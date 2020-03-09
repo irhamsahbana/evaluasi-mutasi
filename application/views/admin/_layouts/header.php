@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url('assets/admin/'); ?>images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url('assets/admin/'); ?>images/favicon.ico">
     <!-- Custom Stylesheet -->
     <link href="<?= base_url('assets/admin/'); ?>css/style.css" rel="stylesheet">
 

@@ -22,7 +22,7 @@ class ModelAdmin extends CI_Model {
                 );
             }
             $this->session->set_userdata($sess);
-            redirect('admin');
+            redirect('administrator');
         }else{
            $this->session->set_flashdata('info', 'Username dan Password Anda Salah !');
             redirect('login');
