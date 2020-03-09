@@ -25,7 +25,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="javascript:void()" aria-expanded="false">
+                        <a href="javascript:void()">
                             <i class="icon-docs menu-icon"></i><span class="nav-text">Lembar Evaluasi</span>
                         </a>
                     </li>
