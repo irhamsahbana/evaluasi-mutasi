@@ -20,4 +20,50 @@ class Administrator extends CI_Controller {
         );
         $this->load->view('admin/_layouts/wrapper', $data);
 	}
+
+	/****************************************
+	Mulai
+	Kerjaanya Irham
+	jangan sentuh-sentuh diantara komen ini!
+	****************************************/
+	
+	
+
+	/****************************************
+	Selesai
+	Kerjaanya Irham
+	jangan sentuh-sentuh diantara komen ini!
+	****************************************/
+
+
+
+	/****************************************
+	Mulai
+	Kerjaanya Ghina
+	jangan sentuh-sentuh diantara komen ini!
+	****************************************/
+
+	
+
+	/****************************************
+	Selesai
+	Kerjaanya Ghina
+	jangan sentuh-sentuh diantara komen ini!
+	****************************************/
+
+	
+
+	/****************************************
+	Mulai
+	Kerjaanya Okti
+	jangan sentuh-sentuh diantara komen ini!
+	****************************************/
+
+	
+
+	/****************************************
+	Selesai
+	Kerjaanya Okti
+	jangan sentuh-sentuh diantara komen ini!
+	****************************************/		
 }

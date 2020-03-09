@@ -10,5 +10,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url('assets/admin/'); ?>images/favicon.ico">
     <!-- Custom Stylesheet -->
     <link href="<?= base_url('assets/admin/'); ?>css/style.css" rel="stylesheet">
+    <link href="<?= base_url('assets/admin/'); ?>plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
