@@ -11,19 +11,19 @@ class Login extends CI_Controller {
 		$username = $this->input->post('username');
         $cek_pass = $this->input->post('password');
         $password = md5($cek_pass);
-        $this->ModelAdmin->login($username, $password);
+        $this->ModelUser->login($username, $password);
 	}
 
 	public function logout(){
         $waktu = date("Y-m-d H:i:s");
         $where = array(
-            "id_admin" => $this->session->userdata('id_admin'),
+            "id_user" => $this->session->userdata('id_user'),
         );
 
         $items = array(
-            "last_login_admin" => $waktu,
+            "last_login_user" => $waktu,
         );
-        $this->Crud->u('admin', $items, $where );
+        $this->Crud->u('user', $items, $where );
         $this->session->sess_destroy();
         redirect('login');
     }
