@@ -43,12 +43,101 @@ class User extends CI_Controller {
 	public function tampilanMenuUsulan()
 	{
 		$data = array(
-            'isi' => 'admin/contents/pejabat/menuUsulan',
+            'isi' => 'user/contents/menuUsulan',
             'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
         );
-        $this->load->view('admin/_layouts/wrapper', $data);
+        $this->load->view('user/_layouts/wrapper', $data);
+	}
+
+	public function tampilanDataPegawai()
+	{
+		$data = array(
+            'isi' => 'user/contents/tabelDataPegawai',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
+	}
+
+	public function tampilanApprovalCommittee()
+	{
+		$data = array(
+            'isi' => 'user/contents/tabelApprovalCommittee',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
+	}
+
+	public function tampilanDaftarJabatan()
+	{
+		$data = array(
+            'isi' => 'user/contents/tabelDaftarJabatan',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
+	}
+
+	public function tampilanUsulanEvaluasiDariUnit()
+	{
+		$data = array(
+            'isi' => 'user/contents/tabelUsulanEvaluasiDariUnit',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
+	}
+
+	public function tampilanUsulanEvaluasiYangDitolak()
+	{
+		$data = array(
+            'isi' => 'user/contents/tabelUsulanEvaluasiYangDitolak',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
+	}
+
+	public function tampilanLembarEvaluasi()
+	{
+		$data = array(
+            'isi' => 'user/contents/tabelLembarEvaluasi',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
 	}
 	
+	public function tampilanPengaturanPengguna()
+	{
+		$data = array(
+            'isi' => 'user/contents/tabelPengaturanPengguna',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
+	}
+
+	public function tampilanUsulanEvaluasiMasuk()
+	{
+		$data = array(
+            'isi' => 'user/contents/tabelUsulanEvaluasiMasuk',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
+	}
+
+	public function tampilanUsulanEvaluasi()
+	{
+		$data = array(
+            'isi' => 'user/contents/tabelUsulanEvaluasi',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
+	}
+
+	public function tampilanDaftarUnit()
+	{
+		$data = array(
+            'isi' => 'user/contents/tabelDaftarUnit',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
+	}
 
 	/****************************************
 	Selesai
