@@ -42,7 +42,14 @@ class Administrator extends CI_Controller {
 	Kerjaanya Ghina
 	jangan sentuh-sentuh diantara komen ini!
 	****************************************/
-
+	public function tampilanMenuUsulan()
+	{
+		$data = array(
+            'isi' => 'admin/contents/pejabat/menuUsulan',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+        );
+        $this->load->view('admin/_layouts/wrapper', $data);
+	}
 	
 
 	/****************************************
