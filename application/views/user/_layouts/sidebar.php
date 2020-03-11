@@ -1,3 +1,5 @@
+<?php  $modul = $this->uri->segment(2);   ?>
+
         <!--**********************************
             Sidebar start
         ***********************************-->
@@ -11,47 +13,47 @@
                         </a>
                     </li>
                     <li>
-                        <a href="javascript:void()">
+                        <a href="<?= site_url('User/tampilanDataPegawai') ?>" class="<?= ($modul == 'tampilanDataPegawai') ? 'active' : '' ?>">
                             <i class="icon-people menu-icon"></i><span class="nav-text">Data Pegawai</span>
                         </a>
                     </li>
                       <li>
-                        <a href="javascript:void()">
+                        <a href="<?= site_url('User/tampilanApprovalCommittee') ?>" class="<?= ($modul == 'tampilanApprovalCommittee') ? 'active' : '' ?>">
                             <i class="icon-pencil menu-icon"></i> <span class="nav-text">Approval Committee</span>
                         </a>
                     </li>
                     <li class="mega-menu mega-menu-sm">
-                        <a href="javascript:void()">
+                        <a href="<?= site_url('User/tampilanDaftarJabatan') ?>" class="<?= ($modul == 'tampilanDaftarJabatan') ? 'active' : '' ?>">
                             <i class="icon-list menu-icon"></i><span class="nav-text">Daftar Jabatan</span>
                         </a>
                     </li>
                       <li>
-                        <a href="javascript:void()">
+                        <a href="<?= site_url('User/tampilanUsulanEvaluasiDariUnit') ?>" class="<?= ($modul == 'tampilanUsulanEvaluasiDariUnit') ? 'active' : '' ?>">
                             <i class="icon-note menu-icon"></i><span class="nav-text">Usulan Evaluasi dari Unit</span>
                         </a>
                     </li>
                     <li>
-                        <a href="javascript:void()">
-                            <i class="icon-user-unfollow menu-icon"></i><span class="nav-text">Usulan Evaluasi yang ditolak</span>
+                        <a href="<?= site_url('User/tampilanUsulanEvaluasiYangDitolak') ?>" class="<?= ($modul == 'tampilanUsulanEvaluasiYangDitolak') ? 'active' : '' ?>">
+                            <i class="icon-user-unfollow menu-icon"></i><span class="nav-text">Usulan Evaluasi dari Unit yang Ditolak</span>
                         </a>
                     </li>
                     <li>
-                        <a href="javascript:void()">
+                        <a href="<?= site_url('User/tampilanLembarEvaluasi') ?>" class="<?= ($modul == 'tampilanLembarEvaluasi') ? 'active' : '' ?>">
                             <i class="icon-docs menu-icon"></i><span class="nav-text">Lembar Evaluasi</span>
                         </a>
                     </li>
                     <li>
-                        <a href="javascript:void()">
+                        <a href="<?= site_url('User/tampilanPengaturanPengguna') ?>" class="<?= ($modul == 'tampilanPengaturanPengguna') ? 'active' : '' ?>">
                             <i class="icon-settings menu-icon"></i><span class="nav-text">Pengaturan Pengguna</span>
                         </a>
                     </li>
                     <li>
-                        <a href="javascript:void()">
+                        <a href="<?= site_url('User/tampilanUsulanEvaluasiMasuk') ?>" class="<?= ($modul == 'tampilanUsulanEvaluasiMasuk') ? 'active' : '' ?>">
                             <i class="icon-envelope menu-icon"></i><span class="nav-text">Usulan Evaluasi Masuk</span>
                         </a>
                     </li>
                     <li>
-                        <a href="javascript:void()">
+                        <a href="<?= site_url('User/tampilanUsulanEvaluasi') ?>" class="<?= ($modul == 'tampilanUsulanEvaluasi') ? 'active' : '' ?>">
                             <i class="icon-paper-plane menu-icon"></i><span class="nav-text">Usulan Evaluasi</span>
                         </a>
                     </li>
