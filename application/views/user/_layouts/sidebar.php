@@ -27,6 +27,11 @@
                             <i class="icon-list menu-icon"></i><span class="nav-text">Daftar Jabatan</span>
                         </a>
                     </li>
+                    <li class="mega-menu mega-menu-sm">
+                        <a href="<?= site_url('User/tampilanDaftarUnit') ?>" class="<?= ($modul == 'tampilanDaftarUnit') ? 'active' : '' ?>">
+                            <i class="icon-list menu-icon"></i><span class="nav-text">Daftar Unit</span>
+                        </a>
+                    </li>
                       <li>
                         <a href="<?= site_url('User/tampilanUsulanEvaluasiDariUnit') ?>" class="<?= ($modul == 'tampilanUsulanEvaluasiDariUnit') ? 'active' : '' ?>">
                             <i class="icon-note menu-icon"></i><span class="nav-text">Usulan Evaluasi dari Unit</span>
@@ -44,7 +49,7 @@
                     </li>
                     <li>
                         <a href="<?= site_url('User/tampilanPengaturanPengguna') ?>" class="<?= ($modul == 'tampilanPengaturanPengguna') ? 'active' : '' ?>">
-                            <i class="icon-settings menu-icon"></i><span class="nav-text">Pengaturan Pengguna</span>
+                            <i class="icon-settings menu-icon"></i><span class="nav-text">Pengaturan Adminstrator</span>
                         </a>
                     </li>
                     <li>

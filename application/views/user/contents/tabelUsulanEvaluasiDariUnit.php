@@ -24,6 +24,7 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
+                                                <th>Tanggal Pengusulan</th>
                                                 <th>Unit yang Mengusulkan</th>
                                                 <th>Evaluasi Mutasi (?)</th>
                                                 <th>Aksi</th>
@@ -32,6 +33,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
+                                                <td>11 Maret 2020</td>
                                                 <td>Sulsel</td>
                                                 <td></td>
                                                 <td>
@@ -43,12 +45,14 @@
                                             </tr>
                                             <tr>
                                                 <td>2</td>
+                                                <td>12 Maret 2020</td>
                                                 <td>Sulbar</td>
                                                 <td></td>
                                                 <td></td>
                                             </tr>
                                             <tr>
                                                 <td>3</td>
+                                                <td>13 Maret 2020</td>
                                                 <td>Sulteng</td>
                                                 <td></td>
                                                 <td></td>
@@ -57,6 +61,7 @@
                                         <tfoot>
                                             <tr>
                                                 <th>No.</th>
+                                                <th>Tanggal Pengusulan</th>
                                                 <th>Unit yang Mengusulkan</th>
                                                 <th>Evaluasi Mutasi (?)</th>
                                                 <th>Aksi</th>

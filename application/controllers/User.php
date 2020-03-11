@@ -24,8 +24,14 @@ class User extends CI_Controller {
 	Kerjaanya Irham
 	jangan sentuh-sentuh diantara komen ini!
 	****************************************/
-	
-	
+	public function tampilanDataPribadiPegawai()
+	{
+		$data = array(
+            'isi' => 'user/contents/dataPribadiPegawai',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
+	}
 
 	/****************************************
 	Selesai
