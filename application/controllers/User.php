@@ -145,6 +145,15 @@ class User extends CI_Controller {
         $this->load->view('user/_layouts/wrapper', $data);
 	}
 
+	public function tampilanNilaiTalenta()
+	{
+		$data = array(
+            'isi' => 'user/contents/tabelNilaiTalenta',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
+	}
+
 	/****************************************
 	Selesai
 	Kerjaanya Ghina

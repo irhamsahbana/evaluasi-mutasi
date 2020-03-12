@@ -53,6 +53,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="<?= site_url('User/tampilanNilaiTalenta') ?>" class="<?= ($modul == 'tampilanNilaiTalenta') ? 'active' : '' ?>">
+                            <i class="icon-star menu-icon"></i><span class="nav-text">Nilai Talenta</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="<?= site_url('User/tampilanUsulanEvaluasiMasuk') ?>" class="<?= ($modul == 'tampilanUsulanEvaluasiMasuk') ? 'active' : '' ?>">
                             <i class="icon-envelope menu-icon"></i><span class="nav-text">Usulan Evaluasi Masuk</span>
                         </a>
