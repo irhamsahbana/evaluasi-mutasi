@@ -21,7 +21,7 @@
                                 <h4 class="card-title">Usulan Evaluasi</h4>
                                  <div class="table-responsive">
                                     <div id="dataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                                        <button style="float: right;" type="button" class="btn mb-1 btn-warning">Kirim Usulan Baru<span class="btn-icon-right"><i class="fa fa-paper-plane"></i></span>
+                                        <button style="float: right;" type="button" class="btn mb-1 btn-warning" >Kirim Usulan Baru<span class="btn-icon-right"><i class="fa fa-paper-plane"></i></span>
                                         </button>
                                     </div>
                                     <table class="table table-striped table-bordered zero-configuration">
@@ -73,3 +73,4 @@
         <!--**********************************
             Content body end
         ***********************************-->
+
