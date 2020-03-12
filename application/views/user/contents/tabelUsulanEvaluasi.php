@@ -45,9 +45,9 @@
                                                 </td>
                                                 <td>Diterima oleh Administrator UIW</td>
                                                 <td>
-                                                    <button type="button" class="btn mb-1 btn-info">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
                                                     </button>
-                                                    <button type="button" class="btn mb-1 btn-danger">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
                                                     </button>
                                                 </td>
                                             </tr>
@@ -73,3 +73,48 @@
         <!--**********************************
             Content body end
         ***********************************-->
+
+
+<!--**********************************
+    Begin : Modal for Update Data
+***********************************-->
+<div class="modal fade modal-update" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Sunting Usulan Evaluasi</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">Sunting Usulan Evaluasi</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Sunting Data</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--**********************************
+    End : Modal for Update Data
+***********************************-->
+
+
+<!--**********************************
+    Begin : Modal for Delete Data
+***********************************-->
+<div class="modal fade modal-delete" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Hapus data usulan evaluasi</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">Yakin ingin Menghapus data usulan evaluasi?</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger">Hapus</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--**********************************
+    End : Modal for Delete Data

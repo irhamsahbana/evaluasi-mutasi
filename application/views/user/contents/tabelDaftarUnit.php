@@ -75,7 +75,7 @@
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
-            <div class="modal-body">Modal body text goes here.</div>
+            <div class="modal-body">Tambbah data unit</div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success">Tambahkan Data</button>
             </div>
@@ -97,7 +97,7 @@
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
-            <div class="modal-body">Modal body text goes here.</div>
+            <div class="modal-body">Sunting daftar unit.</div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary">Sunting Data</button>
             </div>

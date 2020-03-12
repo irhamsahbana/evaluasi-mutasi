@@ -70,26 +70,27 @@
         ***********************************-->
 
 <!--**********************************
-    Begin : Modal for Sunting Data
+    Begin : Modal for Update Data
 ***********************************-->
 <div class="modal fade modal-update" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Persetujuan Usulan Evaluasi dari Unit</h5>
+                <h5 class="modal-title">Sunting Usulan Evaluasi yang ditolak</h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
-            <div class="modal-body">Yakin ingin Menyetujui usulan ini?</div>
+            <div class="modal-body">Sunting Usulan Evaluasi yang ditolak</div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success">Yakin</button>
+                <button type="button" class="btn btn-primary">Sunting Data</button>
             </div>
         </div>
     </div>
 </div>
 <!--**********************************
-    End : Modal for Terima Data
+    End : Modal for Update Data
 ***********************************-->
+
 
 <!--**********************************
     Begin : Modal for Delete Data

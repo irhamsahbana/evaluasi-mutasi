@@ -75,7 +75,7 @@
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
-            <div class="modal-body">Modal body text goes here.</div>
+            <div class="modal-body">Tambah Data Daftar Pegawai</div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success">Tambahkan Data</button>
             </div>
@@ -97,7 +97,7 @@
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
-            <div class="modal-body">Modal body text goes here.</div>
+            <div class="modal-body">Sunting Data Daftar Pegawai</div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary">Sunting Data</button>
             </div>
