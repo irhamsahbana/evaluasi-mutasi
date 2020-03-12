@@ -28,6 +28,7 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
+                                                <th>NIP</th>
                                                 <th>Nama Administrator</th>
                                                 <th>Status</th>
                                                 <th>Terakhir Kali Log in</th>
@@ -37,6 +38,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
+                                                <td>NIP</td>
                                                 <td>Irham Sahbana</td>
                                                 <td>Administrator PLN UIW</td>
                                                 <td>27 Maret 2020</td>
@@ -51,6 +53,7 @@
                                         <tfoot>
                                             <tr>
                                                 <th>No.</th>
+                                                <th>NIP</th>
                                                 <th>Nama Administrator</th>
                                                 <th>Status</th>
                                                 <th>Terakhir Kali Log in</th>
