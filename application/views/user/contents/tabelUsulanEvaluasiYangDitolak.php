@@ -25,7 +25,8 @@
                                             <tr>
                                                 <th>No.</th>
                                                 <th>Unit yang Mengusulkan</th>
-                                                <th>Evaluasi Mutasi (?)</th>
+                                                <th>NIP</th>
+                                                <th>Nama Pegawai</th>
                                                 <th>Alasan Ditolak</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -33,36 +34,24 @@
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>Sulsel</td>
-                                                <td></td>
-                                                <td></td>
+                                                <td>Unit yang Mengusulkan</td>
+                                                <td>NIP</td>
+                                                <td>Nama Pegawai</td>
+                                                <td>Alasan Ditolak</td>
                                                 <td>
-                                                    <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-aupdate">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
                                                     </button>
                                                     <button type="button" class="btn mb-1 btn-danger"data-toggle="modal" data-target=".modal-delete">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
                                                     </button>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Sulbar</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Sulteng</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
                                             </tr>
                                         </tbody>
                                         <tfoot>
                                             <tr>
                                                 <th>No.</th>
                                                 <th>Unit yang Mengusulkan</th>
-                                                <th>Evaluasi Mutasi (?)</th>
+                                                <th>NIP</th>
+                                                <th>Nama Pegawai</th>
                                                 <th>Alasan Ditolak</th>
                                                 <th>Aksi</th>
                                             </tr>

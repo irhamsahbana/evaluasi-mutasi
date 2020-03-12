@@ -21,7 +21,7 @@
                                 <h4 class="card-title">Data Pegawai</h4>
                                 <div class="table-responsive">
                                     <div id="dataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                                        <button style="float: right;" type="button" class="btn mb-1 btn-warning" data-toggle="modal" data-target=".modal-create">
+                                        <button style="float: right;" type="button" class="btn mb-1 btn-success" data-toggle="modal" data-target=".modal-create">
                                             Tambah<span class="btn-icon-right"><i class="fa fa-user-plus"></i></span>
                                         </button>
                                     </div>
@@ -42,41 +42,19 @@
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>D42116020</td>
-                                                <td>Ghina Syukriyah Rania</td>
-                                                <td>Igniter16</td>
-                                                <td>Mahasiswa</td>
-                                                <td>Teknik Informatika</td>
-                                                <td>14-10-2020</td>
-                                                <td>SMA</td>
+                                                <td>NIP</td>
+                                                <td>Nama Lengkap</td>
+                                                <td>Grade / Tanggal Grade</td>
+                                                <td>Jabatan Saat Ini</td>
+                                                <td>Unit Saat Ini</td>
+                                                <td>Tanggal Jabatan</td>
+                                                <td>Pendidikan Terakhir</td>
                                                 <td>
-                                                    <button type="button" class="btn mb-1 btn-info">Sunting<span class="btn-icon-right" data-toggle="modal" data-target=".modal-update"><i class="fa fa-edit"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update">Sunting<span class="btn-icon-right" ><i class="fa fa-edit"></i></span>
                                                     </button>
-                                                    <button type="button" class="btn mb-1 btn-danger">Hapus<span class="btn-icon-right" data-toggle="modal" data-target=".modal-delete"><i class="fa fa-close"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
                                                     </button>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>D42116513</td>
-                                                <td>Irham Sahbana</td>
-                                                <td>Igniter16</td>
-                                                <td>Mahasiswa</td>
-                                                <td>Teknik Informatika</td>
-                                                <td>04-01-2020</td>
-                                                <td>SMA</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>D42116503</td>
-                                                <td>Asri Oktianawati</td>
-                                                <td>Igniter16</td>
-                                                <td>Mahasiswa</td>
-                                                <td>Teknik Informatika</td>
-                                                <td>12-13-2020</td>
-                                                <td>SMA</td>
-                                                <td></td>
                                             </tr>
                                         </tbody>
                                         <tfoot>
@@ -120,7 +98,7 @@
             </div>
             <div class="modal-body">Modal body text goes here.</div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning">Tambahkan Data</button>
+                <button type="button" class="btn btn-success">Tambahkan Data</button>
             </div>
         </div>
     </div>

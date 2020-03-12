@@ -24,9 +24,9 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Tanggal usalan</th>
+                                                <th>Tanggal Usulan</th>
                                                 <th>Usulan dari Unit</th>
-                                                <th>Pegawai yang diusulkan</th>
+                                                <th>Pegawai yang Diusulkan</th>
                                                 <th>Persetujuan</th>
                                             </tr>
                                         </thead>
@@ -38,9 +38,9 @@
                                                 <td>
                                                     <a href="#">Irham Sahbana, </a>
                                                     <a href="#">Okti Asrianawati, </a>
-                                                    <a href="#">Ghina syukria Rania</a>
+                                                    <a href="#">Ghina Syukriyah Rania</a>
                                                 <td>
-                                                     <button type="button" class="btn mb-1 btn-success"data-toggle="modal" data-target=".modal-accept">Setujui<span class="btn-icon-right"><i class="fa fa-check"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-success" data-toggle="modal" data-target=".modal-accept">Setujui<span class="btn-icon-right"><i class="fa fa-check"></i></span>
                                                     </button>
                                                     <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-reject">Tolak<span class="btn-icon-right"><i class="fa fa-close"></i></span>
                                                     </button>
@@ -50,9 +50,9 @@
                                         <tfoot>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Tanggal usalan</th>
+                                                <th>Tanggal Usulan</th>
                                                 <th>Usulan dari Unit</th>
-                                                <th>Pegawai yang diusulkan</th>
+                                                <th>Pegawai yang Diusulkan</th>
                                                 <th>Persetujuan</th>
                                             </tr>
                                         </tfoot>
