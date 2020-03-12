@@ -28,6 +28,7 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
+                                                <th>NIP</th>
                                                 <th>Nama Lengkap</th>
                                                 <th>Posisi</th>
                                                 <th>Tanda Tangan</th>
@@ -37,6 +38,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
+                                                <td>NIP</td>
                                                 <td>Nama Lengkap</td>
                                                 <td>Posisi</td>
                                                 <td>Tanda Tangan</td>
@@ -51,6 +53,7 @@
                                         <tfoot>
                                             <tr>
                                                 <th>No.</th>
+                                                <th>NIP</th>
                                                 <th>Nama Lengkap</th>
                                                 <th>Posisi</th>
                                                 <th>Tanda Tangan</th>
