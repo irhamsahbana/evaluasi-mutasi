@@ -40,9 +40,9 @@
                                                     <a href="#">Okti Asrianawati, </a>
                                                     <a href="#">Ghina syukria Rania</a>
                                                 <td>
-                                                     <button type="button" class="btn mb-1 btn-success">Setujui<span class="btn-icon-right"><i class="fa fa-check"></i></span>
+                                                     <button type="button" class="btn mb-1 btn-success"data-toggle="modal" data-target=".modal-accept">Setujui<span class="btn-icon-right"><i class="fa fa-check"></i></span>
                                                     </button>
-                                                    <button type="button" class="btn mb-1 btn-danger">Tolak<span class="btn-icon-right"><i class="fa fa-close"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-reject">Tolak<span class="btn-icon-right"><i class="fa fa-close"></i></span>
                                                     </button>
                                                 </td>
                                             </tr>
@@ -68,3 +68,47 @@
         <!--**********************************
             Content body end
         ***********************************-->
+
+<!--**********************************
+    Begin : Modal for Terima Data
+***********************************-->
+<div class="modal fade modal-accept" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Persetujuan Evaluasi Masuk</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">Yakin ingin menyetujui evaluasi ini?</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success">Setujui</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--**********************************
+    End : Modal for Terima Data
+***********************************-->
+
+<!--**********************************
+    Begin : Modal for Tolak Data
+***********************************-->
+<div class="modal fade modal-reject" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Evaluasi Masuk</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">Yakin ingin Menolak data evaluasi ini?</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger">Tolak</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--**********************************
+    End : Modal for Tolak Data
+***********************************-->

@@ -37,9 +37,9 @@
                                                 <td>1</td>
                                                 <td>Senior Javascript Developer</td>
                                                 <td>
-                                                    <button type="button" class="btn mb-1 btn-info">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-info">Sunting<span class="btn-icon-right" data-toggle="modal" data-target=".modal-update"><i class="fa fa-edit"></i></span>
                                                     </button>
-                                                    <button type="button" class="btn mb-1 btn-danger">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-danger">Hapus<span class="btn-icon-right"data-toggle="modal" data-target=".modal-delete"><i class="fa fa-close"></i></span>
                                                     </button>
                                                 </td>
                                             </tr>

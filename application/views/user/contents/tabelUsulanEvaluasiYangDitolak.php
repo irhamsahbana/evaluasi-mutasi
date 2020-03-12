@@ -37,9 +37,9 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td>
-                                                    <button type="button" class="btn mb-1 btn-info">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-aupdate">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
                                                     </button>
-                                                    <button type="button" class="btn mb-1 btn-danger">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-danger"data-toggle="modal" data-target=".modal-delete">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
                                                     </button>
                                                 </td>
                                             </tr>
@@ -79,3 +79,47 @@
         <!--**********************************
             Content body end
         ***********************************-->
+
+<!--**********************************
+    Begin : Modal for Sunting Data
+***********************************-->
+<div class="modal fade modal-update" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Persetujuan Usulan Evaluasi dari Unit</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">Yakin ingin Menyetujui usulan ini?</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success">Yakin</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--**********************************
+    End : Modal for Terima Data
+***********************************-->
+
+<!--**********************************
+    Begin : Modal for Delete Data
+***********************************-->
+<div class="modal fade modal-delete" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Hapus</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">Yakin ingin hapus data ini?</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger">Hapus</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--**********************************
+    End : Modal for Delete Data
+***********************************-->
