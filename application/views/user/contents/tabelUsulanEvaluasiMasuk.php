@@ -27,6 +27,7 @@
                                                 <th>Tanggal Usulan</th>
                                                 <th>Usulan dari Unit</th>
                                                 <th>Pegawai yang Diusulkan</th>
+                                                <th>Status</th>
                                                 <th>Persetujuan</th>
                                             </tr>
                                         </thead>
@@ -39,6 +40,8 @@
                                                     <a href="#">Irham Sahbana, </a>
                                                     <a href="#">Okti Asrianawati, </a>
                                                     <a href="#">Ghina Syukriyah Rania</a>
+                                                </td>
+                                                <td>Status</td>
                                                 <td>
                                                     <button type="button" class="btn mb-1 btn-success" data-toggle="modal" data-target=".modal-accept">Setujui<span class="btn-icon-right"><i class="fa fa-check"></i></span>
                                                     </button>
@@ -53,6 +56,7 @@
                                                 <th>Tanggal Usulan</th>
                                                 <th>Usulan dari Unit</th>
                                                 <th>Pegawai yang Diusulkan</th>
+                                                <th>Status</th>
                                                 <th>Persetujuan</th>
                                             </tr>
                                         </tfoot>
