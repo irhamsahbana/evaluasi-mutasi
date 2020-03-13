@@ -84,7 +84,41 @@
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
-            <div class="modal-body">Tambah data approval.</div>
+            <div class="modal-body">
+                <div class="form-validation">
+                    <form class="form-valide" action="#" method="post">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">NIP</label>
+                            <div class="col-sm-9">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="" required>
+                                    <div class ="input-group-append">
+                                        <button class="btn btn-outline-success" type="button"><i class="icon-magnifier menu-icon"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nama Lengkap</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Posisi</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tanda Tangan</label>
+                            <div class="col-sm-9">
+                                <input type="file" class="form-control-file" required>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success">Tambahkan Data</button>
             </div>
@@ -106,7 +140,41 @@
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
-            <div class="modal-body">Sunting data approval</div>
+            <div class="modal-body">
+                <div class="form-validation">
+                    <form class="form-valide" action="#" method="post">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">NIP</label>
+                            <div class="col-sm-9">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="" required>
+                                    <div class ="input-group-append">
+                                        <button class="btn btn-outline-primary" type="button"><i class="icon-magnifier menu-icon"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nama Lengkap</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Posisi</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tanda Tangan</label>
+                            <div class="col-sm-9">
+                                <input type="file" class="form-control-file" required>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary">Sunting Data</button>
             </div>

@@ -75,7 +75,18 @@
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
-            <div class="modal-body">Tambah Data Daftar Pegawai</div>
+            <div class="modal-body">
+                <div class="form-validation">
+                    <form class="form-valide" action="#" method="post">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Jabatan</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success">Tambahkan Data</button>
             </div>
@@ -97,7 +108,18 @@
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
-            <div class="modal-body">Sunting Data Daftar Pegawai</div>
+            <div class="modal-body">
+                <div class="form-validation">
+                    <form class="form-valide" action="#" method="post">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Jabatan</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary">Sunting Data</button>
             </div>

@@ -239,7 +239,119 @@
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
-            <div class="modal-body">Sunting data pegawai</div>
+            <div class="modal-body">
+                <div class="form-validation">
+                    <form class="form-valide" action="#" method="post">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nomor Induk Pegawai</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nama Lengkap</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Grade</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tanggal Grade</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Jabatan Saat Ini</label>
+                            <div class="col-sm-9">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="" required>
+                                    <div class ="input-group-append">
+                                        <button class="btn btn-outline-primary" type="button"><i class="icon-magnifier menu-icon"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Unit Saat Ini</label>
+                            <div class="col-sm-9">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="" required>
+                                    <div class ="input-group-append">
+                                        <button class="btn btn-outline-primary" type="button"><i class="icon-magnifier menu-icon"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tanggal Jabatan</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Pendidikan Terakhir</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nilai Talenta</label>
+                            <div class="col-sm-9">
+                                <div class="row">
+                                    <div class="col">
+                                        <select class="form-control">
+                                            <option selected="selected">Pilih salah satu</option>
+                                            <option>LBS</option>
+                                            <option>SOP</option>
+                                            <option>SPO</option>
+                                            <option>OPT</option>
+                                            <option>POT</option>
+                                            <option>KPO</option>
+                                            <option>PPS</option>
+                                            <option>PPE</option>
+                                            <option>SPP</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <select class="form-control">
+                                            <option selected="selected">Pilih salah satu</option>
+                                            <option>LBS</option>
+                                            <option>SOP</option>
+                                            <option>SPO</option>
+                                            <option>OPT</option>
+                                            <option>POT</option>
+                                            <option>KPO</option>
+                                            <option>PPS</option>
+                                            <option>PPE</option>
+                                            <option>SPP</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <select class="form-control">
+                                            <option selected="selected">Pilih salah satu</option>
+                                            <option>LBS</option>
+                                            <option>SOP</option>
+                                            <option>SPO</option>
+                                            <option>OPT</option>
+                                            <option>POT</option>
+                                            <option>KPO</option>
+                                            <option>PPS</option>
+                                            <option>PPE</option>
+                                            <option>SPP</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary">Sunting Data</button>
             </div>
@@ -262,7 +374,7 @@
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
-            <div class="modal-body">Yakin ingin Menghapus data (nama pegawai)?</div>
+            <div class="modal-body">Yakin ingin menghapus data (nama pegawai)?</div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger">Hapus</button>
             </div>
