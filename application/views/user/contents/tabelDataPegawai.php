@@ -35,6 +35,9 @@
                                                 <th>Jabatan Saat Ini</th>
                                                 <th>Unit Saat Ini</th>
                                                 <th>Tanggal Jabatan</th>
+                                                <th>Nilai Talenta (I)</th>
+                                                <th>Nilai Talenta (II)</th>
+                                                <th>Nilai Talenta (III)</th>
                                                 <th>Pendidikan Terakhir</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -48,6 +51,9 @@
                                                 <td>Jabatan Saat Ini</td>
                                                 <td>Unit Saat Ini</td>
                                                 <td>Tanggal Jabatan</td>
+                                                <td>Nilai Talenta (I)</td>
+                                                <td>Nilai Talenta (II)</td>
+                                                <td>Nilai Talenta (III)</td>
                                                 <td>Pendidikan Terakhir</td>
                                                 <td>
                                                     <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update">Sunting<span class="btn-icon-right" ><i class="fa fa-edit"></i></span>
@@ -66,6 +72,9 @@
                                                 <th>Jabatan Saat Ini</th>
                                                 <th>Unit Saat Ini</th>
                                                 <th>Tanggal Jabatan</th>
+                                                <th>Nilai Talenta (I)</th>
+                                                <th>Nilai Talenta (II)</th>
+                                                <th>Nilai Talenta (III)</th>
                                                 <th>Pendidikan Terakhir</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -96,7 +105,119 @@
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
-            <div class="modal-body">Tambah Data Pegawai</div>
+            <div class="modal-body">
+                <div class="form-validation">
+                    <form class="form-valide" action="#" method="post">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nomor Induk Pegawai</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nama Lengkap</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Grade</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tanggal Grade</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Jabatan Saat Ini</label>
+                            <div class="col-sm-9">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="" required>
+                                    <div class ="input-group-append">
+                                        <button class="btn btn-outline-success" type="button"><i class="icon-magnifier menu-icon"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Unit Saat Ini</label>
+                            <div class="col-sm-9">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="" required>
+                                    <div class ="input-group-append">
+                                        <button class="btn btn-outline-success" type="button"><i class="icon-magnifier menu-icon"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tanggal Jabatan</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Pendidikan Terakhir</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nilai Talenta</label>
+                            <div class="col-sm-9">
+                                <div class="row">
+                                    <div class="col">
+                                        <select class="form-control">
+                                            <option selected="selected">Pilih salah satu</option>
+                                            <option>LBS</option>
+                                            <option>SOP</option>
+                                            <option>SPO</option>
+                                            <option>OPT</option>
+                                            <option>POT</option>
+                                            <option>KPO</option>
+                                            <option>PPS</option>
+                                            <option>PPE</option>
+                                            <option>SPP</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <select class="form-control">
+                                            <option selected="selected">Pilih salah satu</option>
+                                            <option>LBS</option>
+                                            <option>SOP</option>
+                                            <option>SPO</option>
+                                            <option>OPT</option>
+                                            <option>POT</option>
+                                            <option>KPO</option>
+                                            <option>PPS</option>
+                                            <option>PPE</option>
+                                            <option>SPP</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <select class="form-control">
+                                            <option selected="selected">Pilih salah satu</option>
+                                            <option>LBS</option>
+                                            <option>SOP</option>
+                                            <option>SPO</option>
+                                            <option>OPT</option>
+                                            <option>POT</option>
+                                            <option>KPO</option>
+                                            <option>PPS</option>
+                                            <option>PPE</option>
+                                            <option>SPP</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success">Tambahkan Data</button>
             </div>
