@@ -28,13 +28,14 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Nama Lengkap</th>
-                                                <th>Nomor Induk Pegawai</th>
-                                                <th>Jabatan Saat Ini</th>
-                                                <th>Grade / Tanggal Grade</th>
+                                                <th>No. Induk</th>
+                                                <th>Nama</th>
+                                                <th>Sebutan Jabatan / Kelas Unit</th>
+                                                <th>Grade</th>
+                                                <th>Tanggal Grade Terakhir</th>
                                                 <th>Pendidikan Terakhir</th>
                                                 <th>Nilai Talenta</th>
-                                                <th>Jabatan yang Diusulkan</th>
+                                                <th>Jabatan Baru / Kelas Unit</th>
                                                 <th>Lama di Jabatan Terakhir</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
@@ -43,13 +44,14 @@
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>Nama Lengkap</td>
-                                                <td>Nomor Induk Pegawai</td>
-                                                <td>Jabatan Saat Ini</td>
-                                                <td>Grade / Tanggal Grade</td>
+                                                <td>No. Induk</td>
+                                                <td>Nama</td>
+                                                <td>Sebutan Jabatan / Kelas Unit</td>
+                                                <td>Grade</td>
+                                                <td>Tanggal Grade Terakhir</td>
                                                 <td>Pendidikan Terakhir</td>
                                                 <td>Nilai Talenta</td>
-                                                <td>Jabatan yang Diusulkan</td>
+                                                <td>Jabatan Baru / Kelas Unit</td>
                                                 <td>Lama di Jabatan Terakhir</td>
                                                 <td>Keterangan</td>
                                                 <td>
@@ -63,13 +65,14 @@
                                         <tfoot>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Nama Lengkap</th>
-                                                <th>Nomor Induk Pegawai</th>
-                                                <th>Jabatan Saat Ini</th>
-                                                <th>Grade / Tanggal Grade</th>
+                                                <th>No. Induk</th>
+                                                <th>Nama</th>
+                                                <th>Sebutan Jabatan / Kelas Unit</th>
+                                                <th>Grade</th>
+                                                <th>Tanggal Grade Terakhir</th>
                                                 <th>Pendidikan Terakhir</th>
                                                 <th>Nilai Talenta</th>
-                                                <th>Jabatan yang Diusulkan</th>
+                                                <th>Jabatan Baru / Kelas Unit</th>
                                                 <th>Lama di Jabatan Terakhir</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
@@ -98,7 +101,160 @@
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
-            <div class="modal-body">Modal body text goes here.</div>
+            <div class="modal-body">
+                <div class="form-validation">
+                    <form class="form-valide" action="#" method="post">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">No. Induk</label>
+                            <div class="col-sm-9">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Masukkan No. Induk Pegawai..." required>
+                                    <div class ="input-group-append">
+                                        <button class="btn btn-outline-success" type="button"><i class="icon-magnifier menu-icon"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nama</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Sebutan Jabatan / Kelas Unit</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Grade</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tanggal Grade Terakhir</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Pendidikan Terakhir</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nilai Talenta</label>
+                            <div class="col-sm-9">
+                                <div class="row">
+                                    <div class="col">
+                                        <select class="form-control">
+                                            <option>--Nilai Talenta (I)--</option>
+                                            <option>LBS</option>
+                                            <option>SOP</option>
+                                            <option>SPO</option>
+                                            <option>OPT</option>
+                                            <option>POT</option>
+                                            <option>KPO</option>
+                                            <option>PPS</option>
+                                            <option>PPE</option>
+                                            <option>SPP</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <select class="form-control">
+                                            <option>--Nilai Talenta (I)--</option>
+                                            <option>LBS</option>
+                                            <option>SOP</option>
+                                            <option>SPO</option>
+                                            <option>OPT</option>
+                                            <option>POT</option>
+                                            <option>KPO</option>
+                                            <option>PPS</option>
+                                            <option>PPE</option>
+                                            <option>SPP</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <select class="form-control">
+                                            <option>--Nilai Talenta (I)--</option>
+                                            <option>LBS</option>
+                                            <option>SOP</option>
+                                            <option>SPO</option>
+                                            <option>OPT</option>
+                                            <option>POT</option>
+                                            <option>KPO</option>
+                                            <option>PPS</option>
+                                            <option>PPE</option>
+                                            <option>SPP</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <h5>Jabatan yang Diusulkan</h5>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Business Area</label>
+                            <div class="col-sm-9">
+                                <select class="form-control">
+                                    <option>Pilih Salah Satu</option>
+                                    <option>A</option>
+                                    <option>B</option>
+                                    <option>C</option>
+                                    <option>D</option>
+                                    <option>E</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Personnel Subarea</label>
+                            <div class="col-sm-9">
+                                <select class="form-control">
+                                    <option>Pilih Salah Satu</option>
+                                    <option>A</option>
+                                    <option>B</option>
+                                    <option>C</option>
+                                    <option>D</option>
+                                    <option>E</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Org. Unit</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Organizational Unit</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Position</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nama Panjang Posisi</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Keterangan</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" rows="5" placeholder="Silahkan diisi..."></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success">Tambahkan Data</button>
             </div>
@@ -121,7 +277,160 @@
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
-            <div class="modal-body">Sunting daftar usulan evaluasi</div>
+            <div class="modal-body">
+                <div class="form-validation">
+                    <form class="form-valide" action="#" method="post">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">No. Induk</label>
+                            <div class="col-sm-9">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Masukkan No. Induk Pegawai..." required>
+                                    <div class ="input-group-append">
+                                        <button class="btn btn-outline-primary" type="button"><i class="icon-magnifier menu-icon"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nama</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Sebutan Jabatan / Kelas Unit</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Grade</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tanggal Grade Terakhir</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Pendidikan Terakhir</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nilai Talenta</label>
+                            <div class="col-sm-9">
+                                <div class="row">
+                                    <div class="col">
+                                        <select class="form-control">
+                                            <option>--Nilai Talenta (I)--</option>
+                                            <option>LBS</option>
+                                            <option>SOP</option>
+                                            <option>SPO</option>
+                                            <option>OPT</option>
+                                            <option>POT</option>
+                                            <option>KPO</option>
+                                            <option>PPS</option>
+                                            <option>PPE</option>
+                                            <option>SPP</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <select class="form-control">
+                                            <option>--Nilai Talenta (I)--</option>
+                                            <option>LBS</option>
+                                            <option>SOP</option>
+                                            <option>SPO</option>
+                                            <option>OPT</option>
+                                            <option>POT</option>
+                                            <option>KPO</option>
+                                            <option>PPS</option>
+                                            <option>PPE</option>
+                                            <option>SPP</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <select class="form-control">
+                                            <option>--Nilai Talenta (I)--</option>
+                                            <option>LBS</option>
+                                            <option>SOP</option>
+                                            <option>SPO</option>
+                                            <option>OPT</option>
+                                            <option>POT</option>
+                                            <option>KPO</option>
+                                            <option>PPS</option>
+                                            <option>PPE</option>
+                                            <option>SPP</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <h5>Jabatan yang Diusulkan</h5>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Business Area</label>
+                            <div class="col-sm-9">
+                                <select class="form-control">
+                                    <option>Pilih Salah Satu</option>
+                                    <option>A</option>
+                                    <option>B</option>
+                                    <option>C</option>
+                                    <option>D</option>
+                                    <option>E</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Personnel Subarea</label>
+                            <div class="col-sm-9">
+                                <select class="form-control">
+                                    <option>Pilih Salah Satu</option>
+                                    <option>A</option>
+                                    <option>B</option>
+                                    <option>C</option>
+                                    <option>D</option>
+                                    <option>E</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Org. Unit</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Organizational Unit</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Position</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nama Panjang Posisi</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Keterangan</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" rows="5" placeholder="Silahkan diisi..."></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary">Sunting Data</button>
             </div>
