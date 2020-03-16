@@ -33,7 +33,7 @@
                                             <tr>
                                                 <td>1</td>
                                                 <td>2018</td>
-                                                <td>Semester II</td>
+                                                <td>II</td>
                                                 <td>
                                                     <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update">Sunting<span class="btn-icon-right" ><i class="fa fa-edit"></i></span>
                                                     </button>
@@ -42,7 +42,7 @@
                                             <tr>
                                                 <td>2</td>
                                                 <td>2019</td>
-                                                <td>Semester I</td>
+                                                <td>I</td>
                                                 <td>
                                                     <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update">Sunting<span class="btn-icon-right" ><i class="fa fa-edit"></i></span>
                                                     </button>
@@ -51,7 +51,7 @@
                                             <tr>
                                                 <td>3</td>
                                                 <td>2019</td>
-                                                <td>Semester II</td>
+                                                <td>II</td>
                                                 <td>
                                                     <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update">Sunting<span class="btn-icon-right" ><i class="fa fa-edit"></i></span>
                                                     </button>
