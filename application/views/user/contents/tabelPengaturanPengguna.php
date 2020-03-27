@@ -84,7 +84,43 @@
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
-            <div class="modal-body">Tambah data pada pengaturan pengguna.</div>
+            <div class="modal-body">
+                <div class="form-validation">
+                    <form class="form-valide" action="#" method="post">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Username</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Password</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Status Pengguna</label>
+                            <div class="col-sm-9">
+                                <select class="form-control">
+                                    <option>Pilih Salah Satu</option>
+                                    <option>A</option>
+                                    <option>B</option>
+                                    <option>C</option>
+                                    <option>D</option>
+                                    <option>E</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nama Lengkap</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success">Tambahkan Data</button>
             </div>
