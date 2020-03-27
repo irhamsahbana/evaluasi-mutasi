@@ -114,6 +114,7 @@ class User extends CI_Controller {
 		$data = array(
             'isi' => 'user/contents/tabelPengaturanPengguna',
             'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'data_user' => $this->Crud->ga('user'),
         );
         $this->load->view('user/_layouts/wrapper', $data);
 	}
@@ -176,3 +177,4 @@ class User extends CI_Controller {
 	jangan sentuh-sentuh diantara komen ini!
 	****************************************/		
 }
+

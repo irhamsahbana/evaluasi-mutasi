@@ -36,12 +36,16 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php 
+                                                $no = 1;
+                                                  foreach($data_user as $user){
+                                            ?>
                                             <tr>
-                                                <td>1</td>
+                                                <td><?= $no++ ?></td>
                                                 <td>NIP</td>
-                                                <td>Irham Sahbana</td>
-                                                <td>Administrator PLN UIW</td>
-                                                <td>27 Maret 2020</td>
+                                                <td><?= $user->fullname_user ?></td>
+                                                <td><?= $user->status_user ?></td>
+                                                <td><?= $user->password_user ?></td>
                                                 <td>
                                                     <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
                                                     </button>
@@ -49,6 +53,9 @@
                                                     </button>
                                                 </td>
                                             </tr>
+                                            <?php 
+                                                }
+                                             ?>
                                         </tbody>
                                         <tfoot>
                                             <tr>
@@ -86,44 +93,44 @@
             </div>
             <div class="modal-body">
                 <div class="form-validation">
-                    <form class="form-valide" action="#" method="post">
+                    <form method="post" class="form-valide" action="<?= site_url('Okti1/doAddPengguna') ?>" enctype="multipart/form-data">
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Username</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="" required>
+                                <input type="text" name='username'class="form-control" placeholder="" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Password</label>
                             <div class="col-sm-9">
-                                <input type="password" class="form-control" placeholder="" required>
+                                <input type="password" name="password" class="form-control" placeholder="" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Status Pengguna</label>
                             <div class="col-sm-9">
-                                <select class="form-control">
+                                <select class="form-control" name="status_pengguna">
                                     <option>Pilih Salah Satu</option>
-                                    <option>A</option>
-                                    <option>B</option>
-                                    <option>C</option>
-                                    <option>D</option>
-                                    <option>E</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Nama Lengkap</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="" required>
+                                <input type="text" name="nama_lengkap" class="form-control" placeholder="" required>
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success">Tambahkan Data</button>
+                <button type="submit" class="btn btn-success">Tambahkan Data</button>
             </div>
+                    </form>
         </div>
     </div>
 </div>
