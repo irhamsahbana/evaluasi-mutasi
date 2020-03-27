@@ -37,4 +37,14 @@ class Okti1 extends CI_Controller {
         $this->db->insert('user', $data);
         redirect('user/tampilanPengaturanPengguna');
     }
+
+    //Begin Do Delete Mahasiswa
+    public function doDeletePengguna($id){
+        $where = array('id_user' => $id,);
+
+        $this->Crud->d('user', $where);
+        $this->session->set_flashdata('info', 'Data Mahasiswa Telah Dihapus');
+        redirect('user/tampilanPengaturanPengguna');
+    }
+    //End Do Delete Mahasiswa
 }

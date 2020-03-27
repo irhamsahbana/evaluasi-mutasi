@@ -49,7 +49,7 @@
                                                 <td>
                                                     <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
                                                     </button>
-                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete<?=$user->id_user?>">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
                                                     </button>
                                                 </td>
                                             </tr>
@@ -164,7 +164,11 @@
 <!--**********************************
     Begin : Modal for Delete Data
 ***********************************-->
-<div class="modal fade modal-delete" tabindex="-1" role="dialog" aria-hidden="true">
+<?php
+   foreach($data_user as $user){
+    $id = $user->id_user;
+?>
+<div class="modal fade modal-delete<?=$id?>" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
@@ -172,13 +176,20 @@
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
-            <div class="modal-body">Yakin ingin Menghapus data (pengaturan pengguna)?</div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger">Hapus</button>
+            <div class="modal-body">
+                <form method="POST" action="<?= base_url('Okti1/doDeletePengguna/'.$id) ?>">
+                <h5>
+                    Apakah Anda Yakin Menghapus Data Ini ?
+                </h5>
             </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger">Hapus</button>
+            </div>
+                </form>
         </div>
     </div>
 </div>
+<?php } ?>
 <!--**********************************
     End : Modal for Delete Data
 ***********************************-->
