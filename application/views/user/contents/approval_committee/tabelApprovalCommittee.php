@@ -86,12 +86,12 @@
             </div>
             <div class="modal-body">
                 <div class="form-validation">
-                    <form class="form-valide" action="#" method="post">
+                    <form class="form-valide" action="<?= site_url('ApprovalCommittee/doAddPegawai') ?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">NIP</label>
                             <div class="col-sm-9">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="" required>
+                                    <input type="text" name="id_approval" class="form-control" placeholder="" required>
                                     <div class ="input-group-append">
                                         <button class="btn btn-outline-success" type="button"><i class="icon-magnifier menu-icon"></i></button>
                                     </div>
@@ -101,19 +101,19 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Nama Lengkap</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="" required>
+                                <input type="text" name="nipeg" class="form-control" placeholder="" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Posisi</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="" required>
+                                <input type="text" name="nama_approval"class="form-control" placeholder="" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tanda Tangan</label>
                             <div class="col-sm-9">
-                                <input type="file" class="form-control-file" required>
+                                <input type="file" name="tanda_tangan" class="form-control-file" required>
                             </div>
                         </div>
                     </form>
