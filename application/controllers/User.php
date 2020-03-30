@@ -55,14 +55,7 @@ class User extends CI_Controller {
         $this->load->view('user/_layouts/wrapper', $data);
 	}
 
-	public function tampilanDataPegawai()
-	{
-		$data = array(
-            'isi' => 'user/contents/tabelDataPegawai',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
-        );
-        $this->load->view('user/_layouts/wrapper', $data);
-	}
+	
 
 	public function tampilanApprovalCommittee()
 	{
@@ -154,6 +147,8 @@ class User extends CI_Controller {
         );
         $this->load->view('user/_layouts/wrapper', $data);
 	}
+
+	
 
 	/****************************************
 	Selesai

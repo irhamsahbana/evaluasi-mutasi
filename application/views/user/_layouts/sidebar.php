@@ -13,7 +13,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?= site_url('User/tampilanDataPegawai') ?>" class="<?= ($modul == 'tampilanDataPegawai') ? 'active' : '' ?>">
+                        <a href="<?= site_url('AdministratorInduk/tampilanDataPegawai') ?>" class="<?= ($modul == 'tampilanDataPegawai') ? 'active' : '' ?>">
                             <i class="icon-people menu-icon"></i><span class="nav-text">Data Pegawai</span>
                         </a>
                     </li>
