@@ -193,41 +193,32 @@ class AdministratorInduk extends CI_Controller {
         $filenya      = $_FILES['file_ttd']['name'];
 
         if($filenya = ''){
-        $this->session->set_flashdata('info', 'File Tidak Terpilih'); 
-
-        if($kode == '1'){
-                redirect('AdministratorInduk/approval_committee');
-            }else{
-                redirect('admin');
-            }
-
+            redirect('AdministratorInduk/tampilanApprovalCommittee');
         }else{
-            if($kode == '1'){
-                $config['upload_path'] = './asset/user/approval_committee';
-
-         }
-            $config['allowed_types'] = 'jpg|png|jpeg';
+            
+            $config['upload_path'] = './assets/user/approval_committee';
+            $config['allowed_types'] = 'gif|jpg|png';
             $config['max_size'] = '0';
 
             $this->load->library('upload', $config);
 
             if(!$this->upload->do_upload('file_ttd')){
-                // die();
-                $this->session->set_flashdata('info', 'Upload File Gagal, Periksa Ukuran dan Ekstensi');
-                redirect('AdministratorInduk/tampilanApprovalCommittee/'.$kode);
+                redirect('AdministratorInduk/tampilanApprovalCommittee');
             }else{
                 $filenya =  $this->upload->data('file_name');
             }
 
-        $data_penerimawai = array(
-            'nip'                       => $input['nipeg'],
-            'nama_approval'             => $input['nama_approval'],
-            'file_ttd'                  => $input['file_ttd'],
-        );
-        $this->db->set('id_approval', 'UUID()', FALSE);
-        $this->db->insert('tb_approval_committee', $data_penerima);
-        redirect('AdministratorInduk/tampilanApprovalCommittee');
-      }
+            $data_penerima = array(
+                'nip'                       => $input['nipeg'],
+                'nama_approval'             => $input['nama_approval'],
+                'password'                  => $input['password'],
+                'role'                      => 'approval_committee',
+                'file_ttd'                  => $filenya,
+            );
+            $this->db->set('id_approval', 'UUID()', FALSE);
+            $this->db->insert('tb_approval_committee', $data_penerima);
+            redirect('AdministratorInduk/tampilanApprovalCommittee');
+        }
     }
 
     public function doDeletePenerima($id){
