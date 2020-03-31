@@ -30,7 +30,7 @@
                                                 <th>No.</th>
                                                 <th>NIP</th>
                                                 <th>Nama Lengkap</th>
-                                                <th>Posisi</th>
+                                                <th>Password</th>
                                                 <th>Tanda Tangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -92,7 +92,7 @@
             </div>
             <div class="modal-body">
                 <div class="form-validation">
-                    <form class="form-valide" action="<?= site_url('ApprovalCommittee/doAddPegawai') ?>" method="POST" enctype="multipart/form-data">
+                    <form class="form-valide" action="<?= site_url('AdministratorInduk/doAddPegawai') ?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">NIP</label>
                             <div class="col-sm-9">
@@ -150,7 +150,7 @@
             </div>
             <div class="modal-body">
                 <div class="form-validation">
-                    <form class="form-valide" action="<?= site_url('ApprovalCommittee/doUpdatePegawai/'.$id) ?>" method="POST" enctype="multipart/form-data">
+                    <form class="form-valide" action="<?= site_url('AdministratorInduk/doUpdatePegawai/'.$id) ?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">NIP</label>
                             <div class="col-sm-9">
@@ -210,7 +210,7 @@
                 </button>
             </div>
             <div class="modal-body">
-            <form method="POST" action="<?= site_url('ApprovalCommittee/doDeletePegawai/'.$id) ?>">
+            <form method="POST" action="<?= site_url('AdministratorInduk/doDeletePegawai/'.$id) ?>">
                 Yakin ingin menghapus data (<?=$pegawai->nama_pegawai?>) ?
             </div>
             <div class="modal-footer">

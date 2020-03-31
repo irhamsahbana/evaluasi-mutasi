@@ -18,7 +18,7 @@
                         </a>
                     </li>
                       <li>
-                        <a href="<?= site_url('ApprovalCommittee/tampilanApprovalCommittee') ?>" class="<?= ($modul == 'tampilanApprovalCommittee') ? 'active' : '' ?>">
+                        <a href="<?= site_url('AdministratorInduk/tampilanApprovalCommittee') ?>" class="<?= ($modul == 'tampilanApprovalCommittee') ? 'active' : '' ?>">
                             <i class="icon-pencil menu-icon"></i> <span class="nav-text">Approval Committee</span>
                         </a>
                     </li>
