@@ -30,7 +30,7 @@
                                                 <th>No.</th>
                                                 <th>NIP</th>
                                                 <th>Nama Lengkap</th>
-                                                <th>Password</th>
+                                                <th>Posisi</th>
                                                 <th>Tanda Tangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -97,24 +97,24 @@
                             <label class="col-sm-3 col-form-label">NIP</label>
                             <div class="col-sm-9">
                                 <div class="input-group mb-3">
-                                    <input type="text" name="id_approval" class="form-control" placeholder="" required>
+                                    <input type="text" name="nipeg" class="form-control" placeholder="" required>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Nama Lengkap</label>
+                            <label class="col-sm-3 col-form-label">Nama</label>
                             <div class="col-sm-9">
-                                <input type="text" name="nipeg" class="form-control" placeholder="" required>
+                                <input type="text" name="nama_approval" class="form-control" placeholder="" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Posisi</label>
+                            <label class="col-sm-3 col-form-label">Password</label>
                             <div class="col-sm-9">
-                                <input type="text" name="nama_approval"class="form-control" placeholder="" required>
+                                <input type="text" name="password" class="form-control" placeholder="" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Tanda Tangan</label>
+                            <label class="col-sm-3 col-form-label">Foto Tanda Tangan</label>
                             <div class="col-sm-9">
                                 <input type="file" name="file_ttd" class="form-control-file" maxlength="40" class="form-control" required>
                                 <?php  ?>  
@@ -211,7 +211,7 @@
             </div>
             <div class="modal-body">
             <form method="POST" action="<?= site_url('AdministratorInduk/doDeletePenerima/'.$id) ?>">
-                Yakin ingin menghapus data (<?=$penerima->nama_penerima?>) ?
+                Yakin ingin menghapus data (<?=$penerima->id_penerima?>) ?
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-danger">Hapus</button>

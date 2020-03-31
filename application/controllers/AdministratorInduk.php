@@ -2,7 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class AdministratorInduk extends CI_Controller {
-
     
     public function __construct() {
         parent::__construct();
@@ -182,7 +181,7 @@ class AdministratorInduk extends CI_Controller {
     public function tampilanApprovalCommittee()
     {
         $data = array(
-            'isi' => 'user/contents/administrator_induk/AdministratorInduk',
+            'isi' => 'user/contents/administrator_induk/tabelApprovalCommittee',
             'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
             'data_penerima' => $this->Crud->ga('tb_approval_committee'),
         );
