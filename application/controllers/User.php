@@ -130,14 +130,7 @@ class User extends CI_Controller {
         $this->load->view('user/_layouts/wrapper', $data);
 	}
 
-	public function tampilanDaftarUnit()
-	{
-		$data = array(
-            'isi' => 'user/contents/tabelDaftarUnit',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
-        );
-        $this->load->view('user/_layouts/wrapper', $data);
-	}
+	
 
 	public function tampilanNilaiTalenta()
 	{
