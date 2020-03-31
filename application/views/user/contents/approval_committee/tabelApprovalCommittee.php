@@ -36,19 +36,26 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php 
+                                                $no = 1;
+                                                foreach ($data_pegawai as $pegawai) {
+                                            ?>
                                             <tr>
-                                                <td>1</td>
-                                                <td>NIP</td>
-                                                <td>Nama Lengkap</td>
-                                                <td>Posisi</td>
-                                                <td>Tanda Tangan</td>
+                                                <td><?= $no++ ?></td>
+                                                <td><?= $pegawai->id_approval ?></td>
+                                                <td><?= $pegawai->nip ?></td>
+                                                <td><?= $pegawai->nama_approval ?></td>
+                                                <td><?= $pegawai->file_ttd ?></td>
                                                 <td>
-                                                    <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update<?=$pegawai->id_approval?>">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
                                                     </button>
-                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete<?=$pegawai->id_approval?>">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
                                                     </button>
                                                 </td>
                                             </tr>
+                                            <?php 
+                                                }
+                                            ?>
                                         </tbody>
                                         <tfoot>
                                             <tr>
@@ -113,7 +120,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tanda Tangan</label>
                             <div class="col-sm-9">
-                                <input type="file" name="tanda_tangan" class="form-control-file" required>
+                                <input type="file" name="file_ttd" class="form-control-file" required>
                             </div>
                         </div>
                     </form>
@@ -132,7 +139,11 @@
 <!--**********************************
     Begin : Modal for Update Data
 ***********************************-->
-<div class="modal fade modal-update" tabindex="-1" role="dialog" aria-hidden="true">
+<?php 
+    foreach ($data_pegawai as $pegawai) {
+        $id = $pegawai->id_approval;
+?>
+<div class="modal fade modal-update<?=$id?>" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -142,12 +153,12 @@
             </div>
             <div class="modal-body">
                 <div class="form-validation">
-                    <form class="form-valide" action="#" method="post">
+                    <form class="form-valide" action="<?= site_url('ApprovalCommittee/doUpdatePegawai/'.$id) ?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">NIP</label>
                             <div class="col-sm-9">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="" required>
+                                    <input type="text" name="id_approval' class="form-control" placeholder="" required>
                                     <div class ="input-group-append">
                                         <button class="btn btn-outline-primary" type="button"><i class="icon-magnifier menu-icon"></i></button>
                                     </div>
@@ -157,26 +168,26 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Nama Lengkap</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="" required>
+                                <input type="text" name="nipeg" class="form-control" placeholder="" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Posisi</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="" required>
+                                <input type="text" name="nama_approval" class="form-control" placeholder="" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tanda Tangan</label>
                             <div class="col-sm-9">
-                                <input type="file" class="form-control-file" required>
+                                <input type="file" name="file_ttd" class="form-control-file" required>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Sunting Data</button>
+                <button type="submit" class="btn btn-primary">Sunting Data</button>
             </div>
         </div>
     </div>
@@ -189,7 +200,11 @@
 <!--**********************************
     Begin : Modal for Delete Data
 ***********************************-->
-<div class="modal fade modal-delete" tabindex="-1" role="dialog" aria-hidden="true">
+<?php
+    foreach ($data_pegawai as $pegawai) {
+        $id = $pegawai->id_approval;
+?>
+<div class="modal fade modal-delete<?=$id?>" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
@@ -197,13 +212,17 @@
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
-            <div class="modal-body">Yakin ingin Menghapus data (approval)?</div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger">Hapus</button>
+            <div class="modal-body">
+            <form method="POST" action="<?= site_url('ApprovalCommittee/doDeletePegawai/'.$id) ?>">
+                Yakin ingin menghapus data (<?=$pegawai->nama_pegawai?>) ?
             </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger">Hapus</button>
+            </div></form>
         </div>
     </div>
 </div>
+<?php } ?>
 <!--**********************************
     End : Modal for Delete Data
 ***********************************-->

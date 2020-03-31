@@ -41,4 +41,26 @@ class ApprovalCommittee extends CI_Controller {
         redirect('ApprovalCommittee/tampilanApprovalCommittee');
     }
 
+    public function doDeletePegawai($id){
+        $where = array('id_approval' => $id,);
+
+        $this->Crud->d('tb_approval_committee', $where);
+        $this->session->set_flashdata('info', 'Data Pegawai Telah Dihapus');
+        redirect('ApprovalCommittee/tampilanApprovalCommittee');
+    }
+
+
+    public function doUpdatePegawai($id){
+        $where         = array('id_approval' => $id);
+        $input         = $this->input->post(NULL, TRUE);
+        $data_pegawai  = array(
+            'nip'                       => $input['nipeg'],
+            'nama_approval'             => $input['nama_approval'],
+            'file_ttd'                  => $input['tanda_tangan'],
+            
+        );
+        $this->Crud->u('tb_approval_committee', $data_pegawai, $where);
+        $this->session->set_flashdata('info', 'Data Pegawai Berhasil Diupdate');
+        redirect('ApprovalCommittee/tampilanApprovalCommittee');
+    }
 }
