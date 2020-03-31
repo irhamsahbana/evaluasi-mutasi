@@ -43,4 +43,49 @@ class Crud extends CI_Model {
           ->get()
           ->result();
     }
+
+    public function getAreaRows($params = array()) {
+        $this->db->select('a.business_area, a.nama_business_area');
+        $this->db->from('tb_business_area as a');
+
+        //fetch data by conditions
+        if(array_key_exists("conditions", $params)){
+            foreach ($params['conditions'] as $key => $value) {
+                if(strpos($key, '.') !== false){
+                    $this->db->where($key, $value);
+                }else {
+                    $this->db->where('a.'.$key, $value);
+                }
+            }
+        }
+        $this->db->where('a.status', '1');
+
+        $query = $this->db->get();
+        $result = ($query->num_rows() > 0)?$query->result_array():FALSE;
+
+        //return fetched data
+        return $result;
+    }
+
+    public function getSubareaRows($params = array()) {
+        $this->db->select('s.personnel_subarea, s.nama_personnel_subarea');
+        $this->db->from('tb_personnel_area as s');
+
+        //fetch data by conditions
+        if(array_key_exists("conditions", $params)){
+            foreach ($params['conditions'] as $key => $value) {
+                if(strpos($key, '.') !== false){
+                    $this->db->where($key, $value);
+                }else {
+                    $this->db->where('s.'.$key, $value);
+                }
+            }
+        }
+
+        $query = $this->db->get();
+        $result = ($query->num_rows() > 0)?$query->result_array():FALSE;
+
+        //return fetched data
+        return $result;
+    }
 }

@@ -167,15 +167,27 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Business Area</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="business_area" id="area">
+                                    <option value="">Pilih Business Area</option>
+                                    <?php 
+                                        if (!empty($area)) {
+                                            foreach ($area as $row) {
+                                                echo '<option value="'.$row['business_area'].'">'.$row['nama_business_area'].'</option>';
+                                            }
+                                        }else {
+                                            echo '<option value="">Business Area tidak tersedia</option>';
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Personnel Subarea</label>
                             <div class="col-sm-9">
-                                <select class="form-control" name="personnel_subarea">
-                                    <option>Pilih Salah Satu</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                    <option value="D">D</option>
-                                    <option value="E">E</option>
+                                <select class="form-control" name="personnel_subarea" id="subarea">
+                                    <option value="">Pilih Business Area dahulu</option>
                                 </select>
                             </div>
                         </div>

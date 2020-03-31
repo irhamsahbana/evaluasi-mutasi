@@ -25,8 +25,19 @@ class AdministratorInduk extends CI_Controller {
             'isi' => 'user/contents/administrator_induk/tabelDataPegawai',
             'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
             'data_pegawai' => $this->Crud->ga('tb_pegawai'),
+            'area' => $this->Crud->getAreaRows(),
         );
         $this->load->view('user/_layouts/wrapper', $data);
+    }
+
+    public function getSubarea() {
+        $subarea = array();
+        $business_area = $this->input->post('business_area');
+        if($business_area) {
+            $con['conditions'] = array('business_area'=>$business_area);
+            $subarea = $this->Crud->getSubareaRows($con);
+        }
+        echo json_encode($subarea);
     }
 
     public function doAddPegawai() {
