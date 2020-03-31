@@ -28,11 +28,16 @@
                         </a>
                     </li>
                     <li class="mega-menu mega-menu-sm">
-                        <a href="<?= site_url('User/tampilanDaftarUnit') ?>" class="<?= ($modul == 'tampilanDaftarUnit') ? 'active' : '' ?>">
-                            <i class="icon-list menu-icon"></i><span class="nav-text">Daftar Unit</span>
+                        <a href="<?= site_url('AdministratorInduk/tampilanDaftarBusinessArea') ?>" class="<?= ($modul == 'tampilanDaftarBusinessArea') ? 'active' : '' ?>">
+                            <i class="icon-list menu-icon"></i><span class="nav-text">Daftar Business Area</span>
                         </a>
                     </li>
-                      <li>
+                    <li class="mega-menu mega-menu-sm">
+                        <a href="<?= site_url('AdministratorInduk/tampilanDaftarPersonnelSubarea') ?>" class="<?= ($modul == 'tampilanDaftarPersonnelSubarea') ? 'active' : '' ?>">
+                            <i class="icon-list menu-icon"></i><span class="nav-text">Daftar Personnel Subarea</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="<?= site_url('User/tampilanUsulanEvaluasiDariUnit') ?>" class="<?= ($modul == 'tampilanUsulanEvaluasiDariUnit') ? 'active' : '' ?>">
                             <i class="icon-note menu-icon"></i><span class="nav-text">Usulan Evaluasi dari Unit</span>
                         </a>

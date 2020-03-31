@@ -141,9 +141,41 @@ class AdministratorInduk extends CI_Controller {
         $data = array(
             'isi' => 'user/contents/administrator_induk/tabelDaftarPersonnelSubarea',
             'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
-            'data_subarea' => $this->Crud->ga('tb_personnel_area'),
+            'data_subarea' => $this->Crud->tampilSubarea(),
+            'data_area' => $this->Crud->ga('tb_business_area'),
         );
         $this->load->view('user/_layouts/wrapper', $data);
+    }
+
+    public function doAddSubarea() {
+        $input        = $this->input->post(NULL, TRUE);
+        $data_subarea = array(
+            'business_area'            => $input['business_area'],
+            'nama_personnel_subarea'   => $input['personnel_subarea'],
+        );
+        $this->db->set('personnel_subarea', 'UUID()', FALSE);
+        $this->db->insert('tb_personnel_area', $data_subarea);
+        redirect('AdministratorInduk/tampilanDaftarPersonnelSubarea');
+    }
+
+    public function doDeleteSubarea($id){
+        $where = array('personnel_subarea' => $id,);
+
+        $this->Crud->d('tb_personnel_area', $where);
+        $this->session->set_flashdata('info', 'Data Personnel Subarea Telah Dihapus');
+        redirect('AdministratorInduk/tampilanDaftarPersonnelSubarea');
+    }
+
+    public function doUpdateSubarea($id){
+        $where      = array('personnel_subarea' => $id);
+        $input      = $this->input->post(NULL, TRUE);
+        $data_subarea  = array(
+            'business_area'            => $input['business_area'],
+            'nama_personnel_subarea'   => $input['personnel_subarea'],
+        );
+        $this->Crud->u('tb_personnel_area', $data_subarea, $where);
+        $this->session->set_flashdata('info', 'Data Personnel Subarea Berhasil Diupdate');
+        redirect('AdministratorInduk/tampilanDaftarPersonnelSubarea');
     }
 
 }

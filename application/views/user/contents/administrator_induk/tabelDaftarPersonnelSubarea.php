@@ -18,7 +18,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Daftar Unit</h4>
+                                <h4 class="card-title">Daftar Personnel Subarea</h4>
                                 <div class="table-responsive">
                                     <div id="dataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
                                         <button style="float: right;" type="button" class="btn mb-1 btn-success" data-toggle="modal" data-target=".modal-create">Tambah<span class="btn-icon-right"><i class="fa fa-user-plus"></i></span>
@@ -28,26 +28,34 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Unit</th>
+                                                <th>Business Area</th>
+                                                <th>Personnel Subarea</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        <?php  
+                                            $no = 1;
+                                            foreach ($data_subarea as $subarea) {
+                                        ?>
                                             <tr>
-                                                <td>1</td>
-                                                <td>Unit</td>
+                                                <td><?= $no++ ?></td>
+                                                <td><?= $subarea->nama_business_area ?></td>
+                                                <td><?= $subarea->nama_personnel_subarea ?></td>
                                                 <td>
-                                                    <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update<?=$subarea->personnel_subarea?>">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
                                                     </button>
-                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete<?=$subarea->personnel_subarea?>">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
                                                     </button>
                                                 </td>
                                             </tr>
+                                        <?php } ?>
                                         </tbody>
                                         <tfoot>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Unit</th>
+                                                <th>Business Area</th>
+                                                <th>Personnel Subarea</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </tfoot>
@@ -70,14 +78,39 @@
 <div class="modal fade modal-create" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Tambah Data Unit</h5>
-                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">Tambbah data unit</div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success">Tambahkan Data</button>
+            <div class="form-validation">
+                <form class="form-valide" action="<?= site_url('AdministratorInduk/doAddSubarea') ?>" method="POST" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Tambah Data Unit</h5>
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Business Area</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="business_area">
+                                    <option>Pilih Salah Satu</option>
+                                    <?php
+                                        $no = 1; 
+                                        foreach ($data_area as $area) {
+                                    ?>
+                                    <option value="<?=$area->business_area?>"><?=$area->nama_business_area?></option>
+                                    <?php $no++; } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Personnel Subarea</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="personnel_subarea" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Tambahkan Data</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -89,21 +122,49 @@
 <!--**********************************
     Begin : Modal for Update Data
 ***********************************-->
-<div class="modal fade modal-update" tabindex="-1" role="dialog" aria-hidden="true">
+<?php  
+    foreach ($data_subarea as $subarea) {
+        $id = $subarea->personnel_subarea;
+        $business_area_selected = $subarea->business_area;
+?>
+<div class="modal fade modal-update<?=$id?>" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Sunting Daftar Unit</h5>
-                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">Sunting daftar unit.</div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Sunting Data</button>
+            <div class="form-validation">
+                <form class="form-valide" action="<?= site_url('AdministratorInduk/doUpdateSubarea/'.$id) ?>" method="POST" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Sunting Daftar Unit</h5>
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Business Area</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="business_area">
+                                    <option>Pilih Salah Satu</option>
+                                    <?php foreach ($data_area as $area) { ?>
+                                    <option value="<?=$area->business_area?>" <?php if($business_area_selected == $area->business_area){echo "selected";} ?>><?=$area->nama_business_area?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Personnel Subarea</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="personnel_subarea" class="form-control" placeholder="" required value="<?=$subarea->nama_personnel_subarea?>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Sunting Data</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
+<?php } ?>
 <!--**********************************
     End : Modal for Update Data
 ***********************************-->
@@ -112,21 +173,28 @@
 <!--**********************************
     Begin : Modal for Delete Data
 ***********************************-->
-<div class="modal fade modal-delete" tabindex="-1" role="dialog" aria-hidden="true">
+<?php  
+    foreach ($data_subarea as $subarea) {
+        $id = $subarea->personnel_subarea;
+?>
+<div class="modal fade modal-delete<?=$id?>" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
+            <form method="POST" action="<?= site_url('AdministratorInduk/doDeleteSubarea/'.$id) ?>">
             <div class="modal-header">
                 <h5 class="modal-title">Hapus data unit</h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
-            <div class="modal-body">Yakin ingin Menghapus data (daftar unit)?</div>
+            <div class="modal-body">Yakin ingin menghapus data (<?=$subarea->nama_personnel_subarea?>) ?</div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger">Hapus</button>
+                <button type="submit" class="btn btn-danger">Hapus</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
+<?php } ?>
 <!--**********************************
     End : Modal for Delete Data
 ***********************************-->

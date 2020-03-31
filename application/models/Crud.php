@@ -35,4 +35,12 @@ class Crud extends CI_Model {
     $insertedId = $this->db->insert_id();
     return $insertedId;
     }
+
+    public function tampilSubarea() 
+    {
+        return $this->db->from('tb_personnel_area')
+          ->join('tb_business_area', 'tb_business_area.business_area=tb_personnel_area.business_area', 'inner')
+          ->get()
+          ->result();
+    }
 }

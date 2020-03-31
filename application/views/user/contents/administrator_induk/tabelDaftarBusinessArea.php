@@ -159,7 +159,7 @@ foreach ($data_area as $area) {
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
-            <div class="modal-body">Yakin ingin Menghapus data (<?=$area->nama_business_area?>) ?</div>
+            <div class="modal-body">Yakin ingin menghapus data (<?=$area->nama_business_area?>) ?</div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-danger">Hapus</button>
             </div>
