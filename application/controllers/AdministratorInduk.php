@@ -97,4 +97,53 @@ class AdministratorInduk extends CI_Controller {
         redirect('AdministratorInduk/tampilanDataPegawai');
     }
 
+    public function tampilanDaftarBusinessArea()
+    {
+        $data = array(
+            'isi' => 'user/contents/administrator_induk/tabelDaftarBusinessArea',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'data_area' => $this->Crud->ga('tb_business_area'),
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
+    }
+
+    public function doAddArea() {
+        $input     = $this->input->post(NULL, TRUE);
+        $data_area = array(
+            'nama_business_area'   => $input['business_area'],
+        );
+        $this->db->set('business_area', 'UUID()', FALSE);
+        $this->db->insert('tb_business_area', $data_area);
+        redirect('AdministratorInduk/tampilanDaftarBusinessArea');
+    }
+
+    public function doDeleteArea($id){
+        $where = array('business_area' => $id,);
+
+        $this->Crud->d('tb_business_area', $where);
+        $this->session->set_flashdata('info', 'Data Business Area Telah Dihapus');
+        redirect('AdministratorInduk/tampilanDaftarBusinessArea');
+    }
+
+    public function doUpdateArea($id){
+        $where      = array('business_area' => $id);
+        $input      = $this->input->post(NULL, TRUE);
+        $data_area  = array(
+            'nama_business_area'   => $input['business_area'],
+        );
+        $this->Crud->u('tb_business_area', $data_area, $where);
+        $this->session->set_flashdata('info', 'Data Business Area Berhasil Diupdate');
+        redirect('AdministratorInduk/tampilanDaftarBusinessArea');
+    }
+
+    public function tampilanDaftarPersonnelSubarea()
+    {
+        $data = array(
+            'isi' => 'user/contents/administrator_induk/tabelDaftarPersonnelSubarea',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'data_subarea' => $this->Crud->ga('tb_personnel_area'),
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
+    }
+
 }
