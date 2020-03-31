@@ -119,7 +119,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tanda Tangan</label>
                             <div class="col-sm-9">
-                                <input type="file" name="file_ttd" class="form-control-file" maxlength="40" class="form-control" <?php if($modul=='createInformation'){echo 'required';} ?> >>
+                                <input type="file" name="file_ttd" class="form-control-file" maxlength="40" class="form-control" required>
                                 <?php  ?>  
                             </div>
                         </div>
