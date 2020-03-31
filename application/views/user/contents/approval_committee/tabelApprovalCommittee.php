@@ -42,7 +42,6 @@
                                             ?>
                                             <tr>
                                                 <td><?= $no++ ?></td>
-                                                <td><?= $pegawai->id_approval ?></td>
                                                 <td><?= $pegawai->nip ?></td>
                                                 <td><?= $pegawai->nama_approval ?></td>
                                                 <td><?= $pegawai->file_ttd ?></td>
@@ -126,7 +125,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success">Tambahkan Data</button>
+                <button type="submit" class="btn btn-success">Tambahkan Data</button>
             </div>
                     </form>
         </div>
@@ -158,7 +157,7 @@
                             <label class="col-sm-3 col-form-label">NIP</label>
                             <div class="col-sm-9">
                                 <div class="input-group mb-3">
-                                    <input type="text" name="id_approval' class="form-control" placeholder="" required>
+                                    <input type="text" name="id_approval' class="form-control" placeholder="" required value="<?=$pegawai->id_approval?>">
                                     <div class ="input-group-append">
                                         <button class="btn btn-outline-primary" type="button"><i class="icon-magnifier menu-icon"></i></button>
                                     </div>
@@ -168,19 +167,19 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Nama Lengkap</label>
                             <div class="col-sm-9">
-                                <input type="text" name="nipeg" class="form-control" placeholder="" required>
+                                <input type="text" name="nipeg" class="form-control" pplaceholder="" required value="<?=$pegawai->nip?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Posisi</label>
                             <div class="col-sm-9">
-                                <input type="text" name="nama_approval" class="form-control" placeholder="" required>
+                                <input type="text" name="nama_approval" class="form-control" placeholder="" required value="<?=$pegawai->nama_approval?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tanda Tangan</label>
                             <div class="col-sm-9">
-                                <input type="file" name="file_ttd" class="form-control-file" required>
+                                <input type="file" name="file_ttd" class="form-control-file" placeholder="" required value="<?=$pegawai->file_ttd?>">
                             </div>
                         </div>
                 </div>

@@ -34,7 +34,7 @@ class ApprovalCommittee extends CI_Controller {
         $data_pegawai = array(
             'nip'                       => $input['nipeg'],
             'nama_approval'             => $input['nama_approval'],
-            'file_ttd'                  => $input['tanda_tangan'],
+            'file_ttd'                  => $input['file_ttd'],
         );
         $this->db->set('id_approval', 'UUID()', FALSE);
         $this->db->insert('tb_approval_committee', $data_pegawai);
@@ -56,7 +56,7 @@ class ApprovalCommittee extends CI_Controller {
         $data_pegawai  = array(
             'nip'                       => $input['nipeg'],
             'nama_approval'             => $input['nama_approval'],
-            'file_ttd'                  => $input['tanda_tangan'],
+            'file_ttd'                  => $input['file_ttd'],
             
         );
         $this->Crud->u('tb_approval_committee', $data_pegawai, $where);
