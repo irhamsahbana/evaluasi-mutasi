@@ -123,12 +123,12 @@
                                 <input type="file" name="file_ttd" class="form-control-file" required>
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success">Tambahkan Data</button>
             </div>
+                    </form>
         </div>
     </div>
 </div>
@@ -183,15 +183,15 @@
                                 <input type="file" name="file_ttd" class="form-control-file" required>
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary">Sunting Data</button>
-            </div>
+            </div></form>
         </div>
     </div>
 </div>
+<?php } ?>
 <!--**********************************
     End : Modal for Update Data
 ***********************************-->
