@@ -98,9 +98,6 @@
                             <div class="col-sm-9">
                                 <div class="input-group mb-3">
                                     <input type="text" name="id_approval" class="form-control" placeholder="" required>
-                                    <div class ="input-group-append">
-                                        <button class="btn btn-outline-success" type="button"><i class="icon-magnifier menu-icon"></i></button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
