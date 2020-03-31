@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class AdministratorInduk extends CI_Controller {
 
+    
     public function __construct() {
         parent::__construct();
         date_default_timezone_set('Asia/Makassar');
@@ -177,18 +178,18 @@ class AdministratorInduk extends CI_Controller {
         $this->session->set_flashdata('info', 'Data Personnel Subarea Berhasil Diupdate');
         redirect('AdministratorInduk/tampilanDaftarPersonnelSubarea');
     }
-    
+
     public function tampilanApprovalCommittee()
     {
         $data = array(
             'isi' => 'user/contents/administrator_induk/AdministratorInduk',
             'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
-            'data_pegawai' => $this->Crud->ga('tb_approval_committee'),
+            'data_penerima' => $this->Crud->ga('tb_approval_committee'),
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
 
-    public function doAddPegawai() {
+    public function doAddPenerima() {
         $input        = $this->input->post(NULL, TRUE);
         $filenya      = $_FILES['file_ttd']['name'];
 
@@ -219,26 +220,26 @@ class AdministratorInduk extends CI_Controller {
                 $filenya =  $this->upload->data('file_name');
             }
 
-        $data_pegawai = array(
+        $data_penerimawai = array(
             'nip'                       => $input['nipeg'],
             'nama_approval'             => $input['nama_approval'],
             'file_ttd'                  => $input['file_ttd'],
         );
         $this->db->set('id_approval', 'UUID()', FALSE);
-        $this->db->insert('tb_approval_committee', $data_pegawai);
+        $this->db->insert('tb_approval_committee', $data_penerima);
         redirect('AdministratorInduk/tampilanApprovalCommittee');
       }
     }
 
-    public function doDeletePegawai($id){
+    public function doDeletePenerima($id){
         $where = array('id_approval' => $id,);
 
         $this->Crud->d('tb_approval_committee', $where);
-        $this->session->set_flashdata('info', 'Data Pegawai Telah Dihapus');
+        $this->session->set_flashdata('info', 'Data Penerima Telah Dihapus');
         redirect('AdministratorInduk/tampilanApprovalCommittee');
     }
 
-    public function doUpdatePegawai($id){
+    public function doUpdatePenerima($id){
         $where         = array('id_approval' => $id);
         $input         = $this->input->post(NULL, TRUE);
         $data_pegawai  = array(
@@ -247,8 +248,13 @@ class AdministratorInduk extends CI_Controller {
             'file_ttd'                  => $input['file_ttd'],
             
         );
-        $this->Crud->u('tb_approval_committee', $data_pegawai, $where);
-        $this->session->set_flashdata('info', 'Data Pegawai Berhasil Diupdate');
+        $this->Crud->u('tb_approval_committee', $data_penerima, $where);
+        $this->session->set_flashdata('info', 'Data Penerima Berhasil Diupdate');
         redirect('AdministratorInduk/tampilanApprovalCommittee');
     }
 }
+
+
+
+
+

@@ -38,17 +38,17 @@
                                         <tbody>
                                             <?php 
                                                 $no = 1;
-                                                foreach ($data_pegawai as $pegawai) {
+                                                foreach ($data_penerima as $penerima) {
                                             ?>
                                             <tr>
                                                 <td><?= $no++ ?></td>
-                                                <td><?= $pegawai->nip ?></td>
-                                                <td><?= $pegawai->nama_approval ?></td>
-                                                <td><?= $pegawai->file_ttd ?></td>
+                                                <td><?= $penerima->nip ?></td>
+                                                <td><?= $penerima->nama_approval ?></td>
+                                                <td><?= $penerima->file_ttd ?></td>
                                                 <td>
-                                                    <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update<?=$pegawai->id_approval?>">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update<?=$penerima->id_approval?>">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
                                                     </button>
-                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete<?=$pegawai->id_approval?>">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete<?=$penerima->id_approval?>">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
                                                     </button>
                                                 </td>
                                             </tr>
@@ -92,7 +92,7 @@
             </div>
             <div class="modal-body">
                 <div class="form-validation">
-                    <form class="form-valide" action="<?= site_url('AdministratorInduk/doAddPegawai') ?>" method="POST" enctype="multipart/form-data">
+                    <form class="form-valide" action="<?= site_url('AdministratorInduk/doAddPenerima') ?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">NIP</label>
                             <div class="col-sm-9">
@@ -150,12 +150,12 @@
             </div>
             <div class="modal-body">
                 <div class="form-validation">
-                    <form class="form-valide" action="<?= site_url('AdministratorInduk/doUpdatePegawai/'.$id) ?>" method="POST" enctype="multipart/form-data">
+                    <form class="form-valide" action="<?= site_url('AdministratorInduk/doUpdatePenerima/'.$id) ?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">NIP</label>
                             <div class="col-sm-9">
                                 <div class="input-group mb-3">
-                                    <input type="text" name="id_approval' class="form-control" placeholder="" required value="<?=$pegawai->id_approval?>">
+                                    <input type="text" name="id_approval' class="form-control" placeholder="" required value="<?=$penerima->id_approval?>">
                                     <div class ="input-group-append">
                                         <button class="btn btn-outline-primary" type="button"><i class="icon-magnifier menu-icon"></i></button>
                                     </div>
@@ -165,19 +165,19 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Nama Lengkap</label>
                             <div class="col-sm-9">
-                                <input type="text" name="nipeg" class="form-control" pplaceholder="" required value="<?=$pegawai->nip?>">
+                                <input type="text" name="nipeg" class="form-control" pplaceholder="" required value="<?=$penerima->nip?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Posisi</label>
                             <div class="col-sm-9">
-                                <input type="text" name="nama_approval" class="form-control" placeholder="" required value="<?=$pegawai->nama_approval?>">
+                                <input type="text" name="nama_approval" class="form-control" placeholder="" required value="<?=$penerima->nama_approval?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tanda Tangan</label>
                             <div class="col-sm-9">
-                                <input type="file" name="file_ttd" class="form-control-file" placeholder="" required value="<?=$pegawai->file_ttd?>">
+                                <input type="file" name="file_ttd" class="form-control-file" placeholder="" required value="<?=$penerima->file_ttd?>">
                             </div>
                         </div>
                 </div>
@@ -198,8 +198,8 @@
     Begin : Modal for Delete Data
 ***********************************-->
 <?php
-    foreach ($data_pegawai as $pegawai) {
-        $id = $pegawai->id_approval;
+    foreach ($data_penerima as $penerima) {
+        $id = $penerima->id_approval;
 ?>
 <div class="modal fade modal-delete<?=$id?>" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm">
@@ -210,8 +210,8 @@
                 </button>
             </div>
             <div class="modal-body">
-            <form method="POST" action="<?= site_url('AdministratorInduk/doDeletePegawai/'.$id) ?>">
-                Yakin ingin menghapus data (<?=$pegawai->nama_pegawai?>) ?
+            <form method="POST" action="<?= site_url('AdministratorInduk/doDeletePenerima/'.$id) ?>">
+                Yakin ingin menghapus data (<?=$penerima->nama_penerima?>) ?
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-danger">Hapus</button>
