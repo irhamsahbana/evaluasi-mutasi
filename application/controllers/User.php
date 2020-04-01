@@ -55,7 +55,14 @@ class User extends CI_Controller {
         $this->load->view('user/_layouts/wrapper', $data);
 	}
 
-	
+	public function tampilanDataPegawai()
+	{
+		$data = array(
+            'isi' => 'user/contents/tabelDataPegawai',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
+	}
 
 	public function tampilanApprovalCommittee()
 	{
@@ -107,7 +114,7 @@ class User extends CI_Controller {
 		$data = array(
             'isi' => 'user/contents/tabelPengaturanPengguna',
             'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
-            'data_user' => $this->Crud->ga('user'),
+            '_data_user_' => $this->Crud->ga('user'),
         );
         $this->load->view('user/_layouts/wrapper', $data);
 	}
@@ -130,7 +137,14 @@ class User extends CI_Controller {
         $this->load->view('user/_layouts/wrapper', $data);
 	}
 
-	
+	public function tampilanDaftarUnit()
+	{
+		$data = array(
+            'isi' => 'user/contents/tabelDaftarUnit',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
+	}
 
 	public function tampilanNilaiTalenta()
 	{
@@ -140,8 +154,6 @@ class User extends CI_Controller {
         );
         $this->load->view('user/_layouts/wrapper', $data);
 	}
-
-	
 
 	/****************************************
 	Selesai
@@ -156,8 +168,14 @@ class User extends CI_Controller {
 	Kerjaanya Okti
 	jangan sentuh-sentuh diantara komen ini!
 	****************************************/
-
-	
+	public function tampilanDataApproval()
+	{
+		$data = array(
+            'isi' => 'user/contents/tabelPosisiApproval',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
+	}
 
 	/****************************************
 	Selesai
