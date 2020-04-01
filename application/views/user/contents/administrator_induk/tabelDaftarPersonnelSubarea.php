@@ -29,6 +29,7 @@
                                             <tr>
                                                 <th>No.</th>
                                                 <th>Business Area</th>
+                                                <th>ID Personnel Subarea</th>
                                                 <th>Personnel Subarea</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -41,6 +42,7 @@
                                             <tr>
                                                 <td><?= $no++ ?></td>
                                                 <td><?= $subarea->nama_business_area ?></td>
+                                                <td><?= $subarea->personnel_subarea ?></td>
                                                 <td><?= $subarea->nama_personnel_subarea ?></td>
                                                 <td>
                                                     <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update<?=$subarea->personnel_subarea?>">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
@@ -55,6 +57,7 @@
                                             <tr>
                                                 <th>No.</th>
                                                 <th>Business Area</th>
+                                                <th>ID Personnel Subarea</th>
                                                 <th>Personnel Subarea</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -98,6 +101,12 @@
                                     <option value="<?=$area->business_area?>"><?=$area->nama_business_area?></option>
                                     <?php $no++; } ?>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">ID Personnel Subarea</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="id_personnel_subarea" class="form-control" placeholder="" required>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -147,6 +156,12 @@
                                     <option value="<?=$area->business_area?>" <?php if($business_area_selected == $area->business_area){echo "selected";} ?>><?=$area->nama_business_area?></option>
                                     <?php } ?>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">ID Personnel Subarea</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="id_personnel_subarea" class="form-control" placeholder="" required value="<?=$subarea->personnel_subarea?>">
                             </div>
                         </div>
                         <div class="form-group row">

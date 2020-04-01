@@ -19,12 +19,11 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Data Pegawai</h4>
+                                <div id="dataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                    <button style="float: right;" type="button" class="btn mb-1 btn-success" data-toggle="modal" data-target=".modal-create">Tambah<span class="btn-icon-right"><i class="fa fa-user-plus"></i></span>
+                                    </button>
+                                </div>
                                 <div class="table-responsive">
-                                    <div id="dataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                                        <button style="float: right;" type="button" class="btn mb-1 btn-success" data-toggle="modal" data-target=".modal-create">
-                                            Tambah<span class="btn-icon-right"><i class="fa fa-user-plus"></i></span>
-                                        </button>
-                                    </div>
                                     <table class="table table-striped table-bordered zero-configuration">
                                         <thead>
                                             <tr>
@@ -251,7 +250,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <select class="form-control" name="nilai_talenta_i">
-                                            <option>--Nilai Talenta (I)--</option>
+                                            <option value="">--Nilai Talenta (I)--</option>
                                             <option value="LBS">LBS</option>
                                             <option value="SOP">SOP</option>
                                             <option value="SPO">SPO</option>
@@ -265,7 +264,7 @@
                                     </div>
                                     <div class="col">
                                         <select class="form-control" name="nilai_talenta_ii">
-                                            <option>--Nilai Talenta (I)--</option>
+                                            <option value="">--Nilai Talenta (I)--</option>
                                             <option value="LBS">LBS</option>
                                             <option value="SOP">SOP</option>
                                             <option value="SPO">SPO</option>
@@ -279,7 +278,7 @@
                                     </div>
                                     <div class="col">
                                         <select class="form-control" name="nilai_talenta_iii">
-                                            <option>--Nilai Talenta (I)--</option>
+                                            <option value="">--Nilai Talenta (I)--</option>
                                             <option value="LBS">LBS</option>
                                             <option value="SOP">SOP</option>
                                             <option value="SPO">SPO</option>
@@ -387,7 +386,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Business Area</label>
                             <div class="col-sm-9">
-                                <select class="form-control" name="business_area" id="area">
+                                <select class="form-control" name="business_area" id="area_update">
                                     <?php 
                                         $no = 1;
                                         foreach ($area as $row) {
@@ -400,14 +399,8 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Personnel Subarea</label>
                             <div class="col-sm-9">
-                                <select class="form-control" name="personnel_subarea" id="subarea">
-                                    <option value="">Pilih Personnel Subarea</option>
-                                    <?php 
-                                        $no = 1;
-                                        foreach ($subarea as $row) {
-                                    ?>
-                                    <option value="<?=$row['personnel_subarea']?>" <?php if($subarea_selected == $row['personnel_subarea']){echo 'selected';} ?>><?=$row['nama_personnel_subarea']?></option>
-                                    <?php $no++; } ?>
+                                <select class="form-control" name="personnel_subarea" id="subarea_update">
+                                    <option value="<?=$pegawai->personnel_subarea?>" <?php if($subarea_selected == $pegawai->personnel_subarea){echo 'selected';} ?>><?=$pegawai->nama_personnel_subarea?></option>
                                 </select>
                             </div>
                         </div>
@@ -471,7 +464,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <select class="form-control" name="nilai_talenta_i">
-                                            <option>--Nilai Talenta (I)--</option>
+                                            <option value="">--Nilai Talenta (I)--</option>
                                             <option value="LBS" <?php if($talenta_i_selected == "LBS"){echo "selected";} ?>>LBS</option>
                                             <option value="SOP" <?php if($talenta_i_selected == "SOP"){echo "selected";} ?>>SOP</option>
                                             <option value="SPO" <?php if($talenta_i_selected == "SPO"){echo "selected";} ?>>SPO</option>
@@ -485,7 +478,7 @@
                                     </div>
                                     <div class="col">
                                         <select class="form-control" name="nilai_talenta_ii">
-                                            <option>--Nilai Talenta (I)--</option>
+                                            <option value="">--Nilai Talenta (I)--</option>
                                             <option value="LBS" <?php if($talenta_ii_selected == "LBS"){echo "selected";} ?>>LBS</option>
                                             <option value="SOP" <?php if($talenta_ii_selected == "SOP"){echo "selected";} ?>>SOP</option>
                                             <option value="SPO" <?php if($talenta_ii_selected == "SPO"){echo "selected";} ?>>SPO</option>
@@ -499,7 +492,7 @@
                                     </div>
                                     <div class="col">
                                         <select class="form-control" name="nilai_talenta_iii">
-                                            <option>--Nilai Talenta (I)--</option>
+                                            <option value="">--Nilai Talenta (I)--</option>
                                             <option value="LBS" <?php if($talenta_iii_selected == "LBS"){echo "selected";} ?>>LBS</option>
                                             <option value="SOP" <?php if($talenta_iii_selected == "SOP"){echo "selected";} ?>>SOP</option>
                                             <option value="SPO" <?php if($talenta_iii_selected == "SPO"){echo "selected";} ?>>SPO</option>

@@ -122,9 +122,9 @@ class AdministratorInduk extends CI_Controller {
     public function doAddArea() {
         $input     = $this->input->post(NULL, TRUE);
         $data_area = array(
+            'business_area'        => $input['id_business_area'],
             'nama_business_area'   => $input['business_area'],
         );
-        $this->db->set('business_area', 'UUID()', FALSE);
         $this->db->insert('tb_business_area', $data_area);
         redirect('AdministratorInduk/tampilanDaftarBusinessArea');
     }
@@ -141,6 +141,7 @@ class AdministratorInduk extends CI_Controller {
         $where      = array('business_area' => $id);
         $input      = $this->input->post(NULL, TRUE);
         $data_area  = array(
+            'business_area'        => $input['id_business_area'],
             'nama_business_area'   => $input['business_area'],
         );
         $this->Crud->u('tb_business_area', $data_area, $where);
@@ -163,9 +164,9 @@ class AdministratorInduk extends CI_Controller {
         $input        = $this->input->post(NULL, TRUE);
         $data_subarea = array(
             'business_area'            => $input['business_area'],
+            'personnel_subarea'        => $input['id_personnel_subarea'],
             'nama_personnel_subarea'   => $input['personnel_subarea'],
         );
-        $this->db->set('personnel_subarea', 'UUID()', FALSE);
         $this->db->insert('tb_personnel_area', $data_subarea);
         redirect('AdministratorInduk/tampilanDaftarPersonnelSubarea');
     }
@@ -183,6 +184,7 @@ class AdministratorInduk extends CI_Controller {
         $input      = $this->input->post(NULL, TRUE);
         $data_subarea  = array(
             'business_area'            => $input['business_area'],
+            'personnel_subarea'        => $input['id_personnel_subarea'],
             'nama_personnel_subarea'   => $input['personnel_subarea'],
         );
         $this->Crud->u('tb_personnel_area', $data_subarea, $where);
