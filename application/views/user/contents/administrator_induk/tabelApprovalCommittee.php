@@ -30,7 +30,6 @@
                                                 <th>No.</th>
                                                 <th>NIP</th>
                                                 <th>Nama Lengkap</th>
-                                                <th>Posisi</th>
                                                 <th>Tanda Tangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -61,9 +60,7 @@
                                                 <th>No.</th>
                                                 <th>NIP</th>
                                                 <th>Nama Lengkap</th>
-                                                <th>Posisi</th>
                                                 <th>Tanda Tangan</th>
-                                                <th>Aksi</th>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -117,7 +114,6 @@
                             <label class="col-sm-3 col-form-label">Foto Tanda Tangan</label>
                             <div class="col-sm-9">
                                 <input type="file" name="file_ttd" class="form-control-file" maxlength="40" class="form-control" required>
-                                <?php  ?>  
                             </div>
                         </div>
                 </div>
@@ -137,8 +133,8 @@
     Begin : Modal for Update Data
 ***********************************-->
 <?php 
-    foreach ($data_pegawai as $pegawai) {
-        $id = $pegawai->id_approval;
+    foreach ($data_penerima as $penerima) {
+        $id = $penerima->id_approval;
 ?>
 <div class="modal fade modal-update<?=$id?>" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -155,9 +151,8 @@
                             <label class="col-sm-3 col-form-label">NIP</label>
                             <div class="col-sm-9">
                                 <div class="input-group mb-3">
-                                    <input type="text" name="id_approval' class="form-control" placeholder="" required value="<?=$penerima->id_approval?>">
+                                    <input type="text" name="nipeg" class="form-control" placeholder="" required value="<?=$penerima->id_approval?>">
                                     <div class ="input-group-append">
-                                        <button class="btn btn-outline-primary" type="button"><i class="icon-magnifier menu-icon"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -165,13 +160,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Nama Lengkap</label>
                             <div class="col-sm-9">
-                                <input type="text" name="nipeg" class="form-control" pplaceholder="" required value="<?=$penerima->nip?>">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Posisi</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="nama_approval" class="form-control" placeholder="" required value="<?=$penerima->nama_approval?>">
+                                <input type="text" name="nama_approval" class="form-control" pplaceholder="" required value="<?=$penerima->nip?>">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -211,7 +200,7 @@
             </div>
             <div class="modal-body">
             <form method="POST" action="<?= site_url('AdministratorInduk/doDeletePenerima/'.$id) ?>">
-                Yakin ingin menghapus data (<?=$penerima->id_penerima?>) ?
+                Yakin ingin menghapus data (<?=$penerima->id_approval?>) ?
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-danger">Hapus</button>

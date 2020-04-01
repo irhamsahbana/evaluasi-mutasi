@@ -244,10 +244,11 @@ class AdministratorInduk extends CI_Controller {
     public function doUpdatePenerima($id){
         $where         = array('id_approval' => $id);
         $input         = $this->input->post(NULL, TRUE);
-        $data_pegawai  = array(
+        $filenya      = $_FILES['file_ttd']['name'];
+        $data_penerima  = array(
             'nip'                       => $input['nipeg'],
             'nama_approval'             => $input['nama_approval'],
-            'file_ttd'                  => $input['file_ttd'],
+            'file_ttd'                  => $filenya,
             
         );
         $this->Crud->u('tb_approval_committee', $data_penerima, $where);
