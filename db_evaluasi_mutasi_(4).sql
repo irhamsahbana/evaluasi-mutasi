@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 25 Mar 2020 pada 07.49
+-- Waktu pembuatan: 01 Apr 2020 pada 09.11
 -- Versi server: 10.4.6-MariaDB-log
 -- Versi PHP: 7.3.9
 
@@ -29,10 +29,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tb_administrator` (
-  `id_administrator` int(15) NOT NULL,
+  `id_administrator` varchar(100) NOT NULL,
   `nip` varchar(15) NOT NULL,
-  `nama_administrator` varchar(25) NOT NULL,
   `password` varchar(50) NOT NULL,
+  `role` varchar(15) NOT NULL,
+  `nama_administrator` varchar(25) NOT NULL,
   `business_area` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -43,8 +44,10 @@ CREATE TABLE `tb_administrator` (
 --
 
 CREATE TABLE `tb_approval_committee` (
-  `id_approval` int(15) NOT NULL,
+  `id_approval` varchar(100) NOT NULL,
   `nip` varchar(15) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `role` varchar(15) NOT NULL,
   `nama_approval` varchar(100) NOT NULL,
   `file_ttd` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -56,9 +59,9 @@ CREATE TABLE `tb_approval_committee` (
 --
 
 CREATE TABLE `tb_approvement` (
-  `id_usulan` int(15) NOT NULL,
+  `id_usulan` varchar(100) NOT NULL,
   `nip` varchar(15) NOT NULL,
-  `id_approval` int(15) NOT NULL,
+  `id_approval` varchar(100) NOT NULL,
   `approvement` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -80,7 +83,7 @@ CREATE TABLE `tb_business_area` (
 --
 
 CREATE TABLE `tb_jabatan` (
-  `id_sebutan_jabatan` int(15) NOT NULL,
+  `id_sebutan_jabatan` varchar(100) NOT NULL,
   `sebutan_jabatan` text NOT NULL,
   `personnel_subarea` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -92,7 +95,7 @@ CREATE TABLE `tb_jabatan` (
 --
 
 CREATE TABLE `tb_judul_talenta` (
-  `id_talenta` int(15) NOT NULL,
+  `id_talenta` varchar(100) NOT NULL,
   `semester` varchar(2) NOT NULL,
   `tahun` varchar(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -122,7 +125,7 @@ CREATE TABLE `tb_pegawai` (
   `tgl_masuk` date NOT NULL,
   `agama` varchar(25) NOT NULL,
   `no_telp` varchar(15) NOT NULL,
-  `id_sebutan_jabatan` int(15) NOT NULL,
+  `id_sebutan_jabatan` varchar(100) NOT NULL,
   `talenta_tiga_semester_lalu` varchar(5) NOT NULL,
   `talenta_dua_semester_lalu` varchar(5) NOT NULL,
   `talenta_semester_lalu` varchar(5) NOT NULL
@@ -147,7 +150,7 @@ CREATE TABLE `tb_personnel_area` (
 --
 
 CREATE TABLE `tb_posisi_approval_committee` (
-  `id_posisi` int(15) NOT NULL,
+  `id_posisi` varchar(100) NOT NULL,
   `posisi` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -158,8 +161,8 @@ CREATE TABLE `tb_posisi_approval_committee` (
 --
 
 CREATE TABLE `tb_usulan_evaluasi` (
-  `id_usulan` int(15) NOT NULL,
-  `id_administrator` int(15) NOT NULL,
+  `id_usulan` varchar(100) NOT NULL,
+  `id_administrator` varchar(100) NOT NULL,
   `tgl_usulan` datetime NOT NULL,
   `no_surat` varchar(50) NOT NULL,
   `status_usulan` varchar(25) NOT NULL,
@@ -173,9 +176,9 @@ CREATE TABLE `tb_usulan_evaluasi` (
 --
 
 CREATE TABLE `tb_usulan_evaluasi_approval` (
-  `id_usulan` int(15) NOT NULL,
-  `id_approval` int(15) NOT NULL,
-  `id_posisi` int(15) NOT NULL
+  `id_usulan` varchar(100) NOT NULL,
+  `id_approval` varchar(100) NOT NULL,
+  `id_posisi` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -185,7 +188,7 @@ CREATE TABLE `tb_usulan_evaluasi_approval` (
 --
 
 CREATE TABLE `tb_usulan_evaluasi_pegawai` (
-  `id_usulan` int(15) NOT NULL,
+  `id_usulan` varchar(100) NOT NULL,
   `nip` varchar(15) NOT NULL,
   `keterangan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -199,22 +202,20 @@ CREATE TABLE `tb_usulan_evaluasi_pegawai` (
 --
 ALTER TABLE `tb_administrator`
   ADD PRIMARY KEY (`id_administrator`),
-  ADD KEY `nip` (`nip`),
-  ADD KEY `business_area` (`business_area`);
+  ADD KEY `tb_administrator_ibfk_2` (`business_area`);
 
 --
 -- Indeks untuk tabel `tb_approval_committee`
 --
 ALTER TABLE `tb_approval_committee`
-  ADD PRIMARY KEY (`id_approval`),
-  ADD KEY `nip` (`nip`);
+  ADD PRIMARY KEY (`id_approval`);
 
 --
 -- Indeks untuk tabel `tb_approvement`
 --
 ALTER TABLE `tb_approvement`
-  ADD KEY `id_usulan` (`id_usulan`),
-  ADD KEY `nip` (`nip`),
+  ADD KEY `tb_approvement_ibfk_2` (`nip`),
+  ADD KEY `tb_approvement_ibfk_4` (`id_usulan`),
   ADD KEY `id_approval` (`id_approval`);
 
 --
@@ -228,7 +229,7 @@ ALTER TABLE `tb_business_area`
 --
 ALTER TABLE `tb_jabatan`
   ADD PRIMARY KEY (`id_sebutan_jabatan`),
-  ADD KEY `personnel_subarea` (`personnel_subarea`);
+  ADD KEY `tb_jabatan_ibfk_1` (`personnel_subarea`);
 
 --
 -- Indeks untuk tabel `tb_judul_talenta`
@@ -241,7 +242,7 @@ ALTER TABLE `tb_judul_talenta`
 --
 ALTER TABLE `tb_pegawai`
   ADD PRIMARY KEY (`nip`),
-  ADD KEY `personnel_subarea` (`personnel_subarea`),
+  ADD KEY `tb_pegawai_ibfk_1` (`personnel_subarea`),
   ADD KEY `id_sebutan_jabatan` (`id_sebutan_jabatan`);
 
 --
@@ -249,7 +250,7 @@ ALTER TABLE `tb_pegawai`
 --
 ALTER TABLE `tb_personnel_area`
   ADD PRIMARY KEY (`personnel_subarea`),
-  ADD KEY `business_area` (`business_area`);
+  ADD KEY `tb_personnel_area_ibfk_1` (`business_area`);
 
 --
 -- Indeks untuk tabel `tb_posisi_approval_committee`
@@ -268,16 +269,16 @@ ALTER TABLE `tb_usulan_evaluasi`
 -- Indeks untuk tabel `tb_usulan_evaluasi_approval`
 --
 ALTER TABLE `tb_usulan_evaluasi_approval`
+  ADD KEY `id_posisi` (`id_posisi`),
   ADD KEY `id_usulan` (`id_usulan`),
-  ADD KEY `id_approval` (`id_approval`),
-  ADD KEY `id_posisi` (`id_posisi`);
+  ADD KEY `id_approval` (`id_approval`);
 
 --
 -- Indeks untuk tabel `tb_usulan_evaluasi_pegawai`
 --
 ALTER TABLE `tb_usulan_evaluasi_pegawai`
-  ADD KEY `id_usulan` (`id_usulan`),
-  ADD KEY `nip` (`nip`);
+  ADD KEY `tb_usulan_evaluasi_pegawai_ibfk_2` (`nip`),
+  ADD KEY `id_usulan` (`id_usulan`);
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -287,62 +288,55 @@ ALTER TABLE `tb_usulan_evaluasi_pegawai`
 -- Ketidakleluasaan untuk tabel `tb_administrator`
 --
 ALTER TABLE `tb_administrator`
-  ADD CONSTRAINT `tb_administrator_ibfk_1` FOREIGN KEY (`nip`) REFERENCES `tb_pegawai` (`nip`),
-  ADD CONSTRAINT `tb_administrator_ibfk_2` FOREIGN KEY (`business_area`) REFERENCES `tb_business_area` (`business_area`);
-
---
--- Ketidakleluasaan untuk tabel `tb_approval_committee`
---
-ALTER TABLE `tb_approval_committee`
-  ADD CONSTRAINT `tb_approval_committee_ibfk_1` FOREIGN KEY (`nip`) REFERENCES `tb_pegawai` (`nip`);
+  ADD CONSTRAINT `tb_administrator_ibfk_2` FOREIGN KEY (`business_area`) REFERENCES `tb_business_area` (`business_area`) ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `tb_approvement`
 --
 ALTER TABLE `tb_approvement`
-  ADD CONSTRAINT `tb_approvement_ibfk_1` FOREIGN KEY (`id_usulan`) REFERENCES `tb_usulan_evaluasi` (`id_usulan`),
-  ADD CONSTRAINT `tb_approvement_ibfk_2` FOREIGN KEY (`nip`) REFERENCES `tb_pegawai` (`nip`),
-  ADD CONSTRAINT `tb_approvement_ibfk_3` FOREIGN KEY (`id_approval`) REFERENCES `tb_approval_committee` (`id_approval`);
+  ADD CONSTRAINT `tb_approvement_ibfk_2` FOREIGN KEY (`nip`) REFERENCES `tb_pegawai` (`nip`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_approvement_ibfk_4` FOREIGN KEY (`id_usulan`) REFERENCES `tb_usulan_evaluasi` (`id_usulan`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_approvement_ibfk_5` FOREIGN KEY (`id_approval`) REFERENCES `tb_approval_committee` (`id_approval`) ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `tb_jabatan`
 --
 ALTER TABLE `tb_jabatan`
-  ADD CONSTRAINT `tb_jabatan_ibfk_1` FOREIGN KEY (`personnel_subarea`) REFERENCES `tb_personnel_area` (`personnel_subarea`);
+  ADD CONSTRAINT `tb_jabatan_ibfk_1` FOREIGN KEY (`personnel_subarea`) REFERENCES `tb_personnel_area` (`personnel_subarea`) ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `tb_pegawai`
 --
 ALTER TABLE `tb_pegawai`
-  ADD CONSTRAINT `tb_pegawai_ibfk_1` FOREIGN KEY (`personnel_subarea`) REFERENCES `tb_personnel_area` (`personnel_subarea`),
-  ADD CONSTRAINT `tb_pegawai_ibfk_2` FOREIGN KEY (`id_sebutan_jabatan`) REFERENCES `tb_jabatan` (`id_sebutan_jabatan`);
+  ADD CONSTRAINT `tb_pegawai_ibfk_1` FOREIGN KEY (`personnel_subarea`) REFERENCES `tb_personnel_area` (`personnel_subarea`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_pegawai_ibfk_2` FOREIGN KEY (`id_sebutan_jabatan`) REFERENCES `tb_jabatan` (`id_sebutan_jabatan`) ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `tb_personnel_area`
 --
 ALTER TABLE `tb_personnel_area`
-  ADD CONSTRAINT `tb_personnel_area_ibfk_1` FOREIGN KEY (`business_area`) REFERENCES `tb_business_area` (`business_area`);
+  ADD CONSTRAINT `tb_personnel_area_ibfk_1` FOREIGN KEY (`business_area`) REFERENCES `tb_business_area` (`business_area`) ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `tb_usulan_evaluasi`
 --
 ALTER TABLE `tb_usulan_evaluasi`
-  ADD CONSTRAINT `tb_usulan_evaluasi_ibfk_1` FOREIGN KEY (`id_administrator`) REFERENCES `tb_administrator` (`id_administrator`);
+  ADD CONSTRAINT `tb_usulan_evaluasi_ibfk_1` FOREIGN KEY (`id_administrator`) REFERENCES `tb_administrator` (`id_administrator`) ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `tb_usulan_evaluasi_approval`
 --
 ALTER TABLE `tb_usulan_evaluasi_approval`
-  ADD CONSTRAINT `tb_usulan_evaluasi_approval_ibfk_1` FOREIGN KEY (`id_usulan`) REFERENCES `tb_usulan_evaluasi` (`id_usulan`),
-  ADD CONSTRAINT `tb_usulan_evaluasi_approval_ibfk_2` FOREIGN KEY (`id_approval`) REFERENCES `tb_approval_committee` (`id_approval`),
-  ADD CONSTRAINT `tb_usulan_evaluasi_approval_ibfk_3` FOREIGN KEY (`id_posisi`) REFERENCES `tb_posisi_approval_committee` (`id_posisi`);
+  ADD CONSTRAINT `tb_usulan_evaluasi_approval_ibfk_3` FOREIGN KEY (`id_posisi`) REFERENCES `tb_posisi_approval_committee` (`id_posisi`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_usulan_evaluasi_approval_ibfk_4` FOREIGN KEY (`id_usulan`) REFERENCES `tb_usulan_evaluasi` (`id_usulan`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_usulan_evaluasi_approval_ibfk_5` FOREIGN KEY (`id_approval`) REFERENCES `tb_approval_committee` (`id_approval`) ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `tb_usulan_evaluasi_pegawai`
 --
 ALTER TABLE `tb_usulan_evaluasi_pegawai`
-  ADD CONSTRAINT `tb_usulan_evaluasi_pegawai_ibfk_1` FOREIGN KEY (`id_usulan`) REFERENCES `tb_usulan_evaluasi` (`id_usulan`),
-  ADD CONSTRAINT `tb_usulan_evaluasi_pegawai_ibfk_2` FOREIGN KEY (`nip`) REFERENCES `tb_pegawai` (`nip`);
+  ADD CONSTRAINT `tb_usulan_evaluasi_pegawai_ibfk_2` FOREIGN KEY (`nip`) REFERENCES `tb_pegawai` (`nip`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_usulan_evaluasi_pegawai_ibfk_3` FOREIGN KEY (`id_usulan`) REFERENCES `tb_usulan_evaluasi` (`id_usulan`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -24,8 +24,9 @@ class AdministratorInduk extends CI_Controller {
         $data = array(
             'isi' => 'user/contents/administrator_induk/tabelDataPegawai',
             'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
-            'data_pegawai' => $this->Crud->ga('tb_pegawai'),
-            'area' => $this->Crud->getAreaRows(),
+            'data_pegawai' => $this->M_AdministratorInduk->getDataPegawai(),
+            'area' => $this->M_AdministratorInduk->getAreaRows(),
+            'subarea' => $this->M_AdministratorInduk->getSubareaRows(),
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
@@ -35,7 +36,7 @@ class AdministratorInduk extends CI_Controller {
         $business_area = $this->input->post('business_area');
         if($business_area) {
             $con['conditions'] = array('business_area'=>$business_area);
-            $subarea = $this->Crud->getSubareaRows($con);
+            $subarea = $this->M_AdministratorInduk->getSubareaRows($con);
         }
         echo json_encode($subarea);
     }
@@ -152,7 +153,7 @@ class AdministratorInduk extends CI_Controller {
         $data = array(
             'isi' => 'user/contents/administrator_induk/tabelDaftarPersonnelSubarea',
             'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
-            'data_subarea' => $this->Crud->tampilSubarea(),
+            'data_subarea' => $this->M_AdministratorInduk->tampilSubarea(),
             'data_area' => $this->Crud->ga('tb_business_area'),
         );
         $this->load->view('user/_layouts/wrapper', $data);

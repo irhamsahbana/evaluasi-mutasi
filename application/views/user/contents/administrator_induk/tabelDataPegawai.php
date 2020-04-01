@@ -63,7 +63,7 @@
                                                 <td><?= $pegawai->pers_no ?></td>
                                                 <td><?= $pegawai->nip ?></td>
                                                 <td><?= $pegawai->nama_pegawai ?></td>
-                                                <td><?= $pegawai->personnel_subarea ?></td>
+                                                <td><?= $pegawai->nama_personnel_subarea ?></td>
                                                 <td><?= $pegawai->org_unit ?></td>
                                                 <td><?= $pegawai->organizational_unit ?></td>
                                                 <td><?= $pegawai->position ?></td>
@@ -348,6 +348,7 @@
 <?php 
     foreach ($data_pegawai as $pegawai) {
         $id = $pegawai->nip;
+        $area_selected = $pegawai->business_area;
         $subarea_selected = $pegawai->personnel_subarea;
         $talenta_i_selected = $pegawai->talenta_semester_lalu;
         $talenta_ii_selected = $pegawai->talenta_dua_semester_lalu;
@@ -384,15 +385,29 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Business Area</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="business_area" id="area">
+                                    <?php 
+                                        $no = 1;
+                                        foreach ($area as $row) {
+                                    ?>
+                                    <option value="<?=$row['business_area']?>" <?php if($area_selected == $row['business_area']){echo 'selected';} ?>><?=$row['nama_business_area']?></option>
+                                    <?php $no++; } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Personnel Subarea</label>
                             <div class="col-sm-9">
-                                <select class="form-control" name="personnel_subarea">
-                                    <option>Pilih Salah Satu</option>
-                                    <option value="A" <?php if($subarea_selected == "A"){echo "selected";} ?>>A</option>
-                                    <option value="B" <?php if($subarea_selected == "B"){echo "selected";} ?>>B</option>
-                                    <option value="C" <?php if($subarea_selected == "C"){echo "selected";} ?>>C</option>
-                                    <option value="D" <?php if($subarea_selected == "D"){echo "selected";} ?>>D</option>
-                                    <option value="E" <?php if($subarea_selected == "E"){echo "selected";} ?>>E</option>
+                                <select class="form-control" name="personnel_subarea" id="subarea">
+                                    <option value="">Pilih Personnel Subarea</option>
+                                    <?php 
+                                        $no = 1;
+                                        foreach ($subarea as $row) {
+                                    ?>
+                                    <option value="<?=$row['personnel_subarea']?>" <?php if($subarea_selected == $row['personnel_subarea']){echo 'selected';} ?>><?=$row['nama_personnel_subarea']?></option>
+                                    <?php $no++; } ?>
                                 </select>
                             </div>
                         </div>
