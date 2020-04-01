@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 01 Apr 2020 pada 09.11
+-- Waktu pembuatan: 01 Apr 2020 pada 09.27
 -- Versi server: 10.4.6-MariaDB-log
 -- Versi PHP: 7.3.9
 
@@ -19,8 +19,31 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_evaluasi_mutasi`
+-- Database: `evaluasi_mutasi`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `admin`
+--
+
+CREATE TABLE `admin` (
+  `id_admin` int(11) NOT NULL,
+  `username_admin` varchar(30) NOT NULL,
+  `password_admin` varchar(40) NOT NULL,
+  `last_login_admin` datetime DEFAULT NULL,
+  `status_admin` varchar(50) NOT NULL,
+  `foto_admin` varchar(50) NOT NULL,
+  `nama_lengkap_admin` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `admin`
+--
+
+INSERT INTO `admin` (`id_admin`, `username_admin`, `password_admin`, `last_login_admin`, `status_admin`, `foto_admin`, `nama_lengkap_admin`) VALUES
+(1, 'irhamsahbana', '30a838bd52aaf321806e03924ad94c3e', '2020-03-09 04:03:14', 'super_admin', '', 'Irham Sahbana');
 
 -- --------------------------------------------------------
 
@@ -76,6 +99,16 @@ CREATE TABLE `tb_business_area` (
   `nama_business_area` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `tb_business_area`
+--
+
+INSERT INTO `tb_business_area` (`business_area`, `nama_business_area`) VALUES
+('14c61956-7340-11ea-b285-00ffee911c8d', 'maros'),
+('18e4a608-7329-11ea-b285-00ffee911c8d', 'gowa'),
+('3c4df9be-732a-11ea-b285-00ffee911c8d', 'makassar'),
+('c720ae50-73e8-11ea-b446-00ffee911c8d', 'wajo');
+
 -- --------------------------------------------------------
 
 --
@@ -118,7 +151,7 @@ CREATE TABLE `tb_pegawai` (
   `jenjang_main_grp` varchar(50) NOT NULL,
   `jenjang_sub_grp` varchar(50) NOT NULL,
   `grade` varchar(10) NOT NULL,
-  `tgl_grade` datetime NOT NULL,
+  `tgl_grade` date NOT NULL,
   `pendidikan_terakhir` varchar(50) NOT NULL,
   `gender` varchar(10) NOT NULL,
   `email` varchar(50) NOT NULL,
@@ -131,6 +164,13 @@ CREATE TABLE `tb_pegawai` (
   `talenta_semester_lalu` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `tb_pegawai`
+--
+
+INSERT INTO `tb_pegawai` (`nip`, `pers_no`, `nama_pegawai`, `personnel_subarea`, `org_unit`, `organizational_unit`, `position`, `nama_panjang_posisi`, `jenjang_main_grp`, `jenjang_sub_grp`, `grade`, `tgl_grade`, `pendidikan_terakhir`, `gender`, `email`, `tgl_masuk`, `agama`, `no_telp`, `id_sebutan_jabatan`, `talenta_tiga_semester_lalu`, `talenta_dua_semester_lalu`, `talenta_semester_lalu`) VALUES
+('kc', '105', 'syukri', '7588b15c-733f-11ea-b285-00ffee911c8d', '63', 'entah', '68', 'cgfh', 'bla', 'ew', 'hmm', '2020-03-18', 'sma', 'Perempuan', 'ghinarania14@gmail.com', '2020-03-13', 'islam', 'rgfgtrj', '', 'POT', 'SPO', 'PPS');
+
 -- --------------------------------------------------------
 
 --
@@ -142,6 +182,17 @@ CREATE TABLE `tb_personnel_area` (
   `nama_personnel_subarea` varchar(250) NOT NULL,
   `business_area` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_personnel_area`
+--
+
+INSERT INTO `tb_personnel_area` (`personnel_subarea`, `nama_personnel_subarea`, `business_area`) VALUES
+('1f0579f5-7340-11ea-b285-00ffee911c8d', 'hawaii', '14c61956-7340-11ea-b285-00ffee911c8d'),
+('35dgcvb', 'havana', '3c4df9be-732a-11ea-b285-00ffee911c8d'),
+('7588b15c-733f-11ea-b285-00ffee911c8d', 'stpp phb', '18e4a608-7329-11ea-b285-00ffee911c8d'),
+('d7ad0548-73e8-11ea-b446-00ffee911c8d', 'sengkang', 'c720ae50-73e8-11ea-b446-00ffee911c8d'),
+('e35945fb-733d-11ea-b285-00ffee911c8d', 'btn hartaco', '3c4df9be-732a-11ea-b285-00ffee911c8d');
 
 -- --------------------------------------------------------
 
@@ -193,30 +244,51 @@ CREATE TABLE `tb_usulan_evaluasi_pegawai` (
   `keterangan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `user`
+--
+
+CREATE TABLE `user` (
+  `id_user` int(11) NOT NULL,
+  `username_user` varchar(30) NOT NULL,
+  `password_user` varchar(40) NOT NULL,
+  `last_login_user` datetime DEFAULT NULL,
+  `status_user` varchar(50) NOT NULL,
+  `foto_user` varchar(50) NOT NULL,
+  `fullname_user` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `user`
+--
+
+INSERT INTO `user` (`id_user`, `username_user`, `password_user`, `last_login_user`, `status_user`, `foto_user`, `fullname_user`) VALUES
+(1, 'irhamsahbana', '30a838bd52aaf321806e03924ad94c3e', NULL, 'maintainer', '', 'Irham Sahbana'),
+(5, 'sdvs', 'sfd', NULL, 'A', '', 'sdvsdas');
+
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indeks untuk tabel `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id_admin`);
+
+--
 -- Indeks untuk tabel `tb_administrator`
 --
 ALTER TABLE `tb_administrator`
-  ADD PRIMARY KEY (`id_administrator`),
-  ADD KEY `tb_administrator_ibfk_2` (`business_area`);
+  ADD PRIMARY KEY (`id_administrator`);
 
 --
 -- Indeks untuk tabel `tb_approval_committee`
 --
 ALTER TABLE `tb_approval_committee`
   ADD PRIMARY KEY (`id_approval`);
-
---
--- Indeks untuk tabel `tb_approvement`
---
-ALTER TABLE `tb_approvement`
-  ADD KEY `tb_approvement_ibfk_2` (`nip`),
-  ADD KEY `tb_approvement_ibfk_4` (`id_usulan`),
-  ADD KEY `id_approval` (`id_approval`);
 
 --
 -- Indeks untuk tabel `tb_business_area`
@@ -228,8 +300,7 @@ ALTER TABLE `tb_business_area`
 -- Indeks untuk tabel `tb_jabatan`
 --
 ALTER TABLE `tb_jabatan`
-  ADD PRIMARY KEY (`id_sebutan_jabatan`),
-  ADD KEY `tb_jabatan_ibfk_1` (`personnel_subarea`);
+  ADD PRIMARY KEY (`id_sebutan_jabatan`);
 
 --
 -- Indeks untuk tabel `tb_judul_talenta`
@@ -241,16 +312,13 @@ ALTER TABLE `tb_judul_talenta`
 -- Indeks untuk tabel `tb_pegawai`
 --
 ALTER TABLE `tb_pegawai`
-  ADD PRIMARY KEY (`nip`),
-  ADD KEY `tb_pegawai_ibfk_1` (`personnel_subarea`),
-  ADD KEY `id_sebutan_jabatan` (`id_sebutan_jabatan`);
+  ADD PRIMARY KEY (`nip`);
 
 --
 -- Indeks untuk tabel `tb_personnel_area`
 --
 ALTER TABLE `tb_personnel_area`
-  ADD PRIMARY KEY (`personnel_subarea`),
-  ADD KEY `tb_personnel_area_ibfk_1` (`business_area`);
+  ADD PRIMARY KEY (`personnel_subarea`);
 
 --
 -- Indeks untuk tabel `tb_posisi_approval_committee`
@@ -262,81 +330,29 @@ ALTER TABLE `tb_posisi_approval_committee`
 -- Indeks untuk tabel `tb_usulan_evaluasi`
 --
 ALTER TABLE `tb_usulan_evaluasi`
-  ADD PRIMARY KEY (`id_usulan`),
-  ADD KEY `id_administrator` (`id_administrator`);
+  ADD PRIMARY KEY (`id_usulan`);
 
 --
--- Indeks untuk tabel `tb_usulan_evaluasi_approval`
+-- Indeks untuk tabel `user`
 --
-ALTER TABLE `tb_usulan_evaluasi_approval`
-  ADD KEY `id_posisi` (`id_posisi`),
-  ADD KEY `id_usulan` (`id_usulan`),
-  ADD KEY `id_approval` (`id_approval`);
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id_user`);
 
 --
--- Indeks untuk tabel `tb_usulan_evaluasi_pegawai`
---
-ALTER TABLE `tb_usulan_evaluasi_pegawai`
-  ADD KEY `tb_usulan_evaluasi_pegawai_ibfk_2` (`nip`),
-  ADD KEY `id_usulan` (`id_usulan`);
-
---
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- Ketidakleluasaan untuk tabel `tb_administrator`
+-- AUTO_INCREMENT untuk tabel `admin`
 --
-ALTER TABLE `tb_administrator`
-  ADD CONSTRAINT `tb_administrator_ibfk_2` FOREIGN KEY (`business_area`) REFERENCES `tb_business_area` (`business_area`) ON UPDATE CASCADE;
+ALTER TABLE `admin`
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Ketidakleluasaan untuk tabel `tb_approvement`
+-- AUTO_INCREMENT untuk tabel `user`
 --
-ALTER TABLE `tb_approvement`
-  ADD CONSTRAINT `tb_approvement_ibfk_2` FOREIGN KEY (`nip`) REFERENCES `tb_pegawai` (`nip`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `tb_approvement_ibfk_4` FOREIGN KEY (`id_usulan`) REFERENCES `tb_usulan_evaluasi` (`id_usulan`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `tb_approvement_ibfk_5` FOREIGN KEY (`id_approval`) REFERENCES `tb_approval_committee` (`id_approval`) ON UPDATE CASCADE;
-
---
--- Ketidakleluasaan untuk tabel `tb_jabatan`
---
-ALTER TABLE `tb_jabatan`
-  ADD CONSTRAINT `tb_jabatan_ibfk_1` FOREIGN KEY (`personnel_subarea`) REFERENCES `tb_personnel_area` (`personnel_subarea`) ON UPDATE CASCADE;
-
---
--- Ketidakleluasaan untuk tabel `tb_pegawai`
---
-ALTER TABLE `tb_pegawai`
-  ADD CONSTRAINT `tb_pegawai_ibfk_1` FOREIGN KEY (`personnel_subarea`) REFERENCES `tb_personnel_area` (`personnel_subarea`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `tb_pegawai_ibfk_2` FOREIGN KEY (`id_sebutan_jabatan`) REFERENCES `tb_jabatan` (`id_sebutan_jabatan`) ON UPDATE CASCADE;
-
---
--- Ketidakleluasaan untuk tabel `tb_personnel_area`
---
-ALTER TABLE `tb_personnel_area`
-  ADD CONSTRAINT `tb_personnel_area_ibfk_1` FOREIGN KEY (`business_area`) REFERENCES `tb_business_area` (`business_area`) ON UPDATE CASCADE;
-
---
--- Ketidakleluasaan untuk tabel `tb_usulan_evaluasi`
---
-ALTER TABLE `tb_usulan_evaluasi`
-  ADD CONSTRAINT `tb_usulan_evaluasi_ibfk_1` FOREIGN KEY (`id_administrator`) REFERENCES `tb_administrator` (`id_administrator`) ON UPDATE CASCADE;
-
---
--- Ketidakleluasaan untuk tabel `tb_usulan_evaluasi_approval`
---
-ALTER TABLE `tb_usulan_evaluasi_approval`
-  ADD CONSTRAINT `tb_usulan_evaluasi_approval_ibfk_3` FOREIGN KEY (`id_posisi`) REFERENCES `tb_posisi_approval_committee` (`id_posisi`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `tb_usulan_evaluasi_approval_ibfk_4` FOREIGN KEY (`id_usulan`) REFERENCES `tb_usulan_evaluasi` (`id_usulan`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `tb_usulan_evaluasi_approval_ibfk_5` FOREIGN KEY (`id_approval`) REFERENCES `tb_approval_committee` (`id_approval`) ON UPDATE CASCADE;
-
---
--- Ketidakleluasaan untuk tabel `tb_usulan_evaluasi_pegawai`
---
-ALTER TABLE `tb_usulan_evaluasi_pegawai`
-  ADD CONSTRAINT `tb_usulan_evaluasi_pegawai_ibfk_2` FOREIGN KEY (`nip`) REFERENCES `tb_pegawai` (`nip`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `tb_usulan_evaluasi_pegawai_ibfk_3` FOREIGN KEY (`id_usulan`) REFERENCES `tb_usulan_evaluasi` (`id_usulan`) ON UPDATE CASCADE;
+ALTER TABLE `user`
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
