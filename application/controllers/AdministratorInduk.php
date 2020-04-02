@@ -67,6 +67,7 @@ class AdministratorInduk extends CI_Controller {
             'no_telp'                        => $input['telephone_no'],
         );
         $this->db->insert('tb_pegawai', $data_pegawai);
+        $this->session->set_flashdata('alert_success', 'Data pegawai baru berhasil ditambahkan!');
         redirect('AdministratorInduk/tampilanDataPegawai');
     }
 
@@ -74,7 +75,7 @@ class AdministratorInduk extends CI_Controller {
         $where = array('nip' => $id,);
 
         $this->Crud->d('tb_pegawai', $where);
-        $this->session->set_flashdata('info', 'Data Pegawai Telah Dihapus');
+        $this->session->set_flashdata('alert_danger', 'Data pegawai berhasil dihapus!');
         redirect('AdministratorInduk/tampilanDataPegawai');
     }
 
@@ -105,7 +106,7 @@ class AdministratorInduk extends CI_Controller {
             'no_telp'                        => $input['telephone_no'],
         );
         $this->Crud->u('tb_pegawai', $data_pegawai, $where);
-        $this->session->set_flashdata('info', 'Data Pegawai Berhasil Diupdate');
+        $this->session->set_flashdata('alert_primary', 'Data pegawai baru berhasil disunting!');
         redirect('AdministratorInduk/tampilanDataPegawai');
     }
 
