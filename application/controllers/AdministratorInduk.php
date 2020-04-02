@@ -258,6 +258,45 @@ class AdministratorInduk extends CI_Controller {
         $this->session->set_flashdata('info', 'Data Penerima Berhasil Diupdate');
         redirect('AdministratorInduk/tampilanApprovalCommittee');
     }
+
+    public function tampilanDataApproval()
+    {
+        $data = array(
+            'isi' => 'user/contents/administrator_induk/tabelPosisiApproval',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'data_approval' => $this->Crud->ga('tb_posisi_approval_committee'),
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
+    }
+     public function doAddApproval() {
+        $input        = $this->input->post(NULL, TRUE);
+        $data_approval = array(
+            'id_posisi'                        => $input['id_posisi'],
+            'posisi'                            => $input['posisi'],
+        );
+        $this->db->insert('tb_posisi_approval_committee', $data_approval);
+        redirect('AdministratorInduk/tampilanDataApproval');
+    }
+
+    public function doDeleteApproval($id){
+        $where = array('id_posisi' => $id,);
+
+        $this->Crud->d('tb_posisi_approval_committee', $where);
+        $this->session->set_flashdata('info', 'Data Penerima Telah Dihapus');
+        redirect('AdministratorInduk/tampilanDataApproval');
+    }
+
+    public function doUpdateApproval($id){
+        $where         = array('id_posisi' => $id);
+        $input         = $this->input->post(NULL, TRUE);
+        $data_approval  = array(
+            'id_posisi'                        => $input['id_posisi'],
+            'posisi'                            => $input['posisi'],
+        );
+        $this->Crud->u('tb_posisi_approval_committee', $data_approval, $where);
+        $this->session->set_flashdata('info', 'Data Penerima Berhasil Diupdate');
+        redirect('AdministratorInduk/tampilanDataApproval');
+    }
 }
 
 

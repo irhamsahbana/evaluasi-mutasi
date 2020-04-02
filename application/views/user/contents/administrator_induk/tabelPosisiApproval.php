@@ -18,7 +18,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Approval Committee</h4>
+                                <h4 class="card-title">Posisi Approval Committee</h4>
                                 <div class="table-responsive">
                                     <div id="dataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
                                         <button style="float: right;" type="button" class="btn mb-1 btn-success" data-toggle="modal" data-target=".modal-create">Tambah<span class="btn-icon-right"><i class="fa fa-user-plus"></i></span>
@@ -28,26 +28,24 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>NIP</th>
-                                                <th>Nama Lengkap</th>
-                                                <th>Tanda Tangan</th>
+                                                <th>ID Posisi</th>
+                                                <th>Posisi</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php 
                                                 $no = 1;
-                                                foreach ($data_penerima as $penerima) {
+                                                foreach ($data_approval as $approval) {
                                             ?>
                                             <tr>
                                                 <td><?= $no++ ?></td>
-                                                <td><?= $penerima->nip ?></td>
-                                                <td><?= $penerima->nama_approval ?></td>
-                                                <td><?= $penerima->file_ttd ?></td>
+                                                <td><?= $approval->id_posisi ?></td>
+                                                <td><?= $approval->posisi ?></td>
                                                 <td>
-                                                    <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update<?=$penerima->id_approval?>">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update<?=$approval->id_posisi?>">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
                                                     </button>
-                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete<?=$penerima->id_approval?>">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete<?=$approval->id_posisi?>">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
                                                     </button>
                                                 </td>
                                             </tr>
@@ -58,9 +56,8 @@
                                         <tfoot>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>NIP</th>
-                                                <th>Nama Lengkap</th>
-                                                <th>Tanda Tangan</th>
+                                                <th>ID Posisi</th>
+                                                <th>Posisi</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </tfoot>
@@ -90,31 +87,19 @@
             </div>
             <div class="modal-body">
                 <div class="form-validation">
-                    <form class="form-valide" action="<?= site_url('AdministratorInduk/doAddPenerima') ?>" method="POST" enctype="multipart/form-data">
+                    <form class="form-valide" action="<?= site_url('AdministratorInduk/doAddApproval') ?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">NIP</label>
+                            <label class="col-sm-3 col-form-label">ID Posisi</label>
                             <div class="col-sm-9">
                                 <div class="input-group mb-3">
-                                    <input type="text" name="nipeg" class="form-control" placeholder="" required>
+                                    <input type="text" name="id_posisi" class="form-control" placeholder="" required>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Nama</label>
+                            <label class="col-sm-3 col-form-label">Posisi</label>
                             <div class="col-sm-9">
-                                <input type="text" name="nama_approval" class="form-control" placeholder="" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Password</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="password" class="form-control" placeholder="" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Foto Tanda Tangan</label>
-                            <div class="col-sm-9">
-                                <input type="file" name="file_ttd" class="form-control-file" maxlength="40" class="form-control" required>
+                                <input type="text" name="posisi" class="form-control" placeholder="" required>
                             </div>
                         </div>
                 </div>
@@ -134,25 +119,25 @@
     Begin : Modal for Update Data
 ***********************************-->
 <?php 
-    foreach ($data_penerima as $penerima) {
-        $id = $penerima->id_approval;
+    foreach ($data_approval as $approval) {
+        $id = $approval->id_posisi;
 ?>
 <div class="modal fade modal-update<?=$id?>" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Sunting Data Approval</h5>
+                <h5 class="modal-title">Sunting Data Posisi Approval</h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-validation">
-                    <form class="form-valide" action="<?= site_url('AdministratorInduk/doUpdatePenerima/'.$id) ?>" method="POST" enctype="multipart/form-data">
+                    <form class="form-valide" action="<?= site_url('AdministratorInduk/doUpdateApproval/'.$id) ?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">NIP</label>
+                            <label class="col-sm-3 col-form-label">ID Posisi</label>
                             <div class="col-sm-9">
                                 <div class="input-group mb-3">
-                                    <input type="text" name="nipeg" class="form-control" placeholder="" required value="<?=$penerima->nip?>">
+                                    <input type="text" name="id_posisi" class="form-control" placeholder="" required value="<?=$approval->id_posisi?>">
                                     <div class ="input-group-append">
                                     </div>
                                 </div>
@@ -161,13 +146,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Nama Lengkap</label>
                             <div class="col-sm-9">
-                                <input type="text" name="nama_approval" class="form-control" pplaceholder="" required value="<?=$penerima->nama_approval?>">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Tanda Tangan</label>
-                            <div class="col-sm-9">
-                                <input type="file" name="file_ttd" class="form-control-file" placeholder="" required value="<?=$penerima->file_ttd?>">
+                                <input type="text" name="posisi" class="form-control" pplaceholder="" required value="<?=$approval->posisi?>">
                             </div>
                         </div>
                 </div>
@@ -188,8 +167,8 @@
     Begin : Modal for Delete Data
 ***********************************-->
 <?php
-    foreach ($data_penerima as $penerima) {
-        $id = $penerima->id_approval;
+    foreach ($data_approval as $approval) {
+        $id = $approval->id_posisi;
 ?>
 <div class="modal fade modal-delete<?=$id?>" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm">
@@ -200,8 +179,8 @@
                 </button>
             </div>
             <div class="modal-body">
-            <form method="POST" action="<?= site_url('AdministratorInduk/doDeletePenerima/'.$id) ?>">
-                Yakin ingin menghapus data (<?=$penerima->id_approval?>) ?
+            <form method="POST" action="<?= site_url('AdministratorInduk/doDeleteApproval/'.$id) ?>">
+                Yakin ingin menghapus data (<?=$approval->id_posisi?>) ?
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-danger">Hapus</button>
