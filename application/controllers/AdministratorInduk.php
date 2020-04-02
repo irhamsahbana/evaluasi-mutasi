@@ -106,7 +106,7 @@ class AdministratorInduk extends CI_Controller {
             'no_telp'                        => $input['telephone_no'],
         );
         $this->Crud->u('tb_pegawai', $data_pegawai, $where);
-        $this->session->set_flashdata('alert_primary', 'Data pegawai baru berhasil disunting!');
+        $this->session->set_flashdata('alert_primary', 'Data pegawai berhasil disunting!');
         redirect('AdministratorInduk/tampilanDataPegawai');
     }
 

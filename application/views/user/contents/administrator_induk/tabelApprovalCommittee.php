@@ -43,7 +43,9 @@
                                                 <td><?= $no++ ?></td>
                                                 <td><?= $penerima->nip ?></td>
                                                 <td><?= $penerima->nama_approval ?></td>
-                                                <td><?= $penerima->file_ttd ?></td>
+                                                <td>
+                                                    <img src="<?= base_url('assets/user/approval_committee/'.$penerima->file_ttd)?>" class="img-responsive" style="max-height: 240px; max-width: 200px;">
+                                                </td>
                                                 <td>
                                                     <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update<?=$penerima->id_approval?>">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
                                                     </button>
@@ -114,7 +116,8 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Foto Tanda Tangan</label>
                             <div class="col-sm-9">
-                                <input type="file" name="file_ttd" class="form-control-file" maxlength="40" class="form-control" required>
+                                <input type="file" name="file_ttd" class="form-control-file" maxlength="40" class="form-control" required  accept=".png">
+                                <div style="font-size: 10px">File hanya PNG dengan ukuran Maks. 2048 Kb</div>
                             </div>
                         </div>
                 </div>
@@ -167,7 +170,14 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tanda Tangan</label>
                             <div class="col-sm-9">
-                                <input type="file" name="file_ttd" class="form-control-file" placeholder="" required value="<?=$penerima->file_ttd?>">
+                                <input type="file" name="file_ttd" class="form-control-file" placeholder="" required accept=".png">
+                                <div style="font-size: 10px">File hanya PNG dengan ukuran Maks. 2048 Kb</div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tanda tangan saat ini</label>
+                            <div class="col-sm-9">
+                                <img src="<?= base_url('assets/user/approval_committee/'.$penerima->file_ttd)?>" class="img-responsive" style="max-height: 240px; max-width: 200px;">
                             </div>
                         </div>
                 </div>
