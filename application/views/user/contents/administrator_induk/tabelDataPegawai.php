@@ -19,7 +19,6 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Data Pegawai</h4>
-
                                 <div id="dataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
                                     <!-- Alert Add -->
                                     <?php 
@@ -324,8 +323,8 @@
                             <div class="col-sm-9">
                                 <select class="form-control" name="gender">
                                     <option>Pilih Salah Satu</option>
-                                    <option value="Laki-Laki">Laki-Laki</option>
-                                    <option value="Perempuan">Perempuan</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
                                 </select>
                             </div>
                         </div>
@@ -538,8 +537,8 @@
                             <div class="col-sm-9">
                                 <select class="form-control" name="gender">
                                     <option>Pilih Salah Satu</option>
-                                    <option value="Laki-Laki" <?php if($gender_selected == "Laki-Laki"){echo "selected";} ?>>Laki-Laki</option>
-                                    <option value="Perempuan" <?php if($gender_selected == "Perempuan"){echo "selected";} ?>>Perempuan</option>
+                                    <option value="Male" <?php if($gender_selected == "Male"){echo "selected";} ?>>Male</option>
+                                    <option value="Female" <?php if($gender_selected == "Female"){echo "selected";} ?>>Female</option>
                                 </select>
                             </div>
                         </div>

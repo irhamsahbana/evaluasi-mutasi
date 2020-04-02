@@ -127,6 +127,7 @@ class AdministratorInduk extends CI_Controller {
             'nama_business_area'   => $input['business_area'],
         );
         $this->db->insert('tb_business_area', $data_area);
+        $this->session->set_flashdata('alert_success', 'Data business area baru berhasil ditambahkan!');
         redirect('AdministratorInduk/tampilanDaftarBusinessArea');
     }
 
@@ -134,7 +135,7 @@ class AdministratorInduk extends CI_Controller {
         $where = array('business_area' => $id,);
 
         $this->Crud->d('tb_business_area', $where);
-        $this->session->set_flashdata('alert_danger', 'Data Business Area Telah Dihapus');
+        $this->session->set_flashdata('alert_danger', 'Data business area berhasil dihapus!');
         redirect('AdministratorInduk/tampilanDaftarBusinessArea');
     }
 
@@ -146,7 +147,7 @@ class AdministratorInduk extends CI_Controller {
             'nama_business_area'   => $input['business_area'],
         );
         $this->Crud->u('tb_business_area', $data_area, $where);
-        $this->session->set_flashdata('alert_primary', 'Data Business Area Berhasil Diupdate');
+        $this->session->set_flashdata('alert_primary', 'Data business area berhasil disunting!');
         redirect('AdministratorInduk/tampilanDaftarBusinessArea');
     }
 
@@ -169,7 +170,7 @@ class AdministratorInduk extends CI_Controller {
             'nama_personnel_subarea'   => $input['personnel_subarea'],
         );
         $this->db->insert('tb_personnel_area', $data_subarea);
-        $this->session->set_flashdata('alert_success', 'Data Personnel Subarea Telah Ditambahkan');
+        $this->session->set_flashdata('alert_success', 'Data personnel subarea berhasil ditambahkan!');
         redirect('AdministratorInduk/tampilanDaftarPersonnelSubarea');
     }
 
@@ -177,7 +178,7 @@ class AdministratorInduk extends CI_Controller {
         $where = array('personnel_subarea' => $id,);
 
         $this->Crud->d('tb_personnel_area', $where);
-        $this->session->set_flashdata('alert_danger', 'Data Personnel Subarea Telah Dihapus');
+        $this->session->set_flashdata('alert_danger', 'Data personnel subarea berhasil dihapus!');
         redirect('AdministratorInduk/tampilanDaftarPersonnelSubarea');
     }
 
@@ -190,7 +191,7 @@ class AdministratorInduk extends CI_Controller {
             'nama_personnel_subarea'   => $input['personnel_subarea'],
         );
         $this->Crud->u('tb_personnel_area', $data_subarea, $where);
-        $this->session->set_flashdata('alert_primary', 'Data Personnel Subarea Berhasil Diupdate');
+        $this->session->set_flashdata('alert_primary', 'Data personnel subarea berhasil disunting!');
         redirect('AdministratorInduk/tampilanDaftarPersonnelSubarea');
     }
 
