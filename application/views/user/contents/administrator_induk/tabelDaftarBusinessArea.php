@@ -19,15 +19,16 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Daftar Business Area</h4>
+                                <div id="dataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                    <button style="float: right;" type="button" class="btn mb-1 btn-success" data-toggle="modal" data-target=".modal-create">Tambah<span class="btn-icon-right"><i class="fa fa-user-plus"></i></span>
+                                    </button>
+                                </div>
                                 <div class="table-responsive">
-                                    <div id="dataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                                        <button style="float: right;" type="button" class="btn mb-1 btn-success" data-toggle="modal" data-target=".modal-create">Tambah<span class="btn-icon-right"><i class="fa fa-user-plus"></i></span>
-                                        </button>
-                                    </div>
                                     <table class="table table-striped table-bordered zero-configuration">
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
+                                                <th>ID Business Area</th>
                                                 <th>Business Area</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -39,6 +40,7 @@
                                             ?>
                                             <tr>
                                                 <td><?= $no++ ?></td>
+                                                <td><?= $area->business_area ?></td>
                                                 <td><?= $area->nama_business_area ?></td>
                                                 <td>
                                                     <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update<?=$area->business_area?>">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
@@ -54,6 +56,7 @@
                                         <tfoot>
                                             <tr>
                                                 <th>No.</th>
+                                                <th>ID Business Area</th>
                                                 <th>Business Area</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -85,6 +88,12 @@
                         </button>
                     </div>
                     <div class="modal-body">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">ID Business Area</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="id_business_area" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Business Area</label>
                             <div class="col-sm-9">
@@ -122,6 +131,12 @@ foreach ($data_area as $area) {
                         </button>
                     </div>
                     <div class="modal-body">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">ID Business Area</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="id_business_area" class="form-control" placeholder="" required value="<?=$area->business_area?>">
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Business Area</label>
                             <div class="col-sm-9">

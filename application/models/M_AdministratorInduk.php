@@ -13,7 +13,8 @@ class M_AdministratorInduk extends CI_Model {
 
     public function tampilSubarea() {
         return $this->db->from('tb_personnel_area')
-          ->join('tb_business_area', 'tb_business_area.business_area=tb_personnel_area.business_area', 'inner')
+          ->order_by('nama_business_area', 'ASC')
+          ->join('tb_business_area', 'tb_personnel_area.business_area=tb_business_area.business_area', 'inner')
           ->get()
           ->result();
     }
