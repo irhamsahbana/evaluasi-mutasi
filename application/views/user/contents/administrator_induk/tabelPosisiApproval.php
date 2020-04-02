@@ -21,6 +21,30 @@
                                 <h4 class="card-title">Posisi Approval Committee</h4>
                                 <div class="table-responsive">
                                     <div id="dataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                         <!-- Alert Add -->
+                                    <?php 
+                                    $alert_success = $this->session->flashdata('alert_success');
+                                    if($this->session->flashdata('alert_success') == TRUE) : ?>
+                                        <div class="alert alert-success alert-dismissible fade show">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                        </button><strong><?= $alert_success ?></strong></div>
+                                    <?php endif; ?>
+                                    <!-- Alert Update -->
+                                    <?php 
+                                    $alert_primary = $this->session->flashdata('alert_primary');
+                                    if($this->session->flashdata('alert_primary') == TRUE) : ?>
+                                        <div class="alert alert-primary alert-dismissible fade show">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                        </button><strong><?= $alert_primary ?></strong></div>
+                                    <?php endif; ?>
+                                    <!-- Alert Delete -->
+                                    <?php 
+                                    $alert_danger = $this->session->flashdata('alert_danger');
+                                    if($this->session->flashdata('alert_danger') == TRUE) : ?>
+                                        <div class="alert alert-danger alert-dismissible fade show">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                        </button><strong><?= $alert_danger ?></strong></div>
+                                    <?php endif; ?>
                                         <button style="float: right;" type="button" class="btn mb-1 btn-success" data-toggle="modal" data-target=".modal-create">Tambah<span class="btn-icon-right"><i class="fa fa-user-plus"></i></span>
                                         </button>
                                     </div>
@@ -28,7 +52,6 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>ID Posisi</th>
                                                 <th>Posisi</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -40,7 +63,6 @@
                                             ?>
                                             <tr>
                                                 <td><?= $no++ ?></td>
-                                                <td><?= $approval->id_posisi ?></td>
                                                 <td><?= $approval->posisi ?></td>
                                                 <td>
                                                     <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update<?=$approval->id_posisi?>">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
@@ -56,7 +78,6 @@
                                         <tfoot>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>ID Posisi</th>
                                                 <th>Posisi</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -81,21 +102,13 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Tambah Data Approval</h5>
+                <h5 class="modal-title">Tambah Data Posisi</h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-validation">
                     <form class="form-valide" action="<?= site_url('AdministratorInduk/doAddApproval') ?>" method="POST" enctype="multipart/form-data">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">ID Posisi</label>
-                            <div class="col-sm-9">
-                                <div class="input-group mb-3">
-                                    <input type="text" name="id_posisi" class="form-control" placeholder="" required>
-                                </div>
-                            </div>
-                        </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Posisi</label>
                             <div class="col-sm-9">
@@ -134,16 +147,6 @@
                 <div class="form-validation">
                     <form class="form-valide" action="<?= site_url('AdministratorInduk/doUpdateApproval/'.$id) ?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">ID Posisi</label>
-                            <div class="col-sm-9">
-                                <div class="input-group mb-3">
-                                    <input type="text" name="id_posisi" class="form-control" placeholder="" required value="<?=$approval->id_posisi?>">
-                                    <div class ="input-group-append">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Nama Lengkap</label>
                             <div class="col-sm-9">
                                 <input type="text" name="posisi" class="form-control" pplaceholder="" required value="<?=$approval->posisi?>">
@@ -174,7 +177,7 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Hapus data approval</h5>
+                <h5 class="modal-title">Hapus data posisi</h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
