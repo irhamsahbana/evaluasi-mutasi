@@ -194,7 +194,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tanda Tangan</label>
                             <div class="col-sm-9">
-                                <input type="file" name="file_ttd" class="form-control-file" placeholder="" required accept=".png">
+                                <input type="file" name="file_ttd" class="form-control-file" placeholder="" accept=".png">
                                 <div style="font-size: 10px">File hanya PNG dengan ukuran Maks. 2048 Kb</div>
                             </div>
                         </div>
@@ -202,8 +202,10 @@
                             <label class="col-sm-3 col-form-label">Tanda tangan saat ini</label>
                             <div class="col-sm-9">
                                 <img src="<?= base_url('assets/user/approval_committee/'.$penerima->file_ttd)?>" class="img-responsive" style="max-height: 240px; max-width: 200px;">
+
                             </div>
                         </div>
+                        <input type="hidden" readonly name="foto_lama" value="<?= $penerima->file_ttd ?>">
                 </div>
             </div>
             <div class="modal-footer">
@@ -235,11 +237,13 @@
             </div>
             <div class="modal-body">
             <form method="POST" action="<?= site_url('AdministratorInduk/doDeletePenerima/'.$id) ?>">
-                Yakin ingin menghapus data (<?=$penerima->id_approval?>) ?
+                Yakin ingin menghapus data (<?=$penerima->nama_approval?>) ?
+                <input type="hidden" name="file_ttd" readonly value="<?= $penerima->file_ttd ?>">
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-danger">Hapus</button>
-            </div></form>
+            </div>
+        </form>
         </div>
     </div>
 </div>

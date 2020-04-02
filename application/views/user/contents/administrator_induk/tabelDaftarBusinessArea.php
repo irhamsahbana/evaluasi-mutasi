@@ -44,6 +44,7 @@
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
                                         </button><strong><?= $alert_danger ?></strong></div>
                                     <?php endif; ?>
+                                    
                                     <button style="float: right;" type="button" class="btn mb-1 btn-success" data-toggle="modal" data-target=".modal-create">Tambah<span class="btn-icon-right"><i class="fa fa-user-plus"></i></span>
                                     </button>
                                 </div>
