@@ -63,7 +63,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?= site_url('User/tampilanNilaiTalenta') ?>" class="<?= ($modul == 'tampilanNilaiTalenta') ? 'active' : '' ?>">
+                        <a href="<?= site_url('AdministratorInduk/tampilanNilaiTalenta') ?>" class="<?= ($modul == 'tampilanNilaiTalenta') ? 'active' : '' ?>">
                             <i class="icon-star menu-icon"></i><span class="nav-text">Nilai Talenta</span>
                         </a>
                     </li>
