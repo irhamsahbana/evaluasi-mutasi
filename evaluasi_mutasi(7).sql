@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Apr 2020 pada 10.14
+-- Waktu pembuatan: 03 Apr 2020 pada 11.01
 -- Versi server: 10.4.6-MariaDB-log
 -- Versi PHP: 7.3.9
 
@@ -54,9 +54,9 @@ INSERT INTO `admin` (`id_admin`, `username_admin`, `password_admin`, `last_login
 CREATE TABLE `tb_administrator` (
   `id_administrator` varchar(100) NOT NULL,
   `nip` varchar(15) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `role` varchar(25) NOT NULL,
-  `nama_administrator` varchar(25) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` varchar(50) NOT NULL,
+  `nama_administrator` varchar(255) NOT NULL,
   `business_area` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -69,9 +69,9 @@ CREATE TABLE `tb_administrator` (
 CREATE TABLE `tb_approval_committee` (
   `id_approval` varchar(100) NOT NULL,
   `nip` varchar(15) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `role` varchar(25) NOT NULL,
-  `nama_approval` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` varchar(50) NOT NULL,
+  `nama_approval` varchar(255) NOT NULL,
   `file_ttd` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -141,7 +141,7 @@ CREATE TABLE `tb_judul_talenta` (
 CREATE TABLE `tb_pegawai` (
   `nip` varchar(15) NOT NULL,
   `pers_no` varchar(15) NOT NULL,
-  `nama_pegawai` varchar(100) NOT NULL,
+  `nama_pegawai` varchar(255) NOT NULL,
   `personnel_subarea` varchar(250) NOT NULL,
   `org_unit` varchar(15) NOT NULL,
   `organizational_unit` varchar(100) NOT NULL,
