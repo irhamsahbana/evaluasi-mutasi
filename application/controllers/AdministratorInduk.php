@@ -106,7 +106,7 @@ class AdministratorInduk extends CI_Controller {
             'no_telp'                        => $input['telephone_no'],
         );
         $this->Crud->u('tb_pegawai', $data_pegawai, $where);
-        $this->session->set_flashdata('alert_primary', 'Data pegawai berhasil disunting!');
+        $this->session->set_flashdata('alert_primary', 'Data pegawai baru berhasil disunting!');
         redirect('AdministratorInduk/tampilanDataPegawai');
     }
 
@@ -127,7 +127,6 @@ class AdministratorInduk extends CI_Controller {
             'nama_business_area'   => $input['business_area'],
         );
         $this->db->insert('tb_business_area', $data_area);
-        $this->session->set_flashdata('alert_success', 'Data business area baru berhasil ditambahkan!');
         redirect('AdministratorInduk/tampilanDaftarBusinessArea');
     }
 
@@ -135,7 +134,7 @@ class AdministratorInduk extends CI_Controller {
         $where = array('business_area' => $id,);
 
         $this->Crud->d('tb_business_area', $where);
-        $this->session->set_flashdata('alert_danger', 'Data business area berhasil dihapus!');
+        $this->session->set_flashdata('alert_danger', 'Data Business Area Telah Dihapus');
         redirect('AdministratorInduk/tampilanDaftarBusinessArea');
     }
 
@@ -147,7 +146,7 @@ class AdministratorInduk extends CI_Controller {
             'nama_business_area'   => $input['business_area'],
         );
         $this->Crud->u('tb_business_area', $data_area, $where);
-        $this->session->set_flashdata('alert_primary', 'Data business area berhasil disunting!');
+        $this->session->set_flashdata('alert_primary', 'Data Business Area Berhasil Diupdate');
         redirect('AdministratorInduk/tampilanDaftarBusinessArea');
     }
 
@@ -170,7 +169,7 @@ class AdministratorInduk extends CI_Controller {
             'nama_personnel_subarea'   => $input['personnel_subarea'],
         );
         $this->db->insert('tb_personnel_area', $data_subarea);
-        $this->session->set_flashdata('alert_success', 'Data personnel subarea berhasil ditambahkan!');
+        $this->session->set_flashdata('alert_success', 'Data Personnel Subarea Telah Ditambahkan');
         redirect('AdministratorInduk/tampilanDaftarPersonnelSubarea');
     }
 
@@ -178,7 +177,7 @@ class AdministratorInduk extends CI_Controller {
         $where = array('personnel_subarea' => $id,);
 
         $this->Crud->d('tb_personnel_area', $where);
-        $this->session->set_flashdata('alert_danger', 'Data personnel subarea berhasil dihapus!');
+        $this->session->set_flashdata('alert_danger', 'Data Personnel Subarea Telah Dihapus');
         redirect('AdministratorInduk/tampilanDaftarPersonnelSubarea');
     }
 
@@ -191,7 +190,7 @@ class AdministratorInduk extends CI_Controller {
             'nama_personnel_subarea'   => $input['personnel_subarea'],
         );
         $this->Crud->u('tb_personnel_area', $data_subarea, $where);
-        $this->session->set_flashdata('alert_primary', 'Data personnel subarea berhasil disunting!');
+        $this->session->set_flashdata('alert_primary', 'Data Personnel Subarea Berhasil Diupdate');
         redirect('AdministratorInduk/tampilanDaftarPersonnelSubarea');
     }
 
@@ -234,72 +233,32 @@ class AdministratorInduk extends CI_Controller {
             );
             $this->db->set('id_approval', 'UUID()', FALSE);
             $this->db->insert('tb_approval_committee', $data_penerima);
-            $this->session->set_flashdata('alert_success', 'Data penerima berhasil ditambahkan!');
+            $this->session->set_flashdata('alert_success', 'Data Penerima Telah ditambahkan');
             redirect('AdministratorInduk/tampilanApprovalCommittee');
         }
     }
 
     public function doDeletePenerima($id){
-        $input = $this->input->post(NULL, TRUE);
-        $where = array('id_approval' => $id);
-        unlink('./assets/user/approval_committee/'.$input['file_ttd']);
-
+        $where = array('id_approval' => $id,);
 
         $this->Crud->d('tb_approval_committee', $where);
-        $this->session->set_flashdata('alert_danger', 'Data penerima berhasil dihapus!');
+        $this->session->set_flashdata('alert_danger', 'Data Penerima Telah Dihapus');
         redirect('AdministratorInduk/tampilanApprovalCommittee');
     }
 
     public function doUpdatePenerima($id){
         $where         = array('id_approval' => $id);
-        $input         = $this->input->post(NULL, FALSE);
-
-        if(!empty($_FILES['file_ttd']['tmp_name'])){
-
-            $filenya = $_FILES['file_ttd']['name'];
-
-            if($filenya = ''){
-                $this->session->set_flashdata('alert_danger', 'Gagal merubah Data!');
-                redirect('AdministratorInduk/tampilanApprovalCommittee');
-            }else {
-                $config['upload_path'] = './assets/user/approval_committee';
-                $config['allowed_types'] = 'png';
-                $config['max_size'] = '' ;
-                
-                $this->load->library('upload', $config);
-                if($config['max_size'] >= 2048){
-                    $this->session->set_flashdata('alert_danger', 'File Melewati Batas Ukuran!');
-                    redirect('AdministratorInduk/tampilanApprovalCommittee');
-                }
-                unlink($config['upload_path'].'/'.$input['foto_lama']);
-
-                if (!$this->upload->do_upload('file_ttd')){
-                    $this->session->set_flashdata('alert_danger', 'Gagal mengupload! Periksa kembali ukuran dan ekstensi file!');
-                    redirect('AdministratorInduk/tampilanApprovalCommittee');
-                }else{
-                    $filenya = $this->upload->data();
-                }
-
-                $items = array(
-                    'nip'                       => $input['nipeg'],
-                    'nama_approval'             => $input['nama_approval'],
-                    'file_ttd'                  => $filenya['file_name'],
-                );
-
-                $this->db->update('tb_approval_committee', $items, $where);
-                $this->session->set_flashdata('alert_primary', 'Data penerima berhasil disunting!');
-                redirect('AdministratorInduk/tampilanApprovalCommittee');
-            }  
-        }else{
-            $items = array(
-                'nip'                       => $input['nipeg'],
-                'nama_approval'             => $input['nama_approval'],
-            );
-
-            $this->db->update('tb_approval_committee', $items, $where);
-            $this->session->set_flashdata('alert_primary', 'Data penerima berhasil disunting!');
-            redirect('AdministratorInduk/tampilanApprovalCommittee');
-        }
+        $input         = $this->input->post(NULL, TRUE);
+        $filenya      = $_FILES['file_ttd']['name'];
+        $data_penerima  = array(
+            'nip'                       => $input['nipeg'],
+            'nama_approval'             => $input['nama_approval'],
+            'file_ttd'                  => $filenya,
+            
+        );
+        $this->Crud->u('tb_approval_committee', $data_penerima, $where);
+        $this->session->set_flashdata('alert_primary', 'Data Penerima Berhasil Diupdate');
+        redirect('AdministratorInduk/tampilanApprovalCommittee');
     }
 
     public function tampilanDataApproval()
@@ -340,7 +299,51 @@ class AdministratorInduk extends CI_Controller {
         $this->session->set_flashdata('alert_primary', 'Data Posisi Berhasil Diupdate');
         redirect('AdministratorInduk/tampilanDataApproval');
     }
+
+    public function tampilanNilaiTalenta()
+    {
+        $data = array(
+            'isi' => 'user/contents/tabelNilaiTalenta',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'data_talenta' => $this->Crud->ga('tb_judul_talenta'),
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
+    }
+
+     public function doAddTalenta() {
+        $input        = $this->input->post(NULL, TRUE);
+        $data_talenta = array(
+            'id_talenta'                           => $input['id_talenta'],
+            'tahun'                            => $input['tahun'],
+            'semester'                         => $input['semester'],
+        );
+        $this->db->insert('tb_judul_talenta', $data_talenta);
+        $this->session->set_flashdata('alert_success', 'Data Talenta Telah ditambahkan');
+        redirect('AdministratorInduk/tampilanNilaiTalenta');
+    }
+
+    public function doUpdateTalenta($id){
+        $where         = array('id_talenta' => $id,);
+        $input         = $this->input->post(NULL, TRUE);
+        $data_talenta  = array(
+            'id_talenta'                       => $input['id_talenta'],
+            'tahun'                            => $input['tahun'],
+            'semester'                         => $input['semester'],
+        );
+        $this->Crud->u('tb_judul_talenta', $data_talenta, $where);
+        $this->session->set_flashdata('alert_primary', 'Data Talenta Berhasil Diupdate');
+        redirect('AdministratorInduk/tampilanNilaiTalenta');
+    }
+
+    public function doDeleteTalenta($id){
+        $where = array('id_talenta' => $id,);
+
+        $this->Crud->d('tb_judul_talenta', $where);
+        $this->session->set_flashdata('alert_danger', 'Data Talenta Telah Dihapus');
+        redirect('AdministratorInduk/tampilanNilaiTalenta');
+    }
 }
+
 
 
 
