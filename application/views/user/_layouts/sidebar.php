@@ -17,14 +17,14 @@
                             <i class="icon-people menu-icon"></i><span class="nav-text">Data Pegawai</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="<?= site_url('AdministratorInduk/tampilanDataApproval') ?>" class="<?= ($modul == 'tampilanDataApproval') ? 'active' : '' ?>">
-                            <i class="icon-people menu-icon"></i><span class="nav-text">Data Approval</span>
-                        </a>
-                    </li>
                       <li>
                         <a href="<?= site_url('AdministratorInduk/tampilanApprovalCommittee') ?>" class="<?= ($modul == 'tampilanApprovalCommittee') ? 'active' : '' ?>">
                             <i class="icon-pencil menu-icon"></i> <span class="nav-text">Approval Committee</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?= site_url('AdministratorInduk/tampilanDataApproval') ?>" class="<?= ($modul == 'tampilanDataApproval') ? 'active' : '' ?>">
+                            <i class="icon-layers menu-icon"></i><span class="nav-text">Posisi Approval Committee</span>
                         </a>
                     </li>
                     <li class="mega-menu mega-menu-sm">
