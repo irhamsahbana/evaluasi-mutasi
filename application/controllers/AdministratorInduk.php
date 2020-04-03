@@ -278,21 +278,38 @@ class AdministratorInduk extends CI_Controller {
                     $filenya = $this->upload->data();
                 }
 
-                $items = array(
-                    'nip'                       => $input['nipeg'],
-                    'nama_approval'             => $input['nama_approval'],
-                    'file_ttd'                  => $filenya['file_name'],
-                );
+                if($input['password'] != ''){
+                    $items = array(
+                        'nip'                => $input['nipeg'],
+                        'nama_approval'      => $input['nama_approval'],
+                        'password'           => password_hash($input['password'], PASSWORD_DEFAULT),
+                        'file_ttd'           => $filenya['file_name'],
+                    );
+                }else {
+                    $items = array(
+                        'nip'                => $input['nipeg'],
+                        'nama_approval'      => $input['nama_approval'],
+                        'file_ttd'           => $filenya['file_name'],
+                    );
+                }
 
                 $this->db->update('tb_approval_committee', $items, $where);
                 $this->session->set_flashdata('alert_primary', 'Data penerima berhasil disunting!');
                 redirect('AdministratorInduk/tampilanApprovalCommittee');
             }  
         }else{
-            $items = array(
-                'nip'                       => $input['nipeg'],
-                'nama_approval'             => $input['nama_approval'],
-            );
+            if($input['password'] != ''){
+                $items = array(
+                    'nip'                => $input['nipeg'],
+                    'nama_approval'      => $input['nama_approval'],
+                    'password'           => password_hash($input['password'], PASSWORD_DEFAULT),
+                );
+            }else {
+                $items = array(
+                    'nip'                => $input['nipeg'],
+                    'nama_approval'      => $input['nama_approval'],
+                );
+            }
 
             $this->db->update('tb_approval_committee', $items, $where);
             $this->session->set_flashdata('alert_primary', 'Data penerima berhasil disunting!');

@@ -192,6 +192,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Password Baru</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="password" class="form-control" placeholder="Jangan diisi dengan apapun jika tidak ingin merubah password!">
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tanda Tangan</label>
                             <div class="col-sm-9">
                                 <input type="file" name="file_ttd" class="form-control-file" placeholder="" accept=".png">
@@ -206,6 +212,7 @@
                             </div>
                         </div>
                         <input type="hidden" readonly name="foto_lama" value="<?= $penerima->file_ttd ?>">
+                        <input type="hidden" readonly name="password_lama" value="<?= $penerima->password ?>">
                 </div>
             </div>
             <div class="modal-footer">
