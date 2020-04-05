@@ -70,9 +70,9 @@
                                                 <td><?= $subarea->personnel_subarea ?></td>
                                                 <td><?= $subarea->nama_personnel_subarea ?></td>
                                                 <td>
-                                                    <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update<?=$subarea->personnel_subarea?>">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update<?=$subarea->target?>">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
                                                     </button>
-                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete<?=$subarea->personnel_subarea?>">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete<?=$subarea->target?>">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
                                                     </button>
                                                 </td>
                                             </tr>
@@ -158,7 +158,7 @@
 ***********************************-->
 <?php  
     foreach ($data_subarea as $subarea) {
-        $id = $subarea->personnel_subarea;
+        $id = $subarea->target;
         $business_area_selected = $subarea->business_area;
 ?>
 <div class="modal fade modal-update<?=$id?>" tabindex="-1" role="dialog" aria-hidden="true">
@@ -215,7 +215,7 @@
 ***********************************-->
 <?php  
     foreach ($data_subarea as $subarea) {
-        $id = $subarea->personnel_subarea;
+        $id = $subarea->target;
 ?>
 <div class="modal fade modal-delete<?=$id?>" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm">

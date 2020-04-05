@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Apr 2020 pada 08.01
+-- Waktu pembuatan: 05 Apr 2020 pada 11.58
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.3
 
@@ -105,9 +105,7 @@ CREATE TABLE `tb_business_area` (
 --
 
 INSERT INTO `tb_business_area` (`business_area`, `nama_business_area`, `target`) VALUES
-('UIW001', 'UIW Sulselrabar', ''),
-('UP3001', 'UP3 Palopo', ''),
-('UP3002', 'UP3 Pinrang', '');
+('UIW Sulserabar', 'Unit Induk Wilayah (UIW) Sulselrabar', 'bac9da7f-7716-11ea-a162-00ffee911c8d');
 
 -- --------------------------------------------------------
 
@@ -171,7 +169,7 @@ CREATE TABLE `tb_pegawai` (
 INSERT INTO `tb_pegawai` (`nip`, `pers_no`, `nama_pegawai`, `personnel_subarea`, `org_unit`, `organizational_unit`, `position`, `nama_panjang_posisi`, `jenjang_main_grp`, `jenjang_sub_grp`, `grade`, `tgl_grade`, `pendidikan_terakhir`, `gender`, `email`, `tgl_masuk`, `agama`, `no_telp`, `id_sebutan_jabatan`, `talenta_tiga_semester_lalu`, `talenta_dua_semester_lalu`, `talenta_semester_lalu`) VALUES
 ('6401007P', '64017600', 'AMIR', 'ULP001', '10069013', 'SIE TE', '37413727', 'ASSISTANT ENGINEER PENYAMBUNGAN DAN PEMUTUSAN', 'Fungsional', 'Fungsional V', 'SPE04', '2018-01-01', 'STM', 'Male', 'AMIR007@PLN.CO.ID', '2001-10-01', 'Islam', '081241314815', '', '', '', ''),
 ('6483084F', '64837601', 'JUFRI D', 'ULP002', '15845307', 'ULP PEKKABATA', '37423009', 'ANALYST KINERJA', 'Fungsional', 'Fungsional IV', 'SYS04', '2019-01-01', 'S1 Non Teknik', 'Male', 'JUFRI.D@PLN.CO.ID', '1983-08-01', 'Islam', '08124162212', '', '', '', ''),
-('6483113F', '64837603', 'MUHAMMAD RIZAL', 'UIW001', '17400702', 'SBI REN POLA OP DAN HAR SIS DIST', '30272190', 'ENGINEER PERENCANAAN KONSTRUKSI DAN TEKNIK DISTRIBUSI', 'Fungsional', 'Fungsional IV', 'SYS01', '2014-01-01', 'S1 Teknik', 'Male', 'MUHAMMAD.RIZAL2@PLN.CO.ID', '1983-10-01', 'Islam', '081222229020', '', '', '', '');
+('6483113F', '64837603', 'MUHAMMAD RIZAL', 'UIW SULSELRABAR', '17400702', 'SBI REN POLA OP DAN HAR SIS DIST', '30272190', 'ENGINEER PERENCANAAN KONSTRUKSI DAN TEKNIK DISTRIBUSI', 'Fungsional', 'Fungsional IV', 'SYS01', '2014-01-01', 'S1 Teknik', 'Male', 'MUHAMMAD.RIZAL2@PLN.CO.ID', '1983-10-01', 'Islam', '081222229020', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -191,9 +189,7 @@ CREATE TABLE `tb_personnel_area` (
 --
 
 INSERT INTO `tb_personnel_area` (`personnel_subarea`, `nama_personnel_subarea`, `business_area`, `target`) VALUES
-('UIW001', 'UIW SULSELRABAR', 'UIW001', ''),
-('ULP001', 'ULP MASAMBA', 'UP3001', ''),
-('ULP002', 'ULP PEKKABATA', 'UP3002', '');
+('UIW SULSELRABAR', 'Unit Induk Wilayah (UIW) Sulselrabar', 'UIW Sulserabar', '343cb4ae-7717-11ea-a162-00ffee911c8d');
 
 -- --------------------------------------------------------
 
