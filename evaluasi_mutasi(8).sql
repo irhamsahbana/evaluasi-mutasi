@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Apr 2020 pada 11.01
--- Versi server: 10.4.6-MariaDB-log
--- Versi PHP: 7.3.9
+-- Waktu pembuatan: 05 Apr 2020 pada 08.01
+-- Versi server: 10.4.11-MariaDB
+-- Versi PHP: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -96,17 +96,18 @@ CREATE TABLE `tb_approvement` (
 
 CREATE TABLE `tb_business_area` (
   `business_area` varchar(250) NOT NULL,
-  `nama_business_area` varchar(250) NOT NULL
+  `nama_business_area` varchar(250) NOT NULL,
+  `target` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tb_business_area`
 --
 
-INSERT INTO `tb_business_area` (`business_area`, `nama_business_area`) VALUES
-('UIW001', 'UIW Sulselrabar'),
-('UP3001', 'UP3 Palopo'),
-('UP3002', 'UP3 Pinrang');
+INSERT INTO `tb_business_area` (`business_area`, `nama_business_area`, `target`) VALUES
+('UIW001', 'UIW Sulselrabar', ''),
+('UP3001', 'UP3 Palopo', ''),
+('UP3002', 'UP3 Pinrang', '');
 
 -- --------------------------------------------------------
 
@@ -181,17 +182,18 @@ INSERT INTO `tb_pegawai` (`nip`, `pers_no`, `nama_pegawai`, `personnel_subarea`,
 CREATE TABLE `tb_personnel_area` (
   `personnel_subarea` varchar(250) NOT NULL,
   `nama_personnel_subarea` varchar(250) NOT NULL,
-  `business_area` varchar(250) NOT NULL
+  `business_area` varchar(250) NOT NULL,
+  `target` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tb_personnel_area`
 --
 
-INSERT INTO `tb_personnel_area` (`personnel_subarea`, `nama_personnel_subarea`, `business_area`) VALUES
-('UIW001', 'UIW SULSELRABAR', 'UIW001'),
-('ULP001', 'ULP MASAMBA', 'UP3001'),
-('ULP002', 'ULP PEKKABATA', 'UP3002');
+INSERT INTO `tb_personnel_area` (`personnel_subarea`, `nama_personnel_subarea`, `business_area`, `target`) VALUES
+('UIW001', 'UIW SULSELRABAR', 'UIW001', ''),
+('ULP001', 'ULP MASAMBA', 'UP3001', ''),
+('ULP002', 'ULP PEKKABATA', 'UP3002', '');
 
 -- --------------------------------------------------------
 
