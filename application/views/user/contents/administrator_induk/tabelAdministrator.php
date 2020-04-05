@@ -31,21 +31,21 @@
                                                 <th>NIP</th>
                                                 <th>Nama Administrator</th>
                                                 <th>Status</th>
-                                                <th>Terakhir Kali Log in</th>
+                                                <th>Business Area</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php 
                                                 $no = 1;
-                                                  foreach($data_user as $user){
+                                                  foreach($data_admin as $admin){
                                             ?>
                                             <tr>
                                                 <td><?= $no++ ?></td>
-                                                <td>NIP</td>
-                                                <td><?= $user->fullname_user ?></td>
-                                                <td><?= $user->status_user ?></td>
-                                                <td><?= $user->password_user ?></td>
+                                                <td><?= $admin->nip ?></td>
+                                                <td><?= $admin->nama_administrator ?></td>
+                                                <td><?= $admin->role ?></td>
+                                                <td><?= $admin->business_area ?></td>
                                                 <td>
                                                     <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
                                                     </button>
@@ -87,42 +87,52 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Tambah Data Pengguna</h5>
+                <h5 class="modal-title">Tambah Administrator</h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-validation">
-                    <form method="post" class="form-valide" action="<?= site_url('Okti1/doAddPengguna') ?>" enctype="multipart/form-data">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Username</label>
+                    <form method="post" class="form-valide" action="<?= site_url('AdministratorInduk/doAddPengguna') ?>" enctype="multipart/form-data">
+                         <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">NIP</label>
                             <div class="col-sm-9">
-                                <input type="text" name='username'class="form-control" placeholder="" required>
+                                <input type="text" name='nip'class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nama Administrator</label>
+                            <div class="col-sm-9">
+                                <input type="text" name='nama_administrator'class="form-control" placeholder="" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Password</label>
                             <div class="col-sm-9">
-                                <input type="password" name="password" class="form-control" placeholder="" required>
+                                <input type="text" name="password" class="form-control" placeholder="" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Status Pengguna</label>
+                            <label class="col-sm-3 col-form-label">Status Administrator</label>
                             <div class="col-sm-9">
-                                <select class="form-control" name="status_pengguna">
+                                <select class="form-control" name="status" required>
                                     <option>Pilih Salah Satu</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                    <option value="D">D</option>
-                                    <option value="E">E</option>
+                                    <option value="admin_induk">Administrator Unit Induk Wilayah</option>
+                                    <option value="admin_unit">Administrator UP2D / UP2K / UP3</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Nama Lengkap</label>
+                            <label class="col-sm-3 col-form-label">Business Area</label>
                             <div class="col-sm-9">
-                                <input type="text" name="nama_lengkap" class="form-control" placeholder="" required>
+                                <select class="form-control" name="business_area" required>
+                                    <option value="#">Pilih Salah Satu</option>
+                                    <?php 
+                                        foreach($business_area as $area){
+                                    ?>                                    
+                                        <option value="<?= $area->business_area ?>"><?= $area->nama_business_area ?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
                         </div>
                 </div>
@@ -164,32 +174,8 @@
 <!--**********************************
     Begin : Modal for Delete Data
 ***********************************-->
-<?php
-   foreach($data_user as $user){
-    $id = $user->id_user;
-?>
-<div class="modal fade modal-delete<?=$id?>" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Hapus data pengguna</h5>
-                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="<?= base_url('Okti1/doDeletePengguna/'.$id) ?>">
-                <h5>
-                    Apakah Anda Yakin Menghapus Data Ini ?
-                </h5>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-danger">Hapus</button>
-            </div>
-                </form>
-        </div>
-    </div>
-</div>
-<?php } ?>
+
+
 <!--**********************************
     End : Modal for Delete Data
 ***********************************-->

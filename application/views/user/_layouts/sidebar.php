@@ -58,7 +58,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?= site_url('User/tampilanPengaturanPengguna') ?>" class="<?= ($modul == 'tampilanPengaturanPengguna') ? 'active' : '' ?>">
+                        <a href="<?= site_url('AdministratorInduk/tampilanAdministrator') ?>" class="<?= ($modul == 'tampilanAdministrator') ? 'active' : '' ?>">
                             <i class="icon-settings menu-icon"></i><span class="nav-text">Pengaturan Adminstrator</span>
                         </a>
                     </li>

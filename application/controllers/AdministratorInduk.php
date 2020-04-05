@@ -209,16 +209,23 @@ class AdministratorInduk extends CI_Controller {
         $filenya      = $_FILES['file_ttd']['name'];
 
         if($filenya = ''){
+            $this->session->set_flashdata('alert_danger', 'file tanda tangan tidak boleh kosong!');
             redirect('AdministratorInduk/tampilanApprovalCommittee');
         }else{
             
             $config['upload_path'] = './assets/user/approval_committee';
-            $config['allowed_types'] = 'gif|jpg|png';
-            $config['max_size'] = '0';
-
+            $config['allowed_types'] = 'png';
+            $config['max_size'] = 2048 ;
+                
+            $this->load->library('upload', $config);
+            if($config['max_size'] >= 2048){
+                $this->session->set_flashdata('alert_danger', 'Gagal mengupload! Periksa kembali ukuran dan ekstensi file!');
+                redirect('AdministratorInduk/tampilanApprovalCommittee');
+            }
             $this->load->library('upload', $config);
 
             if(!$this->upload->do_upload('file_ttd')){
+                $this->session->set_flashdata('alert_danger', 'Gagal mengupload! Periksa kembali ukuran dan ekstensi file!');
                 redirect('AdministratorInduk/tampilanApprovalCommittee');
             }else{
                 $filenya =  $this->upload->data('file_name');
@@ -397,6 +404,16 @@ class AdministratorInduk extends CI_Controller {
         $this->Crud->d('tb_judul_talenta', $where);
         $this->session->set_flashdata('alert_danger', 'Data Talenta Telah Dihapus');
         redirect('AdministratorInduk/tampilanNilaiTalenta');
+    }
+
+    public function tampilanAdministrator(){
+        $data = array(
+            'isi' => 'user/contents/administrator_induk/tabelAdministrator',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'data_admin' => $this->Crud->ga('tb_administrator'),
+            'business_area' => $this->Crud->ga('tb_business_area'),
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
     }
 }
 
