@@ -217,7 +217,7 @@ class AdministratorInduk extends CI_Controller {
             
             $config['upload_path'] = './assets/user/approval_committee';
             $config['allowed_types'] = 'png';
-            $config['max_size'] = 2048 ;
+            $config['max_size'] = '' ;
                 
             $this->load->library('upload', $config);
             if($config['max_size'] >= 2048){
@@ -271,7 +271,7 @@ class AdministratorInduk extends CI_Controller {
             }else {
                 $config['upload_path'] = './assets/user/approval_committee';
                 $config['allowed_types'] = 'png';
-                $config['max_size'] = 2048 ;
+                $config['max_size'] = '' ;
                 
                 $this->load->library('upload', $config);
                 if($config['max_size'] >= 2048){

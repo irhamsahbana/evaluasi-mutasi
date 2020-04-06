@@ -143,9 +143,11 @@
 ***********************************-->
 <?php  
 foreach ($data_area as $area) {
-    $id = $area->target;
+    $id = $area->business_area;
+    $target = $area->target;
+
 ?>
-<div class="modal fade modal-update<?=$id?>" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade modal-update<?=$target?>" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="form-validation">
@@ -188,9 +190,10 @@ foreach ($data_area as $area) {
 ***********************************-->
 <?php  
     foreach ($data_area as $area) {
-        $id = $area->target;
+        $id = $area->business_area;
+        $target = $area->target;
 ?>
-<div class="modal fade modal-delete<?=$id?>" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade modal-delete<?=$target?>" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <form method="POST" action="<?= site_url('AdministratorInduk/doDeleteArea/'.$id) ?>">

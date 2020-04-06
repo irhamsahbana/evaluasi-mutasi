@@ -158,10 +158,11 @@
 ***********************************-->
 <?php  
     foreach ($data_subarea as $subarea) {
-        $id = $subarea->target;
+        $id = $subarea->personnel_subarea;
+        $target = $subarea->target;
         $business_area_selected = $subarea->business_area;
 ?>
-<div class="modal fade modal-update<?=$id?>" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade modal-update<?=$target?>" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="form-validation">
@@ -215,9 +216,10 @@
 ***********************************-->
 <?php  
     foreach ($data_subarea as $subarea) {
-        $id = $subarea->target;
+        $id = $subarea->personnel_subarea;
+        $target = $subarea->target;
 ?>
-<div class="modal fade modal-delete<?=$id?>" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade modal-delete<?=$target?>" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <form method="POST" action="<?= site_url('AdministratorInduk/doDeleteSubarea/'.$id) ?>">

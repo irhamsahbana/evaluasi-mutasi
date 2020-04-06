@@ -123,15 +123,24 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Business Area</label>
+                            <label class="col-sm-3 col-form-label">Personnel Subarea</label>
                             <div class="col-sm-9">
                                 <select class="form-control" name="business_area" required>
-                                    <option value="#">Pilih Salah Satu</option>
-                                    <?php 
-                                        foreach($business_area as $area){
-                                    ?>                                    
-                                        <option value="<?= $area->business_area ?>"><?= $area->nama_business_area ?></option>
-                                    <?php } ?>
+                                    <option >Pilih Salah Satu</option>
+                                    <option value="UIW Sulselrabar">Unit Induk Wilayah (UIW) Sulawesi Selatan, Sulawesi Tenggara, dan Sulawesi Barat</option>
+                                    <option value="UP2D Makassar">Unit Pelaksana Pengatur Distribusi (UP2D) Makassar</option>
+                                    <option value="UP2K Sulawesi Selatan">Unit Pelaksana Proyek Ketenagalistrikan (UP2K) Provinsi Sulawesi Selatan</option>
+                                    <option value="UP2K Sulawesi Tenggara">Unit Pelaksana Proyek Ketenagalistrikan (UP2K) Provinsi Sulawesi Tenggara</option>
+                                    <option value="UP2K Sulawesi Barat">Unit Pelaksana Proyek Ketenagalistrikan (UP2K) Provinsi Sulawesi Barat</option>
+                                    <option value="UP3 Baubau">Unit Pelaksana Pelayanan Pelanggan (UP3) Baubau</option>
+                                    <option value="UP3 Bulukumba">Unit Pelaksana Pelayanan Pelanggan (UP3) Bulukumba</option>
+                                    <option value="UP3 Kendari">Unit Pelaksana Pelayanan Pelanggan (UP3) Kendari</option>
+                                    <option value="UP3 Makassar Selatan">Unit Pelaksana Pelayanan Pelanggan (UP3) Makassar Selatan</option>
+                                    <option value="UP3 Makassar Utara">Unit Pelaksana Pelayanan Pelanggan (UP3) Makassar Utara</option>
+                                    <option value="UP3 Mamuju">Unit Pelaksana Pelayanan Pelanggan (UP3) Mamuju</option>
+                                    <option value="UP3 Palopo">Unit Pelaksana Pelayanan Pelanggan (UP3) Palopo</option>
+                                    <option value="UP3 Parepare">Unit Pelaksana Pelayanan Pelanggan (UP3) Parepare</option>
+                                    <option value="UP3 Watampone">Unit Pelaksana Pelayanan Pelanggan (UP3) Watampone</option>
                                 </select>
                             </div>
                         </div>
