@@ -68,9 +68,9 @@
                                                 <td><?= $area->business_area ?></td>
                                                 <td><?= $area->nama_business_area ?></td>
                                                 <td>
-                                                    <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update<?=$area->target?>">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update<?=$area->business_area?>">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
                                                     </button>
-                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete<?=$area->target?>">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete<?=$area->business_area?>">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
                                                     </button>
                                                 </td>
                                             </tr>
@@ -144,10 +144,9 @@
 <?php  
 foreach ($data_area as $area) {
     $id = $area->business_area;
-    $target = $area->target;
 
 ?>
-<div class="modal fade modal-update<?=$target?>" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade modal-update<?=$id?>" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="form-validation">
@@ -191,9 +190,8 @@ foreach ($data_area as $area) {
 <?php  
     foreach ($data_area as $area) {
         $id = $area->business_area;
-        $target = $area->target;
 ?>
-<div class="modal fade modal-delete<?=$target?>" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade modal-delete<?=$id?>" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <form method="POST" action="<?= site_url('AdministratorInduk/doDeleteArea/'.$id) ?>">

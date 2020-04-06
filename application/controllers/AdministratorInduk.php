@@ -126,7 +126,6 @@ class AdministratorInduk extends CI_Controller {
             'business_area'        => $input['id_business_area'],
             'nama_business_area'   => $input['business_area'],
         );
-        $this->db->set('target', 'UUID()', FALSE);
         $this->db->insert('tb_business_area', $data_area);
         redirect('AdministratorInduk/tampilanDaftarBusinessArea');
     }
@@ -169,7 +168,6 @@ class AdministratorInduk extends CI_Controller {
             'personnel_subarea'        => $input['id_personnel_subarea'],
             'nama_personnel_subarea'   => $input['personnel_subarea'],
         );
-        $this->db->set('target', 'UUID()', FALSE);
         $this->db->insert('tb_personnel_area', $data_subarea);
         $this->session->set_flashdata('alert_success', 'Data Personnel Subarea Telah Ditambahkan');
         redirect('AdministratorInduk/tampilanDaftarPersonnelSubarea');
