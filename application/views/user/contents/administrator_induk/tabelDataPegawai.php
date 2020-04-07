@@ -57,6 +57,7 @@
                                                 <th>NIP</th>
                                                 <th>Nama Pegawai</th>
                                                 <th>Personnel Subarea</th>
+                                                <th>Jabatan Saat Ini</th>
                                                 <th>Org.unit</th>
                                                 <th>Organizational Unit</th>
                                                 <th>Position</th>
@@ -88,6 +89,7 @@
                                                 <td><?= $pegawai->nip ?></td>
                                                 <td><?= $pegawai->nama_pegawai ?></td>
                                                 <td><?= $pegawai->nama_personnel_subarea ?></td>
+                                                <td><?= $pegawai->sebutan_jabatan ?></td>
                                                 <td><?= $pegawai->org_unit ?></td>
                                                 <td><?= $pegawai->organizational_unit ?></td>
                                                 <td><?= $pegawai->position ?></td>
@@ -123,6 +125,7 @@
                                                 <th>NIP</th>
                                                 <th>Nama Pegawai</th>
                                                 <th>Personnel Subarea</th>
+                                                <th>Jabatan Saat Ini</th>
                                                 <th>Org.unit</th>
                                                 <th>Organizational Unit</th>
                                                 <th>Position</th>
@@ -212,6 +215,14 @@
                             <div class="col-sm-9">
                                 <select class="form-control" name="personnel_subarea" id="subarea">
                                     <option value="">Pilih Business Area dahulu</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Sebutan Jabatan</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="sebutan_jabatan" id="jabatan">
+                                    <option value="">Pilih Personnel Subarea dahulu</option>
                                 </select>
                             </div>
                         </div>
@@ -374,6 +385,7 @@
         $id = $pegawai->nip;
         $area_selected = $pegawai->business_area;
         $subarea_selected = $pegawai->personnel_subarea;
+        $jabatan_selected = $pegawai->sebutan_jabatan;
         $talenta_i_selected = $pegawai->talenta_semester_lalu;
         $talenta_ii_selected = $pegawai->talenta_dua_semester_lalu;
         $talenta_iii_selected = $pegawai->talenta_tiga_semester_lalu;
@@ -426,6 +438,14 @@
                             <div class="col-sm-9">
                                 <select class="form-control" name="personnel_subarea" id="subarea_update">
                                     <option value="<?=$pegawai->personnel_subarea?>" <?php if($subarea_selected == $pegawai->personnel_subarea){echo 'selected';} ?>><?=$pegawai->nama_personnel_subarea?></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Sebutan Jabatan</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="sebutan_jabatan" id="jabatan_update">
+                                    <option value="<?=$pegawai->sebutan_jabatan?>" <?php if($jabatan_selected == $pegawai->sebutan_jabatan){echo 'selected';} ?>><?=$pegawai->sebutan_jabatan?></option>
                                 </select>
                             </div>
                         </div>

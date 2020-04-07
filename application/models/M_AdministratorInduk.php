@@ -6,6 +6,7 @@ class M_AdministratorInduk extends CI_Model {
     public function getDataPegawai() {
         return $this->db->from('tb_pegawai')
           ->join('tb_personnel_area', 'tb_personnel_area.personnel_subarea=tb_pegawai.personnel_subarea', 'inner')
+          ->join('tb_jabatan', 'tb_jabatan.personnel_subarea=tb_pegawai.personnel_subarea', 'inner')
           ->join('tb_business_area', 'tb_business_area.business_area=tb_personnel_area.business_area', 'inner')
           ->get()
           ->result();
@@ -52,6 +53,28 @@ class M_AdministratorInduk extends CI_Model {
                     $this->db->where($key, $value);
                 }else {
                     $this->db->where('s.'.$key, $value);
+                }
+            }
+        }
+
+        $query = $this->db->get();
+        $result = ($query->num_rows() > 0)?$query->result_array():FALSE;
+
+        //return fetched data
+        return $result;
+    }
+
+    public function getJabatanRows($params = array()) {
+        $this->db->select('j.id_sebutan_jabatan, j.sebutan_jabatan');
+        $this->db->from('tb_jabatan as j');
+
+        //fetch data by conditions
+        if(array_key_exists("conditions", $params)){
+            foreach ($params['conditions'] as $key => $value) {
+                if(strpos($key, '.') !== false){
+                    $this->db->where($key, $value);
+                }else {
+                    $this->db->where('j.'.$key, $value);
                 }
             }
         }

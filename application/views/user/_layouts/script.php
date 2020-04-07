@@ -41,6 +41,32 @@
                 }
             });
 
+            $('#subarea').on('change',function(){
+                var subareaID = $(this).val();
+                if(subareaID) {
+                    $.ajax({
+                        type:'POST',
+                        url:'<?php echo base_url('AdministratorInduk/getJabatan');?>',
+                        data:'personnel_subarea='+subareaID,
+                        success:function(data){
+                            $('#jabatan').html('<option value="">Pilih Sebutan Jabatan</option>');
+                            var dataObj = jQuery.parseJSON(data);
+                            if(dataObj){
+                                $(dataObj).each(function(){
+                                    var option = $('<option />');
+                                    option.attr('value', this.id_sebutan_jabatan).text(this.sebutan_jabatan);
+                                    $('#jabatan').append(option);
+                                });
+                            }else{
+                                $('#jabatan').html('<option value="">Sebutan Jabatan tidak tersedia</option>');
+                            }
+                        }
+                    });
+                }else{
+                    $('#jabatan').html('<option value="">Pilih Personnel Area dahulu</option>');
+                }
+            });
+
             $('#area_update').on('change',function(){
                 var areaID = $(this).val();
                 if(areaID) {
@@ -64,6 +90,32 @@
                     });
                 }else{
                     $('#subarea_update').html('<option value="">Pilih Business Area dahulu</option>');
+                }
+            });
+
+            $('#subarea_update').on('change',function(){
+                var subareaID = $(this).val();
+                if(subareaID) {
+                    $.ajax({
+                        type:'POST',
+                        url:'<?php echo base_url('AdministratorInduk/getJabatan');?>',
+                        data:'personnel_subarea='+subareaID,
+                        success:function(data){
+                            $('#jabatan_update').html('<option value="">Pilih Sebutan Jabatan</option>');
+                            var dataObj = jQuery.parseJSON(data);
+                            if(dataObj){
+                                $(dataObj).each(function(){
+                                    var option = $('<option />');
+                                    option.attr('value', this.id_sebutan_jabatan).text(this.sebutan_jabatan);
+                                    $('#jabatan_update').append(option);
+                                });
+                            }else{
+                                $('#jabatan_update').html('<option value="">Sebutan Jabatan tidak tersedia</option>');
+                            }
+                        }
+                    });
+                }else{
+                    $('#jabatan_update').html('<option value="">Pilih Personnel Area dahulu</option>');
                 }
             });
         });

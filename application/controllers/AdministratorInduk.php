@@ -26,7 +26,8 @@ class AdministratorInduk extends CI_Controller {
             'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
             'data_pegawai' => $this->M_AdministratorInduk->getDataPegawai(),
             'area' => $this->M_AdministratorInduk->getAreaRows(),
-            'subarea' => $this->M_AdministratorInduk->getSubareaRows(),
+            // 'subarea' => $this->M_AdministratorInduk->getSubareaRows(),
+            // 'jabatan' => $this->M_AdministratorInduk->getJabatanRows(),
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
@@ -39,6 +40,16 @@ class AdministratorInduk extends CI_Controller {
             $subarea = $this->M_AdministratorInduk->getSubareaRows($con);
         }
         echo json_encode($subarea);
+    }
+
+    public function getJabatan() {
+        $jabatan = array();
+        $personnel_subarea = $this->input->post('personnel_subarea');
+        if($personnel_subarea) {
+            $con['conditions'] = array('personnel_subarea'=>$personnel_subarea);
+            $jabatan = $this->M_AdministratorInduk->getJabatanRows($con);
+        }
+        echo json_encode($jabatan);
     }
 
     public function doAddPegawai() {
