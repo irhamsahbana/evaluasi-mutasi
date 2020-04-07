@@ -426,6 +426,15 @@ class AdministratorInduk extends CI_Controller {
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
+
+    public function tampilanJabatan(){
+        $data = array(
+            'isi' => 'user/contents/administrator_induk/tabelDaftarJabatan',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'data_jabatan' => $this->Crud->ga('tb_jabatan'),
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
+    }
 }
 
 

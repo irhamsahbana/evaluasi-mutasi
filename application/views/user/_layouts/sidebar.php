@@ -28,7 +28,7 @@
                         </a>
                     </li>
                     <li class="mega-menu mega-menu-sm">
-                        <a href="<?= site_url('User/tampilanDaftarJabatan') ?>" class="<?= ($modul == 'tampilanDaftarJabatan') ? 'active' : '' ?>">
+                        <a href="<?= site_url('AdministratorInduk/tampilanJabatan') ?>" class="<?= ($modul == 'tampilanJabatan') ? 'active' : '' ?>">
                             <i class="icon-list menu-icon"></i><span class="nav-text">Daftar Jabatan</span>
                         </a>
                     </li>
