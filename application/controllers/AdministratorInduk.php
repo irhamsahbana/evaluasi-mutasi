@@ -208,6 +208,7 @@ class AdministratorInduk extends CI_Controller {
 
     public function tampilanApprovalCommittee()
     {
+
         $data = array(
             'isi' => 'user/contents/administrator_induk/tabelApprovalCommittee',
             'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
@@ -429,10 +430,18 @@ class AdministratorInduk extends CI_Controller {
     }
 
     public function tampilanJabatan(){
+        $this->db->select('*');
+        $this->db->from('tb_jabatan');
+        $this->db->order_by('personnel_subarea', 'asc');
+        $this->db->order_by('urutan_dalam_org', 'asc');
+        $query = $this->db->get();
+        $data_jabatan = $query->result();
+        
+
         $data = array(
             'isi' => 'user/contents/administrator_induk/tabelDaftarJabatan',
             'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
-            'data_jabatan' => $this->Crud->ga('tb_jabatan'),
+            'data_jabatan' => $data_jabatan,
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
@@ -440,7 +449,7 @@ class AdministratorInduk extends CI_Controller {
     public function doImportJabatan(){
         $this->load->library(array('PHPExcel','PHPExcel/IOFactory'));
 
-        $fileName = time().'_'.$_FILES['file_jabatan']['name'];
+        $fileName = $_FILES['file_jabatan']['name'];
          
         $config['upload_path'] = './assets/user/administrator_induk';
         $config['file_name'] = $fileName;
@@ -475,15 +484,17 @@ class AdministratorInduk extends CI_Controller {
                    TRUE,
                    FALSE);
                 $data = array(
+                    "id_sebutan_jabatan" => $rowData[0][2].'-'.$rowData[0][0],
                     "urutan_dalam_org"=> $rowData[0][0],
                     "sebutan_jabatan"=> $rowData[0][1],
                     "Personnel_subarea"=> $rowData[0][2],
                 );
-                $this->db->set('id_sebutan_jabatan', 'UUID()', FALSE);
                 $this->db->insert("tb_jabatan",$data);
             }
+            unlink('./assets/user/administrator_induk/'.$config['file_name']);
             $this->session->set_flashdata('alert_success', 'Daftar sebutan jabatan berhasil di import!');
-            redirect('AdministratorInduk/tampilanJabatan'); 
+            redirect('AdministratorInduk/tampilanJabatan');
+
         }
     }
 }
