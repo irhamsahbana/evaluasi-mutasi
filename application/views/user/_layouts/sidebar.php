@@ -17,6 +17,11 @@
                             <i class="icon-people menu-icon"></i><span class="nav-text">Data Pegawai</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="<?= site_url('AdministratorInduk/tampilanNilaiTalentaPegawai') ?>" class="<?= ($modul == 'tampilanNilaiTalentaPegawai') ? 'active' : '' ?>">
+                            <i class="icon-star menu-icon"></i><span class="nav-text">Nilai Talenta Pegawai</span>
+                        </a>
+                    </li>
                       <li>
                         <a href="<?= site_url('AdministratorInduk/tampilanApprovalCommittee') ?>" class="<?= ($modul == 'tampilanApprovalCommittee') ? 'active' : '' ?>">
                             <i class="icon-pencil menu-icon"></i> <span class="nav-text">Approval Committee</span>
