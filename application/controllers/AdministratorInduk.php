@@ -123,10 +123,16 @@ class AdministratorInduk extends CI_Controller {
     }
 
     public function tampilanNilaiTalentaPegawai(){
+        $this->db->select('*');
+        $this->db->from('tb_nilai_talenta_pegawai');
+        $this->db->order_by('tahun_talenta', 'desc');
+        $query = $this->db->get();
+        $data_talenta_pegawai = $query->result();
+
         $data = array(
             'isi' => 'user/contents/administrator_induk/tabelNilaiTalentaPegawai',
             'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
-            'tb_talenta' => $this->Crud->ga('tb_nilai_talenta'),
+            'tb_talenta' => $data_talenta_pegawai,
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
@@ -138,7 +144,7 @@ class AdministratorInduk extends CI_Controller {
             'nip'                  => $input['nip'],
             'nilai_talenta'        => $input['nilai_talenta'],
         );
-        $this->db->insert('tb_nilai_talenta', $data);
+        $this->db->insert('tb_nilai_talenta_pegawai', $data);
         $this->session->set_flashdata('alert_success', 'Data nilai talenta pegawai berhasil ditambahkan!');
         redirect('AdministratorInduk/tampilanNilaiTalentaPegawai');
     }
@@ -156,7 +162,7 @@ class AdministratorInduk extends CI_Controller {
             'nip'                  => $input['nip'],
             'nilai_talenta'        => $input['nilai_talenta'],
         );
-        $this->Crud->u('tb_nilai_talenta', $data, $where);
+        $this->Crud->u('tb_nilai_talenta_pegawai', $data, $where);
         $this->session->set_flashdata('alert_primary', 'Data nilai talenta pegawai berhasil disunting!');
         redirect('AdministratorInduk/tampilanNilaiTalentaPegawai');
     }
@@ -167,7 +173,7 @@ class AdministratorInduk extends CI_Controller {
             'semester_talenta'  => $semester,
             'nip'               => $nip,
         );
-        $this->Crud->d('tb_nilai_talenta', $where);
+        $this->Crud->d('tb_nilai_talenta_pegawai', $where);
         $this->session->set_flashdata('alert_danger', 'Data nilai talenta pegawai berhasil dihapus!');
         redirect('AdministratorInduk/tampilanNilaiTalentaPegawai');
     }
