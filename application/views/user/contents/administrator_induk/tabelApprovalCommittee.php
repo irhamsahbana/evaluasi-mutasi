@@ -53,7 +53,6 @@
                                             <tr>
                                                 <th>No.</th>
                                                 <th>NIP</th>
-                                                <th>Nama Lengkap</th>
                                                 <th>Tanda Tangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -66,7 +65,6 @@
                                             <tr>
                                                 <td><?= $no++ ?></td>
                                                 <td><?= $penerima->nip ?></td>
-                                                <td><?= $penerima->nama_approval ?></td>
                                                 <td>
                                                     <img src="<?= base_url('assets/user/approval_committee/'.$penerima->file_ttd)?>" class="img-responsive" style="max-height: 240px; max-width: 200px;">
                                                 </td>
@@ -85,7 +83,6 @@
                                             <tr>
                                                 <th>No.</th>
                                                 <th>NIP</th>
-                                                <th>Nama Lengkap</th>
                                                 <th>Tanda Tangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -123,12 +120,6 @@
                                 <div class="input-group mb-3">
                                     <input type="text" name="nipeg" class="form-control" placeholder="" required>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Nama</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="nama_approval" class="form-control" placeholder="" required>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -184,13 +175,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Nama Lengkap</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="nama_approval" class="form-control" pplaceholder="" required value="<?=$penerima->nama_approval?>">
-                            </div>
-                        </div>
+                        </div>                       
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Password Baru</label>
                             <div class="col-sm-9">

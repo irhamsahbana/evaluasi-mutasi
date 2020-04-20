@@ -27,7 +27,7 @@
 					<button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Sign in</button>
 				</form>
 				<div class="form-links">
-					<a href="#">copyright © 2020 PT. PLN (Persero) Unit Induk Wilayah Sulselrabar</a>
+					<a href="#" style="color:black">copyright © 2020 PT. PLN (Persero) Unit Induk Wilayah Sulselrabar</a>
 				</div>
 			</section>
 	</section>

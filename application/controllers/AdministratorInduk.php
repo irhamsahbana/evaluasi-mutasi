@@ -302,7 +302,6 @@ class AdministratorInduk extends CI_Controller {
 
             $data_penerima = array(
                 'nip'                       => $input['nipeg'],
-                'nama_approval'             => $input['nama_approval'],
                 'password'                  => password_hash($input['password'], PASSWORD_DEFAULT),
                 'role'                      => 'approval_committee',
                 'file_ttd'                  => $filenya,
@@ -357,14 +356,12 @@ class AdministratorInduk extends CI_Controller {
                 if($input['password'] != ''){
                     $items = array(
                         'nip'                => $input['nipeg'],
-                        'nama_approval'      => $input['nama_approval'],
                         'password'           => password_hash($input['password'], PASSWORD_DEFAULT),
                         'file_ttd'           => $filenya['file_name'],
                     );
                 }else {
                     $items = array(
                         'nip'                => $input['nipeg'],
-                        'nama_approval'      => $input['nama_approval'],
                         'file_ttd'           => $filenya['file_name'],
                     );
                 }
@@ -377,13 +374,11 @@ class AdministratorInduk extends CI_Controller {
             if($input['password'] != ''){
                 $items = array(
                     'nip'                => $input['nipeg'],
-                    'nama_approval'      => $input['nama_approval'],
                     'password'           => password_hash($input['password'], PASSWORD_DEFAULT),
                 );
             }else {
                 $items = array(
                     'nip'                => $input['nipeg'],
-                    'nama_approval'      => $input['nama_approval'],
                 );
             }
 
@@ -480,7 +475,6 @@ class AdministratorInduk extends CI_Controller {
             'isi' => 'user/contents/administrator_induk/tabelAdministrator',
             'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
             'data_admin' => $this->Crud->ga('tb_administrator'),
-            'business_area' => $this->Crud->ga('tb_business_area'),
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
@@ -547,7 +541,7 @@ class AdministratorInduk extends CI_Controller {
                 );
                 $this->db->insert("tb_jabatan",$data);
             }
-            unlink('./assets/user/administrator_induk/'.$config['file_name']);
+            unlink(base_url('/assets/user/administrator_induk/'.$config['file_name']));
             $this->session->set_flashdata('alert_success', 'Daftar sebutan jabatan berhasil diimpor!');
             redirect('AdministratorInduk/tampilanJabatan');
 

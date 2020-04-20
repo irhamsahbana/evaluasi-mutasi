@@ -29,9 +29,8 @@
                                             <tr>
                                                 <th>No.</th>
                                                 <th>NIP</th>
-                                                <th>Nama Administrator</th>
                                                 <th>Status</th>
-                                                <th>Business Area</th>
+                                                <th>Personnel Subarea</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -43,9 +42,8 @@
                                             <tr>
                                                 <td><?= $no++ ?></td>
                                                 <td><?= $admin->nip ?></td>
-                                                <td><?= $admin->nama_administrator ?></td>
                                                 <td><?= $admin->role ?></td>
-                                                <td><?= $admin->business_area ?></td>
+                                                <td><?= $admin->personnel_subarea ?></td>
                                                 <td>
                                                     <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
                                                     </button>
@@ -61,9 +59,8 @@
                                             <tr>
                                                 <th>No.</th>
                                                 <th>NIP</th>
-                                                <th>Nama Administrator</th>
                                                 <th>Status</th>
-                                                <th>Terakhir Kali Log in</th>
+                                                <th>Personnel Subarea</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </tfoot>
@@ -101,15 +98,25 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Nama Administrator</label>
-                            <div class="col-sm-9">
-                                <input type="text" name='nama_administrator'class="form-control" placeholder="" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Password</label>
                             <div class="col-sm-9">
                                 <input type="text" name="password" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Business Area</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="business_area" required>
+                                    <option >Pilih Salah Satu</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Personnel Subarea</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="personnel_subarea" required>
+                                    <option >Pilih Salah Satu</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -119,28 +126,6 @@
                                     <option>Pilih Salah Satu</option>
                                     <option value="admin_induk">Administrator Unit Induk Wilayah</option>
                                     <option value="admin_unit">Administrator UP2D / UP2K / UP3</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Personnel Subarea</label>
-                            <div class="col-sm-9">
-                                <select class="form-control" name="business_area" required>
-                                    <option >Pilih Salah Satu</option>
-                                    <option value="UIW Sulselrabar">Unit Induk Wilayah (UIW) Sulawesi Selatan, Sulawesi Tenggara, dan Sulawesi Barat</option>
-                                    <option value="UP2D Makassar">Unit Pelaksana Pengatur Distribusi (UP2D) Makassar</option>
-                                    <option value="UP2K Sulawesi Selatan">Unit Pelaksana Proyek Ketenagalistrikan (UP2K) Provinsi Sulawesi Selatan</option>
-                                    <option value="UP2K Sulawesi Tenggara">Unit Pelaksana Proyek Ketenagalistrikan (UP2K) Provinsi Sulawesi Tenggara</option>
-                                    <option value="UP2K Sulawesi Barat">Unit Pelaksana Proyek Ketenagalistrikan (UP2K) Provinsi Sulawesi Barat</option>
-                                    <option value="UP3 Baubau">Unit Pelaksana Pelayanan Pelanggan (UP3) Baubau</option>
-                                    <option value="UP3 Bulukumba">Unit Pelaksana Pelayanan Pelanggan (UP3) Bulukumba</option>
-                                    <option value="UP3 Kendari">Unit Pelaksana Pelayanan Pelanggan (UP3) Kendari</option>
-                                    <option value="UP3 Makassar Selatan">Unit Pelaksana Pelayanan Pelanggan (UP3) Makassar Selatan</option>
-                                    <option value="UP3 Makassar Utara">Unit Pelaksana Pelayanan Pelanggan (UP3) Makassar Utara</option>
-                                    <option value="UP3 Mamuju">Unit Pelaksana Pelayanan Pelanggan (UP3) Mamuju</option>
-                                    <option value="UP3 Palopo">Unit Pelaksana Pelayanan Pelanggan (UP3) Palopo</option>
-                                    <option value="UP3 Parepare">Unit Pelaksana Pelayanan Pelanggan (UP3) Parepare</option>
-                                    <option value="UP3 Watampone">Unit Pelaksana Pelayanan Pelanggan (UP3) Watampone</option>
                                 </select>
                             </div>
                         </div>
