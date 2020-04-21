@@ -85,4 +85,22 @@ class M_AdministratorInduk extends CI_Model {
         //return fetched data
         return $result;
     }
+
+    public function getDataAdmin() {
+        return $this->db->from('tb_administrator')
+          ->join('tb_personnel_area', 'tb_personnel_area.personnel_subarea=tb_administrator.personnel_subarea', 'left')
+          ->join('tb_business_area', 'tb_business_area.business_area=tb_personnel_area.business_area', 'left')
+          ->get()
+          ->result();
+    }
+
+    public function getAdminById($id){
+        $this->db->from('tb_administrator');
+        $this->db->join('tb_personnel_area', 'tb_personnel_area.personnel_subarea = tb_administrator.personnel_subarea', 'left');
+        $this->db->join('tb_business_area', 'tb_business_area.business_area = tb_personnel_area.business_area', 'left');
+        $this->db->where(array('id_administrator' =>  $id));
+        $query = $this->db->get();
+        return $query;
+    }
+
 }

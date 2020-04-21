@@ -470,15 +470,6 @@ class AdministratorInduk extends CI_Controller {
         redirect('AdministratorInduk/tampilanNilaiTalenta');
     }
 
-    public function tampilanAdministrator(){
-        $data = array(
-            'isi' => 'user/contents/administrator_induk/tabelAdministrator',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
-            'data_admin' => $this->Crud->ga('tb_administrator'),
-        );
-        $this->load->view('user/_layouts/wrapper', $data);
-    }
-
     public function tampilanJabatan(){
         $this->db->select('*');
         $this->db->from('tb_jabatan');
@@ -547,4 +538,81 @@ class AdministratorInduk extends CI_Controller {
 
         }
     }
+
+    public function tampilanAdministrator(){
+        $data = array(
+            'isi' => 'user/contents/administrator_induk/tabelAdministrator',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'data_admin' => $this->M_AdministratorInduk->getDataAdmin(), 
+            'area' =>  $this->Crud->ga('tb_business_area'),
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
+    }
+
+    public function getPersonnelSubarea(){
+        $business_area = $this->input->post('id',TRUE);
+        $data = $this->Crud->gw('tb_personnel_area', array('business_area' => $business_area));
+        echo json_encode($data);
+    }
+
+    public function doAddAdmin() {
+        $input      = $this->input->post(NULL, TRUE);
+        $data_admin = array(
+            'nip'                            => $input['nip'],
+            'password'                       => $input['password'],
+            'role'                           => $input['status'],
+            'personnel_subarea'              => $input['personnel_subarea'],
+        );
+        $this->db->set('id_administrator', 'UUID()', FALSE);
+        $this->db->insert('tb_administrator', $data_admin);
+        $this->session->set_flashdata('alert_success', 'Data Administrator Telah Ditambahkan');
+        redirect('AdministratorInduk/tampilanAdministrator');
+    }
+
+    public function getEditAdmin(){
+        $id_administrator = $this->uri->segment(3);
+        $data = array(
+            'isi' => 'user/contents/administrator_induk/editAdministrator',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'area' =>  $this->Crud->ga('tb_business_area'),
+            'id_administrator' => $id_administrator,
+        );
+        $get_data = $this->M_AdministratorInduk->getAdminById($id_administrator);
+        if($get_data->num_rows() > 0){
+            $row = $get_data->row_array();
+            $data['subarea_id'] = $row['personnel_subarea'];
+        }
+        $this->load->view('user/_layouts/wrapper', $data);
+    }
+
+    public function getDataEditAdmin(){
+        $id_administrator = $this->input->post('id_administrator',TRUE);
+        $data = $this->M_AdministratorInduk->getAdminById($id_administrator)->result();
+        echo json_encode($data);
+    }
+
+    public function doUpdateAdmin(){
+        $id            = $this->input->post('id_administrator',TRUE);
+        $where         = array('id_administrator' => $id,);
+        $input         = $this->input->post(NULL, TRUE);
+        $data_admin    = array(
+            'nip'                            => $input['nip'],
+            'nama_administrator'             => $input['nama_administrator'],
+            'password'                       => $input['password'],
+            'role'                           => $input['status'],
+            'personnel_subarea'              => $input['personnel_subarea'],
+        );
+        $this->Crud->u('tb_administrator', $data_admin, $where);
+        $this->session->set_flashdata('alert_primary', 'Data Administrator Berhasil Diupdate');
+        redirect('AdministratorInduk/tampilanAdministrator');
+    }
+
+    public function doDeleteAdmin($id){
+        $where = array('id_administrator' => $id,);
+
+        $this->Crud->d('tb_administrator', $where);
+        $this->session->set_flashdata('alert_danger', 'Data Administrator Telah Dihapus');
+        redirect('AdministratorInduk/tampilanAdministrator');
+    }
+
 }

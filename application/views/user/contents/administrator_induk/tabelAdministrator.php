@@ -21,6 +21,30 @@
                                 <h4 class="card-title">Pengaturan Administrator</h4>
                                 <div class="table-responsive">
                                     <div id="dataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                        <!-- Alert Add -->
+                                    <?php 
+                                    $alert_success = $this->session->flashdata('alert_success');
+                                    if($this->session->flashdata('alert_success') == TRUE) : ?>
+                                        <div class="alert alert-success alert-dismissible fade show">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                        </button><strong><?= $alert_success ?></strong></div>
+                                    <?php endif; ?>
+                                        <!-- Alert Update -->
+                                    <?php 
+                                    $alert_primary = $this->session->flashdata('alert_primary');
+                                    if($this->session->flashdata('alert_primary') == TRUE) : ?>
+                                        <div class="alert alert-primary alert-dismissible fade show">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                        </button><strong><?= $alert_primary ?></strong></div>
+                                    <?php endif; ?>
+                                    <!-- Alert Delete -->
+                                    <?php 
+                                    $alert_danger = $this->session->flashdata('alert_danger');
+                                    if($this->session->flashdata('alert_danger') == TRUE) : ?>
+                                        <div class="alert alert-danger alert-dismissible fade show">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                        </button><strong><?= $alert_danger ?></strong></div>
+                                    <?php endif; ?>
                                         <button style="float: right;" type="button" class="btn mb-1 btn-success" data-toggle="modal" data-target=".modal-create">Tambah<span class="btn-icon-right"><i class="fa fa-user-plus"></i></span>
                                         </button>
                                     </div>
@@ -43,11 +67,11 @@
                                                 <td><?= $no++ ?></td>
                                                 <td><?= $admin->nip ?></td>
                                                 <td><?= $admin->role ?></td>
-                                                <td><?= $admin->personnel_subarea ?></td>
+                                                <td><?= $admin->nama_personnel_subarea ?></td>
                                                 <td>
-                                                    <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-info" onclick='window.open("<?=site_url('AdministratorInduk/getEditAdmin/'.$admin->id_administrator);?>","_blank")' target="_blank">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
                                                     </button>
-                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete<?=$user->id_user?>">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete<?=$admin->id_administrator?>">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
                                                     </button>
                                                 </td>
                                             </tr>
@@ -90,7 +114,7 @@
             </div>
             <div class="modal-body">
                 <div class="form-validation">
-                    <form method="post" class="form-valide" action="<?= site_url('AdministratorInduk/doAddPengguna') ?>" enctype="multipart/form-data">
+                    <form method="post" class="form-valide" action="<?= site_url('AdministratorInduk/doAddAdmin') ?>" enctype="multipart/form-data">
                          <div class="form-group row">
                             <label class="col-sm-3 col-form-label">NIP</label>
                             <div class="col-sm-9">
@@ -104,28 +128,31 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Business Area</label>
-                            <div class="col-sm-9">
-                                <select class="form-control" name="business_area" required>
-                                    <option >Pilih Salah Satu</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Personnel Subarea</label>
-                            <div class="col-sm-9">
-                                <select class="form-control" name="personnel_subarea" required>
-                                    <option >Pilih Salah Satu</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Status Administrator</label>
                             <div class="col-sm-9">
                                 <select class="form-control" name="status" required>
                                     <option>Pilih Salah Satu</option>
                                     <option value="admin_induk">Administrator Unit Induk Wilayah</option>
                                     <option value="admin_unit">Administrator UP2D / UP2K / UP3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Business Area</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="business_area" id="area_admin" required>
+                                    <option value="">Pilih Salah Satu</option>
+                                    <?php foreach($area as $row):?>
+                                    <option value="<?php echo $row->business_area;?>"><?php echo $row->nama_business_area;?></option>
+                                    <?php endforeach;?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Personnel Subarea</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="personnel_subarea" id="subarea_admin" required>
+                                    <option >Pilih Business Area dahulu</option>
                                 </select>
                             </div>
                         </div>
@@ -142,33 +169,35 @@
     End : Modal for Add Data
 ***********************************-->
 
-<!--**********************************
-    Begin : Modal for Update Data
-***********************************-->
-<div class="modal fade modal-update" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Sunting Daftar Pengguna</h5>
-                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">Sunting daftar pengaturan pengguna.</div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Sunting Data</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!--**********************************
-    End : Modal for Update Data
-***********************************-->
-
 
 <!--**********************************
     Begin : Modal for Delete Data
 ***********************************-->
 
+<?php
+    foreach ($data_admin as $admin) {
+        $id = $admin->id_administrator;
+?>
+<div class="modal fade modal-delete<?=$id?>" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Hapus Data Administrator</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="<?= site_url('AdministratorInduk/doDeleteAdmin/'.$id) ?>">
+                Yakin ingin menghapus data admin <?=$admin->nama_personnel_subarea?> ?
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger">Hapus</button>
+            </div>
+                </form>
+        </div>
+    </div>
+</div>
+<?php } ?>
 
 <!--**********************************
     End : Modal for Delete Data
