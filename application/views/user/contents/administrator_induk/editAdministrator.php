@@ -33,7 +33,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">NIP</label>
                                             <div class="col-sm-9">
-                                                <input type="text" name="nip" class="form-control" required value="<?= $nip ?>">
+                                                <input type="text" name="nip" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -71,7 +71,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <input type="hidden" name="id_administrator" value="" required>
+                                        <input type="hidden" name="id_administrator" value="<?=$id?>" required>
                                         <button style="float: right;" type="submit" class="btn btn-primary">Sunting Data</button>
                                     </form>
                                 </div>

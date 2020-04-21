@@ -14,6 +14,7 @@
 
     <script type="text/javascript">
         $(document).ready(function(){
+            getDataEditAdmin();
             //load data for edit
             function getDataEditAdmin(){
                 var id_administrator = $('[name="id_administrator"]').val();
@@ -31,6 +32,10 @@
                             $('[name="business_area"]').val(data[i].business_area).trigger('change');
                             $('[name="personnel_subarea"]').val(data[i].personnel_subarea).trigger('change');
                         });
+                        console.log(`Request passed!`);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(`Request failed!`);
                     }
  
                 });
