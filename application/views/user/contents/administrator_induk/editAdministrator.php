@@ -1,6 +1,14 @@
         <!--**********************************
             Content body start
         ***********************************-->
+        <?php foreach ($data_admin as $get) {
+            $id = $get->id_administrator;
+            $nip = $get->nip;
+            $personnel_subarea = $get->personnel_subarea;
+            $role = $get->role;
+            $password = $get->password;
+        } ?>
+
         <div class="content-body">
 
             <div class="row page-titles mx-0">
@@ -25,7 +33,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">NIP</label>
                                             <div class="col-sm-9">
-                                                <input type="text" name="nip" class="form-control" required>
+                                                <input type="text" name="nip" class="form-control" required value="<?= $nip ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -63,7 +71,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <input type="hidden" name="id_administrator" value="<?=$id_administrator;?>" required>
+                                        <input type="hidden" name="id_administrator" value="" required>
                                         <button style="float: right;" type="submit" class="btn btn-primary">Sunting Data</button>
                                     </form>
                                 </div>

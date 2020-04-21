@@ -569,20 +569,14 @@ class AdministratorInduk extends CI_Controller {
         redirect('AdministratorInduk/tampilanAdministrator');
     }
 
-    public function getEditAdmin(){
-        $id_administrator = $this->uri->segment(3);
-        $data = array(
-            'isi' => 'user/contents/administrator_induk/editAdministrator',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
-            'area' =>  $this->Crud->ga('tb_business_area'),
-            'id_administrator' => $id_administrator,
-        );
-        $get_data = $this->M_AdministratorInduk->getAdminById($id_administrator);
-        if($get_data->num_rows() > 0){
-            $row = $get_data->row_array();
-            $data['subarea_id'] = $row['personnel_subarea'];
-        }
-        $this->load->view('user/_layouts/wrapper', $data);
+    public function getEditAdmin($id_admin){
+        $where = array('id_administrator' => $id_admin);
+            $data = array(
+                'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+                'data_admin' => $this->Crud->gw('tb_administrator', $where),
+                'isi'           => 'user/contents/administrator_induk/editAdministrator', 
+            );
+            $this->load->view('user/_layouts/wrapper', $data);
     }
 
     public function getDataEditAdmin(){
