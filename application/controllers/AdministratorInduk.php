@@ -275,48 +275,20 @@ class AdministratorInduk extends CI_Controller {
 
     public function doAddPenerima() {
         $input        = $this->input->post(NULL, TRUE);
-        $filenya      = $_FILES['file_ttd']['name'];
-
-        if($filenya = ''){
-            $this->session->set_flashdata('alert_danger', 'file tanda tangan tidak boleh kosong!');
-            redirect('AdministratorInduk/tampilanApprovalCommittee');
-        }else{
-            
-            $config['upload_path'] = './assets/user/approval_committee';
-            $config['allowed_types'] = 'png';
-            $config['max_size'] = '' ;
-                
-            $this->load->library('upload', $config);
-            if($config['max_size'] >= 2048){
-                $this->session->set_flashdata('alert_danger', 'Gagal mengupload! Periksa kembali ukuran dan ekstensi file!');
-                redirect('AdministratorInduk/tampilanApprovalCommittee');
-            }
-            $this->load->library('upload', $config);
-
-            if(!$this->upload->do_upload('file_ttd')){
-                $this->session->set_flashdata('alert_danger', 'Gagal mengupload! Periksa kembali ukuran dan ekstensi file!');
-                redirect('AdministratorInduk/tampilanApprovalCommittee');
-            }else{
-                $filenya =  $this->upload->data('file_name');
-            }
-
-            $data_penerima = array(
-                'nip'                       => $input['nipeg'],
-                'password'                  => password_hash($input['password'], PASSWORD_DEFAULT),
-                'role'                      => 'approval_committee',
-                'file_ttd'                  => $filenya,
-            );
-            $this->db->set('id_approval', 'UUID()', FALSE);
-            $this->db->insert('tb_approval_committee', $data_penerima);
-            $this->session->set_flashdata('alert_success', 'Data penerima berhasil ditambahkan!');
-            redirect('AdministratorInduk/tampilanApprovalCommittee');
-        }
+        $data_penerima = array(
+            'nip'                       => $input['nipeg'],
+            'password'                  => password_hash($input['password'], PASSWORD_DEFAULT),
+            'role'                      => 'approval_committee',
+        );
+        $this->db->set('id_approval', 'UUID()', FALSE);
+        $this->db->insert('tb_approval_committee', $data_penerima);
+        $this->session->set_flashdata('alert_success', 'Data penerima berhasil ditambahkan!');
+        redirect('AdministratorInduk/tampilanApprovalCommittee');
     }
 
     public function doDeletePenerima($id){
         $input = $this->input->post(NULL, TRUE);
         $where = array('id_approval' => $id);
-        unlink('./assets/user/approval_committee/'.$input['file_ttd']);
 
         $this->Crud->d('tb_approval_committee', $where);
         $this->session->set_flashdata('alert_danger', 'Data penerima berhasil dihapus!');
@@ -327,65 +299,19 @@ class AdministratorInduk extends CI_Controller {
         $where         = array('id_approval' => $id);
         $input         = $this->input->post(NULL, FALSE);
 
-        if(!empty($_FILES['file_ttd']['tmp_name'])){
-
-            $filenya = $_FILES['file_ttd']['name'];
-
-            if($filenya = ''){
-                $this->session->set_flashdata('alert_danger', 'Gagal merubah Data!');
-                redirect('AdministratorInduk/tampilanApprovalCommittee');
-            }else {
-                $config['upload_path'] = './assets/user/approval_committee';
-                $config['allowed_types'] = 'png';
-                $config['max_size'] = '' ;
-                
-                $this->load->library('upload', $config);
-                if($config['max_size'] >= 2048){
-                    $this->session->set_flashdata('alert_danger', 'Gagal mengupload! Periksa kembali ukuran dan ekstensi file!');
-                    redirect('AdministratorInduk/tampilanApprovalCommittee');
-                }
-                unlink($config['upload_path'].'/'.$input['foto_lama']);
-
-                if (!$this->upload->do_upload('file_ttd')){
-                    $this->session->set_flashdata('alert_danger', 'Gagal mengupload! Periksa kembali ukuran dan ekstensi file!');
-                    redirect('AdministratorInduk/tampilanApprovalCommittee');
-                }else{
-                    $filenya = $this->upload->data();
-                }
-
-                if($input['password'] != ''){
-                    $items = array(
-                        'nip'                => $input['nipeg'],
-                        'password'           => password_hash($input['password'], PASSWORD_DEFAULT),
-                        'file_ttd'           => $filenya['file_name'],
-                    );
-                }else {
-                    $items = array(
-                        'nip'                => $input['nipeg'],
-                        'file_ttd'           => $filenya['file_name'],
-                    );
-                }
-
-                $this->db->update('tb_approval_committee', $items, $where);
-                $this->session->set_flashdata('alert_primary', 'Data penerima berhasil disunting!');
-                redirect('AdministratorInduk/tampilanApprovalCommittee');
-            }  
-        }else{
-            if($input['password'] != ''){
-                $items = array(
-                    'nip'                => $input['nipeg'],
-                    'password'           => password_hash($input['password'], PASSWORD_DEFAULT),
-                );
-            }else {
-                $items = array(
-                    'nip'                => $input['nipeg'],
-                );
-            }
-
-            $this->db->update('tb_approval_committee', $items, $where);
-            $this->session->set_flashdata('alert_primary', 'Data penerima berhasil disunting!');
-            redirect('AdministratorInduk/tampilanApprovalCommittee');
+        if($input['password'] != ''){
+            $items = array(
+                'nip'                => $input['nipeg'],
+                'password'           => password_hash($input['password'], PASSWORD_DEFAULT),
+            );
+        }else {
+            $items = array(
+                'nip'                => $input['nipeg'],
+            );
         }
+        $this->db->update('tb_approval_committee', $items, $where);
+        $this->session->set_flashdata('alert_primary', 'Data penerima berhasil disunting!');
+        redirect('AdministratorInduk/tampilanApprovalCommittee');
     }
 
     public function tampilanDataApproval()
