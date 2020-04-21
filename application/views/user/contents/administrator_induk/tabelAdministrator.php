@@ -54,6 +54,7 @@
                                                 <th>No.</th>
                                                 <th>NIP</th>
                                                 <th>Status</th>
+                                                <th>Business Area</th>
                                                 <th>Personnel Subarea</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -67,9 +68,10 @@
                                                 <td><?= $no++ ?></td>
                                                 <td><?= $admin->nip ?></td>
                                                 <td><?= $admin->role ?></td>
+                                                <td><?= $admin->nama_business_area ?></td>
                                                 <td><?= $admin->nama_personnel_subarea ?></td>
                                                 <td>
-                                                    <button type="button" class="btn mb-1 btn-info" onclick='window.open("<?=site_url('AdministratorInduk/getEditAdmin/'.$admin->id_administrator);?>","_blank")' target="_blank">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-info" onclick='window.open("<?=site_url('AdministratorInduk/getEditAdmin/'.$admin->id_administrator);?>","_blank")'>Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
                                                     </button>
                                                     <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete<?=$admin->id_administrator?>">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
                                                     </button>
@@ -84,6 +86,7 @@
                                                 <th>No.</th>
                                                 <th>NIP</th>
                                                 <th>Status</th>
+                                                <th>Business Area</th>
                                                 <th>Personnel Subarea</th>
                                                 <th>Aksi</th>
                                             </tr>
