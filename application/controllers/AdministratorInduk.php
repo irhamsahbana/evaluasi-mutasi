@@ -597,7 +597,6 @@ class AdministratorInduk extends CI_Controller {
         $input         = $this->input->post(NULL, TRUE);
         $data_admin    = array(
             'nip'                            => $input['nip'],
-            'nama_administrator'             => $input['nama_administrator'],
             'password'                       => $input['password'],
             'role'                           => $input['status'],
             'personnel_subarea'              => $input['personnel_subarea'],
