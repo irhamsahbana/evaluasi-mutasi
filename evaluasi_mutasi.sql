@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2020 at 02:45 PM
+-- Generation Time: Apr 22, 2020 at 07:07 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -79,6 +79,13 @@ CREATE TABLE `tb_approval_committee` (
   `password` varchar(255) NOT NULL,
   `role` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_approval_committee`
+--
+
+INSERT INTO `tb_approval_committee` (`id_approval`, `nip`, `password`, `role`) VALUES
+('1125b0a4-84ba-11ea-a80d-14dae95f4e07', 'D4211651342', '$2y$10$Q1NV5pvbgHnoubbpo8YzauRpxJYkrzHaY1lBWSTFwM8DmB1irRDnS', 'approval_committee');
 
 -- --------------------------------------------------------
 
@@ -185,10 +192,7 @@ CREATE TABLE `tb_pegawai` (
   `tgl_masuk` date NOT NULL,
   `agama` varchar(255) NOT NULL,
   `no_telp` varchar(255) NOT NULL,
-  `id_sebutan_jabatan` varchar(255) NOT NULL,
-  `talenta_tiga_semester_lalu` varchar(255) NOT NULL,
-  `talenta_dua_semester_lalu` varchar(255) NOT NULL,
-  `talenta_semester_lalu` varchar(255) NOT NULL
+  `id_sebutan_jabatan` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
