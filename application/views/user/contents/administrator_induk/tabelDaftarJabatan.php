@@ -107,6 +107,96 @@
             Content body end
         ***********************************-->
 
+
+<!--**********************************
+    Begin : Modal for Add Data
+***********************************-->
+<div class="modal fade modal-create" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="form-validation">
+                <form method="post" class="form-valide" action="<?= site_url('AdministratorInduk/doAddJabatan') ?>" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Tambah Jabatan</h5>
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Business Area</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="business_area" id="add_area" required>
+                                    <option value="">Pilih Salah Satu</option>
+                                    <?php foreach($area as $row):?>
+                                    <option value="<?php echo $row->business_area;?>"><?php echo $row->nama_business_area;?></option>
+                                    <?php endforeach;?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Personnel Subarea</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="personnel_subarea" id="add_subarea" required>
+                                    <option >Pilih Business Area dahulu</option>
+                                </select>
+                            </div>
+                        </div>
+                         <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Urutan dalam Organisasi</label>
+                            <div class="col-sm-9">
+                                <input type="number" name='urutan'class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Jabatan</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="jabatan" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Tambahkan Data</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--**********************************
+    End : Modal for Add Data
+***********************************-->
+
+<!--**********************************
+    Begin : Modal for Delete Data
+***********************************-->
+<?php
+    foreach ($data_jabatan as $field) {
+        $id = $field->id_sebutan_jabatan;
+?>
+
+<div class="modal fade modal-delete<?= $id ?>" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Hapus jabatan</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <form method="POST" action="<?= site_url('AdministratorInduk/doDeletejabatan/'.$id) ?>">
+                Yakin ingin Menghapus data (<?= $id ?>)?</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger">Hapus</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<?php } ?>
+<!--**********************************
+    End : Modal for Delete Data
+***********************************-->        
+
 <!--**********************************
     Begin : Modal for import excel/csv
 ***********************************-->

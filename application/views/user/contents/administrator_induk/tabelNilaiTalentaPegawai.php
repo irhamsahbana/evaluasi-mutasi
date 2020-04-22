@@ -263,7 +263,8 @@
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-danger">Hapus</button>
-            </div></form>
+            </div>
+            </form>
         </div>
     </div>
 </div>

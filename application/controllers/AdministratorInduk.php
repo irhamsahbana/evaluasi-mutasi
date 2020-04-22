@@ -400,7 +400,7 @@ class AdministratorInduk extends CI_Controller {
     }
 
     public function doDeleteTalenta($id){
-        $where = array('id_talenta' => $id,);
+        $where = array('id_talenta' => $id);
 
         $this->Crud->d('tb_judul_talenta', $where);
         $this->session->set_flashdata('alert_danger', 'Data talenta berhasil dihapus!');
@@ -422,6 +422,27 @@ class AdministratorInduk extends CI_Controller {
             'data_jabatan' => $data_jabatan,
         );
         $this->load->view('user/_layouts/wrapper', $data);
+    }
+
+    public function doAddJabatan(){
+        $input        = $this->input->post(NULL, TRUE);
+        $data_jabatan = array(
+            'id_sebutan_jabatan'          => $input['personnel_subarea'].'-'.$input['urutan'],
+            'personnel_subarea'           => $input['personnel_subarea'],
+            'urutan_dalam_org'            => $input['urutan'],
+            'sebutan_jabatan'             => $input['jabatan']
+        );
+        $this->db->insert('tb_jabatan', $data_jabatan);
+        $this->session->set_flashdata('alert_success', 'Data jabatan berhasil ditambahkan!');
+        redirect('AdministratorInduk/tampilanJabatan');
+    }
+
+    public function doDeletejabatan($id){
+        $where = array('id_sebutan_jabatan' => $id);
+
+        $this->Crud->d('tb_jabatan', $where);
+        $this->session->set_flashdata('alert_danger', 'Data jabatan berhasil dihapus!');
+        redirect('AdministratorInduk/tampilanJabatan');
     }
 
     public function doImportJabatan(){
