@@ -1,13 +1,12 @@
         <!--**********************************
             Content body start
         ***********************************-->
-        <?php foreach ($data_admin as $get) {
-            $id = $get->id_administrator;
-            $nip = $get->nip;
-            $personnel_subarea = $get->personnel_subarea;
-            $role = $get->role;
-            $password = $get->password;
-        } ?>
+
+        <?php 
+        foreach ($data_admin as $admin) {
+           $id = $admin->id_administrator;
+        }
+        ?>
 
         <div class="content-body">
 
@@ -39,7 +38,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Password</label>
                                             <div class="col-sm-9">
-                                                <input type="text" name="password" class="form-control" required>
+                                                <input type="text" name="password" class="form-control" placeholder="Jangan diisi dengan apapun jika tidak ingin merubah password!">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -55,7 +54,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Business Area</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control area-edit" name="business_area" required>
+                                                <select class="form-control edit-area" name="business_area" required>
                                                 <option value="">Pilih Salah Satu</option>
                                                 <?php foreach($area as $row):?>
                                                 <option value="<?=$row->business_area;?>"><?=$row->nama_business_area;?></option>
@@ -66,12 +65,13 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Personnel Subarea</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control subarea-edit" name="personnel_subarea" required>
+                                                <select class="form-control edit-subarea" name="personnel_subarea" required>
                                                     <option value="">Pilih Business Area dahulu</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <input type="hidden" name="id_administrator" value="<?=$id?>" required>
+                                        <input type="hidden" raedonly name="id_administrator" value="<?=$id?>">
+                                        <input type="hidden" readonly name="password_lama" value="<?=$admin->password?>">
                                         <button style="float: right;" type="submit" class="btn btn-primary">Sunting Data</button>
                                     </form>
                                 </div>

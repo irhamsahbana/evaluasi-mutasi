@@ -110,14 +110,14 @@
 <div class="modal fade modal-create" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Tambah Administrator</h5>
-                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-validation">
-                    <form method="post" class="form-valide" action="<?= site_url('AdministratorInduk/doAddAdmin') ?>" enctype="multipart/form-data">
+            <div class="form-validation">
+                <form method="post" class="form-valide" action="<?= site_url('AdministratorInduk/doAddAdmin') ?>" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Tambah Administrator</h5>
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
                          <div class="form-group row">
                             <label class="col-sm-3 col-form-label">NIP</label>
                             <div class="col-sm-9">
@@ -143,7 +143,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Business Area</label>
                             <div class="col-sm-9">
-                                <select class="form-control" name="business_area" id="area_admin" required>
+                                <select class="form-control" name="business_area" id="add_area" required>
                                     <option value="">Pilih Salah Satu</option>
                                     <?php foreach($area as $row):?>
                                     <option value="<?php echo $row->business_area;?>"><?php echo $row->nama_business_area;?></option>
@@ -154,17 +154,17 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Personnel Subarea</label>
                             <div class="col-sm-9">
-                                <select class="form-control" name="personnel_subarea" id="subarea_admin" required>
+                                <select class="form-control" name="personnel_subarea" id="add_subarea" required>
                                     <option >Pilih Business Area dahulu</option>
                                 </select>
                             </div>
                         </div>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Tambahkan Data</button>
+                    </div>
+                </form>
             </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-success">Tambahkan Data</button>
-            </div>
-                    </form>
         </div>
     </div>
 </div>
@@ -184,19 +184,18 @@
 <div class="modal fade modal-delete<?=$id?>" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Hapus Data Administrator</h5>
-                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="<?= site_url('AdministratorInduk/doDeleteAdmin/'.$id) ?>">
-                Yakin ingin menghapus data admin <?=$admin->nama_personnel_subarea?> ?
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-danger">Hapus</button>
-            </div>
-                </form>
+            <form method="POST" action="<?= site_url('AdministratorInduk/doDeleteAdmin/'.$id) ?>">
+                <div class="modal-header">
+                    <h5 class="modal-title">Hapus Data Administrator</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    Yakin ingin menghapus data admin <?=$admin->nama_personnel_subarea?> ?
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">Hapus</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
