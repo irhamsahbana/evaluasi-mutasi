@@ -420,6 +420,7 @@ class AdministratorInduk extends CI_Controller {
             'isi' => 'user/contents/administrator_induk/tabelDaftarJabatan',
             'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
             'data_jabatan' => $data_jabatan,
+            'area' =>  $this->Crud->ga('tb_business_area'),
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
@@ -437,7 +438,43 @@ class AdministratorInduk extends CI_Controller {
         redirect('AdministratorInduk/tampilanJabatan');
     }
 
-    public function doDeletejabatan($id){
+    public function getEditJabatan($id_jabatan){
+        $where = array('id_sebutan_jabatan' => $id_jabatan);
+        $data = array(
+            'isi'              => 'user/contents/administrator_induk/editDataJabatan',
+            'title'            => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'data_jabatan'     => $this->Crud->gw('tb_jabatan', $where),
+            'area'             => $this->Crud->ga('tb_business_area'),
+        );
+        $get_data = $this->M_AdministratorInduk->getJabatanById($id_jabatan);
+        if($get_data->num_rows() > 0){
+            $row = $get_data->row_array();
+            $data['subarea_id'] = $row['personnel_subarea'];
+        }
+        $this->load->view('user/_layouts/wrapper', $data);
+    }
+
+    public function getDataEditJabatan(){
+        $id_sebutan_jabatan = $this->input->post('id_sebutan_jabatan',TRUE);
+        $data = $this->M_AdministratorInduk->getJabatanById($id_sebutan_jabatan)->result();
+        echo json_encode($data);
+    }
+
+    public function doUpdateJabatan(){
+        $id           = $this->input->post('id_sebutan_jabatan',TRUE);
+        $where        = array('id_sebutan_jabatan' => $id,);
+        $input        = $this->input->post(NULL, TRUE);
+        $data_jabatan = array(
+            'personnel_subarea'           => $input['personnel_subarea'],
+            'urutan_dalam_org'            => $input['urutan'],
+            'sebutan_jabatan'             => $input['jabatan'],
+        );          
+        $this->Crud->u('tb_jabatan', $data_jabatan, $where);
+        $this->session->set_flashdata('alert_primary', 'Data jabatan berhasil disunting!');
+        redirect('AdministratorInduk/tampilanJabatan');
+    }
+
+    public function doDeleteJabatan($id){
         $where = array('id_sebutan_jabatan' => $id);
 
         $this->Crud->d('tb_jabatan', $where);

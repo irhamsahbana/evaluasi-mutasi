@@ -74,7 +74,7 @@
                                                 <td><?= $field->sebutan_jabatan ?></td>
                                                 <td><?= $field->id_sebutan_jabatan ?></td>
                                                 <td>
-                                                    <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update<?=$field->id_sebutan_jabatan?>">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-info" onclick='window.open("<?=site_url('AdministratorInduk/getEditJabatan/'.$field->id_sebutan_jabatan);?>","_blank")'>Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
                                                     </button>
                                                     <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete<?=$field->id_sebutan_jabatan?>">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
                                                     </button>
@@ -144,13 +144,13 @@
                          <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Urutan dalam Organisasi</label>
                             <div class="col-sm-9">
-                                <input type="number" name='urutan'class="form-control" placeholder="" required>
+                                <input type="number" name='urutan'class="form-control" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Jabatan</label>
                             <div class="col-sm-9">
-                                <input type="text" name="jabatan" class="form-control" placeholder="" required>
+                                <input type="text" name="jabatan" class="form-control" required>
                             </div>
                         </div>
                     </div>
@@ -183,10 +183,10 @@
                 </button>
             </div>
             <div class="modal-body">
-            <form method="POST" action="<?= site_url('AdministratorInduk/doDeletejabatan/'.$id) ?>">
-                Yakin ingin Menghapus data (<?= $id ?>)?</div>
+            <form method="POST" action="<?= site_url('AdministratorInduk/doDeleteJabatan/'.$id) ?>">
+                Yakin ingin Menghapus data (<?= $field->sebutan_jabatan ?>)?</div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger">Hapus</button>
+                <button type="submit" class="btn btn-danger">Hapus</button>
             </div>
             </form>
         </div>

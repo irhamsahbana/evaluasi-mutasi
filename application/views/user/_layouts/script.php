@@ -161,7 +161,7 @@
 
         <?php } ?>
 
-        <?php if($myURI == 'tampilanAdministrator') { ?>
+        <?php if($myURI == 'tampilanAdministrator' || $myURI == 'tampilanJabatan') { ?>
 
             $('#add_area').change(function(){ 
                 var id=$(this).val();
@@ -231,7 +231,58 @@
                             $('[name="status"]').val(data[i].role);
                             $('[name="business_area"]').val(data[i].business_area).trigger('change');
                             $('[name="personnel_subarea"]').val(data[i].personnel_subarea).trigger('change');
-                            $('[name="subarea"]').val(data[i].personnel_subarea);
+                        });
+                    }
+
+                });
+            }
+
+        <?php } ?>
+
+        <?php if($myURI == 'getEditJabatan') { ?>
+
+            getDataEditJabatan();
+
+            $('.edit-area').change(function(){ 
+                var id=$(this).val();
+                var personnel_subarea = "<?=$subarea_id?>" 
+                $.ajax({
+                    url : "<?= site_url('AdministratorInduk/getPersonnelSubarea');?>",
+                    method : "POST",
+                    data : {id: id},
+                    async : true,
+                    dataType : 'json',
+                    success: function(data){
+ 
+                        $('select[name="personnel_subarea"]').empty();
+ 
+                        $.each(data, function(key, value) {
+                            if(personnel_subarea==value.personnel_subarea){
+                                $('select[name="personnel_subarea"]').append('<option value="'+ value.personnel_subarea +'" selected>'+ value.nama_personnel_subarea +'</option>').trigger('change');
+                            }else{
+                                $('select[name="personnel_subarea"]').append('<option value="'+ value.personnel_subarea +'">'+ value.nama_personnel_subarea +'</option>');
+                            }
+                        });
+ 
+                    }
+                });
+                return false;
+            }); 
+
+            function getDataEditJabatan(){
+                var id_sebutan_jabatan = $('[name="id_sebutan_jabatan"]').val();
+                $.ajax({
+                    url : "<?= site_url('AdministratorInduk/getDataEditJabatan');?>",
+                    method : "POST",
+                    data : {id_sebutan_jabatan : id_sebutan_jabatan},
+                    async : true,
+                    dataType : 'json',
+                    success : function(data){
+                        $.each(data, function(i, item){
+                            $('[name="business_area"]').val(data[i].business_area).trigger('change');
+                            $('[name="personnel_subarea"]').val(data[i].personnel_subarea).trigger('change');
+                            $('[name="urutan"]').val(data[i].urutan_dalam_org);
+                            $('[name="jabatan"]').val(data[i].sebutan_jabatan);
                         });
                     }
 

@@ -85,87 +85,85 @@
                                                 <input type="text" name="organizational_unit" class="form-control" required>
                                             </div>
                                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Position</label>
-                            <div class="col-sm-9">
-                                <input type="number" name="position" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Nama Panjang Posisi</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="nama_panjang_posisi" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Jenjang - Main Grp Text</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="jenjang_main_grp" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Jenjang - Sub Grp Text</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="jenjang_sub_grp" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">PS Group</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="grade" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Tanggal Grade Terakhir</label>
-                            <div class="col-sm-9">
-                                <input type="date" name="tgl_grade" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Pendidikan Terakhir</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="pendidikan_terakhir" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Gender</label>
-                            <div class="col-sm-9">
-                                <select class="form-control" name="gender">
-                                    <option>Pilih Salah Satu</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">E-mail</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="email" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Tanggal Masuk</label>
-                            <div class="col-sm-9">
-                                <input type="date" name="tanggal_masuk" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Religious</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="religious" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Telephone No.</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="telephone_no" class="form-control" required>
-                            </div>
-                        </div>
-                        <button style="float: right;" type="submit" class="btn btn-primary">Sunting Data</button>
-                    </form>
-                </div>
-
-
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Position</label>
+                                            <div class="col-sm-9">
+                                                <input type="number" name="position" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Nama Panjang Posisi</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="nama_panjang_posisi" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Jenjang - Main Grp Text</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="jenjang_main_grp" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Jenjang - Sub Grp Text</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="jenjang_sub_grp" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">PS Group</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="grade" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Tanggal Grade Terakhir</label>
+                                            <div class="col-sm-9">
+                                                <input type="date" name="tgl_grade" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Pendidikan Terakhir</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="pendidikan_terakhir" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Gender</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" name="gender">
+                                                    <option>Pilih Salah Satu</option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">E-mail</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="email" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Tanggal Masuk</label>
+                                            <div class="col-sm-9">
+                                                <input type="date" name="tanggal_masuk" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Religious</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="religious" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Telephone No.</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="telephone_no" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <button style="float: right;" type="submit" class="btn btn-primary">Sunting Data</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
