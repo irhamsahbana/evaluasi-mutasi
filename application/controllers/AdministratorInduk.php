@@ -131,20 +131,74 @@ class AdministratorInduk extends CI_Controller {
         redirect('AdministratorInduk/tampilanDataPegawai');
     }
 
-    public function tampilanNilaiTalentaPegawai(){
+    public function tampilanDaftarTalenta(){
         $this->db->select('*');
-        $this->db->from('tb_nilai_talenta_pegawai');
+        $this->db->from('tb_daftar_talenta_per_semester');
         $this->db->order_by('tahun_talenta', 'desc');
         $query = $this->db->get();
-        $data_talenta_pegawai = $query->result();
+        $data_daftar_talenta = $query->result();
+
+        $data = array(
+            'isi' => 'user/contents/administrator_induk/tabelDaftarTalenta',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'daftar_talenta' => $data_daftar_talenta,
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
+    }
+
+    public function doAddDaftarTalenta(){
+        $input      = $this->input->post(NULL, TRUE);
+        $data       = array(
+            'tahun_talenta'        => $input['tahun'],
+            'semester_talenta'     => $input['semester'],
+        );
+        $this->db->insert('tb_daftar_talenta_per_semester', $data);
+        $this->session->set_flashdata('alert_success', 'Data semester berhasil ditambahkan!');
+        redirect('AdministratorInduk/tampilanDaftarTalenta');
+    }
+
+    public function doDeleteDaftarTalenta($tahun, $semester){
+        $where      = array(
+            'tahun_talenta'     => $tahun,
+            'semester_talenta'  => $semester,
+        );
+        $this->Crud->d('tb_daftar_talenta_per_semester', $where);
+        $this->session->set_flashdata('alert_danger', 'Data semester berhasil dihapus!');
+        redirect('AdministratorInduk/tampilanDaftarTalenta');
+    }
+
+    public function doUpdateDaftarTalenta($tahun, $semester){
+        $where      = array(
+            'tahun_talenta'     => $tahun,
+            'semester_talenta'  => $semester,
+        );
+
+        $input = $this->input->post(NULL, TRUE);
+        $data  = array(
+            'tahun_talenta'        => $input['tahun'],
+            'semester_talenta'     => $input['semester'],
+        );
+        $this->Crud->u('tb_daftar_talenta_per_semester', $data, $where);
+        $this->session->set_flashdata('alert_primary', 'Data semester berhasil disunting!');
+        redirect('AdministratorInduk/tampilanDaftarTalenta');
+    }
+
+    public function tampilanNilaiTalentaPegawai($tahun, $semester){
+        $where      = array(
+            'tahun_talenta'     => $tahun,
+            'semester_talenta'  => $semester,
+        );
 
         $data = array(
             'isi' => 'user/contents/administrator_induk/tabelNilaiTalentaPegawai',
             'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
-            'tb_talenta' => $data_talenta_pegawai,
+            'tb_talenta' => $this->Crud->gw('tb_nilai_talenta_pegawai', $where),
+            'judul_tahun' => $tahun,
+            'judul_semester' => $semester,
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
+
     public function doAddTalentaPegawai(){
         $input      = $this->input->post(NULL, TRUE);
         $data       = array(
@@ -155,7 +209,7 @@ class AdministratorInduk extends CI_Controller {
         );
         $this->db->insert('tb_nilai_talenta_pegawai', $data);
         $this->session->set_flashdata('alert_success', 'Data nilai talenta pegawai berhasil ditambahkan!');
-        redirect('AdministratorInduk/tampilanNilaiTalentaPegawai');
+        redirect('AdministratorInduk/tampilanNilaiTalentaPegawai/'.$input['tahun'].'/'.$input['semester']);
     }
 
     public function doUpdateTalentaPegawai($tahun, $semester, $nip){
@@ -164,6 +218,7 @@ class AdministratorInduk extends CI_Controller {
             'semester_talenta'  => $semester,
             'nip'               => $nip,
         );
+
         $input      = $this->input->post(NULL, TRUE);
         $data  = array(
             'tahun_talenta'        => $input['tahun'],

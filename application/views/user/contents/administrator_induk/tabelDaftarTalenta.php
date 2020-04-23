@@ -18,7 +18,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Nilai Talenta Pegawai Tahun <?= $judul_tahun ?> Semester <?= $judul_semester ?></h4>
+                                <h4 class="card-title">Daftar Semester</h4>
                                 <div class="table-responsive">
                                     <div id="dataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
                                          <!-- Alert Add -->
@@ -54,24 +54,24 @@
                                                 <th>No</th>
                                                 <th>Tahun</th>
                                                 <th>Semester</th>
-                                                <th>NIP</th>
-                                                <th>Nilai Talenta</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php 
                                                 $no = 1;
-                                                foreach ($tb_talenta as $talenta) {
-                                                    $target = $talenta->tahun_talenta.$talenta->semester_talenta.$talenta->nip;
+                                                foreach ($daftar_talenta as $field) {
+                                                    $target = $field->tahun_talenta.$field->semester_talenta;
+                                                    $tahun = $field->tahun_talenta;
+                                                    $semester = $field->semester_talenta;
                                             ?>
                                             <tr>
                                                 <td><?= $no++ ?></td>
-                                                <td><?= $talenta->tahun_talenta ?></td>
-                                                <td><?= $talenta->semester_talenta ?></td>
-                                                <td><?= $talenta->nip ?></td>
-                                                <td><?= $talenta->nilai_talenta ?></td>
+                                                <td><?= $field->tahun_talenta ?></td>
+                                                <td><?= $field->semester_talenta ?></td>
                                                 <td>
+                                                    <button type="button" class="btn mb-1 btn-secondary" onclick='window.open("<?=site_url('AdministratorInduk/tampilanNilaiTalentaPegawai/'.$tahun.'/'.$semester);?>","_blank")'>Nilai Talenta Pegawai<span class="btn-icon-right"><i class="fa fa-users"></i></span>
+                                                    </button>
                                                     <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update<?= $target ?>">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
                                                     </button>
                                                     <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete<?= $target ?>">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
@@ -87,8 +87,6 @@
                                                 <th>No</th>
                                                 <th>Tahun</th>
                                                 <th>Semester</th>
-                                                <th>NIP</th>
-                                                <th>Nilai Talenta</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </tfoot>
@@ -112,46 +110,23 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Tambah Data Nilai Talenta Pegawai</h5>
+                <h5 class="modal-title">Tambah Data Semester</h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-validation">
-                    <form class="form-valide" action="<?= site_url('AdministratorInduk/doAddTalentaPegawai') ?>" method="POST" enctype="multipart/form-data">
+                    <form class="form-valide" action="<?= site_url('AdministratorInduk/doAddDaftarTalenta') ?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tahun</label>
                             <div class="col-sm-9">
-                                <input type="number" name="tahun" class="form-control" value="<?= $judul_tahun ?>" placeholder="" required>
+                                <input type="number" name="tahun" class="form-control" placeholder="" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Semester</label>
                             <div class="col-sm-9">
-                                <input type="number" name="semester" class="form-control" value="<?= $judul_semester ?>" placeholder="" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">NIP</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="nip" class="form-control" placeholder="" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Nilai</label>
-                            <div class="col-sm-9">
-                                <select class="form-control" name="nilai_talenta">
-                                    <option value="">Pilih Nilai Talenta</option>
-                                    <option value="LBS">LBS</option>
-                                    <option value="SOP">SOP</option>
-                                    <option value="SPO">SPO</option>
-                                    <option value="OPT">OPT</option>
-                                    <option value="POT">POT</option>
-                                    <option value="KPO">KPO</option>
-                                    <option value="PPS">PPS</option>
-                                    <option value="PPE">PPE</option>
-                                    <option value="SPP">SPP</option>
-                                </select>
+                                <input type="number" name="semester" class="form-control" placeholder="" required>
                             </div>
                         </div>
                 </div>
@@ -171,12 +146,10 @@
     Begin : Modal for Update Data
 ***********************************-->
 <?php 
-    foreach ($tb_talenta as $talenta) {
-        $tahun = $talenta->tahun_talenta;
-        $semester = $talenta->semester_talenta;
-        $nip = $talenta->nip;
-        $target = $tahun.$semester.$nip;
-        $talenta_selected = $talenta->nilai_talenta;
+    foreach ($daftar_talenta as $field) {
+        $tahun = $field->tahun_talenta;
+        $semester = $field->semester_talenta;
+        $target = $tahun.$semester;
          
 ?>
 <div class="modal fade modal-update<?=$target?>" tabindex="-1" role="dialog" aria-hidden="true">
@@ -189,7 +162,7 @@
             </div>
             <div class="modal-body">
                 <div class="form-validation">
-                    <form class="form-valide" action="<?= site_url('AdministratorInduk/doUpdateTalentaPegawai/'.$tahun.'/'.$semester.'/'.$nip) ?>" method="POST" enctype="multipart/form-data">
+                    <form class="form-valide" action="<?= site_url('AdministratorInduk/doUpdateDaftarTalenta/'.$tahun.'/'.$semester) ?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tahun</label>
                             <div class="col-sm-9">
@@ -200,29 +173,6 @@
                             <label class="col-sm-3 col-form-label">Semester</label>
                             <div class="col-sm-9">
                                 <input type="number" name="semester" class="form-control" value="<?= $semester ?>" placeholder="" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">NIP</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="nip" class="form-control" value="<?= $nip ?>" placeholder="" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Nilai</label>
-                            <div class="col-sm-9">
-                                <select class="form-control" name="nilai_talenta">
-                                    <option value="">Pilih Nilai Talenta</option>
-                                    <option value="LBS" <?php if($talenta_selected == "LBS"){echo "selected";} ?>>LBS</option>
-                                    <option value="SOP" <?php if($talenta_selected == "SOP"){echo "selected";} ?>>SOP</option>
-                                    <option value="SPO" <?php if($talenta_selected == "SPO"){echo "selected";} ?>>SPO</option>
-                                    <option value="OPT" <?php if($talenta_selected == "OPT"){echo "selected";} ?>>OPT</option>
-                                    <option value="POT" <?php if($talenta_selected == "POT"){echo "selected";} ?>>POT</option>
-                                    <option value="KPO" <?php if($talenta_selected == "KPO"){echo "selected";} ?>>KPO</option>
-                                    <option value="PPS" <?php if($talenta_selected == "PPS"){echo "selected";} ?>>PPS</option>
-                                    <option value="PPE" <?php if($talenta_selected == "PPE"){echo "selected";} ?>>PPE</option>
-                                    <option value="SPP" <?php if($talenta_selected == "SPP"){echo "selected";} ?>>SPP</option>
-                                </select>
                             </div>
                         </div>
                 </div>
@@ -243,11 +193,10 @@
     Begin : Modal for Delete Data
 ***********************************-->
 <?php
-    foreach ($tb_talenta as $talenta) {
-        $tahun = $talenta->tahun_talenta;
-        $semester = $talenta->semester_talenta;
-        $nip = $talenta->nip;
-        $target = $tahun.$semester.$nip;
+    foreach ($daftar_talenta as $field) {
+        $tahun = $field->tahun_talenta;
+        $semester = $field->semester_talenta;
+        $target = $tahun.$semester;
 ?>
 <div class="modal fade modal-delete<?=$target?>" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm">
@@ -258,8 +207,8 @@
                 </button>
             </div>
             <div class="modal-body">
-            <form method="POST" action="<?= site_url('AdministratorInduk/doDeleteTalentaPegawai/'.$tahun.'/'.$semester.'/'.$nip) ?>">
-                Yakin ingin menghapus data (<?=$tahun.'-'.$semester.'-'.$nip?>) ?
+            <form method="POST" action="<?= site_url('AdministratorInduk/doDeleteDaftarTalenta/'.$tahun.'/'.$semester) ?>">
+                Yakin ingin menghapus data nilai talenta pegawai semester <?= $semester ?> tahun <?= $tahun ?> ?
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-danger">Hapus</button>

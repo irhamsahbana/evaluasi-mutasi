@@ -18,7 +18,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?= site_url('AdministratorInduk/tampilanNilaiTalentaPegawai') ?>" class="<?= ($modul == 'tampilanNilaiTalentaPegawai') ? 'active' : '' ?>">
+                        <a href="<?= site_url('AdministratorInduk/tampilanDaftarTalenta') ?>" class="<?= ($modul == 'tampilanNilaiTalentaPegawai' || $modul == 'tampilanDaftarTalenta') ? 'active' : '' ?>">
                             <i class="icon-star menu-icon"></i><span class="nav-text">Nilai Talenta Pegawai</span>
                         </a>
                     </li>
