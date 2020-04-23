@@ -228,7 +228,7 @@ class AdministratorInduk extends CI_Controller {
         );
         $this->Crud->u('tb_nilai_talenta_pegawai', $data, $where);
         $this->session->set_flashdata('alert_primary', 'Data nilai talenta pegawai berhasil disunting!');
-        redirect('AdministratorInduk/tampilanNilaiTalentaPegawai');
+        redirect('AdministratorInduk/tampilanNilaiTalentaPegawai/'.$input['tahun'].'/'.$input['semester']);
     }
 
     public function doDeleteTalentaPegawai($tahun, $semester, $nip){
@@ -239,7 +239,7 @@ class AdministratorInduk extends CI_Controller {
         );
         $this->Crud->d('tb_nilai_talenta_pegawai', $where);
         $this->session->set_flashdata('alert_danger', 'Data nilai talenta pegawai berhasil dihapus!');
-        redirect('AdministratorInduk/tampilanNilaiTalentaPegawai');
+        redirect('AdministratorInduk/tampilanNilaiTalentaPegawai/'.$tahun.'/'.$semester);
     }
 
     public function tampilanDaftarBusinessArea()
