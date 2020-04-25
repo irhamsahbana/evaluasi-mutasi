@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar</title>
+  <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url('assets/admin/'); ?>images/favicon.ico">
   <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel="stylesheet" href="<?= base_url('assets/new_login/') ?>style.css">
 
@@ -18,15 +19,15 @@
       
       <div class="tab-content">
         <div id="signup">   
-          <h1>Welcome Back!</h1>
-          <h3 style="color: orange;">
+          <h1>Selamat Datang Kembali!</h1>
+          <h4 align="center" style="color: red;">
                   <?php
                       $info = $this->session->flashdata('info');
                       if(!empty($info)){
                                   echo $info;
                       }
                   ?>
-          </h3>
+          </h4>
           
           <form method="post" action="<?= site_url('Login/loginAdmin') ?>">
 
@@ -51,7 +52,7 @@
         </div>
         
         <div id="login">   
-          <h1>Welcome Back!</h1>
+          <h1>Selamat Datang Kembali!</h1>
           
           <form method="post" action="<?= site_url('Login/loginApproval') ?>">
           
