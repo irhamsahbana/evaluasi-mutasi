@@ -4,8 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Login extends CI_Controller {
 	
 	public function index(){
-		$this->load->view('login/login');
+		$this->load->view('login/newLogin');
 	}
+
+    public function loginLama(){
+        $this->load->view('login/login');
+    }
 
 	public function cekLogin(){
 		$username = $this->input->post('username');
@@ -14,17 +18,20 @@ class Login extends CI_Controller {
         $this->ModelUser->login($username, $password);
 	}
 
-	public function logout(){
-        $waktu = date("Y-m-d H:i:s");
-        $where = array(
-            "id_user" => $this->session->userdata('id_user'),
-        );
+    public function LoginAdmin(){
+        $nip = $this->input->post('nip_administrator');
+        $password = $this->input->post('password_administrator');
+        $this->M_Login->mLoginAdmin($nip, $password);
+    }
 
-        $items = array(
-            "last_login_user" => $waktu,
-        );
-        $this->Crud->u('user', $items, $where );
+    public function loginApproval(){
+        $nip = $this->input->post('nip_approval');
+        $password = $this->input->post('password_approval');
+        $this->M_Login->mLoginApproval($nip, $password);
+    }
+
+	public function logout(){
         $this->session->sess_destroy();
-        redirect('login');
+        redirect('Login');
     }
 }

@@ -119,7 +119,7 @@ class AdministratorInduk extends CI_Controller {
             'no_telp'                        => $input['telephone_no'],
         );
         $this->Crud->u('tb_pegawai', $data_pegawai, $where);
-        $this->session->set_flashdata('alert_primary', 'Data Pegawai berhasil disunting!');
+        $this->session->set_flashdata('alert_primary', 'Data pegawai berhasil disunting!');
         redirect('AdministratorInduk/tampilanDataPegawai');
     }
 
@@ -366,12 +366,12 @@ class AdministratorInduk extends CI_Controller {
 
         if($input['password'] != ''){
         $items = array(
-            'nip'                => $input['nipeg'],
-            'password'           => password_hash($input['password'], PASSWORD_DEFAULT),
+            'nip'        => $input['nipeg'],
+            'password'   => password_hash($input['password'], PASSWORD_DEFAULT),
         );
         }else {
             $items = array(
-                'nip'                => $input['nipeg'],
+                'nip'    => $input['nipeg'],
             );
         }
 
@@ -585,7 +585,6 @@ class AdministratorInduk extends CI_Controller {
             unlink(base_url('/assets/user/administrator_induk/'.$config['file_name']));
             $this->session->set_flashdata('alert_success', 'Daftar sebutan jabatan berhasil diimpor!');
             redirect('AdministratorInduk/tampilanJabatan');
-
         }
     }
 
@@ -609,7 +608,7 @@ class AdministratorInduk extends CI_Controller {
         );
         $this->db->set('id_administrator', 'UUID()', FALSE);
         $this->db->insert('tb_administrator', $data_admin);
-        $this->session->set_flashdata('alert_success', 'Data Administrator Telah Ditambahkan');
+        $this->session->set_flashdata('alert_success', 'Data Administrator Telah Ditambahkan!');
         redirect('AdministratorInduk/tampilanAdministrator');
     }
 
@@ -657,7 +656,7 @@ class AdministratorInduk extends CI_Controller {
             }
             
         $this->Crud->u('tb_administrator', $data_admin, $where);
-        $this->session->set_flashdata('alert_primary', 'Data Administrator Berhasil Diupdate');
+        $this->session->set_flashdata('alert_primary', 'Data administrator berhasil disunting!');
         redirect('AdministratorInduk/tampilanAdministrator');
     }
 
@@ -665,7 +664,7 @@ class AdministratorInduk extends CI_Controller {
         $where = array('id_administrator' => $id,);
 
         $this->Crud->d('tb_administrator', $where);
-        $this->session->set_flashdata('alert_danger', 'Data Administrator Telah Dihapus');
+        $this->session->set_flashdata('alert_danger', 'Data administrator berhasil dihapus!');
         redirect('AdministratorInduk/tampilanAdministrator');
     }
 

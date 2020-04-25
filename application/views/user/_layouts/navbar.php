@@ -59,6 +59,7 @@
                             <div class="drop-down dropdown-profile   dropdown-menu">
                                 <div class="dropdown-content-body">
                                     <ul>
+                                        <li><a href="#"><i class="icon-user"></i><span>Hi! <?= $this->session->userdata('nip'); ?></span></a></li>
                                         <li><a href="<?php echo site_url('login/logout')?>"><i class="icon-key"></i> <span>Logout</span></a></li>
                                     </ul>
                                 </div>
