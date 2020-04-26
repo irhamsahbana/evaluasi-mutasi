@@ -117,27 +117,24 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Business Area</label>
                             <div class="col-sm-9">
-                                <select class="form-control" name="business_area">
-                                    <option>Pilih Salah Satu</option>
-                                    <?php
-                                        $no = 1; 
-                                        foreach ($data_area as $area) {
-                                    ?>
-                                    <option value="<?=$area->business_area?>"><?=$area->nama_business_area?></option>
-                                    <?php $no++; } ?>
+                                <select class="form-control" name="business_area" required>
+                                    <option value="">Pilih Salah Satu</option>
+                                    <?php foreach($area as $row):?>
+                                    <option value="<?php echo $row->business_area;?>"><?php echo $row->nama_business_area;?></option>
+                                    <?php endforeach;?>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">ID Personnel Subarea</label>
                             <div class="col-sm-9">
-                                <input type="text" name="id_personnel_subarea" class="form-control" placeholder="" required>
+                                <input type="text" name="id_personnel_subarea" class="form-control" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Personnel Subarea</label>
                             <div class="col-sm-9">
-                                <input type="text" name="personnel_subarea" class="form-control" placeholder="" required>
+                                <input type="text" name="personnel_subarea" class="form-control" required>
                             </div>
                         </div>
                     </div>
@@ -175,11 +172,11 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Business Area</label>
                             <div class="col-sm-9">
-                                <select class="form-control" name="business_area">
-                                    <option>Pilih Salah Satu</option>
-                                    <?php foreach ($data_area as $area) { ?>
-                                    <option value="<?=$area->business_area?>" <?php if($business_area_selected == $area->business_area){echo "selected";} ?>><?=$area->nama_business_area?></option>
-                                    <?php } ?>
+                                <select class="form-control" name="business_area" required>
+                                    <option value="">Pilih Salah Satu</option>
+                                    <?php foreach($area as $row):?>
+                                    <option value="<?php echo $row->business_area;?>" <?php if($business_area_selected == $row->business_area){echo "selected";} ?>><?php echo $row->nama_business_area;?></option>
+                                    <?php endforeach;?>
                                 </select>
                             </div>
                         </div>

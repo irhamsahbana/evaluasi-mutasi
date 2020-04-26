@@ -287,8 +287,8 @@ class AdministratorInduk extends CI_Controller {
         $data = array(
             'isi' => 'user/contents/administrator_induk/tabelDaftarPersonnelSubarea',
             'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
-            'data_subarea' => $this->M_AdministratorInduk->tampilSubarea(),
-            'data_area' => $this->Crud->ga('tb_business_area'),
+            'data_subarea' => $this->M_AdministratorInduk->getDataSubarea(),
+            'area' => $this->Crud->ga('tb_business_area'),
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
