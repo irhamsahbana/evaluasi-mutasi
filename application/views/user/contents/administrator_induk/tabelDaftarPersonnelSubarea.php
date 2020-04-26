@@ -126,12 +126,6 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">ID Personnel Subarea</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="id_personnel_subarea" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Personnel Subarea</label>
                             <div class="col-sm-9">
                                 <input type="text" name="personnel_subarea" class="form-control" required>
@@ -178,12 +172,6 @@
                                     <option value="<?php echo $row->business_area;?>" <?php if($business_area_selected == $row->business_area){echo "selected";} ?>><?php echo $row->nama_business_area;?></option>
                                     <?php endforeach;?>
                                 </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">ID Personnel Subarea</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="id_personnel_subarea" class="form-control" placeholder="" required value="<?=$subarea->personnel_subarea?>">
                             </div>
                         </div>
                         <div class="form-group row">

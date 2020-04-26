@@ -295,9 +295,11 @@ class AdministratorInduk extends CI_Controller {
 
     public function doAddSubarea() {
         $input        = $this->input->post(NULL, TRUE);
+        $str          = $this->input->post('personnel_subarea',TRUE);
+        $id_subarea   = str_replace(" ", "-", $str);
         $data_subarea = array(
             'business_area'            => $input['business_area'],
-            'personnel_subarea'        => $input['id_personnel_subarea'],
+            'personnel_subarea'        => $id_subarea,
             'nama_personnel_subarea'   => $input['personnel_subarea'],
         );
         $this->db->insert('tb_personnel_area', $data_subarea);
@@ -316,9 +318,11 @@ class AdministratorInduk extends CI_Controller {
     public function doUpdateSubarea($id){
         $where      = array('personnel_subarea' => $id);
         $input      = $this->input->post(NULL, TRUE);
+        $str        = $this->input->post('personnel_subarea',TRUE);
+        $id_subarea = str_replace(" ", "-", $str);
         $data_subarea  = array(
             'business_area'            => $input['business_area'],
-            'personnel_subarea'        => $input['id_personnel_subarea'],
+            'personnel_subarea'        => $id_subarea,
             'nama_personnel_subarea'   => $input['personnel_subarea'],
         );
         $this->Crud->u('tb_personnel_area', $data_subarea, $where);
