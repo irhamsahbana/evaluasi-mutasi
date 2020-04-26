@@ -3,15 +3,17 @@
 }
 
 html {
-  overflow-y: scroll;
-  background-image: url("KP-bg.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  overflow-y: hidden; 
+  height: 100%;
 }
 
 body {
   font-family: 'Titillium Web', sans-serif;
+  height: 100%;
+  background-image: url("KP-bg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 a {
@@ -28,7 +30,7 @@ a:hover {
   background: rgba(19, 35, 47, 0.9);
   padding: 40px;
   max-width: 600px;
-  margin: 140px auto 50px;
+  margin: 160px auto 1px;
   border-radius: 4px;
   box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
 }
