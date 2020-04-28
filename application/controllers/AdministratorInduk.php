@@ -131,6 +131,74 @@ class AdministratorInduk extends CI_Controller {
         redirect('AdministratorInduk/tampilanDataPegawai');
     }
 
+    public function doImportPegawai(){
+        $this->load->library(array('PHPExcel','PHPExcel/IOFactory'));
+
+        $fileName = $_FILES['file_data_pegawai']['name'];
+         
+        $config['upload_path'] = './assets/user/administrator_induk';
+        $config['file_name'] = $fileName;
+        $config['allowed_types'] = 'xls|xlsx|csv|ods|ots';
+        $config['max_size'] = 10000;
+         
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        if (!$this->upload->do_upload('file_data_pegawai')) {
+            $this->session->set_flashdata('alert_danger', 'File data pegawai gagal diimpor!');
+            redirect('AdministratorInduk/tampilanDataPegawai');
+        } else {
+           $media = $this->upload->data();
+           $inputFileName = './assets/user/administrator_induk/'.$media['file_name'];
+
+            try {
+                $inputFileType = IOFactory::identify($inputFileName);
+                $objReader = IOFactory::createReader($inputFileType);
+                $objPHPExcel = $objReader->load($inputFileName);
+            } catch(Exception $e) {
+                die('Error loading file "'.pathinfo($inputFileName,PATHINFO_BASENAME).'": '.$e->getMessage());
+            }
+
+           $sheet = $objPHPExcel->getSheet(0);
+           $highestRow = $sheet->getHighestRow();
+           $highestColumn = $sheet->getHighestColumn();
+
+           for ($row = 2; $row <= $highestRow; $row++){  
+                $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,
+                   NULL,
+                   TRUE,
+                   FALSE);
+                $data = array(
+                    "pers_no"               => $rowData[0][0],
+                    "nip"                   => $rowData[0][1],
+                    "nama_pegawai"          => $rowData[0][2],
+                    "id_sebutan_jabatan"    => $rowData[0][3],
+                    "org_unit"              => $rowData[0][4],
+                    "organizational_unit"   => $rowData[0][5],
+                    "position"              => $rowData[0][6],
+                    "nama_panjang_posisi"   => $rowData[0][7],
+                    "jenjang_main_grp"      => $rowData[0][8],
+                    "jenjang_sub_grp"       => $rowData[0][9],
+                    "grade"                 => $rowData[0][10],
+                    "tgl_grade"             => $rowData[0][11],
+                    "pendidikan_terakhir"   => $rowData[0][12],
+                    "tgl_lahir"             => $rowData[0][13],
+                    "tgl_capeg"             => $rowData[0][14],
+                    "tgl_pegawai_tetap"     => $rowData[0][15],
+                    "gender"                => $rowData[0][16],
+                    "email"                 => $rowData[0][17],
+                    "tgl_masuk"             => $rowData[0][18],
+                    "agama"                 => $rowData[0][19],
+                    "no_telp"               => $rowData[0][20],
+                );
+                $this->db->insert("tb_pegawai",$data);
+            }
+            unlink(base_url('/assets/user/administrator_induk/'.$config['file_name']));
+            $this->session->set_flashdata('alert_success', 'Data pegawai berhasil diimpor!');
+            redirect('AdministratorInduk/tampilanDataPegawai');
+        }
+    }
+
     public function tampilanDaftarTalenta(){
         $this->db->select('*');
         $this->db->from('tb_daftar_talenta_per_semester');
