@@ -163,11 +163,18 @@ class AdministratorInduk extends CI_Controller {
            $highestRow = $sheet->getHighestRow();
            $highestColumn = $sheet->getHighestColumn();
 
-           for ($row = 2; $row <= $highestRow; $row++){  
+           for ($row = 2; $row <= $highestRow; $row++){
                 $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,
                    NULL,
                    TRUE,
                    FALSE);
+
+                $tgl_grade          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($rowData[0][11]));
+                $tgl_lahir          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($rowData[0][13]));
+                $tgl_capeg          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($rowData[0][14]));     
+                $tgl_pegawai_tetap  = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($rowData[0][15]));
+                $tgl_masuk          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($rowData[0][18]));
+
                 $data = array(
                     "pers_no"               => $rowData[0][0],
                     "nip"                   => $rowData[0][1],
@@ -180,20 +187,20 @@ class AdministratorInduk extends CI_Controller {
                     "jenjang_main_grp"      => $rowData[0][8],
                     "jenjang_sub_grp"       => $rowData[0][9],
                     "grade"                 => $rowData[0][10],
-                    "tgl_grade"             => $rowData[0][11],
+                    "tgl_grade"             => $tgl_grade,
                     "pendidikan_terakhir"   => $rowData[0][12],
-                    "tgl_lahir"             => $rowData[0][13],
-                    "tgl_capeg"             => $rowData[0][14],
-                    "tgl_pegawai_tetap"     => $rowData[0][15],
+                    "tgl_lahir"             => $tgl_lahir,
+                    "tgl_capeg"             => $tgl_capeg,
+                    "tgl_pegawai_tetap"     => $tgl_pegawai_tetap,
                     "gender"                => $rowData[0][16],
                     "email"                 => $rowData[0][17],
-                    "tgl_masuk"             => $rowData[0][18],
+                    "tgl_masuk"             => $tgl_masuk,
                     "agama"                 => $rowData[0][19],
                     "no_telp"               => $rowData[0][20],
                 );
                 $this->db->insert("tb_pegawai",$data);
             }
-            unlink(base_url('/assets/user/administrator_induk/'.$config['file_name']));
+            unlink('./assets/user/administrator_induk/'.$fileName);
             $this->session->set_flashdata('alert_success', 'Data pegawai berhasil diimpor!');
             redirect('AdministratorInduk/tampilanDataPegawai');
         }
@@ -654,7 +661,7 @@ class AdministratorInduk extends CI_Controller {
                 );
                 $this->db->insert("tb_jabatan",$data);
             }
-            unlink(base_url('/assets/user/administrator_induk/'.$config['file_name']));
+            unlink('./assets/user/administrator_induk/'.$fileName);
             $this->session->set_flashdata('alert_success', 'Daftar sebutan jabatan berhasil diimpor!');
             redirect('AdministratorInduk/tampilanJabatan');
         }
