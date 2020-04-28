@@ -69,6 +69,9 @@
                                                 <th>PS group</th>
                                                 <th>Tanggal Grade Terakhir</th>
                                                 <th>Pendidikan Terakhir</th>
+                                                <th>Tanggal Lahir</th>
+                                                <th>Tanggal Capeg</th>
+                                                <th>Tanggal Pegawai Tetap</th>
                                                 <th>Gender Key</th>
                                                 <th>E-mail</th>
                                                 <th>Tanggal Masuk</th>
@@ -98,6 +101,9 @@
                                                 <td><?= $pegawai->grade ?></td>
                                                 <td><?= $pegawai->tgl_grade ?></td>
                                                 <td><?= $pegawai->pendidikan_terakhir ?></td>
+                                                <td><?= $pegawai->tgl_lahir ?></td>
+                                                <td><?= $pegawai->tgl_capeg ?></td>
+                                                <td><?= $pegawai->tgl_pegawai_tetap ?></td>
                                                 <td><?= $pegawai->gender ?></td>
                                                 <td><?= $pegawai->email ?></td>
                                                 <td><?= $pegawai->tgl_masuk ?></td>
@@ -131,6 +137,9 @@
                                                 <th>PS group</th>
                                                 <th>Tanggal Grade Terakhir</th>
                                                 <th>Pendidikan Terakhir</th>
+                                                <th>Tanggal Lahir</th>
+                                                <th>Tanggal Capeg</th>
+                                                <th>Tanggal Pegawai Tetap</th>
                                                 <th>Gender Key</th>
                                                 <th>E-mail</th>
                                                 <th>Tanggal Masuk</th>
@@ -264,6 +273,24 @@
                             <label class="col-sm-3 col-form-label">Pendidikan Terakhir</label>
                             <div class="col-sm-9">
                                 <input type="text" name="pendidikan_terakhir" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tanggal Lahir</label>
+                            <div class="col-sm-9">
+                                <input type="date" name="tanggal_lahir" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tanggal Capeg</label>
+                            <div class="col-sm-9">
+                                <input type="date" name="tanggal_capeg" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tanggal Pegawai Tetap</label>
+                            <div class="col-sm-9">
+                                <input type="date" name="tanggal_pegawai_tetap" class="form-control" required>
                             </div>
                         </div>
                         <div class="form-group row">

@@ -48,7 +48,6 @@ class AdministratorInduk extends CI_Controller {
             'pers_no'                        => $input['pers_no'],
             'nip'                            => $input['nipeg'],
             'nama_pegawai'                   => $input['nama_pegawai'],
-            'personnel_subarea'              => $input['personnel_subarea'],
             'id_sebutan_jabatan'             => $input['sebutan_jabatan'],
             'org_unit'                       => $input['org_unit'],
             'organizational_unit'            => $input['organizational_unit'],
@@ -59,6 +58,9 @@ class AdministratorInduk extends CI_Controller {
             'grade'                          => $input['grade'],
             'tgl_grade'                      => $input['tgl_grade'],
             'pendidikan_terakhir'            => $input['pendidikan_terakhir'],
+            'tgl_lahir'                      => $input['tanggal_lahir'],
+            'tgl_capeg'                      => $input['tanggal_capeg'],
+            'tgl_pegawai_tetap'              => $input['tanggal_pegawai_tetap'],
             'gender'                         => $input['gender'],
             'email'                          => $input['email'],
             'tgl_masuk'                      => $input['tanggal_masuk'],
@@ -93,15 +95,13 @@ class AdministratorInduk extends CI_Controller {
         echo json_encode($data);
     }
 
-    public function doUpdatePegawai(){
-        $id            = $this->input->post('id_pegawai',TRUE);
+    public function doUpdatePegawai($id){
         $where         = array('nip' => $id,);
         $input         = $this->input->post(NULL, TRUE);
         $data_pegawai  = array(
             'pers_no'                        => $input['pers_no'],
             'nip'                            => $input['nipeg'],
             'nama_pegawai'                   => $input['nama_pegawai'],
-            'personnel_subarea'              => $input['personnel_subarea'],
             'id_sebutan_jabatan'             => $input['sebutan_jabatan'],
             'org_unit'                       => $input['org_unit'],
             'organizational_unit'            => $input['organizational_unit'],
@@ -112,6 +112,9 @@ class AdministratorInduk extends CI_Controller {
             'grade'                          => $input['grade'],
             'tgl_grade'                      => $input['tgl_grade'],
             'pendidikan_terakhir'            => $input['pendidikan_terakhir'],
+            'tgl_lahir'                      => $input['tanggal_lahir'],
+            'tgl_capeg'                      => $input['tanggal_capeg'],
+            'tgl_pegawai_tetap'              => $input['tanggal_pegawai_tetap'],
             'gender'                         => $input['gender'],
             'email'                          => $input['email'],
             'tgl_masuk'                      => $input['tanggal_masuk'],

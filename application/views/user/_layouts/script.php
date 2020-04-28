@@ -148,6 +148,9 @@
                             $('[name="grade"]').val(data[i].grade);
                             $('[name="tgl_grade"]').val(data[i].tgl_grade);
                             $('[name="pendidikan_terakhir"]').val(data[i].pendidikan_terakhir);
+                            $('[name="tanggal_lahir"]').val(data[i].tgl_lahir);
+                            $('[name="tanggal_capeg"]').val(data[i].tgl_capeg);
+                            $('[name="tanggal_pegawai_tetap"]').val(data[i].tgl_pegawai_tetap);
                             $('[name="gender"]').val(data[i].gender);
                             $('[name="email"]').val(data[i].email);
                             $('[name="tanggal_masuk"]').val(data[i].tgl_masuk);

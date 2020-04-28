@@ -27,7 +27,7 @@
                             <div class="card-body">
                                 <h4 class="card-title">Sunting Data Administrator</h4>
                                 <div class="form-validation">
-                                    <form class="form-valide" action="<?= site_url('AdministratorInduk/doUpdatePegawai') ?>" method="POST" enctype="multipart/form-data">
+                                    <form class="form-valide" action="<?= site_url('AdministratorInduk/doUpdatePegawai/'.$id) ?>" method="POST" enctype="multipart/form-data">
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Pers. No.</label>
                                             <div class="col-sm-9">
@@ -125,6 +125,24 @@
                                             <label class="col-sm-3 col-form-label">Pendidikan Terakhir</label>
                                             <div class="col-sm-9">
                                                 <input type="text" name="pendidikan_terakhir" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Tanggal Lahir</label>
+                                            <div class="col-sm-9">
+                                                <input type="date" name="tanggal_lahir" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Tanggal Capeg</label>
+                                            <div class="col-sm-9">
+                                                <input type="date" name="tanggal_capeg" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Tanggal Pegawai Tetap</label>
+                                            <div class="col-sm-9">
+                                                <input type="date" name="tanggal_pegawai_tetap" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
