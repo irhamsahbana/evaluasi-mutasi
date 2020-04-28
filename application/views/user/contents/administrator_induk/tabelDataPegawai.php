@@ -58,6 +58,7 @@
                                                 <th>Pers. No.</th>
                                                 <th>NIP</th>
                                                 <th>Nama Pegawai</th>
+                                                <th>Business Area</th>
                                                 <th>Personnel Subarea</th>
                                                 <th>Jabatan Saat Ini</th>
                                                 <th>Org.unit</th>
@@ -90,6 +91,7 @@
                                                 <td><?= $pegawai->pers_no ?></td>
                                                 <td><?= $pegawai->nip ?></td>
                                                 <td><?= $pegawai->nama_pegawai ?></td>
+                                                <td><?= $pegawai->nama_business_area ?></td>
                                                 <td><?= $pegawai->nama_personnel_subarea ?></td>
                                                 <td><?= $pegawai->sebutan_jabatan ?></td>
                                                 <td><?= $pegawai->org_unit ?></td>
@@ -126,6 +128,7 @@
                                                 <th>Pers. No.</th>
                                                 <th>NIP</th>
                                                 <th>Nama Pegawai</th>
+                                                <th>Business Area</th>
                                                 <th>Personnel Subarea</th>
                                                 <th>Jabatan Saat Ini</th>
                                                 <th>Org.unit</th>
