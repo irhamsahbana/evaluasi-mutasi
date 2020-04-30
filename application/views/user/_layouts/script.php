@@ -18,7 +18,7 @@
         <?php 
         $myURI = $this->uri->segment(2);
 
-        if($myURI == 'tampilanDataPegawai') {
+        if($myURI == 'tampilanDataPegawai' || $myURI == 'tampilanAddUsulanLembarEvaluasi') {
         ?>
             
             $('#add_area').change(function(){ 
@@ -307,12 +307,57 @@
                 count_pegawai = count_pegawai + 1;
                 var html_code_pegawai = "<tr id='baris"+count_pegawai+"'>";
                     html_code_pegawai+= "<td><input type='text' class='form-control nip_usulan' required></td>";
-                    html_code_pegawai+= "<td><select class='form-control' name='business_area' required><option value=''>Pilih Salah Satu</option><option value=''>-</option></select></td>";
-                    html_code_pegawai+= "<td><select class='form-control' name='personnel_subarea' required><option value=''>Pilih Salah Satu</option><option value=''>-</option></select></td>";
-                    html_code_pegawai+= "<td><select class='form-control' name='jabatan' required><option value=''>Pilih Salah Satu</option><option value=''>-</option></select></td>";
+                    html_code_pegawai+= "<td><select class='form-control' name='business_area' id='add_area"+count_pegawai+"' required><option value=''>Pilih Salah Satu</option><?php foreach($area as $row):?><option value='<?php echo $row->business_area;?>'><?php echo $row->nama_business_area;?></option><?php endforeach;?></select></td>";
+                    html_code_pegawai+= "<td><select class='form-control' name='personnel_subarea' id='add_subarea"+count_pegawai+"' required><option value=''>Pilih Business Area dahulu</option></select></td>";
+                    html_code_pegawai+= "<td><select class='form-control' name='jabatan' id='add_jabatan"+count_pegawai+"' required><option value=''>Pilih Personnel Subarea dahulu</option></select></td>";
                     html_code_pegawai+= "<td><button type='button' class='btn btn-danger remove_pegawai' name='remove_pegawai' data-baris='baris"+count_pegawai+"'><strong>-</strong></button></td>";
                     html_code_pegawai+= "</tr>";
                     $('#tbl_pegawai_usulan').append(html_code_pegawai);
+
+            $('#add_area'+count_pegawai).change(function(){ 
+                var id=$(this).val();
+                $.ajax({
+                    url : "<?= site_url('AdministratorInduk/getPersonnelSubarea');?>",
+                    method : "POST",
+                    data : {id: id},
+                    async : true,
+                    dataType : 'json',
+                    success: function(data){
+                         
+                        var html = '<option value="">Pilih Salah Satu</option>';
+                        var i;
+                        for(i=0; i<data.length; i++){
+                            html += '<option value='+data[i].personnel_subarea+'>'+data[i].nama_personnel_subarea+'</option>';
+                        }
+                        $('#add_subarea'+count_pegawai).html(html);
+ 
+                    }
+                });
+                return false;
+            }); 
+
+            $('#add_subarea'+count_pegawai).change(function(){ 
+                var id=$(this).val();
+                $.ajax({
+                    url : "<?= site_url('AdministratorInduk/getSebutanJabatan');?>",
+                    method : "POST",
+                    data : {id: id},
+                    async : true,
+                    dataType : 'json',
+                    success: function(data){
+                         
+                        var html = '<option value="">Pilih Salah Satu</option>';
+                        var i;
+                        for(i=0; i<data.length; i++){
+                            html += '<option value='+data[i].id_sebutan_jabatan+'>'+data[i].sebutan_jabatan+'</option>';
+                        }
+                        $('#add_jabatan'+count_pegawai).html(html);
+ 
+                    }
+                });
+                return false;
+            });
+
             });
             $(document).on('click', '.remove_pegawai',function(){
                 var delete_baris = $(this).data("baris");

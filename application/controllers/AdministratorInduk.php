@@ -40,7 +40,7 @@ class AdministratorInduk extends CI_Controller {
 
     public function getSebutanJabatan(){
         $personnel_subarea = $this->input->post('id',TRUE);
-        $data = $this->Crud->gw('tb_jabatan', array('personnel_subarea' => $personnel_subarea));
+        $data = $this->Crud->gwo('tb_jabatan', array('personnel_subarea' => $personnel_subarea), 'id_sebutan_jabatan'); 
         echo json_encode($data);
     }
 
@@ -786,6 +786,7 @@ class AdministratorInduk extends CI_Controller {
         $data = array(
             'isi'         => 'user/contents/administrator_induk/addUsulanLembarEvaluasi',
             'title'       => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'area'        => $this->Crud->ga('tb_business_area'),
         );
 
         $this->load->view('user/_layouts/wrapper', $data);

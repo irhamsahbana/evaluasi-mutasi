@@ -39,21 +39,21 @@
                                                 <td>
                                                     <input type="text" name="nip_usulan" class="form-control" required></td>
                                                 <td>
-                                                     <select class="form-control" name="business_area" required>
+                                                    <select class="form-control" name="business_area" id="add_area" required>
                                                         <option value="">Pilih Salah Satu</option>
-                                                        <option value="">-</option>
+                                                        <?php foreach($area as $row):?>
+                                                        <option value="<?php echo $row->business_area;?>"><?php echo $row->nama_business_area;?></option>
+                                                        <?php endforeach;?>
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <select class="form-control" name="personnel_subarea" required>
-                                                        <option value="">Pilih Salah Satu</option>
-                                                        <option value="">-</option>
+                                                    <select class="form-control" name="personnel_subarea" id="add_subarea" required>
+                                                        <option value="">Pilih Business Area dahulu</option>
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <select class="form-control" name="jabatan" required>
-                                                        <option value="">Pilih Salah Satu</option>
-                                                        <option value="">-</option>
+                                                    <select class="form-control" name="jabatan" id="add_jabatan" required>
+                                                        <option value="">Pilih Personnel Subarea dahulu</option>
                                                     </select>
                                                 </td>
                                                 <td>
