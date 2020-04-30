@@ -56,7 +56,7 @@
                         var html = '<option value="">Pilih Salah Satu</option>';
                         var i;
                         for(i=0; i<data.length; i++){
-                            html += '<option value='+data[i].id_sebutan_jabatan+'>'+data[i].sebutan_jabatan+'</option>';
+                            html += '<option value='+data[i].id_sebutan_jabatan+' title="'+data[i].sebutan_jabatan+'">'+data[i].sebutan_jabatan+'</option>';
                         }
                         $('#add_jabatan').html(html);
  
@@ -115,7 +115,7 @@
                             if(id_sebutan_jabatan==value.id_sebutan_jabatan){
                                 $('select[name="sebutan_jabatan"]').append('<option value="'+ value.id_sebutan_jabatan +'" selected>'+ value.sebutan_jabatan +'</option>').trigger('change');
                             }else{
-                                $('select[name="sebutan_jabatan"]').append('<option value="'+ value.id_sebutan_jabatan +'">'+ value.sebutan_jabatan +'</option>');
+                                $('select[name="sebutan_jabatan"]').append('<option value="'+ value.id_sebutan_jabatan +'" title="'+ value.sebutan_jabatan +'">'+ value.sebutan_jabatan +'</option>');
                             }
                         });
  
@@ -309,7 +309,7 @@
                     html_code_pegawai+= "<td><input type='text' class='form-control nip_usulan' required></td>";
                     html_code_pegawai+= "<td><select class='form-control' name='business_area' id='add_area"+count_pegawai+"' required><option value=''>Pilih Salah Satu</option><?php foreach($area as $row):?><option value='<?php echo $row->business_area;?>'><?php echo $row->nama_business_area;?></option><?php endforeach;?></select></td>";
                     html_code_pegawai+= "<td><select class='form-control' name='personnel_subarea' id='add_subarea"+count_pegawai+"' required><option value=''>Pilih Business Area dahulu</option></select></td>";
-                    html_code_pegawai+= "<td><select class='form-control' name='jabatan' id='add_jabatan"+count_pegawai+"' required><option value=''>Pilih Personnel Subarea dahulu</option></select></td>";
+                    html_code_pegawai+= "<td><select class='form-control' data-live-search='true' name='jabatan' id='add_jabatan"+count_pegawai+"' required><option value=''>Pilih Personnel Subarea dahulu</option></select></td>";
                     html_code_pegawai+= "<td><button type='button' class='btn btn-danger remove_pegawai' name='remove_pegawai' data-baris='baris"+count_pegawai+"'><strong>-</strong></button></td>";
                     html_code_pegawai+= "</tr>";
                     $('#tbl_pegawai_usulan').append(html_code_pegawai);
@@ -349,7 +349,7 @@
                             var html = '<option value="">Pilih Salah Satu</option>';
                             var i;
                             for(i=0; i<data.length; i++){
-                                html += '<option value='+data[i].id_sebutan_jabatan+'>'+data[i].sebutan_jabatan+'</option>';
+                                html += '<option value='+data[i].id_sebutan_jabatan+' title="'+data[i].sebutan_jabatan+'">'+data[i].sebutan_jabatan+'</option>';
                             }
                             $('#add_jabatan'+count_pegawai).html(html);
      

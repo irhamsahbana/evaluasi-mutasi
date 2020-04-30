@@ -52,7 +52,7 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <select class="form-control" name="jabatan" id="add_jabatan" required>
+                                                    <select class="form-control" name="jabatan" id="add_jabatan" data-live-search="true" required>
                                                         <option value="">Pilih Personnel Subarea dahulu</option>
                                                     </select>
                                                 </td>

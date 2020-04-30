@@ -219,7 +219,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Sebutan Jabatan</label>
                             <div class="col-sm-9">
-                                <select class="form-control" name="sebutan_jabatan" id="add_jabatan" required>
+                                <select class="form-control" name="sebutan_jabatan" id="add_jabatan" data-live-search="true" required>
                                     <option >Pilih Personnel Subarea dahulu</option>
                                 </select>
                             </div>
