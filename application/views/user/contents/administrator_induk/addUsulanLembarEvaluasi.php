@@ -27,11 +27,11 @@
                                     <table class="table table-bordered verticle-middle" id="tbl_pegawai_usulan">
                                         <thead>
                                             <tr>
-                                                <th scope="col">NIP</th>
-                                                <th scope="col">Usulan Bussiness Area Baru</th>
-                                                <th scope="col">Usulan Personnel Subarea Baru</th>
-                                                <th scope="col">Usulan Jabatan Baru</th>
-                                                <th scope="col">Aksi</th>
+                                                <th scope="col" style="width: 10%">NIP</th>
+                                                <th scope="col" style="width: 20%">Usulan Bussiness Area Baru</th>
+                                                <th scope="col" style="width: 20%">Usulan Personnel Subarea Baru</th>
+                                                <th scope="col" style="width: 45%">Usulan Jabatan Baru</th>
+                                                <th scope="col" style="width: 5%">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>

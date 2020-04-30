@@ -314,55 +314,56 @@
                     html_code_pegawai+= "</tr>";
                     $('#tbl_pegawai_usulan').append(html_code_pegawai);
 
-            $('#add_area'+count_pegawai).change(function(){ 
-                var id=$(this).val();
-                $.ajax({
-                    url : "<?= site_url('AdministratorInduk/getPersonnelSubarea');?>",
-                    method : "POST",
-                    data : {id: id},
-                    async : true,
-                    dataType : 'json',
-                    success: function(data){
-                         
-                        var html = '<option value="">Pilih Salah Satu</option>';
-                        var i;
-                        for(i=0; i<data.length; i++){
-                            html += '<option value='+data[i].personnel_subarea+'>'+data[i].nama_personnel_subarea+'</option>';
+                $('#add_area'+count_pegawai).change(function(){ 
+                    var id=$(this).val();
+                    $.ajax({
+                        url : "<?= site_url('AdministratorInduk/getPersonnelSubarea');?>",
+                        method : "POST",
+                        data : {id: id},
+                        async : true,
+                        dataType : 'json',
+                        success: function(data){
+                             
+                            var html = '<option value="">Pilih Salah Satu</option>';
+                            var i;
+                            for(i=0; i<data.length; i++){
+                                html += '<option value='+data[i].personnel_subarea+'>'+data[i].nama_personnel_subarea+'</option>';
+                            }
+                            $('#add_subarea'+count_pegawai).html(html);
+     
                         }
-                        $('#add_subarea'+count_pegawai).html(html);
- 
-                    }
-                });
-                return false;
-            }); 
+                    });
+                    return false;
+                }); 
 
-            $('#add_subarea'+count_pegawai).change(function(){ 
-                var id=$(this).val();
-                $.ajax({
-                    url : "<?= site_url('AdministratorInduk/getSebutanJabatan');?>",
-                    method : "POST",
-                    data : {id: id},
-                    async : true,
-                    dataType : 'json',
-                    success: function(data){
-                         
-                        var html = '<option value="">Pilih Salah Satu</option>';
-                        var i;
-                        for(i=0; i<data.length; i++){
-                            html += '<option value='+data[i].id_sebutan_jabatan+'>'+data[i].sebutan_jabatan+'</option>';
+                $('#add_subarea'+count_pegawai).change(function(){ 
+                    var id=$(this).val();
+                    $.ajax({
+                        url : "<?= site_url('AdministratorInduk/getSebutanJabatan');?>",
+                        method : "POST",
+                        data : {id: id},
+                        async : true,
+                        dataType : 'json',
+                        success: function(data){
+                             
+                            var html = '<option value="">Pilih Salah Satu</option>';
+                            var i;
+                            for(i=0; i<data.length; i++){
+                                html += '<option value='+data[i].id_sebutan_jabatan+'>'+data[i].sebutan_jabatan+'</option>';
+                            }
+                            $('#add_jabatan'+count_pegawai).html(html);
+     
                         }
-                        $('#add_jabatan'+count_pegawai).html(html);
- 
-                    }
+                    });
+                    return false;
                 });
-                return false;
             });
 
-            });
             $(document).on('click', '.remove_pegawai',function(){
                 var delete_baris = $(this).data("baris");
                 $('#' + delete_baris).remove();
             });
+
             $('#tombol_tambah_data').click(function(){
 
             });
