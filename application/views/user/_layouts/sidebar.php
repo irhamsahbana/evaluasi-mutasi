@@ -58,8 +58,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?= site_url('User/tampilanLembarEvaluasi') ?>" class="<?= ($modul == 'tampilanLembarEvaluasi') ? 'active' : '' ?>">
-                            <i class="icon-docs menu-icon"></i><span class="nav-text">Lembar Evaluasi</span>
+                        <a href="<?= site_url('AdministratorInduk/tampilanUsulanLembarEvaluasi') ?>" class="<?= ($modul == 'tampilanUsulanLembarEvaluasi') ? 'active' : '' ?>">
+                            <i class="icon-docs menu-icon"></i><span class="nav-text">Usulan Lembar Evaluasi</span>
                         </a>
                     </li>
                     <li>

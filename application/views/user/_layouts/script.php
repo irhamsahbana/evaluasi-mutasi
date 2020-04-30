@@ -297,6 +297,39 @@
         });
     </script>
 
+<?php if ($this->uri->segment(2) == 'tampilanAddUsulanLembarEvaluasi'): ?>
+    <script>
+        $(document).ready(function(){
+            var count_pegawai = 1;
+            var count_approval = 1;
+
+            $('#add_pegawai').click(function(){
+                count_pegawai = count_pegawai + 1;
+                var html_code_pegawai = "<tr id='baris"+count_pegawai+"'>";
+                    html_code_pegawai+= "<td><input type='text' class='form-control nip_usulan' required></td>";
+                    html_code_pegawai+= "<td><select class='form-control' name='business_area' required><option value=''>Pilih Salah Satu</option><option value=''>-</option></select></td>";
+                    html_code_pegawai+= "<td><select class='form-control' name='personnel_subarea' required><option value=''>Pilih Salah Satu</option><option value=''>-</option></select></td>";
+                    html_code_pegawai+= "<td><select class='form-control' name='jabatan' required><option value=''>Pilih Salah Satu</option><option value=''>-</option></select></td>";
+                    html_code_pegawai+= "<td><button type='button' class='btn btn-danger remove_pegawai' name='remove_pegawai' data-baris='baris"+count_pegawai+"'><strong>-</strong></button></td>";
+                    html_code_pegawai+= "</tr>";
+                    $('#tbl_pegawai_usulan').append(html_code_pegawai);
+            });
+            $(document).on('click', '.remove_pegawai',function(){
+                var delete_baris = $(this).data("baris");
+                $('#' + delete_baris).remove();
+            });
+            $('#tombol_tambah_data').click(function(){
+
+            });
+
+            $('#add_approval').click(function(){
+                count_approval = count_approval + 1;
+                var html_code_approval;
+            });
+        });
+    </script>
+<?php endif ?>
+
 </body>
 
 </html>
