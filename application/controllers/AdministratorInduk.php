@@ -40,7 +40,7 @@ class AdministratorInduk extends CI_Controller {
 
     public function getSebutanJabatan(){
         $personnel_subarea = $this->input->post('id',TRUE);
-        $data = $this->Crud->gwo('tb_jabatan', array('personnel_subarea' => $personnel_subarea), 'id_sebutan_jabatan'); 
+        $data = $this->Crud->gwo('tb_jabatan', array('personnel_subarea' => $personnel_subarea), 'urutan_dalam_org'); 
         echo json_encode($data);
     }
 
