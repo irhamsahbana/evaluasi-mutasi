@@ -315,9 +315,9 @@
                         success : function(data){
                             $.each(data, function(i, item){
                                 $('#nama_usulan').val(data[i].nama_pegawai);
-                                $('#jabatan_skg').val(data[i].id_sebutan_jabatan);
+                                $('#jabatan_skg').val(data[i].sebutan_jabatan);
                                 $('#nama_usulan').attr('title', data[i].nama_pegawai);
-                                $('#jabatan_skg').attr('title', data[i].id_sebutan_jabatan);
+                                $('#jabatan_skg').attr('title', data[i].sebutan_jabatan);
                             });
                         }
                     });
