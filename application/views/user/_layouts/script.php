@@ -315,7 +315,7 @@
                         success : function(data){
                             $.each(data, function(i, item){
                                 $('[name = "nama_usulan"]').val(data[i].nama_pegawai);
-                                $('[name ="jabatan_skg"]').val(data[i].sebutan_jabatan);
+                                $('[name ="jabatan_skg"]').val(data[i].id_sebutan_jabatan);
                             });
                         }
                     });

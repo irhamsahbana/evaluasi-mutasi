@@ -794,7 +794,7 @@ class AdministratorInduk extends CI_Controller {
 
     public function autoFillUsulanPegawai(){
         $id_pegawai = $this->input->post('nip',FALSE);
-        $dataPeg = $this->M_AdministratorInduk->getPegawaiById($id_pegawai)->result();
+        $dataPeg = $this->Crud->gw('tb_pegawai', array('nip' => $id_pegawai));
         echo json_encode($dataPeg);
     }
 # ************ End Menu Lembar Evaluasi ******************
