@@ -300,9 +300,7 @@
 <?php if ($this->uri->segment(2) == 'tampilanAddUsulanLembarEvaluasi'): ?>
     <script>
         $(document).ready(function(){
-            var count_pegawai = 1;
-            var count_approval = 1;
-
+            
             //Begin AutoFill test
                 $('#nip_usulan').keyup(function(){
                     var nip = $('#nip_usulan').val();
@@ -314,15 +312,16 @@
                         dataType : 'json',
                         success : function(data){
                             $.each(data, function(i, item){
-                                $('#nama_usulan').val(data[i].nama_pegawai);
-                                $('#jabatan_skg').val(data[i].sebutan_jabatan);
-                                $('#nama_usulan').attr('title', data[i].nama_pegawai);
-                                $('#jabatan_skg').attr('title', data[i].sebutan_jabatan);
+                                $('#nama_usulan').val(data[i].nama_pegawai).attr('title', data[i].nama_pegawai);
+                                $('#jabatan_skg').val(data[i].sebutan_jabatan).attr('title', data[i].sebutan_jabatan);
                             });
                         }
                     });
                 });      
             //End AutoFill
+
+            var count_pegawai = 1;
+            var count_approval = 1;
 
             $('#add_pegawai').click(function(){
                 count_pegawai = count_pegawai + 1;
@@ -337,6 +336,24 @@
                     html_code_pegawai+= "</tr>";
                     $('#tbl_pegawai_usulan').append(html_code_pegawai);
   
+                //Begin AutoFill
+                    $('#nip_usulan'+count_pegawai).keyup(function(){
+                        var nip = $('#nip_usulan'+count_pegawai).val();
+                        $.ajax({
+                            url : '<?= site_url('AdministratorInduk/autoFillUsulanPegawai'); ?>',
+                            data : {'nip' : nip},
+                            type : 'post',
+                            async : true,
+                            dataType : 'json',
+                            success : function(data){
+                                $.each(data, function(i, item){
+                                    $('#nama_usulan'+count_pegawai).val(data[i].nama_pegawai).attr('title', data[i].nama_pegawai);
+                                    $('#jabatan_skg'+count_pegawai).val(data[i].sebutan_jabatan).attr('title', data[i].sebutan_jabatan);
+                                });
+                            }
+                        });
+                    });      
+                //End AutoFill
 
                 //Begin chainDropdown Area
                     $('#add_area'+count_pegawai).change(function(){ 

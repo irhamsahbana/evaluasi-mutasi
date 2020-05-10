@@ -61,9 +61,11 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <select class="form-control jabatan" name="jabatan" id="add_jabatan" data-live-search="true" required>
+                                                    <div class="select-reverse-div">
+                                                        <select class="form-control jabatan select-reverse" name="jabatan" id="add_jabatan" data-live-search="true" required>
                                                         <option value="">Pilih Personnel Subarea dahulu</option>
                                                     </select>
+                                                    </div>
                                                 </td>
                                                 <td>
                                                     
