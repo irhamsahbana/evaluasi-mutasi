@@ -312,10 +312,12 @@
                         type : 'post',
                         async : true,
                         dataType : 'json',
-                        success : function(dataPeg){
-                                    $('[name = "nama_usulan"]').val(dataPeg.nama_pegawai);
-                                    $('[name ="jabatan_skg"]').val(dataPeg.id_sebutan_jabatan);
-                                }
+                        success : function(data){
+                            $.each(data, function(i, item){
+                                $('[name = "nama_usulan"]').val(data[i].nama_pegawai);
+                                $('[name ="jabatan_skg"]').val(data[i].sebutan_jabatan);
+                            });
+                        }
                     });
                 });      
             //End AutoFill
