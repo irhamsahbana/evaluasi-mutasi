@@ -303,7 +303,7 @@
             var count_pegawai = 1;
             var count_approval = 1;
 
-            //Begin AutoFill
+            //Begin AutoFill test
                 $('#nip_usulan').keyup(function(){
                     var nip = $('#nip_usulan').val();
                     $.ajax({
