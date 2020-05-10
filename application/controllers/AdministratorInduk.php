@@ -791,6 +791,12 @@ class AdministratorInduk extends CI_Controller {
 
         $this->load->view('user/_layouts/wrapper', $data);
     }
+
+    public function autoFillUsulanPegawai(){
+        $id_pegawai = $this->input->post('nip',FALSE);
+        $dataPeg = $this->Crud->gw('tb_pegawai', array('nip' => $id_pegawai));
+        echo json_encode($dataPeg);
+    }
 # ************ End Menu Lembar Evaluasi ******************
 
 }

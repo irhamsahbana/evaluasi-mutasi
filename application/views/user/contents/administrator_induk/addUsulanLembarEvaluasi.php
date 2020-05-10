@@ -27,19 +27,28 @@
                                     <table class="table table-bordered verticle-middle" id="tbl_pegawai_usulan">
                                         <thead>
                                             <tr>
-                                                <th scope="col" style="width: 10%">NIP</th>
-                                                <th scope="col" style="width: 20%">Usulan Bussiness Area Baru</th>
-                                                <th scope="col" style="width: 20%">Usulan Personnel Subarea Baru</th>
-                                                <th scope="col" style="width: 45%">Usulan Jabatan Baru</th>
-                                                <th scope="col" style="width: 5%">Aksi</th>
+                                                <th scope="col" style="width: 16%">NIP</th>
+                                                <th scope="col" style="width: 16%">Nama Pegawai</th>
+                                                <th scope="col" style="width: 16%">Jabatan saat ini</th>
+                                                <th scope="col" style="width: 16%">Usulan Bussiness Area Baru</th>
+                                                <th scope="col" style="width: 16%">Usulan Personnel Subarea Baru</th>
+                                                <th scope="col" style="width: 22%">Usulan Jabatan Baru</th>
+                                                <th scope="col" style="width: 10%">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <input type="text" name="nip_usulan" class="form-control" required></td>
+                                                    <input type="text" name="nip_usulan" class="form-control nip_usulan" id="nip_usulan" required>
+                                                </td>
                                                 <td>
-                                                    <select class="form-control" name="business_area" id="add_area" required>
+                                                    <input type="text" name="nama_usulan" class="form-control nama_usulan" id="nama_usulan" readonly="readonly">
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="jabatan_skg" class="form-control jabatan_skg" id="jabatan_skg" readonly="readonly">
+                                                </td>
+                                                <td>
+                                                    <select class="form-control business_area" name="business_area" id="add_area" required>
                                                         <option value="">Pilih Salah Satu</option>
                                                         <?php foreach($area as $row):?>
                                                         <option value="<?php echo $row->business_area;?>"><?php echo $row->nama_business_area;?></option>
@@ -47,12 +56,12 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <select class="form-control" name="personnel_subarea" id="add_subarea" required>
+                                                    <select class="form-control personnel_subarea" name="personnel_subarea" id="add_subarea" required>
                                                         <option value="">Pilih Business Area dahulu</option>
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <select class="form-control" name="jabatan" id="add_jabatan" data-live-search="true" required>
+                                                    <select class="form-control jabatan" name="jabatan" id="add_jabatan" data-live-search="true" required>
                                                         <option value="">Pilih Personnel Subarea dahulu</option>
                                                     </select>
                                                 </td>
@@ -64,6 +73,7 @@
                                     </table>
                                 </div>
                                 <button style="float: right;" type="button" class="btn btn-success" name="add_pegawai" id="add_pegawai"><strong>+</strong></button>
+                                <br>
                                 <!-- Tabel Approval Committee yang diusukan -->
                                 <h5 class="card-title" style="font-size: 15px; margin-top: 0.75rem">Approval Committee yang Diusulkan</h4>
                                 <div class="table-responsive">

@@ -303,60 +303,82 @@
             var count_pegawai = 1;
             var count_approval = 1;
 
+            //Begin AutoFill
+                $('#nip_usulan').keyup(function(){
+                    var nip = $('#nip_usulan').val();
+                    $.ajax({
+                        url : '<?= site_url('AdministratorInduk/autoFillUsulanPegawai'); ?>',
+                        data : {'nip' : nip},
+                        type : 'post',
+                        async : true,
+                        dataType : 'json',
+                        success : function(dataPeg){
+                                    $('[name = "nama_usulan"]').val(dataPeg.nama_pegawai);
+                                    $('[name ="jabatan_skg"]').val(dataPeg.id_sebutan_jabatan);
+                                }
+                    });
+                });      
+            //End AutoFill
+
             $('#add_pegawai').click(function(){
                 count_pegawai = count_pegawai + 1;
                 var html_code_pegawai = "<tr id='baris"+count_pegawai+"'>";
-                    html_code_pegawai+= "<td><input type='text' class='form-control nip_usulan' required></td>";
-                    html_code_pegawai+= "<td><select class='form-control' name='business_area' id='add_area"+count_pegawai+"' required><option value=''>Pilih Salah Satu</option><?php foreach($area as $row):?><option value='<?php echo $row->business_area;?>'><?php echo $row->nama_business_area;?></option><?php endforeach;?></select></td>";
-                    html_code_pegawai+= "<td><select class='form-control' name='personnel_subarea' id='add_subarea"+count_pegawai+"' required><option value=''>Pilih Business Area dahulu</option></select></td>";
-                    html_code_pegawai+= "<td><select class='form-control' data-live-search='true' name='jabatan' id='add_jabatan"+count_pegawai+"' required><option value=''>Pilih Personnel Subarea dahulu</option></select></td>";
+                    html_code_pegawai+= "<td><input type='text' class='form-control nip_usulan' id='nip_usulan"+count_pegawai+"' required></td>";
+                    html_code_pegawai+= '<td><input type="text" name="nama_usulan" class="form-control nama_usulan" id="nama_usulan'+count_pegawai+'" readonly="readonly"></td>';
+                    html_code_pegawai+= '<td><input type="text" name="jabatan_sekarang" class="form-control jabatan_sekarang" id="jabatan_skg'+count_pegawai+'" readonly="readonly"></td>'
+                    html_code_pegawai+= "<td><select class='form-control business_area' name='business_area' id='add_area"+count_pegawai+"' required><option value=''>Pilih Salah Satu</option><?php foreach($area as $row):?><option value='<?php echo $row->business_area;?>'><?php echo $row->nama_business_area;?></option><?php endforeach;?></select></td>";
+                    html_code_pegawai+= "<td><select class='form-control personnel_subarea' name='personnel_subarea' id='add_subarea"+count_pegawai+"' required><option value=''>Pilih Business Area dahulu</option></select></td>";
+                    html_code_pegawai+= "<td><select class='form-control jabatan' data-live-search='true' name='jabatan' id='add_jabatan"+count_pegawai+"' required><option value=''>Pilih Personnel Subarea dahulu</option></select></td>";
                     html_code_pegawai+= "<td><button type='button' class='btn btn-danger remove_pegawai' name='remove_pegawai' data-baris='baris"+count_pegawai+"'><strong>-</strong></button></td>";
                     html_code_pegawai+= "</tr>";
                     $('#tbl_pegawai_usulan').append(html_code_pegawai);
+  
 
-                $('#add_area'+count_pegawai).change(function(){ 
-                    var id=$(this).val();
-                    $.ajax({
-                        url : "<?= site_url('AdministratorInduk/getPersonnelSubarea');?>",
-                        method : "POST",
-                        data : {id: id},
-                        async : true,
-                        dataType : 'json',
-                        success: function(data){
-                             
-                            var html = '<option value="">Pilih Salah Satu</option>';
-                            var i;
-                            for(i=0; i<data.length; i++){
-                                html += '<option value='+data[i].personnel_subarea+'>'+data[i].nama_personnel_subarea+'</option>';
+                //Begin chainDropdown Area
+                    $('#add_area'+count_pegawai).change(function(){ 
+                        var id=$(this).val();
+                        $.ajax({
+                            url : "<?= site_url('AdministratorInduk/getPersonnelSubarea');?>",
+                            method : "POST",
+                            data : {id: id},
+                            async : true,
+                            dataType : 'json',
+                            success: function(data){
+                                 
+                                var html = '<option value="">Pilih Salah Satu</option>';
+                                var i;
+                                for(i=0; i<data.length; i++){
+                                    html += '<option value='+data[i].personnel_subarea+'>'+data[i].nama_personnel_subarea+'</option>';
+                                }
+                                $('#add_subarea'+count_pegawai).html(html);
+         
                             }
-                            $('#add_subarea'+count_pegawai).html(html);
-     
-                        }
-                    });
-                    return false;
-                }); 
+                        });
+                        return false;
+                    }); 
 
-                $('#add_subarea'+count_pegawai).change(function(){ 
-                    var id=$(this).val();
-                    $.ajax({
-                        url : "<?= site_url('AdministratorInduk/getSebutanJabatan');?>",
-                        method : "POST",
-                        data : {id: id},
-                        async : true,
-                        dataType : 'json',
-                        success: function(data){
-                             
-                            var html = '<option value="">Pilih Salah Satu</option>';
-                            var i;
-                            for(i=0; i<data.length; i++){
-                                html += '<option value='+data[i].id_sebutan_jabatan+' title="'+data[i].sebutan_jabatan+'">'+data[i].sebutan_jabatan+'</option>';
+                    $('#add_subarea'+count_pegawai).change(function(){ 
+                        var id=$(this).val();
+                        $.ajax({
+                            url : "<?= site_url('AdministratorInduk/getSebutanJabatan');?>",
+                            method : "POST",
+                            data : {id: id},
+                            async : true,
+                            dataType : 'json',
+                            success: function(data){
+                                 
+                                var html = '<option value="">Pilih Salah Satu</option>';
+                                var i;
+                                for(i=0; i<data.length; i++){
+                                    html += '<option value='+data[i].id_sebutan_jabatan+' title="'+data[i].sebutan_jabatan+'">'+data[i].sebutan_jabatan+'</option>';
+                                }
+                                $('#add_jabatan'+count_pegawai).html(html);
+         
                             }
-                            $('#add_jabatan'+count_pegawai).html(html);
-     
-                        }
+                        });
+                        return false;
                     });
-                    return false;
-                });
+                //End chainDropdown Area
             });
 
             $(document).on('click', '.remove_pegawai',function(){
