@@ -314,8 +314,10 @@
                         dataType : 'json',
                         success : function(data){
                             $.each(data, function(i, item){
-                                $('[name = "nama_usulan"]').val(data[i].nama_pegawai);
-                                $('[name ="jabatan_skg"]').val(data[i].id_sebutan_jabatan);
+                                $('#nama_usulan').val(data[i].nama_pegawai);
+                                $('#jabatan_skg').val(data[i].id_sebutan_jabatan);
+                                $('#nama_usulan').attr('title', data[i].nama_pegawai);
+                                $('#jabatan_skg').attr('title', data[i].id_sebutan_jabatan);
                             });
                         }
                     });
