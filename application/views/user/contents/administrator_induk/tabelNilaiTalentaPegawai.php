@@ -45,8 +45,10 @@
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
                                         </button><strong><?= $alert_danger ?></strong></div>
                                     <?php endif; ?>
+
                                         <button style="float: right;" type="button" class="btn mb-1 btn-success" data-toggle="modal" data-target=".modal-create">Tambah<span class="btn-icon-right"><i class="fa fa-user-plus"></i></span>
                                         </button>
+                                        <button style="float: right;" type="button" class="btn mb-1 mr-3 btn-rounded btn-success" data-toggle="modal" data-target=".modal-import"><span class="btn-icon-left"><i class="fa fa-upload color-success"></i> </span>Unggah Nilai Talenta Pegawai</button>
                                     </div>
                                     <table class="table table-striped table-bordered zero-configuration">
                                         <thead>
@@ -271,4 +273,42 @@
 <?php } ?>
 <!--**********************************
     End : Modal for Delete Data
+***********************************-->
+
+<!--**********************************
+    Begin : Modal for import excel/csv
+***********************************-->
+<div class="modal fade modal-import" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="form-validation">
+                <form class="form-valide" action="<?= site_url('AdministratorInduk/doImportTalentaPegawai') ?>" method="POST" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Unggah File Excel Nilai Talenta Pegawai</h5>
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <div class="col sm-12">
+                                Silahkan download dan gunakan <strong><u><a href="#">Template Spreadsheet ini</a></u></strong> untuk mengunggah nilai talenta pegawai! 
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Unggah File Excel</label>
+                            <div class="col-sm-9">
+                                <input type="file" name="file_nilai_talenta_pegawai" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Tambahkan Data</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--**********************************
+    End : Modal for import excel/csv
 ***********************************-->

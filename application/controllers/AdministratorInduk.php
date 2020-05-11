@@ -323,6 +323,63 @@ class AdministratorInduk extends CI_Controller {
         $this->session->set_flashdata('alert_danger', 'Data nilai talenta pegawai berhasil dihapus!');
         redirect('AdministratorInduk/tampilanNilaiTalentaPegawai/'.$tahun.'/'.$semester);
     }
+
+    public function doImportTalentaPegawai(){
+        $this->load->library(array('PHPExcel','PHPExcel/IOFactory'));
+
+        $fileName = $_FILES['file_nilai_talenta_pegawai']['name'];
+         
+        $config['upload_path'] = './assets/user/administrator_induk';
+        $config['file_name'] = $fileName;
+        $config['allowed_types'] = 'xls|xlsx|csv|ods|ots';
+        $config['max_size'] = 10000;
+         
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        if (!$this->upload->do_upload('file_nilai_talenta_pegawai')) {
+            $this->session->set_flashdata('alert_danger', 'File nilai talenta pegawai gagal diimpor!');
+            redirect('AdministratorInduk/tampilanDaftarTalenta');
+        } else {
+           $media = $this->upload->data();
+           $inputFileName = './assets/user/administrator_induk/'.$media['file_name'];
+
+            try {
+                $inputFileType = IOFactory::identify($inputFileName);
+                $objReader = IOFactory::createReader($inputFileType);
+                $objPHPExcel = $objReader->load($inputFileName);
+            } catch(Exception $e) {
+                die('Error loading file "'.pathinfo($inputFileName,PATHINFO_BASENAME).'": '.$e->getMessage());
+            }
+
+           $sheet = $objPHPExcel->getSheet(0);
+           $highestRow = $sheet->getHighestRow();
+           $highestColumn = $sheet->getHighestColumn();
+
+           for ($row = 2; $row <= $highestRow; $row++){
+                $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,
+                   NULL,
+                   TRUE,
+                   FALSE);
+
+                $data = array(
+                    "nip"                   => $rowData[0][0],
+                    "tahun_talenta"         => $rowData[0][1],
+                    "semester_talenta"      => $rowData[0][2],
+                    "nilai_talenta"         => $rowData[0][3],
+                );
+                $this->db->insert("tb_nilai_talenta_pegawai",$data);
+            }
+            unlink('./assets/user/administrator_induk/'.$fileName);
+            $this->session->set_flashdata('alert_success', 'Nilai talenta pegawai berhasil diimpor!');
+
+            $baris = 2;
+            $barisData = $sheet->rangeToArray('A'.$baris.':'.$highestColumn.$baris, NULL, TRUE, FALSE);
+            $urisTahun = $barisData[0][1];
+            $urisSemester = $barisData[0][2];
+            redirect('AdministratorInduk/tampilanNilaiTalentaPegawai/'.$urisTahun.'/'.$urisSemester);
+        }
+    }
 # ************ End Menu Nilai Talenta Pegawai ******************
 
 # ************ Begin Menu Bussiness Area ******************
