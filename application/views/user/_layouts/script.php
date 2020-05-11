@@ -301,7 +301,7 @@
     <script>
         $(document).ready(function(){
             
-            //Begin AutoFill test
+            //Begin AutoFill
                 $('#nip_usulan').keyup(function(){
                     var nip = $('#nip_usulan').val();
                     $.ajax({
@@ -407,14 +407,23 @@
                 $('#' + delete_baris).remove();
             });
 
-            $('#tombol_tambah_data').click(function(){
-
-            });
 
             $('#add_approval').click(function(){
                 count_approval = count_approval + 1;
-                var html_code_approval;
+                var html_code_approval = '<tr id="barisApproval'+count_approval+'">';
+                    html_code_approval+= '<td><input type="text" name="nip_usulan_approval" id="nip_usulan_approval'+count_approval+'" class="form-control" required></td>';
+                    html_code_approval+= '<td><input type="text" name="nama_usulan_approval" id="nama_usulan_approval'+count_approval+'" class="form-control" required readonly="readonly"></td>';
+                    html_code_approval+= '<td><select class="form-control" name="posisi" id="posisi" required><option>Pilih Salah Satu</option><?php foreach ($posisi as $pos): ?><option value="<?= $pos->posisi ?>"><?= $pos->posisi ?></option><?php endforeach ?></select></td>';
+                    html_code_approval+= "<td><button type='button' class='btn btn-danger remove_approval' name='remove_approval' data-barisapproval='barisApproval"+count_approval+"'><strong>-</strong></button></td>";
+                    html_code_approval+= '</tr>';
+                    $('#tbl_approval_usulan').append(html_code_approval);
             });
+
+            $(document).on('click', '.remove_approval',function(){
+                var delete_barisApproval = $(this).data("barisapproval");
+                $('#' + delete_barisApproval).remove();
+            });     
+
         });
     </script>
 <?php endif ?>

@@ -787,6 +787,7 @@ class AdministratorInduk extends CI_Controller {
             'isi'         => 'user/contents/administrator_induk/addUsulanLembarEvaluasi',
             'title'       => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
             'area'        => $this->Crud->ga('tb_business_area'),
+            'posisi'      => $this->Crud->ga('tb_posisi_approval_committee'),
         );
 
         $this->load->view('user/_layouts/wrapper', $data);

@@ -83,6 +83,7 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">NIP</th>
+                                                <th scope="col">Nama Approval</th>
                                                 <th scope="col">Posisi</th>
                                                 <th scope="col">Aksi</th>
                                             </tr>
@@ -90,15 +91,21 @@
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <input type="text" name="nip_usulan_approval" class="form-control" required></td>
+                                                    <input type="text" name="nip_usulan_approval" id="nip_usulan_approval" class="form-control" required>
+                                                </td>
                                                 <td>
-                                                     <select class="form-control" name="posisi" required>
-                                                        <option value="">Pilih Salah Satu</option>
-                                                        <option value="">-</option>
+                                                    <input type="text" name="nama_usulan_approval" id="nama_usulan_approval" class="form-control" required readonly="readonly">
+                                                </td>
+                                                <td>
+                                                     <select class="form-control" name="posisi" id="posisi" required>
+                                                        <option>Pilih Salah Satu</option>
+                                                        <?php foreach ($posisi as $pos): ?>
+                                                            <option value="<?= $pos->posisi ?>"><?= $pos->posisi ?></option>
+                                                        <?php endforeach ?>
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <span><a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Hapus"><i class="fa fa-close color-danger"></i></a></span>
+                                    
                                                 </td>
                                             </tr>
                                         </tbody>
