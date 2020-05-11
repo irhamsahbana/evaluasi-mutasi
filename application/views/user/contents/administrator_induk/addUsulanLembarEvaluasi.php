@@ -51,8 +51,8 @@
                                                     <select class="form-control business_area" name="business_area" id="add_area" required>
                                                         <option value="">Pilih Salah Satu</option>
                                                         <?php foreach($area as $row):?>
-                                                        <option value="<?php echo $row->business_area;?>"><?php echo $row->nama_business_area;?></option>
-                                                        <?php endforeach;?>
+                                                        <option value="<?= $row->business_area ?>"><?= $row->nama_business_area ?></option>
+                                                        <?php endforeach?>
                                                     </select>
                                                 </td>
                                                 <td>
@@ -63,8 +63,8 @@
                                                 <td>
                                                     <div class="select-reverse-div">
                                                         <select class="form-control jabatan select-reverse" name="jabatan" id="add_jabatan" data-live-search="true" required>
-                                                        <option value="">Pilih Personnel Subarea dahulu</option>
-                                                    </select>
+                                                            <option value="">Pilih Personnel Subarea dahulu</option>
+                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -82,7 +82,6 @@
                                     <table class="table table-bordered verticle-middle" id="tbl_approval_usulan">
                                         <thead>
                                             <tr>
-                                                <th scope="col">NIP</th>
                                                 <th scope="col">Nama Approval</th>
                                                 <th scope="col">Posisi</th>
                                                 <th scope="col">Aksi</th>
@@ -91,16 +90,18 @@
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <input type="text" name="nip_usulan_approval" id="nip_usulan_approval" class="form-control" required>
+                                                    <select class="form-control nama_usulan_approval" name="nama_usulan_approval" id="nama_usulan_approval" required>
+                                                        <option value="">Pilih Salah Satu</option>
+                                                        <?php foreach($approval as $row):?>
+                                                        <option value="<?= $row->nip ?>">(<?= $row->nip ?>) <?= $row->nama_pegawai ?></option>
+                                                        <?php endforeach?>
+                                                    </select>
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="nama_usulan_approval" id="nama_usulan_approval" class="form-control" required readonly="readonly">
-                                                </td>
-                                                <td>
-                                                     <select class="form-control" name="posisi" id="posisi" required>
+                                                    <select class="form-control posisi" name="posisi" id="posisi" required>
                                                         <option>Pilih Salah Satu</option>
                                                         <?php foreach ($posisi as $pos): ?>
-                                                            <option value="<?= $pos->posisi ?>"><?= $pos->posisi ?></option>
+                                                            <option value="<?= $pos->id_posisi ?>"><?= $pos->posisi ?></option>
                                                         <?php endforeach ?>
                                                     </select>
                                                 </td>

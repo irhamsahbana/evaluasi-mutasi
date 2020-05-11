@@ -326,12 +326,12 @@
             $('#add_pegawai').click(function(){
                 count_pegawai = count_pegawai + 1;
                 var html_code_pegawai = "<tr id='baris"+count_pegawai+"'>";
-                    html_code_pegawai+= "<td><input type='text' class='form-control nip_usulan' id='nip_usulan"+count_pegawai+"' required></td>";
-                    html_code_pegawai+= '<td><input type="text" name="nama_usulan" class="form-control nama_usulan" id="nama_usulan'+count_pegawai+'" readonly="readonly"></td>';
-                    html_code_pegawai+= '<td><input type="text" name="jabatan_sekarang" class="form-control jabatan_sekarang" id="jabatan_skg'+count_pegawai+'" readonly="readonly"></td>'
+                    html_code_pegawai+= "<td><input type='text' name='nip_usulan' class='form-control nip_usulan' id='nip_usulan"+count_pegawai+"' required></td>";
+                    html_code_pegawai+= "<td><input type='text' name='nama_usulan' class='form-control nama_usulan' id='nama_usulan"+count_pegawai+"' readonly='readonly'></td>";
+                    html_code_pegawai+= "<td><input type='text' name='jabatan_sekarang' class='form-control jabatan_sekarang' id='jabatan_skg"+count_pegawai+"' readonly='readonly'></td>";
                     html_code_pegawai+= "<td><select class='form-control business_area' name='business_area' id='add_area"+count_pegawai+"' required><option value=''>Pilih Salah Satu</option><?php foreach($area as $row):?><option value='<?php echo $row->business_area;?>'><?php echo $row->nama_business_area;?></option><?php endforeach;?></select></td>";
                     html_code_pegawai+= "<td><select class='form-control personnel_subarea' name='personnel_subarea' id='add_subarea"+count_pegawai+"' required><option value=''>Pilih Business Area dahulu</option></select></td>";
-                    html_code_pegawai+= "<td><select class='form-control jabatan' data-live-search='true' name='jabatan' id='add_jabatan"+count_pegawai+"' required><option value=''>Pilih Personnel Subarea dahulu</option></select></td>";
+                    html_code_pegawai+= "<td><select class='form-control jabatan' name='jabatan' id='add_jabatan"+count_pegawai+"' required><option value=''>Pilih Personnel Subarea dahulu</option></select></td>";
                     html_code_pegawai+= "<td><button type='button' class='btn btn-danger remove_pegawai' name='remove_pegawai' data-baris='baris"+count_pegawai+"'><strong>-</strong></button></td>";
                     html_code_pegawai+= "</tr>";
                     $('#tbl_pegawai_usulan').append(html_code_pegawai);
@@ -411,9 +411,8 @@
             $('#add_approval').click(function(){
                 count_approval = count_approval + 1;
                 var html_code_approval = '<tr id="barisApproval'+count_approval+'">';
-                    html_code_approval+= '<td><input type="text" name="nip_usulan_approval" id="nip_usulan_approval'+count_approval+'" class="form-control" required></td>';
-                    html_code_approval+= '<td><input type="text" name="nama_usulan_approval" id="nama_usulan_approval'+count_approval+'" class="form-control" required readonly="readonly"></td>';
-                    html_code_approval+= '<td><select class="form-control" name="posisi" id="posisi" required><option>Pilih Salah Satu</option><?php foreach ($posisi as $pos): ?><option value="<?= $pos->posisi ?>"><?= $pos->posisi ?></option><?php endforeach ?></select></td>';
+                    html_code_approval+= '<td><select class="form-control nama_usulan_approval" name="nama_usulan_approval" id="nama_usulan_approval" required><option value="">Pilih Salah Satu</option><?php foreach($approval as $row):?><option value="<?= $row->nip ?>">(<?= $row->nip ?>) <?= $row->nama_pegawai ?></option><?php endforeach?></select></td>';
+                    html_code_approval+= '<td><select class="form-control posisi" name="posisi" id="posisi" required><option>Pilih Salah Satu</option><?php foreach ($posisi as $pos): ?><option value="<?= $pos->id_posisi ?>"><?= $pos->posisi ?></option><?php endforeach ?></select></td>';
                     html_code_approval+= "<td><button type='button' class='btn btn-danger remove_approval' name='remove_approval' data-barisapproval='barisApproval"+count_approval+"'><strong>-</strong></button></td>";
                     html_code_approval+= '</tr>';
                     $('#tbl_approval_usulan').append(html_code_approval);
@@ -422,7 +421,41 @@
             $(document).on('click', '.remove_approval',function(){
                 var delete_barisApproval = $(this).data("barisapproval");
                 $('#' + delete_barisApproval).remove();
-            });     
+            }); 
+
+            $('#tombol_tambah_data').click(function(){
+                var nip_usulan = [];
+                var jabatan = [];
+                var nama_usulan_approval = [];
+                var posisi = [];
+
+                $('.nip_usulan').each(function(){
+                    nip_usulan.push($(this).text());
+                });
+                $('.jabatan').each(function(){
+                    jabatan.push($(this).text());
+                });
+                $('.nama_usulan_approval').each(function(){
+                    nama_usulan_approval.push($(this).text());
+                });
+                $('.posisi').each(function(){
+                    posisi.push($(this).text());
+                });
+
+                console.log(nip_usulan);
+                console.log(jabatan);
+                console.log(nama_usulan_approval);
+                console.log(posisi);
+
+                $.ajax({
+                    url : "<?= site_url('AdministratorInduk/doAddUsulan');?>",
+                    method : "POST",
+                    data : {nip_usulan:nip_usulan, jabatan:jabatan, nama_usulan_approval:nama_usulan_approval, posisi:posisi},
+                    success : function(data){
+                        console.log('berhasil'); 
+                    }
+                });
+            });    
 
         });
     </script>

@@ -844,6 +844,7 @@ class AdministratorInduk extends CI_Controller {
             'isi'         => 'user/contents/administrator_induk/addUsulanLembarEvaluasi',
             'title'       => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
             'area'        => $this->Crud->ga('tb_business_area'),
+            'approval'    => $this->M_AdministratorInduk->getDataApproval(),
             'posisi'      => $this->Crud->ga('tb_posisi_approval_committee'),
         );
 
@@ -855,6 +856,11 @@ class AdministratorInduk extends CI_Controller {
         $dataPeg = $this->M_AdministratorInduk->getPegawaiById($id_pegawai)->result();
         echo json_encode($dataPeg);
     }
+
+    public function doAddUsulan() {
+        
+    }
+
 # ************ End Menu Lembar Evaluasi ******************
 
 }
