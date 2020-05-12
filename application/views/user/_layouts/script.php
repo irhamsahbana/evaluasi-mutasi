@@ -411,7 +411,7 @@
             $('#add_approval').click(function(){
                 count_approval = count_approval + 1;
                 var html_code_approval = '<tr id="barisApproval'+count_approval+'">';
-                    html_code_approval+= '<td><select class="form-control nama_usulan_approval" name="nama_usulan_approval" id="nama_usulan_approval" required><option value="">Pilih Salah Satu</option><?php foreach($approval as $row):?><option value="<?= $row->nip ?>">(<?= $row->nip ?>) <?= $row->nama_pegawai ?></option><?php endforeach?></select></td>';
+                    html_code_approval+= '<td><select class="form-control nama_usulan_approval" name="nama_usulan_approval" id="nama_usulan_approval" required><option value="">Pilih Salah Satu</option><?php foreach($approval as $row):?><option value="<?= $row->id_approval ?>">(<?= $row->nip ?>) <?= $row->nama_pegawai ?></option><?php endforeach?></select></td>';
                     html_code_approval+= '<td><select class="form-control posisi" name="posisi" id="posisi" required><option>Pilih Salah Satu</option><?php foreach ($posisi as $pos): ?><option value="<?= $pos->id_posisi ?>"><?= $pos->posisi ?></option><?php endforeach ?></select></td>';
                     html_code_approval+= "<td><button type='button' class='btn btn-danger remove_approval' name='remove_approval' data-barisapproval='barisApproval"+count_approval+"'><strong>-</strong></button></td>";
                     html_code_approval+= '</tr>';
@@ -429,30 +429,25 @@
                 var nama_usulan_approval = [];
                 var posisi = [];
 
-                $('.nip_usulan').each(function(){
-                    nip_usulan.push($(this).text());
+                $('[name="nip_usulan"]').each(function(){
+                    nip_usulan.push($(this).val());
                 });
-                $('.jabatan').each(function(){
-                    jabatan.push($(this).text());
+                $('[name="jabatan"]').each(function(){
+                    jabatan.push($(this).find(":selected").val());
                 });
-                $('.nama_usulan_approval').each(function(){
-                    nama_usulan_approval.push($(this).text());
+                $('[name="nama_usulan_approval"]').each(function(){
+                    nama_usulan_approval.push($(this).find(":selected").val());
                 });
-                $('.posisi').each(function(){
-                    posisi.push($(this).text());
+                $('[name="posisi"]').each(function(){
+                    posisi.push($(this).find(":selected").val());
                 });
-
-                console.log(nip_usulan);
-                console.log(jabatan);
-                console.log(nama_usulan_approval);
-                console.log(posisi);
-
+                
                 $.ajax({
                     url : "<?= site_url('AdministratorInduk/doAddUsulan');?>",
                     method : "POST",
                     data : {nip_usulan:nip_usulan, jabatan:jabatan, nama_usulan_approval:nama_usulan_approval, posisi:posisi},
                     success : function(data){
-                        console.log('berhasil'); 
+                        window.location.href = "<?= site_url('AdministratorInduk/tampilanUsulanLembarEvaluasi');?>";
                     }
                 });
             });    
