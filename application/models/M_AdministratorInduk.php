@@ -62,12 +62,4 @@ class M_AdministratorInduk extends CI_Model {
           ->result();
     }
 
-    public function getLastIdUsulan($id_administrator, $no_surat) {
-        $this->db->from('tb_usulan_evaluasi');
-        $this->db->select('id_usulan');
-        $this->db->where(array('id_administrator' => $id_administrator, 'no_surat' =>$no_surat));
-        $query = $this->db->get();
-        return $query->row()->id_usulan;
-    }
-
 }

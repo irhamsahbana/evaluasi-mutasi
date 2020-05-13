@@ -941,6 +941,8 @@ class AdministratorInduk extends CI_Controller {
 
     public function doAddUsulan() {
         $id_administrator = $this->session->userdata('id_administrator');
+        $tgl_usulan       = date('y-m-d h:i:s');
+        $id_usulan        = str_replace(' ', '_', $tgl_usulan);
         $no_surat         = '-';
         $nip              = $this->input->post('nip_usulan');
         $jabatan          = $this->input->post('jabatan');
@@ -948,15 +950,14 @@ class AdministratorInduk extends CI_Controller {
         $posisi           = $this->input->post('posisi');
 
         $data_usulan = array(
+            'id_usulan'            => $id_usulan,
             'id_administrator'     => $id_administrator,
-            'tgl_usulan'           => date('y-m-d'),
+            'tgl_usulan'           => $tgl_usulan,
             'no_surat'             => $no_surat,
             'status_usulan'        => 'diterima',
             'alasan_ditolak'       => '-',
         );
-        $this->db->set('id_usulan', 'UUID()', FALSE);
         $this->db->insert('tb_usulan_evaluasi', $data_usulan);
-        $id_usulan = $this->M_AdministratorInduk->getLastIdUsulan($id_administrator, $no_surat);
 
         for($count=0; $count<count($nip); $count++){
             $data_pegawai = array(
