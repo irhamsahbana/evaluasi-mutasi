@@ -50,6 +50,18 @@ class AdministratorUnit extends CI_Controller {
         echo json_encode($dataPeg);
     }
 
+    public function getPersonnelSubarea(){
+        $business_area = $this->input->post('id',TRUE);
+        $data = $this->Crud->gw('tb_personnel_area', array('business_area' => $business_area));
+        echo json_encode($data);
+    }
+
+    public function getSebutanJabatan(){
+        $personnel_subarea = $this->input->post('id',TRUE);
+        $data = $this->Crud->gwo('tb_jabatan', array('personnel_subarea' => $personnel_subarea), 'urutan_dalam_org'); 
+        echo json_encode($data);
+    }
+
     public function doAddUsulan() {
         $id_administrator = $this->session->userdata('id_administrator');
         $tgl_usulan       = date('y-m-d h:i:s');
@@ -65,7 +77,7 @@ class AdministratorUnit extends CI_Controller {
             'id_administrator'     => $id_administrator,
             'tgl_usulan'           => $tgl_usulan,
             'no_surat'             => $no_surat,
-            'status_usulan'        => 'diterima',
+            'status_usulan'        => 'dipending',
             'alasan_ditolak'       => '-',
         );
         $this->db->insert('tb_usulan_evaluasi', $data_usulan);

@@ -23,7 +23,6 @@
                                 <br>
                                 <!-- Tabel Pegawai yang diusulkan -->
                                 <h5 class="card-title" style="font-size: 15px; margin-top: 0.75rem">Pegawai yang Diusulkan</h4>
-                                   <!--  <form class="form-valide" action="<?= site_url('AdministratorInduk/doAddUsulan') ?>" method="POST" enctype="multipart/form-data"> -->
                                 <div class="table-responsive">
                                     <table class="table table-bordered verticle-middle" id="tbl_pegawai_usulan">
                                         <thead>
@@ -117,7 +116,6 @@
                                 <!-- Tombol Kirim Data -->
                                 <br><br><br>
                                 <button style="float: right;" type="button" class="btn btn-success" name="tombol_tambah_data" id="tombol_tambah_data">Tambah Data</button>
-                        <!--     </form> -->
 
                             </div>
                         </div>

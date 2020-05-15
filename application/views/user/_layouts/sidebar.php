@@ -12,6 +12,7 @@
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                         </a>
                     </li>
+                    <?php if($this->uri->segment(1) == 'AdministratorInduk') { ?>
                     <li>
                         <a href="<?= site_url('AdministratorInduk/tampilanDataPegawai') ?>" class="<?= ($modul == 'tampilanDataPegawai') ? 'active' : '' ?>">
                             <i class="icon-people menu-icon"></i><span class="nav-text">Data Pegawai</span>
@@ -82,6 +83,14 @@
                             <i class="icon-paper-plane menu-icon"></i><span class="nav-text">Usulan Evaluasi</span>
                         </a>
                     </li>
+                    <?php } ?>
+                    <?php if($this->uri->segment(1) == 'AdministratorUnit') { ?>
+                    <li>
+                        <a href="<?= site_url('AdministratorUnit/tampilanUsulanLembarEvaluasi') ?>" class="<?= ($modul == 'tampilanUsulanLembarEvaluasi') ? 'active' : '' ?>">
+                            <i class="icon-docs menu-icon"></i><span class="nav-text">Usulan Lembar Evaluasi</span>
+                        </a>
+                    </li>
+                    <?php } ?>
                 </ul>
             </div>
         </div>
