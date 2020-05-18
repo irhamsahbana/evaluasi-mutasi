@@ -2,9 +2,9 @@
             Content body start
         ***********************************-->
 
-        <?php 
+        <?php
         foreach ($data_pegawai as $pegawai) {
-           $id = $pegawai->nip;
+            $id = $pegawai->nip;
         }
         ?>
 
@@ -27,7 +27,7 @@
                             <div class="card-body">
                                 <h4 class="card-title">Sunting Data Administrator</h4>
                                 <div class="form-validation">
-                                    <form class="form-valide" action="<?= site_url('AdministratorInduk/doUpdatePegawai/'.$id) ?>" method="POST" enctype="multipart/form-data">
+                                    <form class="form-valide" action="<?= site_url('AdministratorInduk/doUpdatePegawai/' . $id) ?>" method="POST" enctype="multipart/form-data">
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Pers. No.</label>
                                             <div class="col-sm-9">
@@ -37,7 +37,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">NIP</label>
                                             <div class="col-sm-9">
-                                                <input type="text" name="nipeg" class="form-control" required value="<?=$id?>">
+                                                <input type="text" name="nipeg" class="form-control" required value="<?= $id ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -50,11 +50,11 @@
                                             <label class="col-sm-3 col-form-label">Business Area</label>
                                             <div class="col-sm-9">
                                                 <select class="form-control edit-area" name="business_area" required>
-                                                <option value="">Pilih Salah Satu</option>
-                                                <?php foreach($area as $row):?>
-                                                <option value="<?=$row->business_area;?>"><?=$row->nama_business_area;?></option>
-                                                <?php endforeach;?>
-                                            </select>
+                                                    <option value="">Pilih Salah Satu</option>
+                                                    <?php foreach ($area as $row) : ?>
+                                                        <option value="<?= $row->business_area; ?>"><?= $row->nama_business_area; ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -69,7 +69,7 @@
                                             <label class="col-sm-3 col-form-label">Sebutan Jabatan</label>
                                             <div class="col-sm-9">
                                                 <select class="form-control edit-jabatan" name="sebutan_jabatan" data-live-search="true" required>
-                                                    <option >Pilih Personnel Subarea dahulu</option>
+                                                    <option>Pilih Personnel Subarea dahulu</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -192,4 +192,3 @@
         <!--**********************************
             Content body end
         ***********************************-->
-

@@ -1,50 +1,57 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class AdministratorInduk extends CI_Controller {
-    
-    public function __construct() {
+class AdministratorInduk extends CI_Controller
+{
+
+    public function __construct()
+    {
         parent::__construct();
         date_default_timezone_set('Asia/Makassar');
-        if($this->session->userdata('status') != "login"){
+        if ($this->session->userdata('status') != "login") {
             redirect('login');
         }
-        $this->load->library(array('PHPExcel','PHPExcel/IOFactory'));
+        $this->load->library(array('PHPExcel', 'PHPExcel/IOFactory'));
     }
-    
-    public function index() {
+
+    public function index()
+    {
         $data = array(
             'isi' => 'user/contents/testing',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
 
 
-# ************ Begin Menu Data Pegawai ******************
-    public function tampilanDataPegawai() {
+    # ************ Begin Menu Data Pegawai ******************
+    public function tampilanDataPegawai()
+    {
         $data = array(
             'isi' => 'user/contents/administrator_induk/tabelDataPegawai',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
             'data_pegawai' => $this->M_AdministratorInduk->getDataPegawai(),
             'area' =>  $this->Crud->ga('tb_business_area'),
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
 
-    public function getPersonnelSubarea(){
-        $business_area = $this->input->post('id',TRUE);
+    public function getPersonnelSubarea()
+    {
+        $business_area = $this->input->post('id', TRUE);
         $data = $this->Crud->gw('tb_personnel_area', array('business_area' => $business_area));
         echo json_encode($data);
     }
 
-    public function getSebutanJabatan(){
-        $personnel_subarea = $this->input->post('id',TRUE);
-        $data = $this->Crud->gwo('tb_jabatan', array('personnel_subarea' => $personnel_subarea), 'urutan_dalam_org'); 
+    public function getSebutanJabatan()
+    {
+        $personnel_subarea = $this->input->post('id', TRUE);
+        $data = $this->Crud->gwo('tb_jabatan', array('personnel_subarea' => $personnel_subarea), 'urutan_dalam_org');
         echo json_encode($data);
     }
 
-    public function doAddPegawai() {
+    public function doAddPegawai()
+    {
         $input        = $this->input->post(NULL, TRUE);
         $data_pegawai = array(
             'pers_no'                        => $input['pers_no'],
@@ -74,16 +81,17 @@ class AdministratorInduk extends CI_Controller {
         redirect('AdministratorInduk/tampilanDataPegawai');
     }
 
-    public function getEditPegawai($id_pegawai){
+    public function getEditPegawai($id_pegawai)
+    {
         $where = array('nip' => $id_pegawai);
         $data = array(
             'isi'              => 'user/contents/administrator_induk/editDataPegawai',
-            'title'            => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
-            'data_pegawai'     => $this->Crud->gw('tb_pegawai',$where),
+            'title'            => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
+            'data_pegawai'     => $this->Crud->gw('tb_pegawai', $where),
             'area'             => $this->Crud->ga('tb_business_area'),
         );
         $get_data = $this->M_AdministratorInduk->getPegawaiById($id_pegawai);
-        if($get_data->num_rows() > 0){
+        if ($get_data->num_rows() > 0) {
             $row = $get_data->row_array();
             $data['subarea_id'] = $row['personnel_subarea'];
             $data['jabatan_id'] = $row['id_sebutan_jabatan'];
@@ -91,13 +99,15 @@ class AdministratorInduk extends CI_Controller {
         $this->load->view('user/_layouts/wrapper', $data);
     }
 
-    public function getDataEditPegawai(){
-        $id_pegawai = $this->input->post('nip',TRUE);
+    public function getDataEditPegawai()
+    {
+        $id_pegawai = $this->input->post('nip', TRUE);
         $data = $this->M_AdministratorInduk->getPegawaiById($id_pegawai)->result();
         echo json_encode($data);
     }
 
-    public function doUpdatePegawai($id){
+    public function doUpdatePegawai($id)
+    {
         $where         = array('nip' => $id,);
         $input         = $this->input->post(NULL, TRUE);
         $data_pegawai  = array(
@@ -128,7 +138,8 @@ class AdministratorInduk extends CI_Controller {
         redirect('AdministratorInduk/tampilanDataPegawai');
     }
 
-    public function doDeletePegawai($id){
+    public function doDeletePegawai($id)
+    {
         $where = array('nip' => $id,);
 
         $this->Crud->d('tb_pegawai', $where);
@@ -136,16 +147,17 @@ class AdministratorInduk extends CI_Controller {
         redirect('AdministratorInduk/tampilanDataPegawai');
     }
 
-    public function doImportPegawai(){
-        $this->load->library(array('PHPExcel','PHPExcel/IOFactory'));
+    public function doImportPegawai()
+    {
+        $this->load->library(array('PHPExcel', 'PHPExcel/IOFactory'));
 
         $fileName = $_FILES['file_data_pegawai']['name'];
-         
+
         $config['upload_path'] = './assets/user/administrator_induk';
         $config['file_name'] = $fileName;
         $config['allowed_types'] = 'xls|xlsx|csv|ods|ots';
         $config['max_size'] = 10000;
-         
+
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
 
@@ -153,30 +165,32 @@ class AdministratorInduk extends CI_Controller {
             $this->session->set_flashdata('alert_danger', 'File data pegawai gagal diimpor!');
             redirect('AdministratorInduk/tampilanDataPegawai');
         } else {
-           $media = $this->upload->data();
-           $inputFileName = './assets/user/administrator_induk/'.$media['file_name'];
+            $media = $this->upload->data();
+            $inputFileName = './assets/user/administrator_induk/' . $media['file_name'];
 
             try {
                 $inputFileType = IOFactory::identify($inputFileName);
                 $objReader = IOFactory::createReader($inputFileType);
                 $objPHPExcel = $objReader->load($inputFileName);
-            } catch(Exception $e) {
-                die('Error loading file "'.pathinfo($inputFileName,PATHINFO_BASENAME).'": '.$e->getMessage());
+            } catch (Exception $e) {
+                die('Error loading file "' . pathinfo($inputFileName, PATHINFO_BASENAME) . '": ' . $e->getMessage());
             }
 
-           $sheet = $objPHPExcel->getSheet(0);
-           $highestRow = $sheet->getHighestRow();
-           $highestColumn = $sheet->getHighestColumn();
+            $sheet = $objPHPExcel->getSheet(0);
+            $highestRow = $sheet->getHighestRow();
+            $highestColumn = $sheet->getHighestColumn();
 
-           for ($row = 2; $row <= $highestRow; $row++){
-                $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,
-                   NULL,
-                   TRUE,
-                   FALSE);
+            for ($row = 2; $row <= $highestRow; $row++) {
+                $rowData = $sheet->rangeToArray(
+                    'A' . $row . ':' . $highestColumn . $row,
+                    NULL,
+                    TRUE,
+                    FALSE
+                );
 
                 $tgl_grade          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($rowData[0][11]));
                 $tgl_lahir          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($rowData[0][13]));
-                $tgl_capeg          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($rowData[0][14]));     
+                $tgl_capeg          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($rowData[0][14]));
                 $tgl_pegawai_tetap  = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($rowData[0][15]));
                 $tgl_masuk          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($rowData[0][18]));
 
@@ -203,26 +217,27 @@ class AdministratorInduk extends CI_Controller {
                     "agama"                 => $rowData[0][19],
                     "no_telp"               => $rowData[0][20],
                 );
-                $this->db->insert("tb_pegawai",$data);
+                $this->db->insert("tb_pegawai", $data);
             }
             $fileName_ = str_replace(" ", "_", $fileName);
-            unlink('./assets/user/administrator_induk/'.$fileName);
-            unlink('./assets/user/administrator_induk/'.$fileName_);
+            unlink('./assets/user/administrator_induk/' . $fileName);
+            unlink('./assets/user/administrator_induk/' . $fileName_);
             $this->session->set_flashdata('alert_success', 'Data pegawai berhasil diimpor!');
             redirect('AdministratorInduk/tampilanDataPegawai');
         }
     }
 
-    public function doImportUpdatePegawai(){
-        $this->load->library(array('PHPExcel','PHPExcel/IOFactory'));
+    public function doImportUpdatePegawai()
+    {
+        $this->load->library(array('PHPExcel', 'PHPExcel/IOFactory'));
 
         $fileName = $_FILES['file_sunting_data_pegawai']['name'];
-         
+
         $config['upload_path'] = './assets/user/administrator_induk';
         $config['file_name'] = $fileName;
         $config['allowed_types'] = 'xls|xlsx|csv|ods|ots';
         $config['max_size'] = 10000;
-         
+
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
 
@@ -230,30 +245,32 @@ class AdministratorInduk extends CI_Controller {
             $this->session->set_flashdata('alert_danger', 'File untuk sunting data pegawai gagal diimpor!');
             redirect('AdministratorInduk/tampilanDataPegawai');
         } else {
-           $media = $this->upload->data();
-           $inputFileName = './assets/user/administrator_induk/'.$media['file_name'];
+            $media = $this->upload->data();
+            $inputFileName = './assets/user/administrator_induk/' . $media['file_name'];
 
             try {
                 $inputFileType = IOFactory::identify($inputFileName);
                 $objReader = IOFactory::createReader($inputFileType);
                 $objPHPExcel = $objReader->load($inputFileName);
-            } catch(Exception $e) {
-                die('Error loading file "'.pathinfo($inputFileName,PATHINFO_BASENAME).'": '.$e->getMessage());
+            } catch (Exception $e) {
+                die('Error loading file "' . pathinfo($inputFileName, PATHINFO_BASENAME) . '": ' . $e->getMessage());
             }
 
-           $sheet = $objPHPExcel->getSheet(0);
-           $highestRow = $sheet->getHighestRow();
-           $highestColumn = $sheet->getHighestColumn();
+            $sheet = $objPHPExcel->getSheet(0);
+            $highestRow = $sheet->getHighestRow();
+            $highestColumn = $sheet->getHighestColumn();
 
-           for ($row = 2; $row <= $highestRow; $row++){
-                $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,
-                   NULL,
-                   TRUE,
-                   FALSE);
+            for ($row = 2; $row <= $highestRow; $row++) {
+                $rowData = $sheet->rangeToArray(
+                    'A' . $row . ':' . $highestColumn . $row,
+                    NULL,
+                    TRUE,
+                    FALSE
+                );
 
                 $tgl_grade          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($rowData[0][11]));
                 $tgl_lahir          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($rowData[0][13]));
-                $tgl_capeg          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($rowData[0][14]));     
+                $tgl_capeg          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($rowData[0][14]));
                 $tgl_pegawai_tetap  = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($rowData[0][15]));
                 $tgl_masuk          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($rowData[0][18]));
 
@@ -284,16 +301,17 @@ class AdministratorInduk extends CI_Controller {
                 $this->Crud->u("tb_pegawai", $data, $where);
             }
             $fileName_ = str_replace(" ", "_", $fileName);
-            unlink('./assets/user/administrator_induk/'.$fileName);
-            unlink('./assets/user/administrator_induk/'.$fileName_);
+            unlink('./assets/user/administrator_induk/' . $fileName);
+            unlink('./assets/user/administrator_induk/' . $fileName_);
             $this->session->set_flashdata('alert_primary', 'Data-data pegawai berhasil disunting!');
             redirect('AdministratorInduk/tampilanDataPegawai');
         }
     }
-# ************ End Menu Data Pegawai ******************
+    # ************ End Menu Data Pegawai ******************
 
-# ************ Begin Menu Nilai Talenta Pegawai ******************
-    public function tampilanDaftarTalenta(){
+    # ************ Begin Menu Nilai Talenta Pegawai ******************
+    public function tampilanDaftarTalenta()
+    {
         $this->db->select('*');
         $this->db->from('tb_daftar_talenta_per_semester');
         $this->db->order_by('tahun_talenta', 'desc');
@@ -302,13 +320,14 @@ class AdministratorInduk extends CI_Controller {
 
         $data = array(
             'isi' => 'user/contents/administrator_induk/tabelDaftarTalenta',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
             'daftar_talenta' => $data_daftar_talenta,
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
 
-    public function doAddDaftarTalenta(){
+    public function doAddDaftarTalenta()
+    {
         $input      = $this->input->post(NULL, TRUE);
         $data       = array(
             'tahun_talenta'        => $input['tahun'],
@@ -319,7 +338,8 @@ class AdministratorInduk extends CI_Controller {
         redirect('AdministratorInduk/tampilanDaftarTalenta');
     }
 
-    public function doDeleteDaftarTalenta($tahun, $semester){
+    public function doDeleteDaftarTalenta($tahun, $semester)
+    {
         $where      = array(
             'tahun_talenta'     => $tahun,
             'semester_talenta'  => $semester,
@@ -329,7 +349,8 @@ class AdministratorInduk extends CI_Controller {
         redirect('AdministratorInduk/tampilanDaftarTalenta');
     }
 
-    public function doUpdateDaftarTalenta($tahun, $semester){
+    public function doUpdateDaftarTalenta($tahun, $semester)
+    {
         $where      = array(
             'tahun_talenta'     => $tahun,
             'semester_talenta'  => $semester,
@@ -345,7 +366,8 @@ class AdministratorInduk extends CI_Controller {
         redirect('AdministratorInduk/tampilanDaftarTalenta');
     }
 
-    public function tampilanNilaiTalentaPegawai($tahun, $semester){
+    public function tampilanNilaiTalentaPegawai($tahun, $semester)
+    {
         $where      = array(
             'tahun_talenta'     => $tahun,
             'semester_talenta'  => $semester,
@@ -353,7 +375,7 @@ class AdministratorInduk extends CI_Controller {
 
         $data = array(
             'isi' => 'user/contents/administrator_induk/tabelNilaiTalentaPegawai',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
             'tb_talenta' => $this->Crud->gw('tb_nilai_talenta_pegawai', $where),
             'judul_tahun' => $tahun,
             'judul_semester' => $semester,
@@ -361,7 +383,8 @@ class AdministratorInduk extends CI_Controller {
         $this->load->view('user/_layouts/wrapper', $data);
     }
 
-    public function doAddTalentaPegawai(){
+    public function doAddTalentaPegawai()
+    {
         $input      = $this->input->post(NULL, TRUE);
         $data       = array(
             'tahun_talenta'        => $input['tahun'],
@@ -371,10 +394,11 @@ class AdministratorInduk extends CI_Controller {
         );
         $this->db->insert('tb_nilai_talenta_pegawai', $data);
         $this->session->set_flashdata('alert_success', 'Data nilai talenta pegawai berhasil ditambahkan!');
-        redirect('AdministratorInduk/tampilanNilaiTalentaPegawai/'.$input['tahun'].'/'.$input['semester']);
+        redirect('AdministratorInduk/tampilanNilaiTalentaPegawai/' . $input['tahun'] . '/' . $input['semester']);
     }
 
-    public function doUpdateTalentaPegawai($tahun, $semester, $nip){
+    public function doUpdateTalentaPegawai($tahun, $semester, $nip)
+    {
         $where      = array(
             'tahun_talenta'     => $tahun,
             'semester_talenta'  => $semester,
@@ -390,10 +414,11 @@ class AdministratorInduk extends CI_Controller {
         );
         $this->Crud->u('tb_nilai_talenta_pegawai', $data, $where);
         $this->session->set_flashdata('alert_primary', 'Data nilai talenta pegawai berhasil disunting!');
-        redirect('AdministratorInduk/tampilanNilaiTalentaPegawai/'.$input['tahun'].'/'.$input['semester']);
+        redirect('AdministratorInduk/tampilanNilaiTalentaPegawai/' . $input['tahun'] . '/' . $input['semester']);
     }
 
-    public function doDeleteTalentaPegawai($tahun, $semester, $nip){
+    public function doDeleteTalentaPegawai($tahun, $semester, $nip)
+    {
         $where      = array(
             'tahun_talenta'     => $tahun,
             'semester_talenta'  => $semester,
@@ -401,19 +426,20 @@ class AdministratorInduk extends CI_Controller {
         );
         $this->Crud->d('tb_nilai_talenta_pegawai', $where);
         $this->session->set_flashdata('alert_danger', 'Data nilai talenta pegawai berhasil dihapus!');
-        redirect('AdministratorInduk/tampilanNilaiTalentaPegawai/'.$tahun.'/'.$semester);
+        redirect('AdministratorInduk/tampilanNilaiTalentaPegawai/' . $tahun . '/' . $semester);
     }
 
-    public function doImportTalentaPegawai(){
-        $this->load->library(array('PHPExcel','PHPExcel/IOFactory'));
+    public function doImportTalentaPegawai()
+    {
+        $this->load->library(array('PHPExcel', 'PHPExcel/IOFactory'));
 
         $fileName = $_FILES['file_nilai_talenta_pegawai']['name'];
-         
+
         $config['upload_path'] = './assets/user/administrator_induk';
         $config['file_name'] = $fileName;
         $config['allowed_types'] = 'xls|xlsx|csv|ods|ots';
         $config['max_size'] = 10000;
-         
+
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
 
@@ -421,26 +447,28 @@ class AdministratorInduk extends CI_Controller {
             $this->session->set_flashdata('alert_danger', 'File nilai talenta pegawai gagal diimpor!');
             redirect('AdministratorInduk/tampilanDaftarTalenta');
         } else {
-           $media = $this->upload->data();
-           $inputFileName = './assets/user/administrator_induk/'.$media['file_name'];
+            $media = $this->upload->data();
+            $inputFileName = './assets/user/administrator_induk/' . $media['file_name'];
 
             try {
                 $inputFileType = IOFactory::identify($inputFileName);
                 $objReader = IOFactory::createReader($inputFileType);
                 $objPHPExcel = $objReader->load($inputFileName);
-            } catch(Exception $e) {
-                die('Error loading file "'.pathinfo($inputFileName,PATHINFO_BASENAME).'": '.$e->getMessage());
+            } catch (Exception $e) {
+                die('Error loading file "' . pathinfo($inputFileName, PATHINFO_BASENAME) . '": ' . $e->getMessage());
             }
 
-           $sheet = $objPHPExcel->getSheet(0);
-           $highestRow = $sheet->getHighestRow();
-           $highestColumn = $sheet->getHighestColumn();
+            $sheet = $objPHPExcel->getSheet(0);
+            $highestRow = $sheet->getHighestRow();
+            $highestColumn = $sheet->getHighestColumn();
 
-           for ($row = 2; $row <= $highestRow; $row++){
-                $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,
-                   NULL,
-                   TRUE,
-                   FALSE);
+            for ($row = 2; $row <= $highestRow; $row++) {
+                $rowData = $sheet->rangeToArray(
+                    'A' . $row . ':' . $highestColumn . $row,
+                    NULL,
+                    TRUE,
+                    FALSE
+                );
 
                 $data = array(
                     "nip"                   => $rowData[0][0],
@@ -448,34 +476,35 @@ class AdministratorInduk extends CI_Controller {
                     "semester_talenta"      => $rowData[0][2],
                     "nilai_talenta"         => $rowData[0][3],
                 );
-                $this->db->insert("tb_nilai_talenta_pegawai",$data);
+                $this->db->insert("tb_nilai_talenta_pegawai", $data);
             }
             $fileName_ = str_replace(" ", "_", $fileName);
-            unlink('./assets/user/administrator_induk/'.$fileName_);
-            unlink('./assets/user/administrator_induk/'.$fileName);
+            unlink('./assets/user/administrator_induk/' . $fileName_);
+            unlink('./assets/user/administrator_induk/' . $fileName);
             $this->session->set_flashdata('alert_success', 'Nilai talenta pegawai berhasil diimpor!');
 
             $baris = 2;
-            $barisData = $sheet->rangeToArray('A'.$baris.':'.$highestColumn.$baris, NULL, TRUE, FALSE);
+            $barisData = $sheet->rangeToArray('A' . $baris . ':' . $highestColumn . $baris, NULL, TRUE, FALSE);
             $urisTahun = $barisData[0][1];
             $urisSemester = $barisData[0][2];
-            redirect('AdministratorInduk/tampilanNilaiTalentaPegawai/'.$urisTahun.'/'.$urisSemester);
+            redirect('AdministratorInduk/tampilanNilaiTalentaPegawai/' . $urisTahun . '/' . $urisSemester);
         }
     }
-# ************ End Menu Nilai Talenta Pegawai ******************
+    # ************ End Menu Nilai Talenta Pegawai ******************
 
-# ************ Begin Menu Bussiness Area ******************
+    # ************ Begin Menu Bussiness Area ******************
     public function tampilanDaftarBusinessArea()
     {
         $data = array(
             'isi' => 'user/contents/administrator_induk/tabelDaftarBusinessArea',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
             'data_area' => $this->Crud->ga('tb_business_area'),
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
 
-    public function doAddArea() {
+    public function doAddArea()
+    {
         $input     = $this->input->post(NULL, TRUE);
         $data_area = array(
             'business_area'        => $input['id_business_area'],
@@ -485,7 +514,8 @@ class AdministratorInduk extends CI_Controller {
         redirect('AdministratorInduk/tampilanDaftarBusinessArea');
     }
 
-    public function doDeleteArea($id){
+    public function doDeleteArea($id)
+    {
         $where = array('business_area' => $id,);
 
         $this->Crud->d('tb_business_area', $where);
@@ -493,7 +523,8 @@ class AdministratorInduk extends CI_Controller {
         redirect('AdministratorInduk/tampilanDaftarBusinessArea');
     }
 
-    public function doUpdateArea($id){
+    public function doUpdateArea($id)
+    {
         $where      = array('business_area' => $id);
         $input      = $this->input->post(NULL, TRUE);
         $data_area  = array(
@@ -504,23 +535,24 @@ class AdministratorInduk extends CI_Controller {
         $this->session->set_flashdata('alert_primary', 'Data business area berhasil disunting!');
         redirect('AdministratorInduk/tampilanDaftarBusinessArea');
     }
-# ************ End Menu Bussiness Area ******************
+    # ************ End Menu Bussiness Area ******************
 
-# ************ Begin Menu Personnel Subarea ******************
+    # ************ Begin Menu Personnel Subarea ******************
     public function tampilanDaftarPersonnelSubarea()
     {
         $data = array(
             'isi' => 'user/contents/administrator_induk/tabelDaftarPersonnelSubarea',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
             'data_subarea' => $this->M_AdministratorInduk->getDataSubarea(),
             'area' => $this->Crud->ga('tb_business_area'),
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
 
-    public function doAddSubarea() {
+    public function doAddSubarea()
+    {
         $input        = $this->input->post(NULL, TRUE);
-        $str          = $this->input->post('personnel_subarea',TRUE);
+        $str          = $this->input->post('personnel_subarea', TRUE);
         $id_subarea   = str_replace(" ", "-", $str);
         $data_subarea = array(
             'business_area'            => $input['business_area'],
@@ -532,7 +564,8 @@ class AdministratorInduk extends CI_Controller {
         redirect('AdministratorInduk/tampilanDaftarPersonnelSubarea');
     }
 
-    public function doDeleteSubarea($id){
+    public function doDeleteSubarea($id)
+    {
         $where = array('personnel_subarea' => $id,);
 
         $this->Crud->d('tb_personnel_area', $where);
@@ -540,10 +573,11 @@ class AdministratorInduk extends CI_Controller {
         redirect('AdministratorInduk/tampilanDaftarPersonnelSubarea');
     }
 
-    public function doUpdateSubarea($id){
+    public function doUpdateSubarea($id)
+    {
         $where      = array('personnel_subarea' => $id);
         $input      = $this->input->post(NULL, TRUE);
-        $str        = $this->input->post('personnel_subarea',TRUE);
+        $str        = $this->input->post('personnel_subarea', TRUE);
         $id_subarea = str_replace(" ", "-", $str);
         $data_subarea  = array(
             'business_area'            => $input['business_area'],
@@ -554,21 +588,22 @@ class AdministratorInduk extends CI_Controller {
         $this->session->set_flashdata('alert_primary', 'Data personnel subarea berhasil disunting!');
         redirect('AdministratorInduk/tampilanDaftarPersonnelSubarea');
     }
-# ************ Begin Menu Personnel Subarea ******************
+    # ************ Begin Menu Personnel Subarea ******************
 
-# ************ Begin Menu Approval Committee ******************
+    # ************ Begin Menu Approval Committee ******************
     public function tampilanApprovalCommittee()
     {
 
         $data = array(
             'isi' => 'user/contents/administrator_induk/tabelApprovalCommittee',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
-            'data_penerima' => $this->Crud->ga('tb_approval_committee'),
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
+            'data_penerima' => $this->M_AdministratorInduk->getDataApproval(),
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
 
-    public function doAddPenerima() {
+    public function doAddPenerima()
+    {
         $input        = $this->input->post(NULL, TRUE);
 
         $data_penerima = array(
@@ -582,7 +617,8 @@ class AdministratorInduk extends CI_Controller {
         redirect('AdministratorInduk/tampilanApprovalCommittee');
     }
 
-    public function doDeletePenerima($id){
+    public function doDeletePenerima($id)
+    {
         $input = $this->input->post(NULL, TRUE);
         $where = array('id_approval' => $id);
 
@@ -591,16 +627,17 @@ class AdministratorInduk extends CI_Controller {
         redirect('AdministratorInduk/tampilanApprovalCommittee');
     }
 
-    public function doUpdatePenerima($id){
+    public function doUpdatePenerima($id)
+    {
         $where         = array('id_approval' => $id);
         $input         = $this->input->post(NULL, FALSE);
 
-        if($input['password'] != ''){
-        $items = array(
-            'nip'        => $input['nipeg'],
-            'password'   => password_hash($input['password'], PASSWORD_DEFAULT),
-        );
-        }else {
+        if ($input['password'] != '') {
+            $items = array(
+                'nip'        => $input['nipeg'],
+                'password'   => password_hash($input['password'], PASSWORD_DEFAULT),
+            );
+        } else {
             $items = array(
                 'nip'    => $input['nipeg'],
             );
@@ -610,19 +647,20 @@ class AdministratorInduk extends CI_Controller {
         $this->session->set_flashdata('alert_primary', 'Data penerima berhasil disunting!');
         redirect('AdministratorInduk/tampilanApprovalCommittee');
     }
-# ************ End Menu Approval Committee ******************
+    # ************ End Menu Approval Committee ******************
 
-# ************ Begin Menu Posisi Approval Committee ******************
+    # ************ Begin Menu Posisi Approval Committee ******************
     public function tampilanDataApproval()
     {
         $data = array(
             'isi' => 'user/contents/administrator_induk/tabelPosisiApproval',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
             'data_approval' => $this->Crud->ga('tb_posisi_approval_committee'),
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
-     public function doAddApproval() {
+    public function doAddApproval()
+    {
         $input        = $this->input->post(NULL, TRUE);
         $data_approval = array(
             'posisi'                            => $input['posisi'],
@@ -633,7 +671,8 @@ class AdministratorInduk extends CI_Controller {
         redirect('AdministratorInduk/tampilanDataApproval');
     }
 
-    public function doDeleteApproval($id){
+    public function doDeleteApproval($id)
+    {
         $where = array('id_posisi' => $id,);
 
         $this->Crud->d('tb_posisi_approval_committee', $where);
@@ -641,7 +680,8 @@ class AdministratorInduk extends CI_Controller {
         redirect('AdministratorInduk/tampilanDataApproval');
     }
 
-    public function doUpdateApproval($id){
+    public function doUpdateApproval($id)
+    {
         $where         = array('id_posisi' => $id,);
         $input         = $this->input->post(NULL, TRUE);
         $data_approval  = array(
@@ -658,13 +698,14 @@ class AdministratorInduk extends CI_Controller {
     {
         $data = array(
             'isi' => 'user/contents/tabelNilaiTalenta',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
             'data_talenta' => $this->Crud->ga('tb_judul_talenta'),
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
 
-     public function doAddTalenta() {
+    public function doAddTalenta()
+    {
         $input        = $this->input->post(NULL, TRUE);
         $data_talenta = array(
             'id_talenta'                           => $input['id_talenta'],
@@ -676,7 +717,8 @@ class AdministratorInduk extends CI_Controller {
         redirect('AdministratorInduk/tampilanNilaiTalenta');
     }
 
-    public function doUpdateTalenta($id){
+    public function doUpdateTalenta($id)
+    {
         $where         = array('id_talenta' => $id,);
         $input         = $this->input->post(NULL, TRUE);
         $data_talenta  = array(
@@ -689,38 +731,41 @@ class AdministratorInduk extends CI_Controller {
         redirect('AdministratorInduk/tampilanNilaiTalenta');
     }
 
-    public function doDeleteTalenta($id){
+    public function doDeleteTalenta($id)
+    {
         $where = array('id_talenta' => $id);
 
         $this->Crud->d('tb_judul_talenta', $where);
         $this->session->set_flashdata('alert_danger', 'Data talenta berhasil dihapus!');
         redirect('AdministratorInduk/tampilanNilaiTalenta');
     }
-# ************ End Menu Judul Talenta ******************
+    # ************ End Menu Judul Talenta ******************
 
-# ************ Begin Menu Jabatan ******************
-    public function tampilanJabatan(){
+    # ************ Begin Menu Jabatan ******************
+    public function tampilanJabatan()
+    {
         $this->db->select('*');
         $this->db->from('tb_jabatan');
         $this->db->order_by('personnel_subarea', 'asc');
         $this->db->order_by('urutan_dalam_org', 'asc');
         $query = $this->db->get();
         $data_jabatan = $query->result();
-        
+
 
         $data = array(
             'isi' => 'user/contents/administrator_induk/tabelDaftarJabatan',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
             'data_jabatan' => $data_jabatan,
             'area' =>  $this->Crud->ga('tb_business_area'),
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
 
-    public function doAddJabatan(){
+    public function doAddJabatan()
+    {
         $input        = $this->input->post(NULL, TRUE);
         $data_jabatan = array(
-            'id_sebutan_jabatan'          => $input['personnel_subarea'].'-'.$input['urutan'],
+            'id_sebutan_jabatan'          => $input['personnel_subarea'] . '-' . $input['urutan'],
             'personnel_subarea'           => $input['personnel_subarea'],
             'urutan_dalam_org'            => $input['urutan'],
             'sebutan_jabatan'             => $input['jabatan']
@@ -730,43 +775,47 @@ class AdministratorInduk extends CI_Controller {
         redirect('AdministratorInduk/tampilanJabatan');
     }
 
-    public function getEditJabatan($id_jabatan){
+    public function getEditJabatan($id_jabatan)
+    {
         $where = array('id_sebutan_jabatan' => $id_jabatan);
         $data = array(
             'isi'              => 'user/contents/administrator_induk/editDataJabatan',
-            'title'            => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'title'            => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
             'data_jabatan'     => $this->Crud->gw('tb_jabatan', $where),
             'area'             => $this->Crud->ga('tb_business_area'),
         );
         $get_data = $this->M_AdministratorInduk->getJabatanById($id_jabatan);
-        if($get_data->num_rows() > 0){
+        if ($get_data->num_rows() > 0) {
             $row = $get_data->row_array();
             $data['subarea_id'] = $row['personnel_subarea'];
         }
         $this->load->view('user/_layouts/wrapper', $data);
     }
 
-    public function getDataEditJabatan(){
-        $id_sebutan_jabatan = $this->input->post('id_sebutan_jabatan',TRUE);
+    public function getDataEditJabatan()
+    {
+        $id_sebutan_jabatan = $this->input->post('id_sebutan_jabatan', TRUE);
         $data = $this->M_AdministratorInduk->getJabatanById($id_sebutan_jabatan)->result();
         echo json_encode($data);
     }
 
-    public function doUpdateJabatan(){
-        $id           = $this->input->post('id_sebutan_jabatan',TRUE);
+    public function doUpdateJabatan()
+    {
+        $id           = $this->input->post('id_sebutan_jabatan', TRUE);
         $where        = array('id_sebutan_jabatan' => $id,);
         $input        = $this->input->post(NULL, TRUE);
         $data_jabatan = array(
             'personnel_subarea'           => $input['personnel_subarea'],
             'urutan_dalam_org'            => $input['urutan'],
             'sebutan_jabatan'             => $input['jabatan'],
-        );          
+        );
         $this->Crud->u('tb_jabatan', $data_jabatan, $where);
         $this->session->set_flashdata('alert_primary', 'Data jabatan berhasil disunting!');
         redirect('AdministratorInduk/tampilanJabatan');
     }
 
-    public function doDeleteJabatan($id){
+    public function doDeleteJabatan($id)
+    {
         $where = array('id_sebutan_jabatan' => $id);
 
         $this->Crud->d('tb_jabatan', $where);
@@ -774,16 +823,17 @@ class AdministratorInduk extends CI_Controller {
         redirect('AdministratorInduk/tampilanJabatan');
     }
 
-    public function doImportJabatan(){
-        $this->load->library(array('PHPExcel','PHPExcel/IOFactory'));
+    public function doImportJabatan()
+    {
+        $this->load->library(array('PHPExcel', 'PHPExcel/IOFactory'));
 
         $fileName = $_FILES['file_jabatan']['name'];
-         
+
         $config['upload_path'] = './assets/user/administrator_induk';
         $config['file_name'] = $fileName;
         $config['allowed_types'] = 'xls|xlsx|csv|ods|ots';
         $config['max_size'] = 10000;
-         
+
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
 
@@ -791,53 +841,57 @@ class AdministratorInduk extends CI_Controller {
             $this->session->set_flashdata('alert_danger', 'file daftar jabatan gagal diimpor!');
             redirect('AdministratorInduk/tampilanJabatan');
         } else {
-           $media = $this->upload->data();
-           $inputFileName = './assets/user/administrator_induk/'.$media['file_name'];
+            $media = $this->upload->data();
+            $inputFileName = './assets/user/administrator_induk/' . $media['file_name'];
 
             try {
                 $inputFileType = IOFactory::identify($inputFileName);
                 $objReader = IOFactory::createReader($inputFileType);
                 $objPHPExcel = $objReader->load($inputFileName);
-            } catch(Exception $e) {
-                die('Error loading file "'.pathinfo($inputFileName,PATHINFO_BASENAME).'": '.$e->getMessage());
+            } catch (Exception $e) {
+                die('Error loading file "' . pathinfo($inputFileName, PATHINFO_BASENAME) . '": ' . $e->getMessage());
             }
 
-           $sheet = $objPHPExcel->getSheet(0);
-           $highestRow = $sheet->getHighestRow();
-           $highestColumn = $sheet->getHighestColumn();
+            $sheet = $objPHPExcel->getSheet(0);
+            $highestRow = $sheet->getHighestRow();
+            $highestColumn = $sheet->getHighestColumn();
 
-           for ($row = 2; $row <= $highestRow; $row++){  
-                $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,
-                   NULL,
-                   TRUE,
-                   FALSE);
-                $data = array(
-                    "id_sebutan_jabatan" => $rowData[0][2].'-'.$rowData[0][0],
-                    "urutan_dalam_org"=> $rowData[0][0],
-                    "sebutan_jabatan"=> $rowData[0][1],
-                    "Personnel_subarea"=> $rowData[0][2],
+            for ($row = 2; $row <= $highestRow; $row++) {
+                $rowData = $sheet->rangeToArray(
+                    'A' . $row . ':' . $highestColumn . $row,
+                    NULL,
+                    TRUE,
+                    FALSE
                 );
-                $this->db->insert("tb_jabatan",$data);
+                $data = array(
+                    "id_sebutan_jabatan" => $rowData[0][2] . '-' . $rowData[0][0],
+                    "urutan_dalam_org" => $rowData[0][0],
+                    "sebutan_jabatan" => $rowData[0][1],
+                    "Personnel_subarea" => $rowData[0][2],
+                );
+                $this->db->insert("tb_jabatan", $data);
             }
-            unlink('./assets/user/administrator_induk/'.$fileName);
+            unlink('./assets/user/administrator_induk/' . $fileName);
             $this->session->set_flashdata('alert_success', 'Daftar sebutan jabatan berhasil diimpor!');
             redirect('AdministratorInduk/tampilanJabatan');
         }
     }
-# ************ End Menu Jabatan ******************
+    # ************ End Menu Jabatan ******************
 
-# ************ Begin Menu Pengaturan Administrator ******************
-    public function tampilanAdministrator(){
+    # ************ Begin Menu Pengaturan Administrator ******************
+    public function tampilanAdministrator()
+    {
         $data = array(
             'isi' => 'user/contents/administrator_induk/tabelAdministrator',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
-            'data_admin' => $this->M_AdministratorInduk->getDataAdmin(), 
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
+            'data_admin' => $this->M_AdministratorInduk->getDataAdmin(),
             'area' =>  $this->Crud->ga('tb_business_area'),
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
 
-    public function doAddAdmin() {
+    public function doAddAdmin()
+    {
         $input      = $this->input->post(NULL, TRUE);
         $data_admin = array(
             'nip'                            => $input['nip'],
@@ -851,80 +905,86 @@ class AdministratorInduk extends CI_Controller {
         redirect('AdministratorInduk/tampilanAdministrator');
     }
 
-    public function getEditAdmin($id_admin){
+    public function getEditAdmin($id_admin)
+    {
         $where = array('id_administrator' => $id_admin);
         $data = array(
             'isi'              => 'user/contents/administrator_induk/editAdministrator',
-            'title'            => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'title'            => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
             'data_admin'       => $this->Crud->gw('tb_administrator', $where),
             'area'             => $this->Crud->ga('tb_business_area'),
         );
         $get_data = $this->M_AdministratorInduk->getAdminById($id_admin);
-        if($get_data->num_rows() > 0){
+        if ($get_data->num_rows() > 0) {
             $row = $get_data->row_array();
             $data['subarea_id'] = $row['personnel_subarea'];
         }
         $this->load->view('user/_layouts/wrapper', $data);
     }
 
-    public function getDataEditAdmin(){
-        $id_administrator = $this->input->post('id_administrator',TRUE);
+    public function getDataEditAdmin()
+    {
+        $id_administrator = $this->input->post('id_administrator', TRUE);
         $data = $this->M_AdministratorInduk->getAdminById($id_administrator)->result();
         echo json_encode($data);
     }
 
-    public function doUpdateAdmin(){
-        $id     = $this->input->post('id_administrator',TRUE);
+    public function doUpdateAdmin()
+    {
+        $id     = $this->input->post('id_administrator', TRUE);
         $where  = array('id_administrator' => $id,);
         $input  = $this->input->post(NULL, TRUE);
 
-        if($input['password'] != ''){
-                $data_admin = array(
-                    'nip'                => $input['nip'],
-                    'password'           => password_hash($input['password'], PASSWORD_DEFAULT),
-                    'role'               => $input['status'],
-                    'personnel_subarea'  => $input['personnel_subarea'],
-                );
-            }else {
-                $data_admin = array(
-                    'nip'                => $input['nip'],
-                    'password'           => password_hash($input['password'], PASSWORD_DEFAULT),
-                    'role'               => $input['status'],
-                    'personnel_subarea'  => $input['personnel_subarea'],
-                );
-            }
-            
+        if ($input['password'] != '') {
+            $data_admin = array(
+                'nip'                => $input['nip'],
+                'password'           => password_hash($input['password'], PASSWORD_DEFAULT),
+                'role'               => $input['status'],
+                'personnel_subarea'  => $input['personnel_subarea'],
+            );
+        } else {
+            $data_admin = array(
+                'nip'                => $input['nip'],
+                'password'           => password_hash($input['password'], PASSWORD_DEFAULT),
+                'role'               => $input['status'],
+                'personnel_subarea'  => $input['personnel_subarea'],
+            );
+        }
+
         $this->Crud->u('tb_administrator', $data_admin, $where);
         $this->session->set_flashdata('alert_primary', 'Data administrator berhasil disunting!');
         redirect('AdministratorInduk/tampilanAdministrator');
     }
 
-    public function doDeleteAdmin($id){
+    public function doDeleteAdmin($id)
+    {
         $where = array('id_administrator' => $id,);
 
         $this->Crud->d('tb_administrator', $where);
         $this->session->set_flashdata('alert_danger', 'Data administrator berhasil dihapus!');
         redirect('AdministratorInduk/tampilanAdministrator');
     }
-# ************ End Menu Pengaturan Administrator ******************
+    # ************ End Menu Pengaturan Administrator ******************
 
-# ************ Begin Menu Lembar Evaluasi ******************
-    public function tampilanUsulanLembarEvaluasi(){
+    # ************ Begin Menu Lembar Evaluasi ******************
+    public function tampilanUsulanLembarEvaluasi()
+    {
         $where = array('status_usulan' => 'diterima');
 
         $data = array(
             'isi'         => 'user/contents/administrator_induk/tabelUsulanLembarEvaluasi',
             'title'       => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
-            'lembar_evaluasi_diterima' => $this->Crud->gw('tb_usulan_evaluasi', $where), 
+            'lembar_evaluasi_diterima' => $this->Crud->gw('tb_usulan_evaluasi', $where),
         );
 
         $this->load->view('user/_layouts/wrapper', $data);
     }
 
-    public function tampilanAddUsulanLembarEvaluasi(){
+    public function tampilanAddUsulanLembarEvaluasi()
+    {
         $data = array(
             'isi'         => 'user/contents/administrator_induk/addUsulanLembarEvaluasi',
-            'title'       => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'title'       => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
             'area'        => $this->Crud->ga('tb_business_area'),
             'approval'    => $this->M_AdministratorInduk->getDataApproval(),
             'posisi'      => $this->Crud->ga('tb_posisi_approval_committee'),
@@ -933,13 +993,15 @@ class AdministratorInduk extends CI_Controller {
         $this->load->view('user/_layouts/wrapper', $data);
     }
 
-    public function autoFillUsulanPegawai(){
-        $id_pegawai = $this->input->post('nip',FALSE);
+    public function autoFillUsulanPegawai()
+    {
+        $id_pegawai = $this->input->post('nip', FALSE);
         $dataPeg = $this->M_AdministratorInduk->getPegawaiById($id_pegawai)->result();
         echo json_encode($dataPeg);
     }
 
-    public function doAddUsulan() {
+    public function doAddUsulan()
+    {
         $id_administrator = $this->session->userdata('id_administrator');
         $tgl_usulan       = date('y-m-d h:i:s');
         $id_usulan        = str_replace(' ', '_', $tgl_usulan);
@@ -959,7 +1021,7 @@ class AdministratorInduk extends CI_Controller {
         );
         $this->db->insert('tb_usulan_evaluasi', $data_usulan);
 
-        for($count=0; $count<count($nip); $count++){
+        for ($count = 0; $count < count($nip); $count++) {
             $data_pegawai = array(
                 'id_usulan'                      => $id_usulan,
                 'nip'                            => $nip[$count],
@@ -969,7 +1031,7 @@ class AdministratorInduk extends CI_Controller {
             $this->db->insert('tb_usulan_evaluasi_pegawai', $data_pegawai);
         }
 
-        for($count=0; $count<count($id_approval); $count++){
+        for ($count = 0; $count < count($id_approval); $count++) {
             $data_approval = array(
                 'id_usulan'         => $id_usulan,
                 'id_approval'       => $id_approval[$count],
@@ -981,7 +1043,6 @@ class AdministratorInduk extends CI_Controller {
         $this->session->set_flashdata('alert_success', 'Usulan Telah Ditambahkan!');
         redirect('AdministratorInduk/tampilanUsulanLembarEvaluasi');
     }
-
-# ************ End Menu Lembar Evaluasi ******************
+    # ************ End Menu Lembar Evaluasi ******************
 
 }

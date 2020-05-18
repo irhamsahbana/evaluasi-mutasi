@@ -53,6 +53,7 @@
                                             <tr>
                                                 <th>No.</th>
                                                 <th>NIP</th>
+                                                <th>Nama Approval</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -64,6 +65,7 @@
                                             <tr>
                                                 <td><?= $no++ ?></td>
                                                 <td><?= $penerima->nip ?></td>
+                                                <td><?= $penerima->nama_pegawai ?></td>
                                                 <td>
                                                     <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update<?=$penerima->id_approval?>">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
                                                     </button>

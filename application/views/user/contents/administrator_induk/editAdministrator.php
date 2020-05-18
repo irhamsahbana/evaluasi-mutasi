@@ -2,9 +2,9 @@
             Content body start
         ***********************************-->
 
-        <?php 
+        <?php
         foreach ($data_admin as $admin) {
-           $id = $admin->id_administrator;
+            $id = $admin->id_administrator;
         }
         ?>
 
@@ -26,7 +26,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Sunting Data Administrator</h4>
-                                
+
                                 <div class="form-validation">
                                     <form class="form-valide" action="<?= site_url('AdministratorInduk/doUpdateAdmin') ?>" method="POST" enctype="multipart/form-data">
                                         <div class="form-group row">
@@ -55,11 +55,11 @@
                                             <label class="col-sm-3 col-form-label">Business Area</label>
                                             <div class="col-sm-9">
                                                 <select class="form-control edit-area" name="business_area" required>
-                                                <option value="">Pilih Salah Satu</option>
-                                                <?php foreach($area as $row):?>
-                                                <option value="<?=$row->business_area;?>"><?=$row->nama_business_area;?></option>
-                                                <?php endforeach;?>
-                                            </select>
+                                                    <option value="">Pilih Salah Satu</option>
+                                                    <?php foreach ($area as $row) : ?>
+                                                        <option value="<?= $row->business_area; ?>"><?= $row->nama_business_area; ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -70,8 +70,8 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <input type="hidden" raedonly name="id_administrator" value="<?=$id?>">
-                                        <input type="hidden" readonly name="password_lama" value="<?=$admin->password?>">
+                                        <input type="hidden" raedonly name="id_administrator" value="<?= $id ?>">
+                                        <input type="hidden" readonly name="password_lama" value="<?= $admin->password ?>">
                                         <button style="float: right;" type="submit" class="btn btn-primary">Sunting Data</button>
                                     </form>
                                 </div>
@@ -85,4 +85,3 @@
         <!--**********************************
             Content body end
         ***********************************-->
-

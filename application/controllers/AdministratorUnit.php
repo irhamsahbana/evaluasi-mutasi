@@ -1,12 +1,14 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class AdministratorUnit extends CI_Controller {
+class AdministratorUnit extends CI_Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         date_default_timezone_set('Asia/Makassar');
-        if($this->session->userdata('status') != "login"){
+        if ($this->session->userdata('status') != "login") {
             redirect('login');
         }
     }
@@ -14,28 +16,30 @@ class AdministratorUnit extends CI_Controller {
     {
         $data = array(
             'isi' => 'user/contents/testing',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
 
-# ************ Begin Menu Lembar Evaluasi ******************
-    public function tampilanUsulanLembarEvaluasi(){
+    # ************ Begin Menu Lembar Evaluasi ******************
+    public function tampilanUsulanLembarEvaluasi()
+    {
         $where = array('status_usulan' => 'diterima');
 
         $data = array(
             'isi'         => 'user/contents/administrator_unit/tabelUsulanLembarEvaluasi',
             'title'       => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
-            'lembar_evaluasi_diterima' => $this->Crud->gw('tb_usulan_evaluasi', $where), 
+            'lembar_evaluasi_diterima' => $this->Crud->gw('tb_usulan_evaluasi', $where),
         );
 
         $this->load->view('user/_layouts/wrapper', $data);
     }
 
-    public function tampilanAddUsulanLembarEvaluasi(){
+    public function tampilanAddUsulanLembarEvaluasi()
+    {
         $data = array(
             'isi'         => 'user/contents/administrator_unit/addUsulanLembarEvaluasi',
-            'title'       => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar', 
+            'title'       => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
             'area'        => $this->Crud->ga('tb_business_area'),
             'approval'    => $this->M_AdministratorUnit->getDataApproval(),
             'posisi'      => $this->Crud->ga('tb_posisi_approval_committee'),
@@ -44,25 +48,29 @@ class AdministratorUnit extends CI_Controller {
         $this->load->view('user/_layouts/wrapper', $data);
     }
 
-    public function autoFillUsulanPegawai(){
-        $id_pegawai = $this->input->post('nip',FALSE);
+    public function autoFillUsulanPegawai()
+    {
+        $id_pegawai = $this->input->post('nip', FALSE);
         $dataPeg = $this->M_AdministratorUnit->getPegawaiById($id_pegawai)->result();
         echo json_encode($dataPeg);
     }
 
-    public function getPersonnelSubarea(){
-        $business_area = $this->input->post('id',TRUE);
+    public function getPersonnelSubarea()
+    {
+        $business_area = $this->input->post('id', TRUE);
         $data = $this->Crud->gw('tb_personnel_area', array('business_area' => $business_area));
         echo json_encode($data);
     }
 
-    public function getSebutanJabatan(){
-        $personnel_subarea = $this->input->post('id',TRUE);
-        $data = $this->Crud->gwo('tb_jabatan', array('personnel_subarea' => $personnel_subarea), 'urutan_dalam_org'); 
+    public function getSebutanJabatan()
+    {
+        $personnel_subarea = $this->input->post('id', TRUE);
+        $data = $this->Crud->gwo('tb_jabatan', array('personnel_subarea' => $personnel_subarea), 'urutan_dalam_org');
         echo json_encode($data);
     }
 
-    public function doAddUsulan() {
+    public function doAddUsulan()
+    {
         $id_administrator = $this->session->userdata('id_administrator');
         $tgl_usulan       = date('y-m-d h:i:s');
         $id_usulan        = str_replace(' ', '_', $tgl_usulan);
@@ -82,7 +90,7 @@ class AdministratorUnit extends CI_Controller {
         );
         $this->db->insert('tb_usulan_evaluasi', $data_usulan);
 
-        for($count=0; $count<count($nip); $count++){
+        for ($count = 0; $count < count($nip); $count++) {
             $data_pegawai = array(
                 'id_usulan'                      => $id_usulan,
                 'nip'                            => $nip[$count],
@@ -92,7 +100,7 @@ class AdministratorUnit extends CI_Controller {
             $this->db->insert('tb_usulan_evaluasi_pegawai', $data_pegawai);
         }
 
-        for($count=0; $count<count($id_approval); $count++){
+        for ($count = 0; $count < count($id_approval); $count++) {
             $data_approval = array(
                 'id_usulan'         => $id_usulan,
                 'id_approval'       => $id_approval[$count],
@@ -105,7 +113,7 @@ class AdministratorUnit extends CI_Controller {
         redirect('AdministratorUnit/tampilanUsulanLembarEvaluasi');
     }
 
-# ************ End Menu Lembar Evaluasi ******************
+    # ************ End Menu Lembar Evaluasi ******************
 
 
 }

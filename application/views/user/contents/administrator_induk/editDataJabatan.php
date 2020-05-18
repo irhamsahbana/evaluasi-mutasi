@@ -3,9 +3,9 @@
         ***********************************-->
 
         <?php
-            foreach ($data_jabatan as $get) {
-                $id = $get->id_sebutan_jabatan;
-            }
+        foreach ($data_jabatan as $get) {
+            $id = $get->id_sebutan_jabatan;
+        }
         ?>
 
         <div class="content-body">
@@ -26,18 +26,18 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Sunting Data Sebutan Jabatan</h4>
-                                
+
                                 <div class="form-validation">
                                     <form class="form-valide" action="<?= site_url('AdministratorInduk/doUpdateJabatan') ?>" method="POST" enctype="multipart/form-data">
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Business Area</label>
                                             <div class="col-sm-9">
                                                 <select class="form-control edit-area" name="business_area" required>
-                                                <option value="">Pilih Salah Satu</option>
-                                                <?php foreach($area as $row):?>
-                                                <option value="<?=$row->business_area;?>"><?=$row->nama_business_area;?></option>
-                                                <?php endforeach;?>
-                                            </select>
+                                                    <option value="">Pilih Salah Satu</option>
+                                                    <?php foreach ($area as $row) : ?>
+                                                        <option value="<?= $row->business_area; ?>"><?= $row->nama_business_area; ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -60,7 +60,7 @@
                                                 <input type="text" name="jabatan" class="form-control" required>
                                             </div>
                                         </div>
-                                        <input type="hidden" raedonly name="id_sebutan_jabatan" value="<?=$id?>">
+                                        <input type="hidden" raedonly name="id_sebutan_jabatan" value="<?= $id ?>">
                                         <button style="float: right;" type="submit" class="btn btn-primary">Sunting Data</button>
                                     </form>
                                 </div>
@@ -74,4 +74,3 @@
         <!--**********************************
             Content body end
         ***********************************-->
-
