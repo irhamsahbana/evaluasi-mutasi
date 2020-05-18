@@ -24,7 +24,7 @@ class AdministratorInduk extends CI_Controller
     }
 
 
-    # ************ Begin Menu Data Pegawai ******************
+# ************ Begin Menu Data Pegawai ******************
     public function tampilanDataPegawai()
     {
         $data = array(
@@ -307,9 +307,9 @@ class AdministratorInduk extends CI_Controller
             redirect('AdministratorInduk/tampilanDataPegawai');
         }
     }
-    # ************ End Menu Data Pegawai ******************
+# ************ End Menu Data Pegawai ******************
 
-    # ************ Begin Menu Nilai Talenta Pegawai ******************
+# ************ Begin Menu Nilai Talenta Pegawai ******************
     public function tampilanDaftarTalenta()
     {
         $this->db->select('*');
@@ -319,9 +319,9 @@ class AdministratorInduk extends CI_Controller
         $data_daftar_talenta = $query->result();
 
         $data = array(
-            'isi' => 'user/contents/administrator_induk/tabelDaftarTalenta',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
-            'daftar_talenta' => $data_daftar_talenta,
+            'isi'               => 'user/contents/administrator_induk/tabelDaftarTalenta',
+            'title'             => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
+            'daftar_talenta'    => $data_daftar_talenta,
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
@@ -490,14 +490,14 @@ class AdministratorInduk extends CI_Controller
             redirect('AdministratorInduk/tampilanNilaiTalentaPegawai/' . $urisTahun . '/' . $urisSemester);
         }
     }
-    # ************ End Menu Nilai Talenta Pegawai ******************
+# ************ End Menu Nilai Talenta Pegawai ******************
 
-    # ************ Begin Menu Bussiness Area ******************
+# ************ Begin Menu Bussiness Area ******************
     public function tampilanDaftarBusinessArea()
     {
         $data = array(
-            'isi' => 'user/contents/administrator_induk/tabelDaftarBusinessArea',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
+            'isi'       => 'user/contents/administrator_induk/tabelDaftarBusinessArea',
+            'title'     => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
             'data_area' => $this->Crud->ga('tb_business_area'),
         );
         $this->load->view('user/_layouts/wrapper', $data);
@@ -535,16 +535,16 @@ class AdministratorInduk extends CI_Controller
         $this->session->set_flashdata('alert_primary', 'Data business area berhasil disunting!');
         redirect('AdministratorInduk/tampilanDaftarBusinessArea');
     }
-    # ************ End Menu Bussiness Area ******************
+# ************ End Menu Bussiness Area ******************
 
-    # ************ Begin Menu Personnel Subarea ******************
+# ************ Begin Menu Personnel Subarea ******************
     public function tampilanDaftarPersonnelSubarea()
     {
         $data = array(
-            'isi' => 'user/contents/administrator_induk/tabelDaftarPersonnelSubarea',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
-            'data_subarea' => $this->M_AdministratorInduk->getDataSubarea(),
-            'area' => $this->Crud->ga('tb_business_area'),
+            'isi'           => 'user/contents/administrator_induk/tabelDaftarPersonnelSubarea',
+            'title'         => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
+            'data_subarea'  => $this->M_AdministratorInduk->getDataSubarea(),
+            'area'          => $this->Crud->ga('tb_business_area'),
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
@@ -588,15 +588,15 @@ class AdministratorInduk extends CI_Controller
         $this->session->set_flashdata('alert_primary', 'Data personnel subarea berhasil disunting!');
         redirect('AdministratorInduk/tampilanDaftarPersonnelSubarea');
     }
-    # ************ Begin Menu Personnel Subarea ******************
+# ************ Begin Menu Personnel Subarea ******************
 
-    # ************ Begin Menu Approval Committee ******************
+# ************ Begin Menu Approval Committee ******************
     public function tampilanApprovalCommittee()
     {
 
         $data = array(
-            'isi' => 'user/contents/administrator_induk/tabelApprovalCommittee',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
+            'isi'           => 'user/contents/administrator_induk/tabelApprovalCommittee',
+            'title'         => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
             'data_penerima' => $this->M_AdministratorInduk->getDataApproval(),
         );
         $this->load->view('user/_layouts/wrapper', $data);
@@ -647,23 +647,23 @@ class AdministratorInduk extends CI_Controller
         $this->session->set_flashdata('alert_primary', 'Data penerima berhasil disunting!');
         redirect('AdministratorInduk/tampilanApprovalCommittee');
     }
-    # ************ End Menu Approval Committee ******************
+# ************ End Menu Approval Committee ******************
 
-    # ************ Begin Menu Posisi Approval Committee ******************
+# ************ Begin Menu Posisi Approval Committee ******************
     public function tampilanDataApproval()
     {
         $data = array(
-            'isi' => 'user/contents/administrator_induk/tabelPosisiApproval',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
+            'isi'           => 'user/contents/administrator_induk/tabelPosisiApproval',
+            'title'         => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
             'data_approval' => $this->Crud->ga('tb_posisi_approval_committee'),
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
     public function doAddApproval()
     {
-        $input        = $this->input->post(NULL, TRUE);
+        $input          = $this->input->post(NULL, TRUE);
         $data_approval = array(
-            'posisi'                            => $input['posisi'],
+            'posisi'   => $input['posisi'],
         );
         $this->db->set('id_posisi', 'UUID()', FALSE);
         $this->db->insert('tb_posisi_approval_committee', $data_approval);
@@ -682,24 +682,24 @@ class AdministratorInduk extends CI_Controller
 
     public function doUpdateApproval($id)
     {
-        $where         = array('id_posisi' => $id,);
-        $input         = $this->input->post(NULL, TRUE);
+        $where          = array('id_posisi' => $id,);
+        $input          = $this->input->post(NULL, TRUE);
         $data_approval  = array(
-            'posisi'                            => $input['posisi'],
+            'posisi'  => $input['posisi'],
         );
         $this->Crud->u('tb_posisi_approval_committee', $data_approval, $where);
         $this->session->set_flashdata('alert_primary', 'Data posisi berhasil disunting!');
         redirect('AdministratorInduk/tampilanDataApproval');
     }
-    # ************ End Menu Posisi Approval Committee ******************
+# ************ End Menu Posisi Approval Committee ******************
 
-    # ************ Begin Menu Judul Talenta ******************
+# ************ Begin Menu Judul Talenta ******************
     public function tampilanNilaiTalenta()
     {
         $data = array(
-            'isi' => 'user/contents/tabelNilaiTalenta',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
-            'data_talenta' => $this->Crud->ga('tb_judul_talenta'),
+            'isi'           => 'user/contents/tabelNilaiTalenta',
+            'title'         => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
+            'data_talenta'  => $this->Crud->ga('tb_judul_talenta'),
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
@@ -708,7 +708,7 @@ class AdministratorInduk extends CI_Controller
     {
         $input        = $this->input->post(NULL, TRUE);
         $data_talenta = array(
-            'id_talenta'                           => $input['id_talenta'],
+            'id_talenta'                       => $input['id_talenta'],
             'tahun'                            => $input['tahun'],
             'semester'                         => $input['semester'],
         );
@@ -739,9 +739,9 @@ class AdministratorInduk extends CI_Controller
         $this->session->set_flashdata('alert_danger', 'Data talenta berhasil dihapus!');
         redirect('AdministratorInduk/tampilanNilaiTalenta');
     }
-    # ************ End Menu Judul Talenta ******************
+# ************ End Menu Judul Talenta ******************
 
-    # ************ Begin Menu Jabatan ******************
+# ************ Begin Menu Jabatan ******************
     public function tampilanJabatan()
     {
         $this->db->select('*');
@@ -753,10 +753,10 @@ class AdministratorInduk extends CI_Controller
 
 
         $data = array(
-            'isi' => 'user/contents/administrator_induk/tabelDaftarJabatan',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
-            'data_jabatan' => $data_jabatan,
-            'area' =>  $this->Crud->ga('tb_business_area'),
+            'isi'           => 'user/contents/administrator_induk/tabelDaftarJabatan',
+            'title'         => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
+            'data_jabatan'  => $data_jabatan,
+            'area'          =>  $this->Crud->ga('tb_business_area'),
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
@@ -876,9 +876,9 @@ class AdministratorInduk extends CI_Controller
             redirect('AdministratorInduk/tampilanJabatan');
         }
     }
-    # ************ End Menu Jabatan ******************
+# ************ End Menu Jabatan ******************
 
-    # ************ Begin Menu Pengaturan Administrator ******************
+# ************ Begin Menu Pengaturan Administrator ******************
     public function tampilanAdministrator()
     {
         $data = array(
@@ -964,9 +964,9 @@ class AdministratorInduk extends CI_Controller
         $this->session->set_flashdata('alert_danger', 'Data administrator berhasil dihapus!');
         redirect('AdministratorInduk/tampilanAdministrator');
     }
-    # ************ End Menu Pengaturan Administrator ******************
+# ************ End Menu Pengaturan Administrator ******************
 
-    # ************ Begin Menu Lembar Evaluasi ******************
+# ************ Begin Menu Lembar Evaluasi ******************
     public function tampilanUsulanLembarEvaluasi()
     {
         $where = array('status_usulan' => 'diterima');
@@ -1043,10 +1043,10 @@ class AdministratorInduk extends CI_Controller
         for ($count_approval = 0; $count_approval < count($id_approval); $count_approval++) {
             for ($count_pegawai = 0; $count_pegawai < count($nip); $count_pegawai++) {
                 $data_approvement = array(
-                    'id_usulan' => $id_usulan,
-                    'id_approval' => $id_approval[$count_approval],
-                    'nip' => $nip[$count_pegawai],
-                    'approvement' => 'belum di-approve',
+                    'id_usulan'     => $id_usulan,
+                    'id_approval'   => $id_approval[$count_approval],
+                    'nip'           => $nip[$count_pegawai],
+                    'approvement'   => 'belum di-approve',
                 );
                 $this->db->insert('tb_approvement', $data_approvement);
             }
@@ -1055,6 +1055,6 @@ class AdministratorInduk extends CI_Controller
         $this->session->set_flashdata('alert_success', 'Usulan Telah Ditambahkan!');
         redirect('AdministratorInduk/tampilanUsulanLembarEvaluasi');
     }
-    # ************ End Menu Lembar Evaluasi ******************
+# ************ End Menu Lembar Evaluasi ******************
 
 }
