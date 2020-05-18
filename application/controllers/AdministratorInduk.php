@@ -17,7 +17,7 @@ class AdministratorInduk extends CI_Controller
     public function index()
     {
         $data = array(
-            'isi' => 'user/contents/testing',
+            'isi'   => 'user/contents/testing',
             'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
         );
         $this->load->view('user/_layouts/wrapper', $data);
@@ -972,9 +972,9 @@ class AdministratorInduk extends CI_Controller
         $where = array('status_usulan' => 'diterima');
 
         $data = array(
-            'isi'         => 'user/contents/administrator_induk/tabelUsulanLembarEvaluasi',
-            'title'       => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
-            'lembar_evaluasi_diterima' => $this->Crud->gw('tb_usulan_evaluasi', $where),
+            'isi'                       => 'user/contents/administrator_induk/tabelUsulanLembarEvaluasi',
+            'title'                     => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
+            'lembar_evaluasi_diterima'  => $this->Crud->gw('tb_usulan_evaluasi', $where),
         );
 
         $this->load->view('user/_layouts/wrapper', $data);
