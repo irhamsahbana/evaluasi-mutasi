@@ -101,6 +101,18 @@ class AdministratorUnit extends CI_Controller {
             $this->db->insert('tb_usulan_evaluasi_approval', $data_approval);
         }
 
+        for($count_approval=0; $count_approval<count($id_approval); $count_approval++){
+            for($count_pegawai=0; $count_pegawai<count($nip); $count_pegawai++){
+                $data_approvement = array(
+                    'id_usulan' => $id_usulan,
+                    'id_approval' => $id_approval[$count_approval],
+                    'nip' => $nip[$count_pegawai],
+                    'approvement' => 'belum di-approve',
+                );
+                $this->db->insert('tb_approvement', $data_approvement);
+            }
+        }
+
         $this->session->set_flashdata('alert_success', 'Usulan Telah Ditambahkan!');
         redirect('AdministratorUnit/tampilanUsulanLembarEvaluasi');
     }
