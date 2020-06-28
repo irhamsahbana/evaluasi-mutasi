@@ -61,7 +61,7 @@ class M_Login extends CI_Model
                     );
                 }
                 $this->session->set_userdata($sess);
-                redirect('AdministratorInduk');
+                redirect('ApprovalCommittee');
             } else {
                 $this->session->set_flashdata('info', 'Nomor Induk Pegawai dan Password Anda Salah !');
                 redirect('login');

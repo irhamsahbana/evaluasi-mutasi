@@ -25,39 +25,47 @@
                                             <tr>
                                                 <th>No.</th>
                                                 <th>Tanggal Usulan</th>
-                                                <th>Usulan dari Unit</th>
-                                                <th>Pegawai yang Diusulkan</th>
-                                                <th>Status</th>
+                                                <th>NIP</th>
+                                                <th>Nama Pegawai</th>
+                                                <th>Jabatan Saat Ini</th>
+                                                <th>Jabatan yang Diusulkan</th>
                                                 <th>Persetujuan</th>
+                                                <th>Ubah</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>1</td>
-                                                <td>11 Maret 2020</td>
-                                                <td>UIW Sulselrabar</td>
+                                            <?php
+                                            $no = 1;
+                                            foreach ($detail as $get) {
+                                            ?>
+                                                <td><?= $no++ ?></td>
+                                                <td><?= $get->tgl_usulan ?></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
                                                 <td>
-                                                    <a href="#">Irham Sahbana, </a>
-                                                    <a href="#">Okti Asrianawati, </a>
-                                                    <a href="#">Ghina Syukriyah Rania</a>
+                                                    <button type="button" class="btn mb-1 btn-success" data-toggle="modal" data-target=".modal-terima">Terima<span class="btn-icon-right"><i class="fa fa-check"></i></span>
+                                                    </button>
                                                 </td>
-                                                <td>Status</td>
                                                 <td>
-                                                    <button type="button" class="btn mb-1 btn-success" data-toggle="modal" data-target=".modal-accept">Setujui<span class="btn-icon-right"><i class="fa fa-check"></i></span>
-                                                    </button>
-                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-reject">Tolak<span class="btn-icon-right"><i class="fa fa-close"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-danger"data-toggle="modal" data-target=".modal-tolak">Tolak<span class="btn-icon-right"><i class="fa fa-times"></i></span>
                                                     </button>
                                                 </td>
+                                            <?php } ?>
                                             </tr>
                                         </tbody>
                                         <tfoot>
                                             <tr>
                                                 <th>No.</th>
                                                 <th>Tanggal Usulan</th>
-                                                <th>Usulan dari Unit</th>
-                                                <th>Pegawai yang Diusulkan</th>
-                                                <th>Status</th>
+                                                <th>NIP</th>
+                                                <th>Nama Pegawai</th>
+                                                <th>Jabatan Saat Ini</th>
+                                                <th>Jabatan yang Diusulkan</th>
                                                 <th>Persetujuan</th>
+                                                <th>Ubah</th>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -73,46 +81,49 @@
             Content body end
         ***********************************-->
 
+
 <!--**********************************
-    Begin : Modal for Terima Data
+    Begin : Modal for Update Data
 ***********************************-->
-<div class="modal fade modal-accept" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
+<div class="modal fade modal-terima" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Persetujuan Evaluasi Masuk</h5>
+                <h5 class="modal-title">Terima Usulan Evaluasi</h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
-            <div class="modal-body">Yakin ingin menyetujui evaluasi ini?</div>
+            <div class="modal-body">Yakin ingin menerima usulan ini?</div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success">Setujui</button>
+                <button type="button" class="btn btn-success">Terima Usulan</button>
             </div>
         </div>
     </div>
 </div>
 <!--**********************************
-    End : Modal for Terima Data
+    End : Modal for Update Data
 ***********************************-->
 
 <!--**********************************
-    Begin : Modal for Tolak Data
+    Begin : Modal for Update Data
 ***********************************-->
-<div class="modal fade modal-reject" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
+<div class="modal fade modal-tolak" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Evaluasi Masuk</h5>
+                <h5 class="modal-title">Tolak Usulan Evaluasi</h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
-            <div class="modal-body">Yakin ingin Menolak data evaluasi ini?</div>
+            <div class="modal-body">Yakin ingin menolak usulan ini?</div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger">Tolak</button>
+                <button type="button" class="btn btn-danger">Tolak Usulan</button>
             </div>
         </div>
     </div>
 </div>
 <!--**********************************
-    End : Modal for Tolak Data
+    End : Modal for Update Data
 ***********************************-->
+
+

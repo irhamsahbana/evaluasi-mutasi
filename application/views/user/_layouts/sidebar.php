@@ -74,11 +74,6 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?= site_url('User/tampilanUsulanEvaluasiMasuk') ?>" class="<?= ($modul == 'tampilanUsulanEvaluasiMasuk') ? 'active' : '' ?>">
-                            <i class="icon-envelope menu-icon"></i><span class="nav-text">Usulan Evaluasi Masuk</span>
-                        </a>
-                    </li>
-                    <li>
                         <a href="<?= site_url('User/tampilanUsulanEvaluasi') ?>" class="<?= ($modul == 'tampilanUsulanEvaluasi') ? 'active' : '' ?>">
                             <i class="icon-paper-plane menu-icon"></i><span class="nav-text">Usulan Evaluasi</span>
                         </a>
@@ -88,6 +83,18 @@
                     <li>
                         <a href="<?= site_url('AdministratorUnit/tampilanUsulanLembarEvaluasi') ?>" class="<?= ($modul == 'tampilanUsulanLembarEvaluasi') ? 'active' : '' ?>">
                             <i class="icon-docs menu-icon"></i><span class="nav-text">Usulan Lembar Evaluasi</span>
+                        </a>
+                    </li>
+                    <?php } ?>
+                    <?php if($this->uri->segment(1) == 'ApprovalCommittee') { ?>
+                    <li>
+                        <a href="<?= site_url('ApprovalCommittee/tampilanUsulanEvaluasiMasuk') ?>" class="<?= ($modul == 'tampilanUsulanEvaluasiMasuk') ? 'active' : '' ?>">
+                            <i class="icon-envelope menu-icon"></i><span class="nav-text">Usulan Evaluasi Masuk</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?= site_url('ApprovalCommittee/tampilanUsulanEvaluasiSelesai') ?>" class="<?= ($modul == 'tampilanUsulanEvaluasiSelesai') ? 'active' : '' ?>">
+                            <i class="icon-paper-plane menu-icon"></i><span class="nav-text">Usulan Evaluasi Telah Selesai</span>
                         </a>
                     </li>
                     <?php } ?>
