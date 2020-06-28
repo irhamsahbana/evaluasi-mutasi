@@ -34,6 +34,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            <form>
                                                 <tr>
                                                     <td>
                                                         <input type="text" name="nip_usulan" class="form-control nip_usulan" id="nip_usulan" required>
@@ -95,7 +96,7 @@
                                                         </td>
                                                         <td>
                                                             <select class="form-control posisi" name="posisi" id="posisi" required>
-                                                                <option>Pilih Salah Satu</option>
+                                                                <option value="">Pilih Salah Satu</option>
                                                                 <?php foreach ($posisi as $pos) : ?>
                                                                     <option value="<?= $pos->id_posisi ?>"><?= $pos->posisi ?></option>
                                                                 <?php endforeach ?>
@@ -111,7 +112,8 @@
                                         <button style="float: right;" type="button" class="btn btn-success" name="add_approval" id="add_approval"><strong>+</strong></button>
                                         <!-- Tombol Kirim Data -->
                                         <br><br><br>
-                                        <button style="float: right;" type="button" class="btn btn-success" name="tombol_tambah_data" id="tombol_tambah_data">Tambah Data</button>
+                                        <button style="float: right;" type="submit" class="btn btn-success" name="tombol_tambah_data" id="tombol_tambah_data">Tambah Data</button>
+                                    </form>
                             </div>
                         </div>
                     </div>
