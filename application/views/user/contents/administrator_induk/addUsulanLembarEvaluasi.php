@@ -34,7 +34,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <form>
+                                            <form id="target">
                                                 <tr>
                                                     <td>
                                                         <input type="text" name="nip_usulan" class="form-control nip_usulan" id="nip_usulan" required>

@@ -423,7 +423,7 @@
                 $('#' + delete_barisApproval).remove();
             }); 
 
-            $('#tombol_tambah_data').submit(function(e){
+            $('#target').submit(function(e){
                 e.preventDefault();
                 var nip_usulan = [];
                 var jabatan = [];
