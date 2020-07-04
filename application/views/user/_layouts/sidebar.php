@@ -19,6 +19,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="<?= site_url('AdministratorInduk/tampilanDataPegawaiTalenta') ?>" class="<?= ($modul == 'tampilanDataPegawaiTalenta') ? 'active' : '' ?>">
+                            <i class="icon-people menu-icon"></i><span class="nav-text">Data Pegawai dan Talenta</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="<?= site_url('AdministratorInduk/tampilanDaftarTalenta') ?>" class="<?= ($modul == 'tampilanNilaiTalentaPegawai' || $modul == 'tampilanDaftarTalenta') ? 'active' : '' ?>">
                             <i class="icon-star menu-icon"></i><span class="nav-text">Nilai Talenta Pegawai</span>
                         </a>

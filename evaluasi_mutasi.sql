@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 28, 2020 at 07:53 PM
+-- Generation Time: Jun 30, 2020 at 05:30 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -100,6 +100,14 @@ CREATE TABLE `tb_approvement` (
   `id_approval` varchar(255) NOT NULL,
   `approvement` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_approvement`
+--
+
+INSERT INTO `tb_approvement` (`id_usulan`, `nip`, `id_approval`, `approvement`) VALUES
+('20-06-30_10:12:58', '8106325Z', '06361065-939d-11ea-9f1b-00ffee911c8d', 'belum di-approve'),
+('20-06-30_10:12:58', '8006231Z', '06361065-939d-11ea-9f1b-00ffee911c8d', 'belum di-approve');
 
 -- --------------------------------------------------------
 
@@ -5185,7 +5193,7 @@ CREATE TABLE `tb_usulan_evaluasi` (
 --
 
 INSERT INTO `tb_usulan_evaluasi` (`id_usulan`, `id_administrator`, `tgl_usulan`, `no_surat`, `status_usulan`, `alasan_ditolak`) VALUES
-('20-06-22_08:52:49', '9dc61c04-95e3-11ea-a2b8-00ffee911c8d', '2020-06-22 08:52:49', '-', 'diterima', '-');
+('20-06-30_10:12:58', '9dc61c04-95e3-11ea-a2b8-00ffee911c8d', '2020-06-30 10:12:58', '-', 'diterima', '-');
 
 -- --------------------------------------------------------
 
@@ -5199,6 +5207,13 @@ CREATE TABLE `tb_usulan_evaluasi_approval` (
   `id_posisi` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tb_usulan_evaluasi_approval`
+--
+
+INSERT INTO `tb_usulan_evaluasi_approval` (`id_usulan`, `id_approval`, `id_posisi`) VALUES
+('20-06-30_10:12:58', '06361065-939d-11ea-9f1b-00ffee911c8d', 'a9ffa25d-939f-11ea-9f1b-00ffee911c8d');
+
 -- --------------------------------------------------------
 
 --
@@ -5211,6 +5226,14 @@ CREATE TABLE `tb_usulan_evaluasi_pegawai` (
   `id_sebutan_jabatan_usulan` varchar(255) NOT NULL,
   `keterangan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_usulan_evaluasi_pegawai`
+--
+
+INSERT INTO `tb_usulan_evaluasi_pegawai` (`id_usulan`, `nip`, `id_sebutan_jabatan_usulan`, `keterangan`) VALUES
+('20-06-30_10:12:58', '8106325Z', 'ULP-SELAYAR-10', '-'),
+('20-06-30_10:12:58', '8006231Z', 'ULP-SENGKANG-6', '-');
 
 -- --------------------------------------------------------
 
