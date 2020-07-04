@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 04 Jul 2020 pada 09.13
--- Versi server: 10.4.11-MariaDB
--- Versi PHP: 7.4.3
+-- Generation Time: Jun 30, 2020 at 05:30 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `admin`
+-- Table structure for table `admin`
 --
 
 CREATE TABLE `admin` (
@@ -39,7 +39,7 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `admin`
+-- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`id_admin`, `username_admin`, `password_admin`, `last_login_admin`, `status_admin`, `foto_admin`, `nama_lengkap_admin`) VALUES
@@ -48,7 +48,7 @@ INSERT INTO `admin` (`id_admin`, `username_admin`, `password_admin`, `last_login
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_administrator`
+-- Table structure for table `tb_administrator`
 --
 
 CREATE TABLE `tb_administrator` (
@@ -60,7 +60,7 @@ CREATE TABLE `tb_administrator` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_administrator`
+-- Dumping data for table `tb_administrator`
 --
 
 INSERT INTO `tb_administrator` (`id_administrator`, `nip`, `password`, `role`, `personnel_subarea`) VALUES
@@ -70,7 +70,7 @@ INSERT INTO `tb_administrator` (`id_administrator`, `nip`, `password`, `role`, `
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_approval_committee`
+-- Table structure for table `tb_approval_committee`
 --
 
 CREATE TABLE `tb_approval_committee` (
@@ -81,7 +81,7 @@ CREATE TABLE `tb_approval_committee` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_approval_committee`
+-- Dumping data for table `tb_approval_committee`
 --
 
 INSERT INTO `tb_approval_committee` (`id_approval`, `nip`, `password`, `role`) VALUES
@@ -91,7 +91,7 @@ INSERT INTO `tb_approval_committee` (`id_approval`, `nip`, `password`, `role`) V
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_approvement`
+-- Table structure for table `tb_approvement`
 --
 
 CREATE TABLE `tb_approvement` (
@@ -102,7 +102,7 @@ CREATE TABLE `tb_approvement` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_approvement`
+-- Dumping data for table `tb_approvement`
 --
 
 INSERT INTO `tb_approvement` (`id_usulan`, `nip`, `id_approval`, `approvement`) VALUES
@@ -112,7 +112,7 @@ INSERT INTO `tb_approvement` (`id_usulan`, `nip`, `id_approval`, `approvement`) 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_business_area`
+-- Table structure for table `tb_business_area`
 --
 
 CREATE TABLE `tb_business_area` (
@@ -121,7 +121,7 @@ CREATE TABLE `tb_business_area` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_business_area`
+-- Dumping data for table `tb_business_area`
 --
 
 INSERT INTO `tb_business_area` (`business_area`, `nama_business_area`) VALUES
@@ -141,7 +141,7 @@ INSERT INTO `tb_business_area` (`business_area`, `nama_business_area`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_daftar_talenta_per_semester`
+-- Table structure for table `tb_daftar_talenta_per_semester`
 --
 
 CREATE TABLE `tb_daftar_talenta_per_semester` (
@@ -150,7 +150,7 @@ CREATE TABLE `tb_daftar_talenta_per_semester` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_daftar_talenta_per_semester`
+-- Dumping data for table `tb_daftar_talenta_per_semester`
 --
 
 INSERT INTO `tb_daftar_talenta_per_semester` (`tahun_talenta`, `semester_talenta`) VALUES
@@ -159,7 +159,7 @@ INSERT INTO `tb_daftar_talenta_per_semester` (`tahun_talenta`, `semester_talenta
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_jabatan`
+-- Table structure for table `tb_jabatan`
 --
 
 CREATE TABLE `tb_jabatan` (
@@ -170,7 +170,7 @@ CREATE TABLE `tb_jabatan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_jabatan`
+-- Dumping data for table `tb_jabatan`
 --
 
 INSERT INTO `tb_jabatan` (`id_sebutan_jabatan`, `urutan_dalam_org`, `sebutan_jabatan`, `personnel_subarea`) VALUES
@@ -4992,7 +4992,7 @@ INSERT INTO `tb_jabatan` (`id_sebutan_jabatan`, `urutan_dalam_org`, `sebutan_jab
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_judul_talenta`
+-- Table structure for table `tb_judul_talenta`
 --
 
 CREATE TABLE `tb_judul_talenta` (
@@ -5004,7 +5004,7 @@ CREATE TABLE `tb_judul_talenta` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_nilai_talenta_pegawai`
+-- Table structure for table `tb_nilai_talenta_pegawai`
 --
 
 CREATE TABLE `tb_nilai_talenta_pegawai` (
@@ -5017,7 +5017,7 @@ CREATE TABLE `tb_nilai_talenta_pegawai` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_pegawai`
+-- Table structure for table `tb_pegawai`
 --
 
 CREATE TABLE `tb_pegawai` (
@@ -5045,7 +5045,7 @@ CREATE TABLE `tb_pegawai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_pegawai`
+-- Dumping data for table `tb_pegawai`
 --
 
 INSERT INTO `tb_pegawai` (`nip`, `pers_no`, `nama_pegawai`, `org_unit`, `organizational_unit`, `position`, `nama_panjang_posisi`, `jenjang_main_grp`, `jenjang_sub_grp`, `grade`, `tgl_grade`, `pendidikan_terakhir`, `tgl_lahir`, `tgl_capeg`, `tgl_pegawai_tetap`, `gender`, `email`, `tgl_masuk`, `agama`, `no_telp`, `id_sebutan_jabatan`) VALUES
@@ -5065,7 +5065,7 @@ INSERT INTO `tb_pegawai` (`nip`, `pers_no`, `nama_pegawai`, `org_unit`, `organiz
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_personnel_area`
+-- Table structure for table `tb_personnel_area`
 --
 
 CREATE TABLE `tb_personnel_area` (
@@ -5075,7 +5075,7 @@ CREATE TABLE `tb_personnel_area` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_personnel_area`
+-- Dumping data for table `tb_personnel_area`
 --
 
 INSERT INTO `tb_personnel_area` (`personnel_subarea`, `nama_personnel_subarea`, `business_area`) VALUES
@@ -5157,7 +5157,7 @@ INSERT INTO `tb_personnel_area` (`personnel_subarea`, `nama_personnel_subarea`, 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_posisi_approval_committee`
+-- Table structure for table `tb_posisi_approval_committee`
 --
 
 CREATE TABLE `tb_posisi_approval_committee` (
@@ -5166,7 +5166,7 @@ CREATE TABLE `tb_posisi_approval_committee` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_posisi_approval_committee`
+-- Dumping data for table `tb_posisi_approval_committee`
 --
 
 INSERT INTO `tb_posisi_approval_committee` (`id_posisi`, `posisi`) VALUES
@@ -5176,7 +5176,7 @@ INSERT INTO `tb_posisi_approval_committee` (`id_posisi`, `posisi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_usulan_evaluasi`
+-- Table structure for table `tb_usulan_evaluasi`
 --
 
 CREATE TABLE `tb_usulan_evaluasi` (
@@ -5185,29 +5185,20 @@ CREATE TABLE `tb_usulan_evaluasi` (
   `tgl_usulan` datetime NOT NULL,
   `no_surat` varchar(255) NOT NULL,
   `status_usulan` varchar(255) NOT NULL,
-  `alasan_ditolak` text NOT NULL,
-  `lokasi_surat` varchar(255) NOT NULL,
-  `tgl_surat` date NOT NULL,
-  `tim_approval` varchar(255) NOT NULL,
-  `tahun_1` varchar(255) NOT NULL,
-  `semester_1` varchar(255) NOT NULL,
-  `tahun_2` varchar(255) NOT NULL,
-  `semester_2` varchar(255) NOT NULL,
-  `tahun_3` varchar(255) NOT NULL,
-  `semester_3` varchar(255) NOT NULL
+  `alasan_ditolak` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_usulan_evaluasi`
+-- Dumping data for table `tb_usulan_evaluasi`
 --
 
-INSERT INTO `tb_usulan_evaluasi` (`id_usulan`, `id_administrator`, `tgl_usulan`, `no_surat`, `status_usulan`, `alasan_ditolak`, `lokasi_surat`, `tgl_surat`, `tim_approval`, `tahun_1`, `semester_1`, `tahun_2`, `semester_2`, `tahun_3`, `semester_3`) VALUES
-('20-06-30_10:12:58', '9dc61c04-95e3-11ea-a2b8-00ffee911c8d', '2020-06-30 10:12:58', '-', 'diterima', '-', '', '0000-00-00', '', '', '', '', '', '', '');
+INSERT INTO `tb_usulan_evaluasi` (`id_usulan`, `id_administrator`, `tgl_usulan`, `no_surat`, `status_usulan`, `alasan_ditolak`) VALUES
+('20-06-30_10:12:58', '9dc61c04-95e3-11ea-a2b8-00ffee911c8d', '2020-06-30 10:12:58', '-', 'diterima', '-');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_usulan_evaluasi_approval`
+-- Table structure for table `tb_usulan_evaluasi_approval`
 --
 
 CREATE TABLE `tb_usulan_evaluasi_approval` (
@@ -5217,7 +5208,7 @@ CREATE TABLE `tb_usulan_evaluasi_approval` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_usulan_evaluasi_approval`
+-- Dumping data for table `tb_usulan_evaluasi_approval`
 --
 
 INSERT INTO `tb_usulan_evaluasi_approval` (`id_usulan`, `id_approval`, `id_posisi`) VALUES
@@ -5226,37 +5217,28 @@ INSERT INTO `tb_usulan_evaluasi_approval` (`id_usulan`, `id_approval`, `id_posis
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_usulan_evaluasi_pegawai`
+-- Table structure for table `tb_usulan_evaluasi_pegawai`
 --
 
 CREATE TABLE `tb_usulan_evaluasi_pegawai` (
   `id_usulan` varchar(255) NOT NULL,
   `nip` varchar(255) NOT NULL,
-  `nama` varchar(255) NOT NULL,
-  `sebutan_jabatan_sekarang` text NOT NULL,
-  `sebutan_jabatan_usulan` text NOT NULL,
-  `grade_sekarang` varchar(255) NOT NULL,
-  `tgl_grade_terakhir` date NOT NULL,
-  `pendidikan_terakhir` varchar(255) NOT NULL,
-  `n_talenta_1` varchar(255) NOT NULL,
-  `n_talenta_2` varchar(255) NOT NULL,
-  `n_talenta_3` varchar(255) NOT NULL,
-  `lama_jabatan_terakhir` varchar(255) NOT NULL,
+  `id_sebutan_jabatan_usulan` varchar(255) NOT NULL,
   `keterangan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_usulan_evaluasi_pegawai`
+-- Dumping data for table `tb_usulan_evaluasi_pegawai`
 --
 
-INSERT INTO `tb_usulan_evaluasi_pegawai` (`id_usulan`, `nip`, `nama`, `sebutan_jabatan_sekarang`, `sebutan_jabatan_usulan`, `grade_sekarang`, `tgl_grade_terakhir`, `pendidikan_terakhir`, `n_talenta_1`, `n_talenta_2`, `n_talenta_3`, `lama_jabatan_terakhir`, `keterangan`) VALUES
-('20-06-30_10:12:58', '8106325Z', '', '', 'ULP-SELAYAR-10', '', '0000-00-00', '', '', '', '', '', '-'),
-('20-06-30_10:12:58', '8006231Z', '', '', 'ULP-SENGKANG-6', '', '0000-00-00', '', '', '', '', '', '-');
+INSERT INTO `tb_usulan_evaluasi_pegawai` (`id_usulan`, `nip`, `id_sebutan_jabatan_usulan`, `keterangan`) VALUES
+('20-06-30_10:12:58', '8106325Z', 'ULP-SELAYAR-10', '-'),
+('20-06-30_10:12:58', '8006231Z', 'ULP-SENGKANG-6', '-');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -5270,7 +5252,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id_user`, `username_user`, `password_user`, `last_login_user`, `status_user`, `foto_user`, `fullname_user`) VALUES
@@ -5282,95 +5264,95 @@ INSERT INTO `user` (`id_user`, `username_user`, `password_user`, `last_login_use
 --
 
 --
--- Indeks untuk tabel `admin`
+-- Indexes for table `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_admin`);
 
 --
--- Indeks untuk tabel `tb_administrator`
+-- Indexes for table `tb_administrator`
 --
 ALTER TABLE `tb_administrator`
   ADD PRIMARY KEY (`id_administrator`);
 
 --
--- Indeks untuk tabel `tb_approval_committee`
+-- Indexes for table `tb_approval_committee`
 --
 ALTER TABLE `tb_approval_committee`
   ADD PRIMARY KEY (`id_approval`);
 
 --
--- Indeks untuk tabel `tb_business_area`
+-- Indexes for table `tb_business_area`
 --
 ALTER TABLE `tb_business_area`
   ADD PRIMARY KEY (`business_area`);
 
 --
--- Indeks untuk tabel `tb_daftar_talenta_per_semester`
+-- Indexes for table `tb_daftar_talenta_per_semester`
 --
 ALTER TABLE `tb_daftar_talenta_per_semester`
   ADD PRIMARY KEY (`tahun_talenta`,`semester_talenta`);
 
 --
--- Indeks untuk tabel `tb_jabatan`
+-- Indexes for table `tb_jabatan`
 --
 ALTER TABLE `tb_jabatan`
   ADD PRIMARY KEY (`id_sebutan_jabatan`);
 
 --
--- Indeks untuk tabel `tb_judul_talenta`
+-- Indexes for table `tb_judul_talenta`
 --
 ALTER TABLE `tb_judul_talenta`
   ADD PRIMARY KEY (`id_talenta`);
 
 --
--- Indeks untuk tabel `tb_nilai_talenta_pegawai`
+-- Indexes for table `tb_nilai_talenta_pegawai`
 --
 ALTER TABLE `tb_nilai_talenta_pegawai`
   ADD PRIMARY KEY (`tahun_talenta`,`semester_talenta`,`nip`);
 
 --
--- Indeks untuk tabel `tb_pegawai`
+-- Indexes for table `tb_pegawai`
 --
 ALTER TABLE `tb_pegawai`
   ADD PRIMARY KEY (`nip`);
 
 --
--- Indeks untuk tabel `tb_personnel_area`
+-- Indexes for table `tb_personnel_area`
 --
 ALTER TABLE `tb_personnel_area`
   ADD PRIMARY KEY (`personnel_subarea`);
 
 --
--- Indeks untuk tabel `tb_posisi_approval_committee`
+-- Indexes for table `tb_posisi_approval_committee`
 --
 ALTER TABLE `tb_posisi_approval_committee`
   ADD PRIMARY KEY (`id_posisi`);
 
 --
--- Indeks untuk tabel `tb_usulan_evaluasi`
+-- Indexes for table `tb_usulan_evaluasi`
 --
 ALTER TABLE `tb_usulan_evaluasi`
   ADD PRIMARY KEY (`id_usulan`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `admin`
+-- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
   MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
