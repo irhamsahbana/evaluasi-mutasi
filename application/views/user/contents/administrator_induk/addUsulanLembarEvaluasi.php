@@ -18,23 +18,82 @@
                             <div class="card-body">
                                 <h4 class="card-title">Tambah Usulan Evaluasi Mutasi</h4>
                                 <br>
+                                <!-- Tabel Header Nilai Talenta -->
+                                <h5 class="card-title" style="font-size: 15px; margin-top: 0.75rem">Header Nilai Talenta</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered verticle-middle" id="tbl_header_talenta">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" style="width: 16%">Judul</th>
+                                                    <th scope="col" style="width: 16%">3 Semester Terakhir</th>
+                                                    <th scope="col" style="width: 16%">2 Semester Terakhir</th>
+                                                    <th scope="col" style="width: 16%">Semester Terakhir</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <form id="target">
+                                                <tr>
+                                                    <td>
+                                                        Tahun
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" name="thn_1" class="form-control" max="9999" required>
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" name="thn_2" class="form-control" max="9999" required>
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" name="thn_3" class="form-control" max="9999" required>
+                                                    </td>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Semester
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control" name="smstr_1" required>
+                                                            <option value="">Pilih Salah Satu</option>
+                                                            <option value="I">I</option>
+                                                            <option value="II">II</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control" name="smstr_2" required>
+                                                            <option value="">Pilih Salah Satu</option>
+                                                            <option value="I">I</option>
+                                                            <option value="II">II</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control" name="smstr_3" required>
+                                                            <option value="">Pilih Salah Satu</option>
+                                                            <option value="I">I</option>
+                                                            <option value="II">II</option>
+                                                        </select>
+                                                    </td>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 <!-- Tabel Pegawai yang diusulkan -->
                                 <h5 class="card-title" style="font-size: 15px; margin-top: 0.75rem">Pegawai yang Diusulkan</h4>
                                     <div class="table-responsive">
                                         <table class="table table-bordered verticle-middle" id="tbl_pegawai_usulan">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col" style="width: 16%">NIP</th>
-                                                    <th scope="col" style="width: 16%">Nama Pegawai</th>
-                                                    <th scope="col" style="width: 16%">Jabatan saat ini</th>
-                                                    <th scope="col" style="width: 16%">Usulan Bussiness Area Baru</th>
-                                                    <th scope="col" style="width: 16%">Usulan Personnel Subarea Baru</th>
-                                                    <th scope="col" style="width: 22%">Usulan Jabatan Baru</th>
-                                                    <th scope="col" style="width: 10%">Aksi</th>
+                                                    <th scope="col">NIP</th>
+                                                    <th scope="col">Nama Pegawai</th>
+                                                    <th scope="col">Jabatan Saat Ini</th>
+                                                    <th scope="col">Tanggal mulai Jabatan saat Ini</th>
+                                                    <th scope="col">Usulan Bussiness Area Baru</th>
+                                                    <th scope="col">Usulan Personnel Subarea Baru</th>
+                                                    <th scope="col">Usulan Jabatan Baru</th>
+                                                    <th scope="col">Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <form id="target">
                                                 <tr>
                                                     <td>
                                                         <input type="text" name="nip_usulan" class="form-control nip_usulan" id="nip_usulan" required>
@@ -44,6 +103,9 @@
                                                     </td>
                                                     <td>
                                                         <input type="text" name="jabatan_skg" class="form-control jabatan_skg" id="jabatan_skg" readonly="readonly">
+                                                    </td>
+                                                    <td>
+                                                        <input type="date" name="tgl_mulai_jabatan_skg" class="form-control" id="tgl_mulai_jabatan_skg">
                                                     </td>
                                                     <td>
                                                         <select class="form-control business_area" name="business_area" id="add_area" required>
@@ -72,6 +134,10 @@
                                         </table>
                                     </div>
                                     <button style="float: right;" type="button" class="btn btn-success" name="add_pegawai" id="add_pegawai"><strong>+</strong></button>
+                                    <br><br>
+                                    <!-- Tim Apprasial -->
+                                    <h5 class="card-title" style="font-size: 15px; margin-top: 0.75rem">Tim Approval Committee</h5>
+                                        <input type="text" name="tim_approval" class="form-control" required>
                                     <br>
                                     <!-- Tabel Approval Committee yang diusukan -->
                                     <h5 class="card-title" style="font-size: 15px; margin-top: 0.75rem">Approval Committee yang Diusulkan</h4>
