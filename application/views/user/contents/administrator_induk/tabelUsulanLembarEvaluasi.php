@@ -35,22 +35,23 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>11 Maret 2020</td>
+                                            <?php $no =1; foreach($lembar_evaluasi_diterima as $f): ?>
+                                                <tr>
+                                                <td><?= $no++ ?></td>
+                                                <td><?= $f->tgl_usulan ?></td>
                                                 <td>
-                                                    <a href="#">D42116514</a>
-
+                                                    <a href="#"><?= $f->nip ?></a>
                                                 </td>
-                                                <td>Diterima oleh Administrator UIW</td>
+                                                <td><?php if($f->status_usulan == 'diterima'){echo 'Diterima oleh Administrator UIW';} ?></td>
                                                 <td>
-                                                    <button type="button" class="btn mb-1 btn-secondary" onclick='window.open("<?= site_url('AdministratorInduk/tampilanNilaiTalentaPegawai/'); ?>","_blank")'>Rincian<span class="btn-icon-right"><i class="fa fa-file"></i></span></button>
-                                                    <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
-                                                    </button>
+                                                    <button type="button" class="btn mb-1 btn-secondary" onclick='window.open("<?= site_url('AdministratorInduk/tampilanRincianLembarEvaluasi/'.$f->id_usulan); ?>","_blank")'>Rincian<span class="btn-icon-right"><i class="fa fa-file"></i></span></button>
+                                                    <!-- <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
+                                                    </button> -->
                                                     <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
                                                     </button>
                                                 </td>
                                             </tr>
+                                            <?php endforeach ?>
                                         </tbody>
                                         <tfoot>
                                             <tr>

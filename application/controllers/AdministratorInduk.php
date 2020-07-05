@@ -9,7 +9,7 @@ class AdministratorInduk extends CI_Controller
         parent::__construct();
         date_default_timezone_set('Asia/Makassar');
         if ($this->session->userdata('status') != "login") {
-            redirect('login');
+            redirect('Login');
         }
         $this->load->library(array('PHPExcel', 'PHPExcel/IOFactory'));
     }
@@ -974,7 +974,7 @@ class AdministratorInduk extends CI_Controller
         $data = array(
             'isi'                       => 'user/contents/administrator_induk/tabelUsulanLembarEvaluasi',
             'title'                     => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
-            'lembar_evaluasi_diterima'  => $this->Crud->gw('tb_usulan_evaluasi', $where),
+            'lembar_evaluasi_diterima'  => $this->M_AdministratorInduk->usulanLembarEvaluasiDiterima()
         );
 
         $this->load->view('user/_layouts/wrapper', $data);
@@ -1054,6 +1054,24 @@ class AdministratorInduk extends CI_Controller
 
         $this->session->set_flashdata('alert_success', 'Usulan Telah Ditambahkan!');
         redirect('AdministratorInduk/tampilanUsulanLembarEvaluasi');
+    }
+
+    public function tampilanRincianLembarEvaluasi($id_usulan)
+    {
+        $where = array('id_usulan' => $id_usulan);
+        $coba =  '1992-10-23';
+
+        $data = array(
+            'isi'                       => 'user/contents/administrator_induk/tabelUsulanLembarEvaluasi',
+            'title'                     => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
+            'pegawai'                   => $this->Crud->gw('tb_usulan_evaluasi_pegawai', $where),
+            'approval'                  => $this->Crud->gw('tb_usulan_evaluasi_approval', $where),
+            'tgl'                       => berapa_lama($coba),
+        );
+
+        dd($data);
+
+        $this->load->view('user/_layouts/wrapper', $data);
     }
 # ************ End Menu Lembar Evaluasi ******************
 

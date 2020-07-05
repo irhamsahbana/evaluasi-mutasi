@@ -72,4 +72,13 @@ class M_AdministratorInduk extends CI_Model
             ->get()
             ->result();
     }
+
+    public function usulanLembarEvaluasiDiterima()
+    {
+        $this->db->from('tb_usulan_evaluasi');
+        $this->db->join('tb_administrator', 'tb_administrator.id_administrator = tb_usulan_evaluasi.id_administrator', 'left');
+        $this->db->where(array('status_usulan' => 'diterima'));
+        $query = $this->db->get()->result();
+        return $query;
+    }
 }
