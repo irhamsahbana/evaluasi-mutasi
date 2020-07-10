@@ -999,6 +999,13 @@ class AdministratorInduk extends CI_Controller
         echo json_encode($dataPeg);
     }
 
+    public function calculateLamaMenjabat()
+    {
+        $tgl = $this->input->post('tgl_mulai_jabatan_skg');
+        $data = berapa_lama($tgl);
+        echo json_encode($data);
+    }
+
     public function doAddUsulan()
     {
         $id_administrator = $this->session->userdata('id_administrator');

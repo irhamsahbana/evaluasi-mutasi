@@ -105,7 +105,7 @@
                                                         <input type="text" name="jabatan_skg" class="form-control jabatan_skg" id="jabatan_skg" readonly="readonly">
                                                     </td>
                                                     <td>
-                                                        <input type="date" name="tgl_mulai_jabatan_skg" class="form-control" id="tgl_mulai_jabatan_skg">
+                                                        <input type="date" name="tgl_mulai_jabatan_skg" class="form-control" id="tgl_mulai_jabatan_skg" value="">
                                                     </td>
                                                     <td>
                                                         <select class="form-control business_area" name="business_area" id="add_area" required>
@@ -129,6 +129,7 @@
                                                     </td>
                                                     <td>
                                                     </td>
+                                                    <input type="hidden" name="lama_jabat" class="form-control lama_jabat" id="lama_jabat">
                                                 </tr>
                                             </tbody>
                                         </table>
