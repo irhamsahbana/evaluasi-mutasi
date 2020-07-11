@@ -86,7 +86,14 @@
                                                     <th scope="col">NIP</th>
                                                     <th scope="col">Nama Pegawai</th>
                                                     <th scope="col">Jabatan Saat Ini</th>
+                                                    <th scope="col">Grade Saat Ini</th>
+                                                    <th scope="col">Tanggal Mulai Grade Saat Ini</th>
+                                                    <th scope="col">Pendidikan Terakhir</th>
+                                                    <th scope="col">Nilai Talenta 3 semester lalu</th>
+                                                    <th scope="col">Nilai Talenta 2 semester lalu</th>
+                                                    <th scope="col">Nilai Talenta 1 semester lalu</th>
                                                     <th scope="col">Tanggal mulai Jabatan saat Ini</th>
+                                                    <th scope="col">Lama Menjabat</th>
                                                     <th scope="col">Usulan Bussiness Area Baru</th>
                                                     <th scope="col">Usulan Personnel Subarea Baru</th>
                                                     <th scope="col">Usulan Jabatan Baru</th>
@@ -96,19 +103,40 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <input type="text" name="nip_usulan" class="form-control nip_usulan" id="nip_usulan" required>
+                                                        <input type="text" name="nip_usulan" class="form-control nip_usulan" id="nip_usulan" style="min-width: 120px;" required>
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="nama_usulan" class="form-control nama_usulan" id="nama_usulan" readonly="readonly">
+                                                        <input type="text" name="nama_usulan" class="form-control nama_usulan" id="nama_usulan" style="min-width: 200px;" readonly="readonly" required>
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="jabatan_skg" class="form-control jabatan_skg" id="jabatan_skg" readonly="readonly">
+                                                        <input type="text" name="jabatan_skg" class="form-control jabatan_skg" id="jabatan_skg" style="min-width: 300px;" readonly="readonly" required>
                                                     </td>
                                                     <td>
-                                                        <input type="date" name="tgl_mulai_jabatan_skg" class="form-control" id="tgl_mulai_jabatan_skg" value="">
+                                                        <input type="text" name="grade_skg" class="form-control" id="grade_skg" style="min-width: 120px;" readonly="readonly" required>
                                                     </td>
                                                     <td>
-                                                        <select class="form-control business_area" name="business_area" id="add_area" required>
+                                                        <input type="text" name="tgl_grade_terakhir" class="form-control" id="tgl_grade_terakhir" style="min-width: 120px;" readonly="readonly" required>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" name="pendidikan_terakhir" class="form-control" id="pendidikan_terakhir" style="min-width: 120px;"readonly="readonly" required>
+                                                    </td>
+                                                     <td>
+                                                        <input type="text" name="n_smstr_1_" class="form-control" id="n_smstr_1_" readonly="readonly" style="min-width: 120px;" required>
+                                                    </td>
+                                                     <td>
+                                                        <input type="text" name="n_smstr_2_" class="form-control" id="n_smstr_2_" readonly="readonly" style="min-width: 120px;" required>
+                                                    </td>
+                                                     <td>
+                                                        <input type="text" name="n_smstr_3_" class="form-control" id="n_smstr_3_" readonly="readonly" style="min-width: 120px;" required>
+                                                    </td>
+                                                    <td>
+                                                        <input type="date" name="tgl_mulai_jabatan_skg" class="form-control" id="tgl_mulai_jabatan_skg" style="min-width: 120px;" required>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" name="lama_jabatan" class="form-control" id="lama_jabatan" readonly="readonly" style="min-width: 150px;" required>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control business_area" name="business_area" id="add_area" required style="min-width: 120px;">
                                                             <option value="">Pilih Salah Satu</option>
                                                             <?php foreach ($area as $row) : ?>
                                                                 <option value="<?= $row->business_area ?>"><?= $row->nama_business_area ?></option>
@@ -116,20 +144,19 @@
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <select class="form-control personnel_subarea" name="personnel_subarea" id="add_subarea" required>
+                                                        <select class="form-control personnel_subarea" name="personnel_subarea" id="add_subarea" required style="min-width: 120px;">
                                                             <option value="">Pilih Business Area dahulu</option>
                                                         </select>
                                                     </td>
                                                     <td>
                                                         <div class="select-reverse-div">
-                                                            <select class="form-control jabatan select-reverse" name="jabatan" id="add_jabatan" data-live-search="true" required>
+                                                            <select class="form-control jabatan select-reverse" name="jabatan" id="add_jabatan" required style="min-width: 120px;">
                                                                 <option value="">Pilih Personnel Subarea dahulu</option>
                                                             </select>
                                                         </div>
                                                     </td>
                                                     <td>
                                                     </td>
-                                                    <input type="hidden" name="lama_jabat" class="form-control lama_jabat" id="lama_jabat">
                                                 </tr>
                                             </tbody>
                                         </table>

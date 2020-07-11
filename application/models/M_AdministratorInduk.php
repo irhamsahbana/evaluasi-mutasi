@@ -81,4 +81,15 @@ class M_AdministratorInduk extends CI_Model
         $query = $this->db->get()->result();
         return $query;
     }
+
+    public function nilaiTalenta3Terakhir($nip)
+    {
+        $this->db->select('*');
+        $this->db->from('tb_nilai_talenta_pegawai');
+        $this->db->where(array('nip' => $nip));
+        $this->db->order_by('tahun_talenta', 'desc');
+        $this->db->limit(3);
+        $query = $this->db->get()->result();
+        return $query;
+    }
 }

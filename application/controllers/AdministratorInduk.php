@@ -999,11 +999,21 @@ class AdministratorInduk extends CI_Controller
         echo json_encode($dataPeg);
     }
 
+    public function autoFillTalenta()
+    {
+        $id_pegawai = $this->input->post('nip_talenta', FALSE);
+        $talentaPeg = $this->M_AdministratorInduk->nilaiTalenta3Terakhir($id_pegawai);
+        echo json_encode($talentaPeg);
+    }
+
     public function calculateLamaMenjabat()
     {
-        $tgl = $this->input->post('tgl_mulai_jabatan_skg');
-        $data = berapa_lama($tgl);
-        echo json_encode($data);
+        $tgl = $this->input->post('tgl');
+        $array = array(
+                'lama_menjabat' => berapa_lama($tgl)
+            );
+        $lama = json_encode($array);
+        echo $lama;
     }
 
     public function doAddUsulan()
