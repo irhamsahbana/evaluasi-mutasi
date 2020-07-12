@@ -406,147 +406,156 @@
             var count_pegawai = 1;
             var count_approval = 1;
 
-            $('#add_pegawai').click(function(){
-                count_pegawai = count_pegawai + 1;
-                var html_code_pegawai = "<tr id='baris"+count_pegawai+"'>";
-                    html_code_pegawai+= "<td><input type='text' name='nip_usulan' class='required form-control nip_usulan' id='nip_usulan"+count_pegawai+"' required='required'></td>";
-                    html_code_pegawai+= "<td><input type='text' name='nama_usulan' class='form-control nama_usulan' id='nama_usulan"+count_pegawai+"' readonly='readonly'></td>";
-                    html_code_pegawai+= "<td><input type='text' name='jabatan_skg' class='form-control jabatan_sekarang' id='jabatan_skg"+count_pegawai+"' readonly='readonly'></td>";
-                    html_code_pegawai+= 
-                                        `
-                                            <td>
-                                                <input type="text" name="grade_skg" class="required form-control" id="grade_skg`+count_pegawai+`" readonly="readonly">
-                                            </td>
-                                            <td>
-                                                <input type="text" name="tgl_grade_terakhir" class="required form-control" id="tgl_grade_terakhir`+count_pegawai+`" readonly="readonly">
-                                            </td>
-                                            <td>
-                                                <input type="text" name="pendidikan_terakhir" class="required form-control" id="pendidikan_terakhir`+count_pegawai+`" readonly="readonly">
-                                            </td>
-                                             <td>
-                                                <input type="text" name="n_smstr_1_" class="required form-control" id="n_smstr_1_`+count_pegawai+`" readonly="readonly">
-                                            </td>
-                                             <td>
-                                                <input type="text" name="n_smstr_2_" class="required form-control" id="n_smstr_2_`+count_pegawai+`" readonly="readonly">
-                                            </td>
-                                             <td>
-                                                <input type="text" name="n_smstr_3_" class="required form-control" id="n_smstr_3_`+count_pegawai+`" readonly="readonly">
-                                            </td>
-                                        `;
-                    html_code_pegawai+= "<td><input type='date' name='tgl_mulai_jabatan_skg' class='required form-control tgl_mulai_jabatan_skg' id='tgl_mulai_jabatan_skg"+count_pegawai+"'></td>";
-                    html_code_pegawai+= 
-                                        `
-                                            <td>
-                                                <input type="text" name="lama_jabatan" class="required form-control" id="lama_jabatan`+count_pegawai+`" readonly="readonly">
-                                            </td>
-                                        `;
-                    html_code_pegawai+= "<td><select class='required form-control business_area' name='business_area' id='add_area"+count_pegawai+"' required='required'><option value=''>Pilih Salah Satu</option><?php foreach($area as $row):?><option value='<?php echo $row->business_area;?>'><?php echo $row->nama_business_area;?></option><?php endforeach;?></select></td>";
-                    html_code_pegawai+= "<td><select class='required form-control personnel_subarea' name='personnel_subarea' id='add_subarea"+count_pegawai+"' required='required'><option value=''>Pilih Business Area dahulu</option></select></td>";
-                    html_code_pegawai+= "<td><select class='required form-control jabatan' name='jabatan' id='add_jabatan"+count_pegawai+"' required='required'><option value=''>Pilih Personnel Subarea dahulu</option></select></td>";
-                    html_code_pegawai+= "<td><button type='button' class='btn btn-danger remove_pegawai' name='remove_pegawai' data-baris='baris"+count_pegawai+"'><strong>-</strong></button></td>";
-                    html_code_pegawai+= "</tr>";
-                    $('#tbl_pegawai_usulan').append(html_code_pegawai);
-  
-                //Begin AutoFill
-                    $('#nip_usulan'+count_pegawai).keyup(function(){
-                        var nip = $('#nip_usulan'+count_pegawai).val();
-                        $.ajax({
-                            url : '<?= site_url('AdministratorInduk/autoFillUsulanPegawai'); ?>',
-                            data : {'nip' : nip},
-                            type : 'post',
-                            async : true,
-                            dataType : 'json',
-                            success : function(data){
-                                $.each(data, function(i, item){
-                                    $('#nama_usulan'+count_pegawai).val(data[i].nama_pegawai).attr('title', data[i].nama_pegawai);
-                                    $('#jabatan_skg'+count_pegawai).val(data[i].sebutan_jabatan).attr('title', data[i].sebutan_jabatan);
-                                    $('#grade_skg'+count_pegawai).val(data[i].grade).attr('title', data[i].grade);
-                                    $('#tgl_grade_terakhir'+count_pegawai).val(data[i].tgl_grade).attr('title', data[i].tgl_grade);
-                                    $('#pendidikan_terakhir'+count_pegawai).val(data[i].pendidikan_terakhir).attr('title', data[i].pendidikan_terakhir);
-                                });
-                            }
-                        });
-                    });
+            $(document).on('click', '#add_pegawai', function(e){
+                var empty_pegawai = $(".req_peg").filter(function(){return $.trim($(this).val()) == '';}).length;
 
-                    $('#nip_usulan'+count_pegawai).keyup(function(){
-                        var nip_talenta = $('#nip_usulan'+count_pegawai).val();
-                        $.ajax({
-                            url : '<?= site_url('AdministratorInduk/autoFillTalenta'); ?>',
-                            data : {'nip_talenta' : nip_talenta},
-                            type : 'post',
-                            async : true,
-                            dataType : 'json',
-                            success : function(talenta){
-                                $('#n_smstr_1_'+count_pegawai).val(talenta[2]['nilai_talenta']).attr('title', talenta[2]['tahun_talenta']+' Semester '+talenta[2]['semester_talenta']);
-                                $('#n_smstr_2_'+count_pegawai).val(talenta[1]['nilai_talenta']).attr('title', talenta[1]['tahun_talenta']+' Semester '+talenta[1]['semester_talenta']);
-                                $('#n_smstr_3_'+count_pegawai).val(talenta[0]['nilai_talenta']).attr('title', talenta[0]['tahun_talenta']+' Semester '+talenta[0]['semester_talenta']);
-                            }
-                        });
-                    });   
-                //End AutoFill
+                if (empty_pegawai > 0){
+                    alert('Isi Terlebih dahulu Form Pegawai yang kosong sebelum menambahkan usulan pegawai baru!');
+                    e.preventDefault();
+                } else {
+                    e.preventDefault();
 
-                //Begin chainDropdown Area
-                    $('#add_area'+count_pegawai).change(function(){ 
-                        var id=$(this).val();
-                        $.ajax({
-                            url : "<?= site_url('AdministratorInduk/getPersonnelSubarea');?>",
-                            method : "POST",
-                            data : {id: id},
-                            async : true,
-                            dataType : 'json',
-                            success: function(data){
-                                 
-                                var html = '<option value="">Pilih Salah Satu</option>';
-                                var i;
-                                for(i=0; i<data.length; i++){
-                                    html += '<option value="'+data[i].personnel_subarea+'">'+data[i].nama_personnel_subarea+'</option>';
+                    count_pegawai = count_pegawai + 1;
+                    var html_code_pegawai = "<tr id='baris"+count_pegawai+"'>";
+                        html_code_pegawai+= "<td><input type='text' name='nip_usulan' class='required form-control nip_usulan req_peg' id='nip_usulan"+count_pegawai+"' required='required'></td>";
+                        html_code_pegawai+= "<td><input type='text' name='nama_usulan' class='form-control nama_usulan req_peg' id='nama_usulan"+count_pegawai+"' readonly='readonly'></td>";
+                        html_code_pegawai+= "<td><input type='text' name='jabatan_skg' class='form-control jabatan_sekarang req_peg' id='jabatan_skg"+count_pegawai+"' readonly='readonly'></td>";
+                        html_code_pegawai+= 
+                                            `
+                                                <td>
+                                                    <input type="text" name="grade_skg" class="required form-control req_peg" id="grade_skg`+count_pegawai+`" readonly="readonly">
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="tgl_grade_terakhir" class="required form-control req_peg" id="tgl_grade_terakhir`+count_pegawai+`" readonly="readonly">
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="pendidikan_terakhir" class="required form-control req_peg" id="pendidikan_terakhir`+count_pegawai+`" readonly="readonly">
+                                                </td>
+                                                 <td>
+                                                    <input type="text" name="n_smstr_1_" class="required form-control req_peg" id="n_smstr_1_`+count_pegawai+`" readonly="readonly">
+                                                </td>
+                                                 <td>
+                                                    <input type="text" name="n_smstr_2_" class="required form-control req_peg" id="n_smstr_2_`+count_pegawai+`" readonly="readonly">
+                                                </td>
+                                                 <td>
+                                                    <input type="text" name="n_smstr_3_" class="required form-control req_peg" id="n_smstr_3_`+count_pegawai+`" readonly="readonly">
+                                                </td>
+                                            `;
+                        html_code_pegawai+= "<td><input type='date' name='tgl_mulai_jabatan_skg' class='required form-control tgl_mulai_jabatan_skg req_peg' id='tgl_mulai_jabatan_skg"+count_pegawai+"'></td>";
+                        html_code_pegawai+= 
+                                            `
+                                                <td>
+                                                    <input type="text" name="lama_jabatan" class="required form-control req_peg" id="lama_jabatan`+count_pegawai+`" readonly="readonly">
+                                                </td>
+                                            `;
+                        html_code_pegawai+= "<td><select class='required form-control business_area req_peg' name='business_area' id='add_area"+count_pegawai+"' required='required'><option value=''>Pilih Salah Satu</option><?php foreach($area as $row):?><option value='<?php echo $row->business_area;?>'><?php echo $row->nama_business_area;?></option><?php endforeach;?></select></td>";
+                        html_code_pegawai+= "<td><select class='required form-control personnel_subarea req_peg' name='personnel_subarea' id='add_subarea"+count_pegawai+"' required='required'><option value=''>Pilih Business Area dahulu</option></select></td>";
+                        html_code_pegawai+= "<td><select class='required form-control jabatan req_peg' name='jabatan' id='add_jabatan"+count_pegawai+"' required='required'><option value=''>Pilih Personnel Subarea dahulu</option></select></td>";
+                        html_code_pegawai+= "<td><button type='button' class='btn btn-danger remove_pegawai' name='remove_pegawai' data-baris='baris"+count_pegawai+"'><strong>-</strong></button></td>";
+                        html_code_pegawai+= "</tr>";
+                        $('#tbl_pegawai_usulan').append(html_code_pegawai);
+      
+                    //Begin AutoFill
+                        $('#nip_usulan'+count_pegawai).keyup(function(){
+                            var nip = $('#nip_usulan'+count_pegawai).val();
+                            $.ajax({
+                                url : '<?= site_url('AdministratorInduk/autoFillUsulanPegawai'); ?>',
+                                data : {'nip' : nip},
+                                type : 'post',
+                                async : true,
+                                dataType : 'json',
+                                success : function(data){
+                                    $.each(data, function(i, item){
+                                        $('#nama_usulan'+count_pegawai).val(data[i].nama_pegawai).attr('title', data[i].nama_pegawai);
+                                        $('#jabatan_skg'+count_pegawai).val(data[i].sebutan_jabatan).attr('title', data[i].sebutan_jabatan);
+                                        $('#grade_skg'+count_pegawai).val(data[i].grade).attr('title', data[i].grade);
+                                        $('#tgl_grade_terakhir'+count_pegawai).val(data[i].tgl_grade).attr('title', data[i].tgl_grade);
+                                        $('#pendidikan_terakhir'+count_pegawai).val(data[i].pendidikan_terakhir).attr('title', data[i].pendidikan_terakhir);
+                                    });
                                 }
-                                $('#add_subarea'+count_pegawai).html(html);
-         
-                            }
+                            });
                         });
-                        return false;
-                    }); 
 
-                    $('#add_subarea'+count_pegawai).change(function(){ 
-                        var id=$(this).val();
-                        $.ajax({
-                            url : "<?= site_url('AdministratorInduk/getSebutanJabatan');?>",
-                            method : "POST",
-                            data : {id: id},
-                            async : true,
-                            dataType : 'json',
-                            success: function(data){
-                                 
-                                var html = '<option value="">Pilih Salah Satu</option>';
-                                var i;
-                                for(i=0; i<data.length; i++){
-                                    html += '<option value="'+data[i].sebutan_jabatan+'" title="'+data[i].sebutan_jabatan+'">'+data[i].sebutan_jabatan+'</option>';
+                        $('#nip_usulan'+count_pegawai).keyup(function(){
+                            var nip_talenta = $('#nip_usulan'+count_pegawai).val();
+                            $.ajax({
+                                url : '<?= site_url('AdministratorInduk/autoFillTalenta'); ?>',
+                                data : {'nip_talenta' : nip_talenta},
+                                type : 'post',
+                                async : true,
+                                dataType : 'json',
+                                success : function(talenta){
+                                    $('#n_smstr_1_'+count_pegawai).val(talenta[2]['nilai_talenta']).attr('title', talenta[2]['tahun_talenta']+' Semester '+talenta[2]['semester_talenta']);
+                                    $('#n_smstr_2_'+count_pegawai).val(talenta[1]['nilai_talenta']).attr('title', talenta[1]['tahun_talenta']+' Semester '+talenta[1]['semester_talenta']);
+                                    $('#n_smstr_3_'+count_pegawai).val(talenta[0]['nilai_talenta']).attr('title', talenta[0]['tahun_talenta']+' Semester '+talenta[0]['semester_talenta']);
                                 }
-                                $('#add_jabatan'+count_pegawai).html(html);
-         
-                            }
-                        });
-                        return false;
-                    });
-                //End chainDropdown Area
+                            });
+                        });   
+                    //End AutoFill
 
-                //Begin Hitung Lama Jabatan
-                $('#tgl_mulai_jabatan_skg'+count_pegawai).change(function(){ 
-                    var tgl=$(this).val();
-                    $.ajax({
-                        url : "<?= site_url('AdministratorInduk/calculateLamaMenjabat');?>",
-                        method : "post",
-                        data : {'tgl': tgl},
-                        async : true,
-                        dataType : 'json',
-                        success: function(tgl){
-                            $('#lama_jabatan'+count_pegawai).val(tgl.lama_menjabat)
-                        }
-                    });
-                    return false;
-                }); 
-            //End Hitung Lama Jabatan
+                    //Begin chainDropdown Area
+                        $('#add_area'+count_pegawai).change(function(){ 
+                            var id=$(this).val();
+                            $.ajax({
+                                url : "<?= site_url('AdministratorInduk/getPersonnelSubarea');?>",
+                                method : "POST",
+                                data : {id: id},
+                                async : true,
+                                dataType : 'json',
+                                success: function(data){
+                                     
+                                    var html = '<option value="">Pilih Salah Satu</option>';
+                                    var i;
+                                    for(i=0; i<data.length; i++){
+                                        html += '<option value="'+data[i].personnel_subarea+'">'+data[i].nama_personnel_subarea+'</option>';
+                                    }
+                                    $('#add_subarea'+count_pegawai).html(html);
+             
+                                }
+                            });
+                            return false;
+                        }); 
+
+                        $('#add_subarea'+count_pegawai).change(function(){ 
+                            var id=$(this).val();
+                            $.ajax({
+                                url : "<?= site_url('AdministratorInduk/getSebutanJabatan');?>",
+                                method : "POST",
+                                data : {id: id},
+                                async : true,
+                                dataType : 'json',
+                                success: function(data){
+                                     
+                                    var html = '<option value="">Pilih Salah Satu</option>';
+                                    var i;
+                                    for(i=0; i<data.length; i++){
+                                        html += '<option value="'+data[i].sebutan_jabatan+'" title="'+data[i].sebutan_jabatan+'">'+data[i].sebutan_jabatan+'</option>';
+                                    }
+                                    $('#add_jabatan'+count_pegawai).html(html);
+             
+                                }
+                            });
+                            return false;
+                        });
+                    //End chainDropdown Area
+
+                    //Begin Hitung Lama Jabatan
+                        $('#tgl_mulai_jabatan_skg'+count_pegawai).change(function(){ 
+                            var tgl=$(this).val();
+                            $.ajax({
+                                url : "<?= site_url('AdministratorInduk/calculateLamaMenjabat');?>",
+                                method : "post",
+                                data : {'tgl': tgl},
+                                async : true,
+                                dataType : 'json',
+                                success: function(tgl){
+                                    $('#lama_jabatan'+count_pegawai).val(tgl.lama_menjabat)
+                                }
+                            });
+                            return false;
+                        }); 
+                    //End Hitung Lama Jabatan
+                }
             });
 
             $(document).on('click', '.remove_pegawai',function(){
