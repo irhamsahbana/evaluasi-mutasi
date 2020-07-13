@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 13 Jul 2020 pada 16.40
+-- Waktu pembuatan: 04 Jul 2020 pada 09.13
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.3
 
@@ -96,7 +96,7 @@ INSERT INTO `tb_approval_committee` (`id_approval`, `nip`, `password`, `role`) V
 
 CREATE TABLE `tb_approvement` (
   `id_usulan` varchar(255) NOT NULL,
-  `nip_usulan` varchar(255) NOT NULL,
+  `nip` varchar(255) NOT NULL,
   `id_approval` varchar(255) NOT NULL,
   `approvement` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -105,9 +105,9 @@ CREATE TABLE `tb_approvement` (
 -- Dumping data untuk tabel `tb_approvement`
 --
 
-INSERT INTO `tb_approvement` (`id_usulan`, `nip_usulan`, `id_approval`, `approvement`) VALUES
-('20-07-13_10:21:46', '8106325Z', '06361065-939d-11ea-9f1b-00ffee911c8d', 'under_review'),
-('20-07-13_10:21:46', '8106325Z', 'fd760f3b-939f-11ea-9f1b-00ffee911c8d', 'under_review');
+INSERT INTO `tb_approvement` (`id_usulan`, `nip`, `id_approval`, `approvement`) VALUES
+('20-06-30_10:12:58', '8106325Z', '06361065-939d-11ea-9f1b-00ffee911c8d', 'belum di-approve'),
+('20-06-30_10:12:58', '8006231Z', '06361065-939d-11ea-9f1b-00ffee911c8d', 'belum di-approve');
 
 -- --------------------------------------------------------
 
@@ -154,15 +154,7 @@ CREATE TABLE `tb_daftar_talenta_per_semester` (
 --
 
 INSERT INTO `tb_daftar_talenta_per_semester` (`tahun_talenta`, `semester_talenta`) VALUES
-('2016', '1'),
-('2016', '2'),
-('2017', '1'),
-('2017', '2'),
-('2018', '1'),
-('2018', '2'),
-('2019', '1'),
-('2019', '2'),
-('2020', '1');
+('2019', '2');
 
 -- --------------------------------------------------------
 
@@ -5022,18 +5014,6 @@ CREATE TABLE `tb_nilai_talenta_pegawai` (
   `nilai_talenta` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `tb_nilai_talenta_pegawai`
---
-
-INSERT INTO `tb_nilai_talenta_pegawai` (`tahun_talenta`, `semester_talenta`, `nip`, `nilai_talenta`) VALUES
-(2017, 2, '8106325Z', 'KPO'),
-(2018, 1, '8106325Z', 'POT'),
-(2018, 2, '8106325Z', 'OPT'),
-(2019, 1, '8106325Z', 'SPO'),
-(2019, 2, '8106325Z', 'SOP'),
-(2020, 1, '8106325Z', 'LBS');
-
 -- --------------------------------------------------------
 
 --
@@ -5190,9 +5170,8 @@ CREATE TABLE `tb_posisi_approval_committee` (
 --
 
 INSERT INTO `tb_posisi_approval_committee` (`id_posisi`, `posisi`) VALUES
-('a9ffa25d-939f-11ea-9f1b-00ffee911c8d', 'Ketua'),
-('aa608757-bef7-11ea-b0a8-14dae95f4e07', 'Sekretaris'),
-('aec1e1b7-939f-11ea-9f1b-00ffee911c8d', 'Anggota');
+('a9ffa25d-939f-11ea-9f1b-00ffee911c8d', 'ketua'),
+('aec1e1b7-939f-11ea-9f1b-00ffee911c8d', 'anggota');
 
 -- --------------------------------------------------------
 
@@ -5223,7 +5202,7 @@ CREATE TABLE `tb_usulan_evaluasi` (
 --
 
 INSERT INTO `tb_usulan_evaluasi` (`id_usulan`, `id_administrator`, `tgl_usulan`, `no_surat`, `status_usulan`, `alasan_ditolak`, `lokasi_surat`, `tgl_surat`, `tim_approval`, `tahun_1`, `semester_1`, `tahun_2`, `semester_2`, `tahun_3`, `semester_3`) VALUES
-('20-07-13_10:21:46', '9dc61c04-95e3-11ea-a2b8-00ffee911c8d', '2020-07-13 10:21:46', '-', 'diterima', '-', '-', '0000-00-00', 'UIW SULSELRABAR', '2019', 'I', '2019', 'II', '2020', 'I');
+('20-06-30_10:12:58', '9dc61c04-95e3-11ea-a2b8-00ffee911c8d', '2020-06-30 10:12:58', '-', 'diterima', '-', '', '0000-00-00', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -5242,8 +5221,7 @@ CREATE TABLE `tb_usulan_evaluasi_approval` (
 --
 
 INSERT INTO `tb_usulan_evaluasi_approval` (`id_usulan`, `id_approval`, `id_posisi`) VALUES
-('20-07-13_10:21:46', '06361065-939d-11ea-9f1b-00ffee911c8d', 'a9ffa25d-939f-11ea-9f1b-00ffee911c8d'),
-('20-07-13_10:21:46', 'fd760f3b-939f-11ea-9f1b-00ffee911c8d', 'aa608757-bef7-11ea-b0a8-14dae95f4e07');
+('20-06-30_10:12:58', '06361065-939d-11ea-9f1b-00ffee911c8d', 'a9ffa25d-939f-11ea-9f1b-00ffee911c8d');
 
 -- --------------------------------------------------------
 
@@ -5253,17 +5231,17 @@ INSERT INTO `tb_usulan_evaluasi_approval` (`id_usulan`, `id_approval`, `id_posis
 
 CREATE TABLE `tb_usulan_evaluasi_pegawai` (
   `id_usulan` varchar(255) NOT NULL,
-  `nip_usulan` varchar(255) NOT NULL,
-  `nama_usulan` varchar(255) NOT NULL,
-  `jabatan_skg` text NOT NULL,
-  `jabatan_usulan` text NOT NULL,
-  `grade_skg` varchar(255) NOT NULL,
-  `tgl_grade_skg` date NOT NULL,
+  `nip` varchar(255) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `sebutan_jabatan_sekarang` text NOT NULL,
+  `sebutan_jabatan_usulan` text NOT NULL,
+  `grade_sekarang` varchar(255) NOT NULL,
+  `tgl_grade_terakhir` date NOT NULL,
   `pendidikan_terakhir` varchar(255) NOT NULL,
   `n_talenta_1` varchar(255) NOT NULL,
   `n_talenta_2` varchar(255) NOT NULL,
   `n_talenta_3` varchar(255) NOT NULL,
-  `lama_jabatan_skg` varchar(255) NOT NULL,
+  `lama_jabatan_terakhir` varchar(255) NOT NULL,
   `keterangan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -5271,8 +5249,9 @@ CREATE TABLE `tb_usulan_evaluasi_pegawai` (
 -- Dumping data untuk tabel `tb_usulan_evaluasi_pegawai`
 --
 
-INSERT INTO `tb_usulan_evaluasi_pegawai` (`id_usulan`, `nip_usulan`, `nama_usulan`, `jabatan_skg`, `jabatan_usulan`, `grade_skg`, `tgl_grade_skg`, `pendidikan_terakhir`, `n_talenta_1`, `n_talenta_2`, `n_talenta_3`, `lama_jabatan_skg`, `keterangan`) VALUES
-('20-07-13_10:21:46', '8106325Z', 'RIZKY ARDIANA BAYUWERTY', 'MANAGER UNIT PELAKSANA PELAYANAN PELANGGAN PADA UNIT PELAKSANA PELAYANAN PELANGGAN (UP3) PINRANG', 'JUNIOR TECHNICIAN PEMELIHARAAN DISTRIBUSI PADA SEKSI TEKNIK UNIT LAYANAN PELANGGAN RAHA PADA UNIT PELAKSANA PELAYANAN PELANGGAN (UP3) BAUBAU', 'SYS02', '2019-01-01', 'S1 TEKNIK', 'SPO', 'SOP', 'LBS', '14 Thn 3 Bln', '-');
+INSERT INTO `tb_usulan_evaluasi_pegawai` (`id_usulan`, `nip`, `nama`, `sebutan_jabatan_sekarang`, `sebutan_jabatan_usulan`, `grade_sekarang`, `tgl_grade_terakhir`, `pendidikan_terakhir`, `n_talenta_1`, `n_talenta_2`, `n_talenta_3`, `lama_jabatan_terakhir`, `keterangan`) VALUES
+('20-06-30_10:12:58', '8106325Z', '', '', 'ULP-SELAYAR-10', '', '0000-00-00', '', '', '', '', '', '-'),
+('20-06-30_10:12:58', '8006231Z', '', '', 'ULP-SENGKANG-6', '', '0000-00-00', '', '', '', '', '', '-');
 
 -- --------------------------------------------------------
 
