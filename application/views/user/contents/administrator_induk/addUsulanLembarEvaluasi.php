@@ -37,13 +37,13 @@
                                                         Tahun
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="thn_1" class="form-control" max="9999" required>
+                                                        <input type="number" name="thn_1" class="form-control required" min="1945" max="2100" required>
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="thn_2" class="form-control" max="9999" required>
+                                                        <input type="number" name="thn_2" class="form-control required" min="1945" max="2100" required>
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="thn_3" class="form-control" max="9999" required>
+                                                        <input type="number" name="thn_3" class="form-control required" min="1945" max="2100" required>
                                                     </td>
                                                     </td>
                                                 </tr>
@@ -52,21 +52,21 @@
                                                         Semester
                                                     </td>
                                                     <td>
-                                                        <select class="form-control" name="smstr_1" required>
+                                                        <select class="form-control required" name="smstr_1" required>
                                                             <option value="">Pilih Salah Satu</option>
                                                             <option value="I">I</option>
                                                             <option value="II">II</option>
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <select class="form-control" name="smstr_2" required>
+                                                        <select class="form-control required" name="smstr_2" required>
                                                             <option value="">Pilih Salah Satu</option>
                                                             <option value="I">I</option>
                                                             <option value="II">II</option>
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <select class="form-control" name="smstr_3" required>
+                                                        <select class="form-control required" name="smstr_3" required>
                                                             <option value="">Pilih Salah Satu</option>
                                                             <option value="I">I</option>
                                                             <option value="II">II</option>
@@ -165,7 +165,7 @@
                                     <br><br>
                                     <!-- Tim Apprasial -->
                                     <h5 class="card-title" style="font-size: 15px; margin-top: 0.75rem">Tim Approval Committee</h5>
-                                        <input type="text" name="tim_approval" class="form-control" required>
+                                        <input type="text" name="tim_approval" class="form-control required" required>
                                     <br>
                                     <!-- Tabel Approval Committee yang diusukan -->
                                     <h5 class="card-title" style="font-size: 15px; margin-top: 0.75rem">Approval Committee yang Diusulkan</h4>
@@ -181,7 +181,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <select class="form-control nama_usulan_approval" name="nama_usulan_approval" id="nama_usulan_approval" required>
+                                                            <select class="form-control nama_usulan_approval required" name="nama_usulan_approval" id="nama_usulan_approval" required>
                                                                 <option value="">Pilih Salah Satu</option>
                                                                 <?php foreach ($approval as $row) : ?>
                                                                     <option value="<?= $row->id_approval ?>">(<?= $row->nip ?>) <?= $row->nama_pegawai ?></option>
@@ -189,7 +189,7 @@
                                                             </select>
                                                         </td>
                                                         <td>
-                                                            <select class="form-control posisi" name="posisi" id="posisi" required>
+                                                            <select class="form-control posisi required" name="posisi" id="posisi" required>
                                                                 <option value="">Pilih Salah Satu</option>
                                                                 <?php foreach ($posisi as $pos) : ?>
                                                                     <option value="<?= $pos->id_posisi ?>"><?= $pos->posisi ?></option>

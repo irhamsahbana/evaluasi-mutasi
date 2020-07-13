@@ -589,29 +589,105 @@
                 } else {
                     e.preventDefault();
                     var nip_usulan = [];
-                    var jabatan = [];
-                    var nama_usulan_approval = [];
+                    var nama = [];
+                    var sebutan_jabatan_skg = [];
+                    var sebutan_jabatan_usulan = [];
+                    var grade_skg = [];
+                    var tgl_grade_terakhir = [];
+                    var pendidikan_terakhir = [];
+                    var n_talenta_1 = [];
+                    var n_talenta_2 = [];
+                    var n_talenta_3 = [];
+                    var lama_jabatan_terakhir = [];
+                    var jabatan_usulan = [];
+
+                    //header nilai talenta
+                    var thn_1 = $('[name="thn_1"]').val();
+                    var thn_2 = $('[name="thn_2"]').val();
+                    var thn_3 = $('[name="thn_3"]').val();
+                    var smstr_1 = $('[name="smstr_1"]').val();
+                    var smstr_2 = $('[name="smstr_2"]').val();
+                    var smstr_3 = $('[name="smstr_3"]').val();
+
+                    var tim_approval = $('[name="tim_approval"]').val();
+
+                    var id_approval = [];
                     var posisi = [];
 
+                    //Pegawai yang Diusulkan
                     $('[name="nip_usulan"]').each(function(){
                         nip_usulan.push($(this).val());
                     });
-                    $('[name="jabatan"]').each(function(){
-                        jabatan.push($(this).find(":selected").val());
+                    $('[name="nama_usulan"]').each(function(){
+                        nama.push($(this).val());
                     });
+                    $('[name="jabatan_skg"]').each(function(){
+                        sebutan_jabatan_skg.push($(this).val());
+                    });
+                    $('[name="grade_skg"]').each(function(){
+                        grade_skg.push($(this).val());
+                    });
+                    $('[name="tgl_grade_terakhir"]').each(function(){
+                        tgl_grade_terakhir.push($(this).val());
+                    });
+                    $('[name="pendidikan_terakhir"]').each(function(){
+                        pendidikan_terakhir.push($(this).val());
+                    });
+                    $('[name="n_smstr_1_"]').each(function(){
+                        n_talenta_1.push($(this).val());
+                    });
+                    $('[name="n_smstr_2_"]').each(function(){
+                        n_talenta_2.push($(this).val());
+                    });
+                    $('[name="n_smstr_3_"]').each(function(){
+                        n_talenta_3.push($(this).val());
+                    });
+                    $('[name="lama_jabatan"]').each(function(){
+                        lama_jabatan_terakhir.push($(this).val());
+                    });
+                    $('[name="jabatan"]').each(function(){
+                        jabatan_usulan.push($(this).find(":selected").val());
+                    });
+
+                    //Approval Committee
                     $('[name="nama_usulan_approval"]').each(function(){
-                        nama_usulan_approval.push($(this).find(":selected").val());
+                        id_approval.push($(this).find(":selected").val());
                     });
                     $('[name="posisi"]').each(function(){
                         posisi.push($(this).find(":selected").val());
                     });
                     
                     $.ajax({
-                        url : "<?= site_url('AdministratorInduk/doAddUsulan');?>",
+                        url : "<?= site_url('AdministratorInduk/doAddUsulanMutasi');?>",
                         method : "POST",
-                        data : {nip_usulan:nip_usulan, jabatan:jabatan, nama_usulan_approval:nama_usulan_approval, posisi:posisi},
+                        data : {
+                                    thn_1 : thn_1,
+                                    thn_2 : thn_2,
+                                    thn_3 : thn_3,
+                                    smstr_1 : smstr_1,
+                                    smstr_2 : smstr_2,
+                                    smstr_3 : smstr_3,
+                                    nip_usulan : nip_usulan,
+                                    nama_usulan : nama,
+                                    jabatan_skg : sebutan_jabatan_skg,
+                                    grade_skg : grade_skg,
+                                    tgl_grade_skg : tgl_grade_terakhir,
+                                    pendidikan_terakhir : pendidikan_terakhir,
+                                    n_talenta_1 : n_talenta_1,
+                                    n_talenta_2 : n_talenta_2,
+                                    n_talenta_3 : n_talenta_3,
+                                    lama_jabatan_skg : lama_jabatan_terakhir,
+                                    jabatan_usulan : jabatan_usulan,
+                                    tim_approval : tim_approval, 
+                                    id_approval : id_approval,
+                                    posisi : posisi
+                                },
                         success : function(data){
-                            window.location.href = "<?= site_url('AdministratorInduk/tampilanUsulanLembarEvaluasi');?>";
+                            window.location.href = "<?= site_url('AdministratorInduk/tampilanUsulanLembarEvaluasi') ?>";
+                            
+                        },
+                        error: function(jqxhr, status, exception) {
+                            alert('Terjadi Kesalahan Sistem!');
                         }
                     })
                 }

@@ -1016,6 +1016,108 @@ class AdministratorInduk extends CI_Controller
         echo $lama;
     }
 
+    public function doAddUsulanMutasi()
+    {
+        //data global surat usulan mutasi
+        $id_administrator = $this->session->userdata('id_administrator');
+        $tgl_usulan       = date('y-m-d h:i:s');
+        $id_usulan        = str_replace(' ', '_', $tgl_usulan);
+        $tim_approval     = $this->input->post('tim_approval');
+        $no_surat         = '-';
+        $lokasi_surat     = '-';
+        $tgl_surat        = '0000-00-00';
+        $status_usulan    = 'diterima';
+        $alasan_ditolak   = '-';
+
+        //Header Nilai Talenta
+        $thn_1    = $this->input->post('thn_1');
+        $thn_2    = $this->input->post('thn_2');
+        $thn_3    = $this->input->post('thn_3');
+        $smstr_1    = $this->input->post('smstr_1');
+        $smstr_2    = $this->input->post('smstr_2');
+        $smstr_3    = $this->input->post('smstr_3');
+
+        //Data Pegawai Usulan
+        $nip_usulan             = $this->input->post('nip_usulan');
+        $nama_usulan            = $this->input->post('nama_usulan');
+        $jabatan_skg            = $this->input->post('jabatan_skg');
+        $grade_skg              = $this->input->post('grade_skg');
+        $tgl_grade_skg          = $this->input->post('tgl_grade_skg');
+        $pendidikan_terakhir    = $this->input->post('pendidikan_terakhir');
+        $n_talenta_1            = $this->input->post('n_talenta_1');
+        $n_talenta_2            = $this->input->post('n_talenta_2');
+        $n_talenta_3            = $this->input->post('n_talenta_3');
+        $lama_menjabat          = $this->input->post('lama_jabatan_skg');
+        $jabatan_usulan         = $this->input->post('jabatan_usulan');
+        $keterangan             = '-';
+
+        //Data Approval Committee usulan
+        $id_approval        = $this->input->post('id_approval');
+        $posisi             = $this->input->post('posisi');
+        
+        $data_global_surat = array(
+            'id_usulan'            => $id_usulan,
+            'id_administrator'     => $id_administrator,
+            'tgl_usulan'           => $tgl_usulan,
+            'no_surat'             => $no_surat,
+            'status_usulan'        => $status_usulan,
+            'lokasi_surat'         => $lokasi_surat,
+            'alasan_ditolak'       => $alasan_ditolak,
+            'tgl_surat'            => $tgl_surat,
+            'tim_approval'         => $tim_approval,
+            'tahun_1'              => $thn_1,
+            'tahun_2'              => $thn_2,
+            'tahun_3'              => $thn_3,
+            'semester_1'           => $smstr_1,
+            'semester_2'           => $smstr_2,
+            'semester_3'           => $smstr_3
+        );
+        $this->db->insert('tb_usulan_evaluasi', $data_global_surat);
+
+        for ($count = 0; $count < count($nip_usulan); $count++) {
+            $data_pegawai = array(
+                'id_usulan'                      => $id_usulan,
+                'nip_usulan'                     => $nip_usulan[$count],
+                'nama_usulan'                    => $nama_usulan[$count],
+                'jabatan_skg'                    => $jabatan_skg[$count],
+                'jabatan_usulan'                 => $jabatan_usulan[$count],
+                'grade_skg'                      => $grade_skg[$count], 
+                'tgl_grade_skg'                  => $tgl_grade_skg[$count],
+                'pendidikan_terakhir'            => $pendidikan_terakhir[$count],
+                'n_talenta_1'                    => $n_talenta_1[$count],
+                'n_talenta_2'                    => $n_talenta_2[$count],
+                'n_talenta_3'                    => $n_talenta_3[$count],
+                'lama_jabatan_skg'               => $lama_menjabat[$count],
+                'keterangan'                     => $keterangan
+            );
+            $this->db->insert('tb_usulan_evaluasi_pegawai', $data_pegawai);
+        }
+
+        for ($count = 0; $count < count($id_approval); $count++) {
+            $data_approval = array(
+                'id_usulan'         => $id_usulan,
+                'id_approval'       => $id_approval[$count],
+                'id_posisi'         => $posisi[$count],
+            );
+            $this->db->insert('tb_usulan_evaluasi_approval', $data_approval);
+        }
+
+        for ($count_approval = 0; $count_approval < count($id_approval); $count_approval++) {
+            for ($count_pegawai = 0; $count_pegawai < count($nip_usulan); $count_pegawai++) {
+                $data_approvement = array(
+                    'id_usulan'     => $id_usulan,
+                    'id_approval'   => $id_approval[$count_approval],
+                    'nip_usulan'    => $nip_usulan[$count_pegawai],
+                    'approvement'   => 'under_review',
+                );
+                $this->db->insert('tb_approvement', $data_approvement);
+            }
+        }
+
+        $this->session->set_flashdata('alert_success', 'Usulan Telah Ditambahkan!');
+        redirect('AdministratorInduk/tampilanUsulanLembarEvaluasi');
+    }
+
     public function doAddUsulan()
     {
         $id_administrator = $this->session->userdata('id_administrator');
@@ -1024,7 +1126,7 @@ class AdministratorInduk extends CI_Controller
         $no_surat         = '-';
         $nip              = $this->input->post('nip_usulan');
         $jabatan          = $this->input->post('jabatan');
-        $id_approval      = $this->input->post('nama_usulan_approval');
+        $id_approval      = $this->input->post('id_approval');
         $posisi           = $this->input->post('posisi');
 
         $data_usulan = array(
