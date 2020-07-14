@@ -16,6 +16,10 @@
         <li class="tab active"><a href="#signup">Administrator</a></li>
         <li class="tab"><a href="#login">Approval Committee</a></li>
       </ul>
+
+    <?php if($this->session->flashdata('message')) {?>
+    <h2><span style="color: #ffffff"><?php echo $this->session->flashdata('message');?><span></h2>
+    <?php }?>
       
       <div class="tab-content">
         <div id="signup">   
@@ -70,7 +74,7 @@
             <input type="password" name="password_approval" required autocomplete="off"/>
           </div>
           
-<!--           <p class="forgot"><a href="#">Forgot Password?</a></p> -->
+          <p class="forgot"><a href="<?= site_url('Login/tampilanForgotPassword') ?>">Forgot Password?</a></p>
           
           <button class="button button-block"/>Masuk</button>
           
