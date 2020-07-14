@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 14 Jul 2020 pada 18.30
+-- Waktu pembuatan: 13 Jul 2020 pada 16.40
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.3
 
@@ -76,7 +76,6 @@ INSERT INTO `tb_administrator` (`id_administrator`, `nip`, `password`, `role`, `
 CREATE TABLE `tb_approval_committee` (
   `id_approval` varchar(255) NOT NULL,
   `nip` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -85,9 +84,9 @@ CREATE TABLE `tb_approval_committee` (
 -- Dumping data untuk tabel `tb_approval_committee`
 --
 
-INSERT INTO `tb_approval_committee` (`id_approval`, `nip`, `email`, `password`, `role`) VALUES
-('06361065-939d-11ea-9f1b-00ffee911c8d', '6483084F', 'ginasyrn@gmail.com', '$2y$10$jeubThC6flujTGFMevcRJu6ocQUM7tTYQRTfLW4If/gCbtvfSNDqS', 'approval_committee'),
-('fd760f3b-939f-11ea-9f1b-00ffee911c8d', '6401007P', '', '$2y$10$rvCMLAWS6K/frR5xo9zg6.acdfV6eHLpdIUIxyeko1WJ9wpI//tCK', 'approval_committee');
+INSERT INTO `tb_approval_committee` (`id_approval`, `nip`, `password`, `role`) VALUES
+('06361065-939d-11ea-9f1b-00ffee911c8d', '6483084F', '$2y$10$UlHPcDM22eDt5w1UkS37zOwlEBYDFv1SngZWBt0wPz3B/W9JTe04a', 'approval_committee'),
+('fd760f3b-939f-11ea-9f1b-00ffee911c8d', '6401007P', '$2y$10$rvCMLAWS6K/frR5xo9zg6.acdfV6eHLpdIUIxyeko1WJ9wpI//tCK', 'approval_committee');
 
 -- --------------------------------------------------------
 
