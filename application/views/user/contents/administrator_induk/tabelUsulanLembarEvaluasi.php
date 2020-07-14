@@ -21,6 +21,31 @@
                                 <h4 class="card-title">Usulan Lembar Evaluasi</h4>
                                 <div class="table-responsive">
                                     <div id="dataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                        <!-- Alert Add -->
+                                    <?php 
+                                    $alert_success = $this->session->flashdata('alert_success');
+                                    if($this->session->flashdata('alert_success') == TRUE) : ?>
+                                        <div class="alert alert-success alert-dismissible fade show">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                        </button><strong><?= $alert_success ?></strong></div>
+                                    <?php endif; ?>
+                                    <!-- Alert Update -->
+                                    <?php 
+                                    $alert_primary = $this->session->flashdata('alert_primary');
+                                    if($this->session->flashdata('alert_primary') == TRUE) : ?>
+                                        <div class="alert alert-primary alert-dismissible fade show">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                        </button><strong><?= $alert_primary ?></strong></div>
+                                    <?php endif; ?>
+                                    <!-- Alert Delete -->
+                                    <?php 
+                                    $alert_danger = $this->session->flashdata('alert_danger');
+                                    if($this->session->flashdata('alert_danger') == TRUE) : ?>
+                                        <div class="alert alert-danger alert-dismissible fade show">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                        </button><strong><?= $alert_danger ?></strong></div>
+                                    <?php endif; ?>
+
                                         <button style="float: right;" type="button" class="btn mb-1 btn-success" onclick='window.open("<?= site_url('AdministratorInduk/tampilanAddUsulanLembarEvaluasi'); ?>","_blank")'>Kirim Usulan Baru<span class="btn-icon-right"><i class="fa fa-paper-plane"></i></span>
                                         </button>
                                     </div>

@@ -1115,7 +1115,6 @@ class AdministratorInduk extends CI_Controller
         }
 
         $this->session->set_flashdata('alert_success', 'Usulan Telah Ditambahkan!');
-        redirect('AdministratorInduk/tampilanUsulanLembarEvaluasi');
     }
 
     public function doAddUsulan()
