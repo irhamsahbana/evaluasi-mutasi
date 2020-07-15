@@ -75,8 +75,14 @@ class AdministratorInduk extends CI_Controller
             'agama'                          => $input['religious'],
             'no_telp'                        => $input['telephone_no'],
         );
-        $this->db->insert('tb_pegawai', $data_pegawai);
-        $this->session->set_flashdata('alert_success', 'Data pegawai berhasil ditambahkan!');
+
+        $cek = $this->db->query("SELECT nip FROM tb_pegawai WHERE nip = '$input[nipeg]'");
+        if($cek->num_rows() > 0) { 
+            $this->session->set_flashdata("alert_danger", "Data pegawai dengan NIP tersebut telah ada!");
+        } else {
+            $this->db->insert('tb_pegawai', $data_pegawai);
+            $this->session->set_flashdata('alert_success', 'Data pegawai berhasil ditambahkan!');
+        }
         redirect('AdministratorInduk/tampilanDataPegawai');
     }
 
@@ -1117,76 +1123,19 @@ class AdministratorInduk extends CI_Controller
         $this->session->set_flashdata('alert_success', 'Usulan Telah Ditambahkan!');
     }
 
-    public function doAddUsulan()
-    {
-        $id_administrator = $this->session->userdata('id_administrator');
-        $tgl_usulan       = date('y-m-d h:i:s');
-        $id_usulan        = str_replace(' ', '_', $tgl_usulan);
-        $no_surat         = '-';
-        $nip              = $this->input->post('nip_usulan');
-        $jabatan          = $this->input->post('jabatan');
-        $id_approval      = $this->input->post('id_approval');
-        $posisi           = $this->input->post('posisi');
-
-        $data_usulan = array(
-            'id_usulan'            => $id_usulan,
-            'id_administrator'     => $id_administrator,
-            'tgl_usulan'           => $tgl_usulan,
-            'no_surat'             => $no_surat,
-            'status_usulan'        => 'diterima',
-            'alasan_ditolak'       => '-',
-        );
-        $this->db->insert('tb_usulan_evaluasi', $data_usulan);
-
-        for ($count = 0; $count < count($nip); $count++) {
-            $data_pegawai = array(
-                'id_usulan'                      => $id_usulan,
-                'nip'                            => $nip[$count],
-                'id_sebutan_jabatan_usulan'      => $jabatan[$count],
-                'keterangan'                     => '-',
-            );
-            $this->db->insert('tb_usulan_evaluasi_pegawai', $data_pegawai);
-        }
-
-        for ($count = 0; $count < count($id_approval); $count++) {
-            $data_approval = array(
-                'id_usulan'         => $id_usulan,
-                'id_approval'       => $id_approval[$count],
-                'id_posisi'         => $posisi[$count],
-            );
-            $this->db->insert('tb_usulan_evaluasi_approval', $data_approval);
-        }
-
-        for ($count_approval = 0; $count_approval < count($id_approval); $count_approval++) {
-            for ($count_pegawai = 0; $count_pegawai < count($nip); $count_pegawai++) {
-                $data_approvement = array(
-                    'id_usulan'     => $id_usulan,
-                    'id_approval'   => $id_approval[$count_approval],
-                    'nip'           => $nip[$count_pegawai],
-                    'approvement'   => 'belum di-approve',
-                );
-                $this->db->insert('tb_approvement', $data_approvement);
-            }
-        }
-
-        $this->session->set_flashdata('alert_success', 'Usulan Telah Ditambahkan!');
-        redirect('AdministratorInduk/tampilanUsulanLembarEvaluasi');
-    }
-
     public function tampilanRincianLembarEvaluasi($id_usulan)
     {
         $where = array('id_usulan' => $id_usulan);
         $coba =  '1992-10-23';
 
         $data = array(
-            'isi'                       => 'user/contents/administrator_induk/tabelUsulanLembarEvaluasi',
+            'isi'                       => 'user/contents/administrator_induk/tabelRincianUsulanLembarEvaluasi',
             'title'                     => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
-            'pegawai'                   => $this->Crud->gw('tb_usulan_evaluasi_pegawai', $where),
-            'approval'                  => $this->Crud->gw('tb_usulan_evaluasi_approval', $where),
+            'data_surat'                => $this->Crud->gw('tb_usulan_evaluasi', $where),
+            'usulan_pegawai'            => $this->Crud->gw('tb_usulan_evaluasi_pegawai', $where),
+            'usulan_approval'           => $this->M_AdministratorInduk->rincianApprovalUsulan($where),
             'tgl'                       => berapa_lama($coba),
         );
-
-        dd($data);
 
         $this->load->view('user/_layouts/wrapper', $data);
     }

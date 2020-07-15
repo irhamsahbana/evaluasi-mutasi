@@ -54,6 +54,7 @@
                                             <tr>
                                                 <th>No.</th>
                                                 <th>Tanggal Pengusulan</th>
+                                                <th>No Surat</th>
                                                 <th>Administrator yang mengusulkan</th>
                                                 <th>Status</th>
                                                 <th>Aksi</th>
@@ -64,6 +65,7 @@
                                                 <tr>
                                                 <td><?= $no++ ?></td>
                                                 <td><?= $f->tgl_usulan ?></td>
+                                                <td><?= $f->no_surat ?></td>
                                                 <td>
                                                     <a href="#"><?= $f->nip ?></a>
                                                 </td>
