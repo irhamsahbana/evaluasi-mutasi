@@ -613,6 +613,7 @@ class AdministratorInduk extends CI_Controller
 
         $data_penerima = array(
             'nip'                       => $input['nipeg'],
+            'email'                     => $input['email'],
             'password'                  => password_hash($input['password'], PASSWORD_DEFAULT),
             'role'                      => 'approval_committee',
         );
@@ -640,11 +641,13 @@ class AdministratorInduk extends CI_Controller
         if ($input['password'] != '') {
             $items = array(
                 'nip'        => $input['nipeg'],
+                'email'      => $input['email'],
                 'password'   => password_hash($input['password'], PASSWORD_DEFAULT),
             );
         } else {
             $items = array(
-                'nip'    => $input['nipeg'],
+                'nip'        => $input['nipeg'],
+                'email'      => $input['email'],
             );
         }
 

@@ -67,7 +67,8 @@ class M_AdministratorInduk extends CI_Model
 
     public function getDataApproval()
     {
-        return $this->db->from('tb_approval_committee')
+        return $this->db->select('tb_approval_committee.*, tb_pegawai.nama_pegawai')
+            ->from('tb_approval_committee')
             ->join('tb_pegawai', 'tb_pegawai.nip=tb_approval_committee.nip', 'left')
             ->get()
             ->result();
