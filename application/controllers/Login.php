@@ -50,14 +50,15 @@ class Login extends CI_Controller
     public function forgotPassword()
     {
         $this->load->helper('url');
-        $email_approval = $this->input->post('email');
+        $email_approval = $this->input->post('email', TRUE);
         $this->form_validation->set_rules('email', 'email', 'required');
 
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata('message','Try again!');      
             redirect('Login/tampilanForgotPassword');
         } else {
-            $query = $this->db->get_where('tb_approval_committee', array('email' => $email_approval));
+            // $query = $this->db->get_where('tb_approval_committee', array('email' => $email_approval));
+            $query = $this->db->from('tb_approval_committee')->join('tb_pegawai', 'tb_pegawai.nip = tb_approval_committee.nip', 'left')->where(array('tb_pegawai.email' => $email_approval))->get();
             if ($query->num_rows() > 0) {
                 $r = $query->result();
                 $user = $r[0];
@@ -78,7 +79,7 @@ class Login extends CI_Controller
                 $mail->SMTPSecure = 'tls';
                 $mail->Port       = 587;
         
-                $mail->setFrom('tim2016kp@gmail.com', 'Admin');
+                $mail->setFrom('tim2016kp@gmail.com', 'Sistem Website Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar');
 
                 // Add a recipient
                 $mail->addAddress($user->email);
@@ -87,14 +88,15 @@ class Login extends CI_Controller
                 $mail->Subject = 'Password Reset';
         
                 // Email body content
-                $mail->Body = 'You have requested the new password, Here is you new password:'. $password;
+                $mail->Body = 'Anda baru saja meminta untuk mereset password anda sebagai Approval Committee, Ini adalah password baru anda : '. $password;
         
                 // Send email
                 if(!$mail->send()){
                     echo 'Message could not be sent.';
                     echo 'Mailer Error: ' . $mail->ErrorInfo;
                 }else{
-                    redirect('Login');
+                    $this->session->set_flashdata('message','Password berhasil direset, silahkan cek email anda! : '.$email_approval);
+                    redirect('Login/tampilanForgotPassword');
                 }
 
                 // if($this->email->send()) {
@@ -104,7 +106,7 @@ class Login extends CI_Controller
                 //     redirect('Login/tampilanForgotPassword');
                 // }
             } else {
-                $this->session->set_flashdata('message','Email not found');
+                $this->session->set_flashdata('message','Email tidak terdaftar di dalam basis data pegawai / Email tersebut tidak terdaftar sebagai approval committee!');
                 redirect('Login/tampilanForgotPassword');
             }
         }

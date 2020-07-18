@@ -1026,8 +1026,9 @@ class AdministratorInduk extends CI_Controller
     {
         //data global surat usulan mutasi
         $id_administrator = $this->session->userdata('id_administrator');
-        $tgl_usulan       = date('y-m-d h:i:s');
+        $tgl_usulan       = date('y-m-d H:i:s');
         $id_usulan        = str_replace(' ', '_', $tgl_usulan);
+        $id_usulan        = str_replace(':', '-', $id_usulan);
         $tim_approval     = $this->input->post('tim_approval');
         $no_surat         = '-';
         $lokasi_surat     = '-';
@@ -1120,13 +1121,16 @@ class AdministratorInduk extends CI_Controller
             }
         }
 
-        $this->session->set_flashdata('alert_success', 'Usulan Telah Ditambahkan!');
+        $this->session->set_flashdata('alert_success', 'Data usulan evaluasi mutasi berhasil ditambahkan!');
     }
 
     public function tampilanRincianLembarEvaluasi($id_usulan)
     {
         $where = array('id_usulan' => $id_usulan);
-        $coba =  '1992-10-23';
+        $where_approved = array(
+            'id_usulan'     => $id_usulan,
+            'approvement'   => 'approved'
+        );
 
         $data = array(
             'isi'                       => 'user/contents/administrator_induk/tabelRincianUsulanLembarEvaluasi',
@@ -1134,10 +1138,63 @@ class AdministratorInduk extends CI_Controller
             'data_surat'                => $this->Crud->gw('tb_usulan_evaluasi', $where),
             'usulan_pegawai'            => $this->Crud->gw('tb_usulan_evaluasi_pegawai', $where),
             'usulan_approval'           => $this->M_AdministratorInduk->rincianApprovalUsulan($where),
-            'tgl'                       => berapa_lama($coba),
+            'jumlah_approvement'        => $this->Crud->cw('tb_approvement', $where),
+            'jumlah_approved'           => $this->Crud->cw('tb_approvement', $where_approved),
         );
 
         $this->load->view('user/_layouts/wrapper', $data);
+    }
+
+    public function doDeleteUsulanMutasi($id_usulan)
+    {
+        $where = array('id_usulan' => $id_usulan);
+
+        $this->Crud->d('tb_usulan_evaluasi', $where);
+        $this->Crud->d('tb_usulan_evaluasi_pegawai', $where);
+        $this->Crud->d('tb_usulan_evaluasi_approval', $where);
+        $this->Crud->d('tb_approvement', $where);
+        $this->session->set_flashdata('alert_danger', 'Data usulan evaluasi mutasi berhasil dihapus!');
+        redirect('AdministratorInduk/tampilanUsulanLembarEvaluasi');
+    }
+
+    public function doUpdateDataSurat($id_usulan)
+    {
+        $where = array('id_usulan' => $id_usulan);
+        $input = $this->input->post(NULL, TRUE);
+
+        $data_surat = array(
+            'no_surat'      => $input['no_surat'],
+            'tgl_surat'     => $input['tgl_surat'],
+            'lokasi_surat'  => $input['lokasi_surat'],
+            'tim_approval'  => $input['tim_approval'],
+            'tahun_1'       => $input['thn_1'],
+            'tahun_2'       => $input['thn_2'],
+            'tahun_3'       => $input['thn_3'],
+            'semester_1'    => $input['smstr_1'],
+            'semester_2'    => $input['smstr_2'],
+            'semester_3'    => $input['smstr_3']
+        );
+
+        $this->Crud->u('tb_usulan_evaluasi', $data_surat, $where);
+        $this->session->set_flashdata('alert_primary', 'Data Surat Evaluasi Mutasi berhasil disunting!');
+        redirect('AdministratorInduk/tampilanRincianLembarEvaluasi/'.$id_usulan);
+    }
+
+    public function doUpdateKeterangan($id_usulan, $nip_usulan)
+    {
+        $where = array(
+            'id_usulan'     => $id_usulan,
+            'nip_usulan'    => $nip_usulan
+        );
+        $input = $this->input->post(NULL, TRUE);
+
+        $data_ket = array(
+            'keterangan' => $input['keterangan_pegawai']
+        );
+
+        $this->Crud->u('tb_usulan_evaluasi_pegawai', $data_ket, $where);
+        $this->session->set_flashdata('alert_primary', 'Data Keterangan Pegawai Usulan berhasil disunting!');
+        redirect('AdministratorInduk/tampilanRincianLembarEvaluasi/'.$id_usulan);
     }
 # ************ End Menu Lembar Evaluasi ******************
 

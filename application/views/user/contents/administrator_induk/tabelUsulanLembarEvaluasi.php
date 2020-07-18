@@ -62,9 +62,15 @@
                                         </thead>
                                         <tbody>
                                             <?php $no =1; foreach($lembar_evaluasi_diterima as $f): ?>
+                                                <?php 
+                                                    $myDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $f->tgl_usulan);
+                                                    $tanggal = $myDateTime->format('d/m/Y');
+                                                    $jam = $myDateTime->format('H:i:s');
+                                                    $waktu = $tanggal." Pukul ".$jam." WITA";
+                                                 ?>
                                                 <tr>
                                                 <td><?= $no++ ?></td>
-                                                <td><?= $f->tgl_usulan ?></td>
+                                                <td><?= $waktu ?></td>
                                                 <td><?= $f->no_surat ?></td>
                                                 <td>
                                                     <a href="#"><?= $f->nip ?></a>
@@ -74,7 +80,7 @@
                                                     <button type="button" class="btn mb-1 btn-secondary" onclick='window.open("<?= site_url('AdministratorInduk/tampilanRincianLembarEvaluasi/'.$f->id_usulan); ?>","_blank")'>Rincian<span class="btn-icon-right"><i class="fa fa-file"></i></span></button>
                                                     <!-- <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
                                                     </button> -->
-                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
+                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete<?= $f->id_usulan ?>">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
                                                     </button>
                                                 </td>
                                             </tr>
@@ -102,24 +108,36 @@
             Content body end
         ***********************************-->
 
-        <!--**********************************
-    Begin : Modal for Delete Data
+<!--**********************************
+Begin : Modal for Delete Data
 ***********************************-->
-        <div class="modal fade modal-delete" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Hapus data usulan evaluasi</h5>
-                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Yakin ingin Menghapus data usulan evaluasi?</div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger">Hapus</button>
-                    </div>
+<?php foreach($lembar_evaluasi_diterima as $f): ?>
+    <?php 
+        $myDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $f->tgl_usulan);
+        $tanggal = $myDateTime->format('d/m/Y');
+        $jam = $myDateTime->format('H:i:s');
+        $waktu = $tanggal." Pukul ".$jam." WITA";
+     ?>
+        <div class="modal fade modal-delete<?= $f->id_usulan ?>" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Hapus data talenta</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                    </button>
                 </div>
+                <div class="modal-body">
+                    <form method="POST" action="<?= site_url('AdministratorInduk/doDeleteUsulanMutasi/'.$f->id_usulan) ?>">
+                        Yakin ingin menghapus data usulan evaluasi mutasi bertanggal <?= $waktu ?>?
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">Hapus</button>
+                </div>
+                </form>
             </div>
         </div>
-        <!--**********************************
-    End : Modal for Delete Data
+    </div>
+<?php endforeach ?>
+<!--**********************************
+End : Modal for Delete Data
 ***********************************-->

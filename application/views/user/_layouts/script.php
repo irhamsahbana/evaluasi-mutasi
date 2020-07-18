@@ -687,7 +687,7 @@
                             
                         },
                         error: function(jqxhr, status, exception) {
-                            alert('Terjadi Kesalahan Sistem!');
+                            alert('Terjadi Kesalahan Sistem, Cek kembali data yang anda kirim!)');
                         }
                     })
                 }
