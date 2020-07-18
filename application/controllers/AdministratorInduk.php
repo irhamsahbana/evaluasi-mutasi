@@ -644,7 +644,7 @@ class AdministratorInduk extends CI_Controller
             );
         } else {
             $items = array(
-                'nip'    => $input['nipeg'],
+                'nip'        => $input['nipeg']
             );
         }
 
