@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2020 at 03:44 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.3
+-- Waktu pembuatan: 14 Jul 2020 pada 18.30
+-- Versi server: 10.4.11-MariaDB
+-- Versi PHP: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Struktur dari tabel `admin`
 --
 
 CREATE TABLE `admin` (
@@ -39,7 +39,7 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `admin`
+-- Dumping data untuk tabel `admin`
 --
 
 INSERT INTO `admin` (`id_admin`, `username_admin`, `password_admin`, `last_login_admin`, `status_admin`, `foto_admin`, `nama_lengkap_admin`) VALUES
@@ -48,7 +48,7 @@ INSERT INTO `admin` (`id_admin`, `username_admin`, `password_admin`, `last_login
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_administrator`
+-- Struktur dari tabel `tb_administrator`
 --
 
 CREATE TABLE `tb_administrator` (
@@ -60,7 +60,7 @@ CREATE TABLE `tb_administrator` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_administrator`
+-- Dumping data untuk tabel `tb_administrator`
 --
 
 INSERT INTO `tb_administrator` (`id_administrator`, `nip`, `password`, `role`, `personnel_subarea`) VALUES
@@ -70,28 +70,29 @@ INSERT INTO `tb_administrator` (`id_administrator`, `nip`, `password`, `role`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_approval_committee`
+-- Struktur dari tabel `tb_approval_committee`
 --
 
 CREATE TABLE `tb_approval_committee` (
   `id_approval` varchar(255) NOT NULL,
   `nip` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_approval_committee`
+-- Dumping data untuk tabel `tb_approval_committee`
 --
 
-INSERT INTO `tb_approval_committee` (`id_approval`, `nip`, `password`, `role`) VALUES
-('06361065-939d-11ea-9f1b-00ffee911c8d', '6483084F', '$2y$10$Vqxrke5eK4tLpC4f/Nw0UOG4KwxRReCgrC79proQCyqxNgl9tE/xO', 'approval_committee'),
-('fd760f3b-939f-11ea-9f1b-00ffee911c8d', '6401007P', '$2y$10$rvCMLAWS6K/frR5xo9zg6.acdfV6eHLpdIUIxyeko1WJ9wpI//tCK', 'approval_committee');
+INSERT INTO `tb_approval_committee` (`id_approval`, `nip`, `email`, `password`, `role`) VALUES
+('06361065-939d-11ea-9f1b-00ffee911c8d', '6483084F', 'ginasyrn@gmail.com', '$2y$10$jeubThC6flujTGFMevcRJu6ocQUM7tTYQRTfLW4If/gCbtvfSNDqS', 'approval_committee'),
+('fd760f3b-939f-11ea-9f1b-00ffee911c8d', '6401007P', '', '$2y$10$rvCMLAWS6K/frR5xo9zg6.acdfV6eHLpdIUIxyeko1WJ9wpI//tCK', 'approval_committee');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_approvement`
+-- Struktur dari tabel `tb_approvement`
 --
 
 CREATE TABLE `tb_approvement` (
@@ -102,17 +103,17 @@ CREATE TABLE `tb_approvement` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_approvement`
+-- Dumping data untuk tabel `tb_approvement`
 --
 
 INSERT INTO `tb_approvement` (`id_usulan`, `nip_usulan`, `id_approval`, `approvement`) VALUES
-('20-07-17_21-48-26', '8106325Z', '06361065-939d-11ea-9f1b-00ffee911c8d', 'under_review'),
-('20-07-17_21-48-26', '8106325Z', 'fd760f3b-939f-11ea-9f1b-00ffee911c8d', 'under_review');
+('20-07-13_10:21:46', '8106325Z', '06361065-939d-11ea-9f1b-00ffee911c8d', 'under_review'),
+('20-07-13_10:21:46', '8106325Z', 'fd760f3b-939f-11ea-9f1b-00ffee911c8d', 'under_review');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_business_area`
+-- Struktur dari tabel `tb_business_area`
 --
 
 CREATE TABLE `tb_business_area` (
@@ -121,7 +122,7 @@ CREATE TABLE `tb_business_area` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_business_area`
+-- Dumping data untuk tabel `tb_business_area`
 --
 
 INSERT INTO `tb_business_area` (`business_area`, `nama_business_area`) VALUES
@@ -141,7 +142,7 @@ INSERT INTO `tb_business_area` (`business_area`, `nama_business_area`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_daftar_talenta_per_semester`
+-- Struktur dari tabel `tb_daftar_talenta_per_semester`
 --
 
 CREATE TABLE `tb_daftar_talenta_per_semester` (
@@ -150,7 +151,7 @@ CREATE TABLE `tb_daftar_talenta_per_semester` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_daftar_talenta_per_semester`
+-- Dumping data untuk tabel `tb_daftar_talenta_per_semester`
 --
 
 INSERT INTO `tb_daftar_talenta_per_semester` (`tahun_talenta`, `semester_talenta`) VALUES
@@ -167,7 +168,7 @@ INSERT INTO `tb_daftar_talenta_per_semester` (`tahun_talenta`, `semester_talenta
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_jabatan`
+-- Struktur dari tabel `tb_jabatan`
 --
 
 CREATE TABLE `tb_jabatan` (
@@ -178,7 +179,7 @@ CREATE TABLE `tb_jabatan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_jabatan`
+-- Dumping data untuk tabel `tb_jabatan`
 --
 
 INSERT INTO `tb_jabatan` (`id_sebutan_jabatan`, `urutan_dalam_org`, `sebutan_jabatan`, `personnel_subarea`) VALUES
@@ -5000,7 +5001,7 @@ INSERT INTO `tb_jabatan` (`id_sebutan_jabatan`, `urutan_dalam_org`, `sebutan_jab
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_judul_talenta`
+-- Struktur dari tabel `tb_judul_talenta`
 --
 
 CREATE TABLE `tb_judul_talenta` (
@@ -5012,7 +5013,7 @@ CREATE TABLE `tb_judul_talenta` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_nilai_talenta_pegawai`
+-- Struktur dari tabel `tb_nilai_talenta_pegawai`
 --
 
 CREATE TABLE `tb_nilai_talenta_pegawai` (
@@ -5023,7 +5024,7 @@ CREATE TABLE `tb_nilai_talenta_pegawai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_nilai_talenta_pegawai`
+-- Dumping data untuk tabel `tb_nilai_talenta_pegawai`
 --
 
 INSERT INTO `tb_nilai_talenta_pegawai` (`tahun_talenta`, `semester_talenta`, `nip`, `nilai_talenta`) VALUES
@@ -5037,7 +5038,7 @@ INSERT INTO `tb_nilai_talenta_pegawai` (`tahun_talenta`, `semester_talenta`, `ni
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_pegawai`
+-- Struktur dari tabel `tb_pegawai`
 --
 
 CREATE TABLE `tb_pegawai` (
@@ -5065,13 +5066,13 @@ CREATE TABLE `tb_pegawai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_pegawai`
+-- Dumping data untuk tabel `tb_pegawai`
 --
 
 INSERT INTO `tb_pegawai` (`nip`, `pers_no`, `nama_pegawai`, `org_unit`, `organizational_unit`, `position`, `nama_panjang_posisi`, `jenjang_main_grp`, `jenjang_sub_grp`, `grade`, `tgl_grade`, `pendidikan_terakhir`, `tgl_lahir`, `tgl_capeg`, `tgl_pegawai_tetap`, `gender`, `email`, `tgl_masuk`, `agama`, `no_telp`, `id_sebutan_jabatan`) VALUES
 ('6401007P', '47', 'rania', '47', 'ULP PEKKABATA', '37', 'ANALYST KINERJA', 'Fungsional', 'Fungsional V', 'SYS04', '2020-05-30', 'STM', '2020-05-23', '2020-05-23', '2020-05-09', 'Female', 'raniagomez14@gmail.com', '2020-04-26', 'Islam', '081241314815', 'ULP-PALOPO-KOTA-1'),
-('6483084F', '60', 'ghina', '65', 'ULP PEKKABATA', '63', 'ANALYST KINERJA', 'Fungsional', 'Fungsional IV', 'SPE04', '2020-04-13', 'S1 Non Teknik', '2020-04-15', '2020-04-11', '2020-04-18', 'Female', 'irhamsahbana@gmail.com', '2020-04-18', 'Islam', '08124162212', 'ULP-JENEPONTO-21'),
-('6585051F', 'N/A', 'HARIYADI', 'N/A', 'N/A', 'N/A', 'N/A', 'STRUKTURAL', 'MANAJEMEN DASAR', 'OPT04', '2017-01-01', 'S1 TEKNIK', '1965-05-08', '1986-10-01', '1987-12-01', 'MALE', 'hariyadi@gmail.com', '1945-01-01', 'N/A', 'N/A', 'UP3-MAKASSAR-SELATAN-1'),
+('6483084F', '60', 'ghina', '65', 'ULP PEKKABATA', '63', 'ANALYST KINERJA', 'Fungsional', 'Fungsional IV', 'SPE04', '2020-04-13', 'S1 Non Teknik', '2020-04-15', '2020-04-11', '2020-04-18', 'Female', 'ghinarania14@gmail.com', '2020-04-18', 'Islam', '08124162212', 'ULP-JENEPONTO-21'),
+('6585051F', 'N/A', 'HARIYADI', 'N/A', 'N/A', 'N/A', 'N/A', 'STRUKTURAL', 'MANAJEMEN DASAR', 'OPT04', '2017-01-01', 'S1 TEKNIK', '1965-05-08', '1986-10-01', '1987-12-01', 'MALE', 'N/A', '1945-01-01', 'N/A', 'N/A', 'UP3-MAKASSAR-SELATAN-1'),
 ('6994009ZD', 'N/A', 'YUSWASTUTY YAHYA', 'N/A', 'N/A', 'N/A', 'N/A', 'STRUKTURAL', 'MANAJEMEN DASAR', 'OPT01', '2019-01-01', 'PROGRAM S2 NON TEKNIK', '1969-04-03', '1994-10-01', '1995-09-01', 'MALE', 'N/A', '1945-01-01', 'N/A', 'N/A', 'UP3-BULUKUMBA-1'),
 ('7093034P', 'N/A', 'AGUS SUSANTO', 'N/A', 'N/A', 'N/A', 'N/A', 'STRUKTURAL', 'MANAJEMEN DASAR', 'SYS03', '2019-01-01', 'S1 TEKNIK', '1970-08-16', '1993-09-01', '1994-09-01', 'MALE', 'N/A', '1945-01-01', 'N/A', 'N/A', 'UP3-BAUBAU-1'),
 ('7904006F', 'N/A', 'YULI ASHANIAIS RAMADANI', 'N/A', 'N/A', 'N/A', 'N/A', 'STRUKTURAL', 'MANAJEMEN DASAR', 'OPT04', '2019-01-01', 'S1 TEKNIK', '1979-07-31', '2004-01-01', '2004-01-01', 'MALE', 'N/A', '1945-01-01', 'N/A', 'N/A', 'UP3-MAKASSAR-SELATAN-1'),
@@ -5085,7 +5086,7 @@ INSERT INTO `tb_pegawai` (`nip`, `pers_no`, `nama_pegawai`, `org_unit`, `organiz
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_personnel_area`
+-- Struktur dari tabel `tb_personnel_area`
 --
 
 CREATE TABLE `tb_personnel_area` (
@@ -5095,7 +5096,7 @@ CREATE TABLE `tb_personnel_area` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_personnel_area`
+-- Dumping data untuk tabel `tb_personnel_area`
 --
 
 INSERT INTO `tb_personnel_area` (`personnel_subarea`, `nama_personnel_subarea`, `business_area`) VALUES
@@ -5177,7 +5178,7 @@ INSERT INTO `tb_personnel_area` (`personnel_subarea`, `nama_personnel_subarea`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_posisi_approval_committee`
+-- Struktur dari tabel `tb_posisi_approval_committee`
 --
 
 CREATE TABLE `tb_posisi_approval_committee` (
@@ -5186,7 +5187,7 @@ CREATE TABLE `tb_posisi_approval_committee` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_posisi_approval_committee`
+-- Dumping data untuk tabel `tb_posisi_approval_committee`
 --
 
 INSERT INTO `tb_posisi_approval_committee` (`id_posisi`, `posisi`) VALUES
@@ -5197,7 +5198,7 @@ INSERT INTO `tb_posisi_approval_committee` (`id_posisi`, `posisi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_usulan_evaluasi`
+-- Struktur dari tabel `tb_usulan_evaluasi`
 --
 
 CREATE TABLE `tb_usulan_evaluasi` (
@@ -5219,16 +5220,16 @@ CREATE TABLE `tb_usulan_evaluasi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_usulan_evaluasi`
+-- Dumping data untuk tabel `tb_usulan_evaluasi`
 --
 
 INSERT INTO `tb_usulan_evaluasi` (`id_usulan`, `id_administrator`, `tgl_usulan`, `no_surat`, `status_usulan`, `alasan_ditolak`, `lokasi_surat`, `tgl_surat`, `tim_approval`, `tahun_1`, `semester_1`, `tahun_2`, `semester_2`, `tahun_3`, `semester_3`) VALUES
-('20-07-17_21-48-26', '9dc61c04-95e3-11ea-a2b8-00ffee911c8d', '2020-07-17 21:48:26', '049/A/PLN-UIW-SULSELRABAR/VII/2019', 'diterima', '-', 'Makassar', '2020-07-17', 'UIW SULSELRABAR', '2019', 'I', '2019', 'II', '2020', 'I');
+('20-07-13_10:21:46', '9dc61c04-95e3-11ea-a2b8-00ffee911c8d', '2020-07-13 10:21:46', '-', 'diterima', '-', '-', '0000-00-00', 'UIW SULSELRABAR', '2019', 'I', '2019', 'II', '2020', 'I');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_usulan_evaluasi_approval`
+-- Struktur dari tabel `tb_usulan_evaluasi_approval`
 --
 
 CREATE TABLE `tb_usulan_evaluasi_approval` (
@@ -5238,17 +5239,17 @@ CREATE TABLE `tb_usulan_evaluasi_approval` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_usulan_evaluasi_approval`
+-- Dumping data untuk tabel `tb_usulan_evaluasi_approval`
 --
 
 INSERT INTO `tb_usulan_evaluasi_approval` (`id_usulan`, `id_approval`, `id_posisi`) VALUES
-('20-07-17_21-48-26', '06361065-939d-11ea-9f1b-00ffee911c8d', 'a9ffa25d-939f-11ea-9f1b-00ffee911c8d'),
-('20-07-17_21-48-26', 'fd760f3b-939f-11ea-9f1b-00ffee911c8d', 'aa608757-bef7-11ea-b0a8-14dae95f4e07');
+('20-07-13_10:21:46', '06361065-939d-11ea-9f1b-00ffee911c8d', 'a9ffa25d-939f-11ea-9f1b-00ffee911c8d'),
+('20-07-13_10:21:46', 'fd760f3b-939f-11ea-9f1b-00ffee911c8d', 'aa608757-bef7-11ea-b0a8-14dae95f4e07');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_usulan_evaluasi_pegawai`
+-- Struktur dari tabel `tb_usulan_evaluasi_pegawai`
 --
 
 CREATE TABLE `tb_usulan_evaluasi_pegawai` (
@@ -5268,16 +5269,16 @@ CREATE TABLE `tb_usulan_evaluasi_pegawai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_usulan_evaluasi_pegawai`
+-- Dumping data untuk tabel `tb_usulan_evaluasi_pegawai`
 --
 
 INSERT INTO `tb_usulan_evaluasi_pegawai` (`id_usulan`, `nip_usulan`, `nama_usulan`, `jabatan_skg`, `jabatan_usulan`, `grade_skg`, `tgl_grade_skg`, `pendidikan_terakhir`, `n_talenta_1`, `n_talenta_2`, `n_talenta_3`, `lama_jabatan_skg`, `keterangan`) VALUES
-('20-07-17_21-48-26', '8106325Z', 'RIZKY ARDIANA BAYUWERTY', 'MANAGER UNIT PELAKSANA PELAYANAN PELANGGAN PADA UNIT PELAKSANA PELAYANAN PELANGGAN (UP3) PINRANG', 'JUNIOR ENGINEER OPERASI DISTRIBUSI PADA SEKSI TEKNIK UNIT LAYANAN PELANGGAN MANAKARRA PADA UNIT PELAKSANA PELAYANAN PELANGGAN (UP3) MAMUJU', 'SYS02', '2019-01-01', 'S1 TEKNIK', 'SPO', 'SOP', 'LBS', '0 Thn 4 Bln', 'Memenuhi Kebutuhan Pegawai di Bawah Seksi PP dan ADM ULP Kariango');
+('20-07-13_10:21:46', '8106325Z', 'RIZKY ARDIANA BAYUWERTY', 'MANAGER UNIT PELAKSANA PELAYANAN PELANGGAN PADA UNIT PELAKSANA PELAYANAN PELANGGAN (UP3) PINRANG', 'JUNIOR TECHNICIAN PEMELIHARAAN DISTRIBUSI PADA SEKSI TEKNIK UNIT LAYANAN PELANGGAN RAHA PADA UNIT PELAKSANA PELAYANAN PELANGGAN (UP3) BAUBAU', 'SYS02', '2019-01-01', 'S1 TEKNIK', 'SPO', 'SOP', 'LBS', '14 Thn 3 Bln', '-');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 CREATE TABLE `user` (
@@ -5291,7 +5292,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
 INSERT INTO `user` (`id_user`, `username_user`, `password_user`, `last_login_user`, `status_user`, `foto_user`, `fullname_user`) VALUES
@@ -5303,113 +5304,95 @@ INSERT INTO `user` (`id_user`, `username_user`, `password_user`, `last_login_use
 --
 
 --
--- Indexes for table `admin`
+-- Indeks untuk tabel `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_admin`);
 
 --
--- Indexes for table `tb_administrator`
+-- Indeks untuk tabel `tb_administrator`
 --
 ALTER TABLE `tb_administrator`
   ADD PRIMARY KEY (`id_administrator`);
 
 --
--- Indexes for table `tb_approval_committee`
+-- Indeks untuk tabel `tb_approval_committee`
 --
 ALTER TABLE `tb_approval_committee`
   ADD PRIMARY KEY (`id_approval`);
 
 --
--- Indexes for table `tb_approvement`
---
-ALTER TABLE `tb_approvement`
-  ADD PRIMARY KEY (`id_usulan`,`nip_usulan`,`id_approval`);
-
---
--- Indexes for table `tb_business_area`
+-- Indeks untuk tabel `tb_business_area`
 --
 ALTER TABLE `tb_business_area`
   ADD PRIMARY KEY (`business_area`);
 
 --
--- Indexes for table `tb_daftar_talenta_per_semester`
+-- Indeks untuk tabel `tb_daftar_talenta_per_semester`
 --
 ALTER TABLE `tb_daftar_talenta_per_semester`
   ADD PRIMARY KEY (`tahun_talenta`,`semester_talenta`);
 
 --
--- Indexes for table `tb_jabatan`
+-- Indeks untuk tabel `tb_jabatan`
 --
 ALTER TABLE `tb_jabatan`
   ADD PRIMARY KEY (`id_sebutan_jabatan`);
 
 --
--- Indexes for table `tb_judul_talenta`
+-- Indeks untuk tabel `tb_judul_talenta`
 --
 ALTER TABLE `tb_judul_talenta`
   ADD PRIMARY KEY (`id_talenta`);
 
 --
--- Indexes for table `tb_nilai_talenta_pegawai`
+-- Indeks untuk tabel `tb_nilai_talenta_pegawai`
 --
 ALTER TABLE `tb_nilai_talenta_pegawai`
   ADD PRIMARY KEY (`tahun_talenta`,`semester_talenta`,`nip`);
 
 --
--- Indexes for table `tb_pegawai`
+-- Indeks untuk tabel `tb_pegawai`
 --
 ALTER TABLE `tb_pegawai`
   ADD PRIMARY KEY (`nip`);
 
 --
--- Indexes for table `tb_personnel_area`
+-- Indeks untuk tabel `tb_personnel_area`
 --
 ALTER TABLE `tb_personnel_area`
   ADD PRIMARY KEY (`personnel_subarea`);
 
 --
--- Indexes for table `tb_posisi_approval_committee`
+-- Indeks untuk tabel `tb_posisi_approval_committee`
 --
 ALTER TABLE `tb_posisi_approval_committee`
   ADD PRIMARY KEY (`id_posisi`);
 
 --
--- Indexes for table `tb_usulan_evaluasi`
+-- Indeks untuk tabel `tb_usulan_evaluasi`
 --
 ALTER TABLE `tb_usulan_evaluasi`
   ADD PRIMARY KEY (`id_usulan`);
 
 --
--- Indexes for table `tb_usulan_evaluasi_approval`
---
-ALTER TABLE `tb_usulan_evaluasi_approval`
-  ADD PRIMARY KEY (`id_usulan`,`id_approval`);
-
---
--- Indexes for table `tb_usulan_evaluasi_pegawai`
---
-ALTER TABLE `tb_usulan_evaluasi_pegawai`
-  ADD PRIMARY KEY (`id_usulan`,`nip_usulan`);
-
---
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT untuk tabel `admin`
 --
 ALTER TABLE `admin`
   MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
