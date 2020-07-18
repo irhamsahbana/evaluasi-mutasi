@@ -54,8 +54,10 @@
                                             <tr>
                                                 <th>No.</th>
                                                 <th>Tanggal Pengusulan</th>
-                                                <th>No Surat</th>
+                                                <th>Nomor Surat</th>
                                                 <th>Administrator yang mengusulkan</th>
+                                                <th>Business Area</th>
+                                                <th>Personnel Subarea</th>
                                                 <th>Status</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -73,8 +75,10 @@
                                                 <td><?= $waktu ?></td>
                                                 <td><?= $f->no_surat ?></td>
                                                 <td>
-                                                    <a href="#"><?= $f->nip ?></a>
+                                                    <a href="#"><?= $f->nip.' ( '.$f->nama_pegawai.' )' ?></a>
                                                 </td>
+                                                <td><?= $f->nama_business_area ?></td>
+                                                <td><?= $f->nama_personnel_subarea ?></td>
                                                 <td><?php if($f->status_usulan == 'diterima'){echo 'Diterima oleh Administrator UIW';} ?></td>
                                                 <td>
                                                     <button type="button" class="btn mb-1 btn-secondary" onclick='window.open("<?= site_url('AdministratorInduk/tampilanRincianLembarEvaluasi/'.$f->id_usulan); ?>","_blank")'>Rincian<span class="btn-icon-right"><i class="fa fa-file"></i></span></button>
@@ -90,7 +94,10 @@
                                             <tr>
                                                 <th>No.</th>
                                                 <th>Tanggal Pengusulan</th>
+                                                <th>Nomor Surat</th>
                                                 <th>Administrator yang mengusulkan</th>
+                                                <th>Business Area</th>
+                                                <th>Personnel Subarea</th>
                                                 <th>Status</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -128,7 +135,7 @@ Begin : Modal for Delete Data
                 </div>
                 <div class="modal-body">
                     <form method="POST" action="<?= site_url('AdministratorInduk/doDeleteUsulanMutasi/'.$f->id_usulan) ?>">
-                        Yakin ingin menghapus data usulan evaluasi mutasi bertanggal <?= $waktu ?>?
+                        Yakin ingin menghapus data usulan evaluasi mutasi bertanggal <?= $waktu ?> dari <?= $f->nama_personnel_subarea ?>?
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-danger">Hapus</button>

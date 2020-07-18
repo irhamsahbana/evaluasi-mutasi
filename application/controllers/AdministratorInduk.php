@@ -635,7 +635,7 @@ class AdministratorInduk extends CI_Controller
     public function doUpdatePenerima($id)
     {
         $where         = array('id_approval' => $id);
-        $input         = $this->input->post(NULL, FALSE);
+        $input         = $this->input->post(NULL, TRUE);
 
         if ($input['password'] != '') {
             $items = array(
@@ -1000,14 +1000,14 @@ class AdministratorInduk extends CI_Controller
 
     public function autoFillUsulanPegawai()
     {
-        $id_pegawai = $this->input->post('nip', FALSE);
+        $id_pegawai = $this->input->post('nip', TRUE);
         $dataPeg = $this->M_AdministratorInduk->getPegawaiById($id_pegawai)->result();
         echo json_encode($dataPeg);
     }
 
     public function autoFillTalenta()
     {
-        $id_pegawai = $this->input->post('nip_talenta', FALSE);
+        $id_pegawai = $this->input->post('nip_talenta', TRUE);
         $talentaPeg = $this->M_AdministratorInduk->nilaiTalenta3Terakhir($id_pegawai);
         echo json_encode($talentaPeg);
     }
@@ -1194,6 +1194,19 @@ class AdministratorInduk extends CI_Controller
 
         $this->Crud->u('tb_usulan_evaluasi_pegawai', $data_ket, $where);
         $this->session->set_flashdata('alert_primary', 'Data Keterangan Pegawai Usulan berhasil disunting!');
+        redirect('AdministratorInduk/tampilanRincianLembarEvaluasi/'.$id_usulan);
+    }
+
+    public function doDeletePegawaiUsulan($id_usulan, $nip_usulan)
+    {
+        $where = array(
+            'id_usulan'     => $id_usulan,
+            'nip_usulan'    => $nip_usulan
+        );
+
+        $this->Crud->d('tb_usulan_evaluasi_pegawai', $where);
+        $this->Crud->d('tb_approvement', $where);
+        $this->session->set_flashdata('alert_primary', 'Data Pegawai Usulan berhasil dihapus!');
         redirect('AdministratorInduk/tampilanRincianLembarEvaluasi/'.$id_usulan);
     }
 # ************ End Menu Lembar Evaluasi ******************

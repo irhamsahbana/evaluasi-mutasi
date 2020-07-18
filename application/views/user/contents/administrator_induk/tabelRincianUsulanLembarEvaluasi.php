@@ -129,6 +129,7 @@
                                                     <td><?= $f->keterangan ?></td>
                                                     <td>
                                                         <button style="float: left;" type="button" data-toggle="modal" data-target=".modal-keterangan<?= $f->id_usulan.$f->nip_usulan ?>" class="btn btn-info mt-2">Sunting Keterangan<span class="btn-icon-right"><i class="fa fa-address-card"></i></span></button>
+                                                        <button style="float: left;" type="button" data-toggle="modal" data-target=".modal-delete-pegawai<?= $f->id_usulan.$f->nip_usulan ?>" class="btn btn-danger mt-2">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span></button>
                                                     </td>
                                                 </tr>
                                             <?php endforeach ?>
@@ -378,4 +379,32 @@ Begin : Modal for Update Keterangan
 <?php endforeach ?>
 <!--**********************************
     End : Modal for Update Keterangan
+***********************************-->
+
+<!--**********************************
+Begin : Modal for Delete Usulan Pegawai
+***********************************-->
+<?php foreach($usulan_pegawai as $f): ?>
+        <div class="modal fade modal-delete-pegawai<?= $f->id_usulan.$f->nip_usulan ?>" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Hapus data talenta</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="<?= site_url('AdministratorInduk/doDeletePegawaiUsulan/'.$f->id_usulan.'/'.$f->nip_usulan) ?>">
+                        Yakin ingin menghapus data pegawai usulan evaluasi mutasi?
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">Hapus</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach ?>
+<!--**********************************
+End : Modal for Usulan Pegawai
 ***********************************-->

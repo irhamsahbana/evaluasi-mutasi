@@ -67,7 +67,7 @@ class M_AdministratorInduk extends CI_Model
 
     public function getDataApproval()
     {
-        return $this->db->select('tb_approval_committee.*, tb_pegawai.nama_pegawai')
+        return $this->db->select('tb_approval_committee.*, tb_pegawai.nama_pegawai, tb_pegawai.email')
             ->from('tb_approval_committee')
             ->join('tb_pegawai', 'tb_pegawai.nip=tb_approval_committee.nip', 'left')
             ->get()
@@ -79,6 +79,10 @@ class M_AdministratorInduk extends CI_Model
         {
             $this->db->from('tb_usulan_evaluasi');
             $this->db->join('tb_administrator', 'tb_administrator.id_administrator = tb_usulan_evaluasi.id_administrator', 'left');
+            $this->db->join('tb_pegawai', 'tb_pegawai.nip = tb_administrator.nip', 'left');
+            $this->db->join('tb_jabatan', 'tb_jabatan.id_sebutan_jabatan = tb_pegawai.id_sebutan_jabatan', 'left');
+            $this->db->join('tb_personnel_area', 'tb_personnel_area.personnel_subarea = tb_jabatan.personnel_subarea', 'left');
+            $this->db->join('tb_business_area', 'tb_business_area.business_area = tb_personnel_area.business_area', 'left');
             $this->db->where(array('status_usulan' => 'diterima'));
             $query = $this->db->get()->result();
             return $query;
