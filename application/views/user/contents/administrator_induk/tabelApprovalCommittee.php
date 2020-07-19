@@ -55,6 +55,9 @@
                                                 <th>NIP</th>
                                                 <th>Nama</th>
                                                 <th>Email</th>
+                                                <th>Business Area</th>
+                                                <th>Personnel Subarea</th>
+                                                <th>Jabatan Saat Ini</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -68,6 +71,9 @@
                                                 <td><?= $penerima->nip ?></td>
                                                 <td><?= $penerima->nama_pegawai ?></td>
                                                 <td><?= $penerima->email ?></td>
+                                                <td><?= $penerima->nama_business_area ?></td>
+                                                <td><?= $penerima->nama_personnel_subarea ?></td>
+                                                <td><?= $penerima->sebutan_jabatan ?></td>
                                                 <td>
                                                     <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update<?=$penerima->id_approval?>">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
                                                     </button>
@@ -85,6 +91,9 @@
                                                 <th>NIP</th>
                                                 <th>Nama</th>
                                                 <th>Email</th>
+                                                <th>Business Area</th>
+                                                <th>Personnel Subarea</th>
+                                                <th>Jabatan Saat Ini</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </tfoot>

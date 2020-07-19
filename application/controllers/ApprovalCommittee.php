@@ -24,11 +24,10 @@ class ApprovalCommittee extends CI_Controller
 
     public function tampilanUsulanEvaluasiMasuk()
     {
-        $id_approval = $this->session->userdata('id_administrator');
         $data = array(
-            'isi'         => 'user/contents/approval_committee/tabelUsulanEvaluasiMasuk',
-            'title'       => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
-            'usulan'      => $this->M_ApprovalCommittee->getDataUsulanMasuk($id_approval),
+            'isi'           => 'user/contents/approval_committee/tabelUsulanEvaluasiMasuk',
+            'title'         => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
+            'usulan_masuk'  => $this->M_ApprovalCommittee->usulanLembarEvaluasiMasuk(),
         );
 
         $this->load->view('user/_layouts/wrapper', $data);
