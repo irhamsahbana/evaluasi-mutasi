@@ -102,6 +102,11 @@
                             <i class="icon-paper-plane menu-icon"></i><span class="nav-text">Usulan Evaluasi Telah Ditanggapi</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="<?= site_url('ApprovalCommittee/ubahPasswrodApproval') ?>" class="<?= ($modul == 'ubahPasswrodApproval') ? 'active' : '' ?>">
+                            <i class="icon-paper-plane menu-icon"></i><span class="nav-text">Sunting Password</span>
+                        </a>
+                    </li>
                     <?php } ?>
                 </ul>
             </div>

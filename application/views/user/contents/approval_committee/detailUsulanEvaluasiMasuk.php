@@ -140,10 +140,6 @@
                                                                     </form>
                                                         <?php 
                                                                 }
-                                                        ?>
-
-
-                                                        <?php 
                                                                 if($s->approvement != 'under_review'){
                                                         ?>
                                                                     <!-- satu tombol di sini -->
