@@ -94,7 +94,7 @@
                     </li>
                     <li>
                         <a href="<?= site_url('ApprovalCommittee/tampilanUsulanEvaluasiSelesai') ?>" class="<?= ($modul == 'tampilanUsulanEvaluasiSelesai') ? 'active' : '' ?>">
-                            <i class="icon-paper-plane menu-icon"></i><span class="nav-text">Usulan Evaluasi Telah Selesai</span>
+                            <i class="icon-paper-plane menu-icon"></i><span class="nav-text">Usulan Evaluasi Telah Ditanggapi</span>
                         </a>
                     </li>
                     <?php } ?>

@@ -63,26 +63,36 @@
                                 <tbody>
                                      <?php $no =1; foreach($usulan_masuk as $f): ?>
                                         <?php 
-                                            $myDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $f->tgl_usulan);
-                                            $tanggal = $myDateTime->format('d/m/Y');
-                                            $jam = $myDateTime->format('H:i:s');
-                                            $waktu = $tanggal." Pukul ".$jam." WITA";
-                                         ?>
-                                        <tr>
-                                        <td><?= $no++ ?></td>
-                                        <td><?= $waktu ?></td>
-                                        <td><?= $f->no_surat ?></td>
-                                        <td>
-                                            <a href="#"><?= $f->nip.' ( '.$f->nama_pegawai.' )' ?></a>
-                                        </td>
-                                        <td><?= $f->nama_business_area ?></td>
-                                        <td><?= $f->nama_personnel_subarea ?></td>
-                                        <td><?php if($f->status_usulan == 'diterima'){echo 'Diterima oleh Administrator UIW';} ?></td>
-                                        <td>
-                                            <button type="button" class="btn mb-1 btn-secondary" onclick='window.open("<?= site_url('AdministratorInduk/tampilanRincianLembarEvaluasi/'); ?>","_blank")'>Rincian<span class="btn-icon-right"><i class="fa fa-file"></i></span></button>
-                                        </td>
-                                    </tr>
-                                     <?php endforeach ?>
+                                            $where_count_under_review = array(
+                                                'id_usulan'     => $f->id_usulan,
+                                                'id_approval'   => $this->session->userdata('id_administrator'),
+                                                'approvement'   => 'under_review'
+                                            );
+
+                                            $jumlah_under_review = $this->Crud->cw('tb_approvement', $where_count_under_review);
+
+                                            if($jumlah_under_review != 0) {
+                                                $myDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $f->tgl_usulan);
+                                                $tanggal = $myDateTime->format('d/m/Y');
+                                                $jam = $myDateTime->format('H:i:s');
+                                                $waktu = $tanggal." Pukul ".$jam." WITA";
+                                        ?>
+                                                <tr>
+                                                    <td><?= $no++ ?></td>
+                                                    <td><?= $waktu ?></td>
+                                                    <td><?= $f->no_surat ?></td>
+                                                    <td>
+                                                        <a href="#"><?= $f->nip.' ( '.$f->nama_pegawai.' )' ?></a>
+                                                    </td>
+                                                    <td><?= $f->nama_business_area ?></td>
+                                                    <td><?= $f->nama_personnel_subarea ?></td>
+                                                    <td><?php if($f->status_usulan == 'diterima'){echo 'Diterima oleh Administrator UIW';} ?></td>
+                                                    <td>
+                                                        <button type="button" class="btn mb-1 btn-secondary" onclick='window.open("<?= site_url('ApprovalCommittee/tampilanRincianUsulanEvaluasiMasuk/'.$f->id_usulan); ?>","_blank")'>Rincian<span class="btn-icon-right"><i class="fa fa-file"></i></span></button>
+                                                    </td>
+                                                </tr>
+                                        <?php } ?>
+                                    <?php endforeach ?>
                                 </tbody>
                                 <tfoot>
                                     <tr>
