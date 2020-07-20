@@ -119,7 +119,31 @@ class ApprovalCommittee extends CI_Controller
 # ************ End Menu Usulan Evaluasi Masuk  & Telah Ditanggapi ******************
 
 # ************ Begin Menu Ubah Password Approval Committee ******************
-    
+    public function ubahPasswordApproval()
+    {
+        $approval = $this->session->userdata('id_administrator');
+        $data = array(
+            'isi'           => 'user/contents/approval_committee/ubahPasswordApproval',
+            'title'         => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
+            'data_penerima' => $this->Crud->gw('tb_approval_committee', array('id_approval' => $approval)),
+        );
+
+        $this->load->view('user/_layouts/wrapper', $data);
+    }    
+
+    public function doUpdatePassword()
+    {
+        $id    = $this->session->userdata('id_administrator');
+        $where = array('id_approval' => $id);
+        $input = $this->input->post(NULL, TRUE);
+        $items = array(
+            'password'   => password_hash($input['password'], PASSWORD_DEFAULT),
+        );
+
+        $this->db->update('tb_approval_committee', $items, $where);
+        $this->session->set_flashdata('alert_success', 'Password berhasil disunting!');
+        redirect('ApprovalCommittee/ubahPasswordApproval');
+    }
 # ************ Begin Menu Ubah Password Approval Committee ******************
 
     
