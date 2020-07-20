@@ -118,5 +118,9 @@ class ApprovalCommittee extends CI_Controller
     }
 # ************ End Menu Usulan Evaluasi Masuk  & Telah Ditanggapi ******************
 
+# ************ Begin Menu Ubah Password Approval Committee ******************
+    
+# ************ Begin Menu Ubah Password Approval Committee ******************
+
     
 }
