@@ -8,8 +8,20 @@ class ApprovalCommittee extends CI_Controller
     {
         parent::__construct();
         date_default_timezone_set('Asia/Makassar');
+
         if ($this->session->userdata('status') != "login") {
-            redirect('login');
+            redirect('Login');
+        }
+
+        if ($this->session->userdata('role') != 'approval_committee') {
+
+            if ($this->session->userdata('role') == "admin_unit"){
+                redirect('AdministratorUnit');
+            }
+            if ($this->session->userdata('role') == "admin_induk") {
+                redirect('AdministratorInduk');
+            }
+
         }
     }
 

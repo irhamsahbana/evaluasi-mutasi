@@ -15,12 +15,12 @@ class M_Login extends CI_Model
             if (password_verify($password, $hash)) {
                 foreach ($query->result() as $x) {
                     $sess = array(
-                        "id_administrator"  => $x->id_administrator,
+                        'id_administrator'  => $x->id_administrator,
                         'nip'               => $x->nip,
                         'role'              => $x->role,
                         'personnel_subarea' => $x->personnel_subarea,
                         'password'          => $x->password,
-                        "status"            => "login",
+                        'status'            => 'login',
                     );
                 }
                 $this->session->set_userdata($sess);

@@ -9,7 +9,7 @@ class AdministratorUnit extends CI_Controller
         parent::__construct();
         date_default_timezone_set('Asia/Makassar');
         if ($this->session->userdata('status') != "login") {
-            redirect('login');
+            redirect('Login');
         }
     }
     public function index()
