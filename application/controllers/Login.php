@@ -8,24 +8,23 @@ class Login extends CI_Controller
     {
         parent::__construct();
         date_default_timezone_set('Asia/Makassar');
-
-        if ($this->session->userdata('status') == 'login') {
-
-            if ($this->session->userdata('role') == 'admin_induk') {
-                redirect('AdministratorInduk');
-            } elseif ($this->session->userdata('role') == 'admin_unit') {
-                redirect('AdministratorUnit');
-            } elseif ($this->session->userdata('role') == 'approval_committee') {
-                redirect('ApprovalCommittee');
-            } else{
-                echo "Pengguna Tidak dikenali!";
-            }
-        }
     }
 
     public function index()
     {
-        $this->load->view('login/newLogin');
+        if ($this->session->userdata('status') == 'login') {
+            if ($this->session->userdata('role') == 'admin_induk') {
+                redirect('AdministratorInduk');
+            }
+            else if ($this->session->userdata('role') == 'admin_unit') {
+                redirect('AdministratorUnit');
+            }
+            else if ($this->session->userdata('role') == 'approval_committee') {
+                redirect('ApprovalCommittee');
+            }
+        } else {
+            $this->load->view('login/newLogin');
+        }
     }
 
     public function loginLama()
@@ -57,11 +56,6 @@ class Login extends CI_Controller
 
     public function logout()
     {
-        $this->session->unset_userdata('status');
-        $this->session->unset_userdata('nip');
-        $this->session->unset_userdata('role');
-        $this->session->unset_userdata('personnel_subarea');
-        $this->session->unset_userdata('password');
         $this->session->sess_destroy();
         redirect('Login');
     }
