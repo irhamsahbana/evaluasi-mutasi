@@ -48,6 +48,12 @@
                                         </button><strong><?= $alert_danger ?></strong></div>
                                     <?php endif; ?>
                                 <!-- Button Edit Data Surat dan Keterangan Pegawai -->
+                                <?php foreach($data_surat as $f): ?>
+                                    <form method="POST" action="<?= site_url('AdministratorInduk/doExportToExcel/'.$f->id_usulan) ?>">
+                                        <button style="float: left;" type="submit" class="btn mb-1 mr-1 btn-success" >Ekspor ke Excel<span class="btn-icon-right"><i class="fa fa-file-text"></i></span></button>
+                                    </form>
+                                <?php endforeach ?>
+
                                 <button style="float: left;" type="button" class="btn mb-1 mr-1 btn-info" data-toggle="modal" data-target=".modal-surat">Sunting Data Surat<span class="btn-icon-right"><i class="fa fa-file-text"></i></span></button>
                                 <button style="float: left;" type="button" class="btn mb-1 mr-1 btn-info" data-toggle="modal" data-target=".modal-keterangan">Sunting Keterangan Pegawai<span class="btn-icon-right"><i class="fa fa-address-card"></i></span></button>
                                 <br><br><br>
