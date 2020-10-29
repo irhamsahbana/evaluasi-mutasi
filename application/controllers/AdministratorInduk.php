@@ -1232,18 +1232,17 @@ class AdministratorInduk extends CI_Controller
         $where = array('id_usulan' => $id_usulan);
 
         $data_usulan_pegawai['usulan_pegawai'] = $this->Crud->gw('tb_usulan_evaluasi_pegawai', $where);
-        $header['header'] = $this->Crud->gw('tb_usulan_evaluasi', $where);
+        $data['surat'] = $this->Crud->gw('tb_usulan_evaluasi', $where);
+        $data['approval'] = $this->M_AdministratorInduk->rincianApprovalUsulan($where);
 
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
 
         //Styling Begin
-        $spreadsheet->getActiveSheet()->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
-        $spreadsheet->getActiveSheet()->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4);
+            $spreadsheet->getActiveSheet()->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
+            $spreadsheet->getActiveSheet()->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4);
             $spreadsheet->getDefaultStyle()->getFont()->setName('Arial');
             $spreadsheet->getDefaultStyle()->getFont()->setSize(10);
-
-            $spreadsheet->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
 
             $sheet->getStyle('B1')->getFont()->setSize(8);
             $sheet->getStyle('B2')->getFont()->setSize(8);
@@ -1278,6 +1277,7 @@ class AdministratorInduk extends CI_Controller
                 $sheet->mergeCells('K7:K9');
 
                 //column's width Begin
+                $sheet->getColumnDimension('A')->setWidth(3.5);
                 $sheet->getColumnDimension('B')->setWidth(24);
                 $sheet->getColumnDimension('C')->setWidth(46);
                 $sheet->getColumnDimension('D')->setWidth(11);
@@ -1299,20 +1299,29 @@ class AdministratorInduk extends CI_Controller
                 $sheet->getStyle('G8')->getAlignment()->setWrapText(true);
                 $sheet->getStyle('H8')->getAlignment()->setWrapText(true);
                 //Header Title Wrap Text End
+
+                //Border Header Begin
+                $styleArray = [
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        ],
+                    ],
+                ];
+
+                $sheet->getStyle('A7:K9')->applyFromArray($styleArray);
+                //Border Header Begin
             //Header End
-
-            //Content Begin
-
-            //Content End
-
         //Styling End
 
         //Header Begin
             $sheet->setCellValue('B1', 'PT PLN (PERSERO)');
             $sheet->setCellValue('B2', 'WILAYAH SULSELRABAR');
-
             $sheet->setCellValue('A4', 'LEMBAR EVALUASI MUTASI PEGAWAI');
-            $sheet->setCellValue('A5', 'Nomor : 045/DFB/2020');
+
+            foreach($data['surat'] as $no_surat){
+                $sheet->setCellValue('A5', 'Nomor : '.$no_surat->no_surat);
+            }
 
             $sheet->setCellValue('A7', 'No');
             $sheet->setCellValue('B7', 'Nama / No.Induk');
@@ -1321,7 +1330,7 @@ class AdministratorInduk extends CI_Controller
             $sheet->setCellValue('E7', 'Pendidikan Terakhir');
 
             $sheet->setCellValue('F7', 'Nilai Talenta');
-            foreach($header['header'] as $h){
+            foreach($data['surat'] as $h){
                 $sheet->setCellValue('F8', $h->tahun_1.' ('.$h->semester_1.')');
                 $sheet->setCellValue('G8', $h->tahun_2.' ('.$h->semester_2.')');
                 $sheet->setCellValue('H8', $h->tahun_3.' ('.$h->semester_3.')');
@@ -1371,11 +1380,37 @@ class AdministratorInduk extends CI_Controller
                 $sheet->getStyle('A'.$baris)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
                 $sheet->getStyle('D'.$baris.':H'.$baris)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
                 $sheet->getStyle('J'.$baris)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-                $baris++;
+
+                //Border Content Begin
+                $styleArray = [
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        ],
+                    ],
+                ];
+
+                $sheet->getStyle('A'.$baris.':K'.$baris_bawah)->applyFromArray($styleArray);
+                //Border Content End
+                $baris += 2;
             }
         //Content End
 
-        $filename = 'simple-'.time();
+        $baris_wkt = $baris+1;
+        $baris_tim = $baris+2;
+        $baris_apr = $baris+4;
+        foreach($data['surat'] as $ket){
+            $sheet->setCellValue('A'.$baris_wkt, $ket->lokasi_surat.', '.date_indo($ket->tgl_surat));
+            $sheet->setCellValue('A'.$baris_tim, $ket->tim_approval);
+        }
+
+        $no_apr = 1;
+        foreach($data['approval'] as $apr){
+
+        }
+
+
+        $filename = 'Lembar_Evaluasi_Mutasi_-_';
         
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"'); 
@@ -1385,7 +1420,6 @@ class AdministratorInduk extends CI_Controller
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $writer->save('php://output');
         die;
-
     }
 # ************ End Menu Lembar Evaluasi ******************
     
