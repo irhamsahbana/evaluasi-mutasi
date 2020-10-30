@@ -1406,7 +1406,11 @@ class AdministratorInduk extends CI_Controller
 
         $no_apr = 1;
         foreach($data['approval'] as $apr){
-
+            $titik_ttd = $baris_apr+4;
+            $sheet->setCellValue('A'.$baris_apr, $no_apr.'. '.$apr->nama_pegawai.' ('.$apr->posisi.')');
+            $sheet->setCellValue('A'.$titik_ttd, '..............................................');
+            $no_apr++;
+            $baris_apr += 6;
         }
 
 
