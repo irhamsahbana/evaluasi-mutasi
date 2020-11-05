@@ -70,27 +70,27 @@ class AdministratorInduk extends CI_Controller
     {
         $input        = $this->input->post(NULL, TRUE);
         $data_pegawai = array(
-            'pers_no'                        => $input['pers_no'],
-            'nip'                            => $input['nipeg'],
-            'nama_pegawai'                   => $input['nama_pegawai'],
-            'id_sebutan_jabatan'             => $input['sebutan_jabatan'],
-            'org_unit'                       => $input['org_unit'],
-            'organizational_unit'            => $input['organizational_unit'],
-            'position'                       => $input['position'],
-            'nama_panjang_posisi'            => $input['nama_panjang_posisi'],
-            'jenjang_main_grp'               => $input['jenjang_main_grp'],
-            'jenjang_sub_grp'                => $input['jenjang_sub_grp'],
-            'grade'                          => $input['grade'],
-            'tgl_grade'                      => $input['tgl_grade'],
-            'pendidikan_terakhir'            => $input['pendidikan_terakhir'],
-            'tgl_lahir'                      => $input['tanggal_lahir'],
-            'tgl_capeg'                      => $input['tanggal_capeg'],
-            'tgl_pegawai_tetap'              => $input['tanggal_pegawai_tetap'],
-            'gender'                         => $input['gender'],
-            'email'                          => $input['email'],
-            'tgl_masuk'                      => $input['tanggal_masuk'],
-            'agama'                          => $input['religious'],
-            'no_telp'                        => $input['telephone_no'],
+            'pers_no'                        => trim($input['pers_no']),
+            'nip'                            => trim($input['nipeg']),
+            'nama_pegawai'                   => trim($input['nama_pegawai']),
+            'id_sebutan_jabatan'             => trim($input['sebutan_jabatan']),
+            'org_unit'                       => trim($input['org_unit']),
+            'organizational_unit'            => trim($input['organizational_unit']),
+            'position'                       => trim($input['position']),
+            'nama_panjang_posisi'            => trim($input['nama_panjang_posisi']),
+            'jenjang_main_grp'               => trim($input['jenjang_main_grp']),
+            'jenjang_sub_grp'                => trim($input['jenjang_sub_grp']),
+            'grade'                          => trim($input['grade']),
+            'tgl_grade'                      => trim($input['tgl_grade']),
+            'pendidikan_terakhir'            => trim($input['pendidikan_terakhir']),
+            'tgl_lahir'                      => trim($input['tanggal_lahir']),
+            'tgl_capeg'                      => trim($input['tanggal_capeg']),
+            'tgl_pegawai_tetap'              => trim($input['tanggal_pegawai_tetap']),
+            'gender'                         => trim($input['gender']),
+            'email'                          => trim($input['email']),
+            'tgl_masuk'                      => trim($input['tanggal_masuk']),
+            'agama'                          => trim($input['religious']),
+            'no_telp'                        => trim($input['telephone_no']),
         );
 
         $cek = $this->db->query("SELECT nip FROM tb_pegawai WHERE nip = '$input[nipeg]'");
@@ -133,27 +133,27 @@ class AdministratorInduk extends CI_Controller
         $where         = array('nip' => $id,);
         $input         = $this->input->post(NULL, TRUE);
         $data_pegawai  = array(
-            'pers_no'                        => $input['pers_no'],
-            'nip'                            => $input['nipeg'],
-            'nama_pegawai'                   => $input['nama_pegawai'],
-            'id_sebutan_jabatan'             => $input['sebutan_jabatan'],
-            'org_unit'                       => $input['org_unit'],
-            'organizational_unit'            => $input['organizational_unit'],
-            'position'                       => $input['position'],
-            'nama_panjang_posisi'            => $input['nama_panjang_posisi'],
-            'jenjang_main_grp'               => $input['jenjang_main_grp'],
-            'jenjang_sub_grp'                => $input['jenjang_sub_grp'],
-            'grade'                          => $input['grade'],
-            'tgl_grade'                      => $input['tgl_grade'],
-            'pendidikan_terakhir'            => $input['pendidikan_terakhir'],
-            'tgl_lahir'                      => $input['tanggal_lahir'],
-            'tgl_capeg'                      => $input['tanggal_capeg'],
-            'tgl_pegawai_tetap'              => $input['tanggal_pegawai_tetap'],
-            'gender'                         => $input['gender'],
-            'email'                          => $input['email'],
-            'tgl_masuk'                      => $input['tanggal_masuk'],
-            'agama'                          => $input['religious'],
-            'no_telp'                        => $input['telephone_no'],
+            'pers_no'                        => trim($input['pers_no']),
+            'nip'                            => trim($input['nipeg']),
+            'nama_pegawai'                   => trim($input['nama_pegawai']),
+            'id_sebutan_jabatan'             => trim($input['sebutan_jabatan']),
+            'org_unit'                       => trim($input['org_unit']),
+            'organizational_unit'            => trim($input['organizational_unit']),
+            'position'                       => trim($input['position']),
+            'nama_panjang_posisi'            => trim($input['nama_panjang_posisi']),
+            'jenjang_main_grp'               => trim($input['jenjang_main_grp']),
+            'jenjang_sub_grp'                => trim($input['jenjang_sub_grp']),
+            'grade'                          => trim($input['grade']),
+            'tgl_grade'                      => trim($input['tgl_grade']),
+            'pendidikan_terakhir'            => trim($input['pendidikan_terakhir']),
+            'tgl_lahir'                      => trim($input['tanggal_lahir']),
+            'tgl_capeg'                      => trim($input['tanggal_capeg']),
+            'tgl_pegawai_tetap'              => trim($input['tanggal_pegawai_tetap']),
+            'gender'                         => trim($input['gender']),
+            'email'                          => trim($input['email']),
+            'tgl_masuk'                      => trim($input['tanggal_masuk']),
+            'agama'                          => trim($input['religious']),
+            'no_telp'                        => trim($input['telephone_no']),
         );
         $this->Crud->u('tb_pegawai', $data_pegawai, $where);
         $this->session->set_flashdata('alert_primary', 'Data pegawai berhasil disunting!');
@@ -352,8 +352,8 @@ class AdministratorInduk extends CI_Controller
     {
         $input      = $this->input->post(NULL, TRUE);
         $data       = array(
-            'tahun_talenta'        => $input['tahun'],
-            'semester_talenta'     => $input['semester'],
+            'tahun_talenta'        => trim($input['tahun']),
+            'semester_talenta'     => trim($input['semester']),
         );
         $this->db->insert('tb_daftar_talenta_per_semester', $data);
         $this->session->set_flashdata('alert_success', 'Data semester berhasil ditambahkan!');
@@ -380,8 +380,8 @@ class AdministratorInduk extends CI_Controller
 
         $input = $this->input->post(NULL, TRUE);
         $data  = array(
-            'tahun_talenta'        => $input['tahun'],
-            'semester_talenta'     => $input['semester'],
+            'tahun_talenta'        => trim($input['tahun']),
+            'semester_talenta'     => trim($input['semester']),
         );
         $this->Crud->u('tb_daftar_talenta_per_semester', $data, $where);
         $this->session->set_flashdata('alert_primary', 'Data semester berhasil disunting!');
@@ -409,10 +409,10 @@ class AdministratorInduk extends CI_Controller
     {
         $input      = $this->input->post(NULL, TRUE);
         $data       = array(
-            'tahun_talenta'        => $input['tahun'],
-            'semester_talenta'     => $input['semester'],
-            'nip'                  => $input['nip'],
-            'nilai_talenta'        => $input['nilai_talenta'],
+            'tahun_talenta'        => trim($input['tahun']),
+            'semester_talenta'     => trim($input['semester']),
+            'nip'                  => trim($input['nip']),
+            'nilai_talenta'        => trim($input['nilai_talenta']),
         );
         $this->db->insert('tb_nilai_talenta_pegawai', $data);
         $this->session->set_flashdata('alert_success', 'Data nilai talenta pegawai berhasil ditambahkan!');
@@ -429,10 +429,10 @@ class AdministratorInduk extends CI_Controller
 
         $input      = $this->input->post(NULL, TRUE);
         $data  = array(
-            'tahun_talenta'        => $input['tahun'],
-            'semester_talenta'     => $input['semester'],
-            'nip'                  => $input['nip'],
-            'nilai_talenta'        => $input['nilai_talenta'],
+            'tahun_talenta'        => trim($input['tahun']),
+            'semester_talenta'     => trim($input['semester']),
+            'nip'                  => trim($input['nip']),
+            'nilai_talenta'        => trim($input['nilai_talenta']),
         );
         $this->Crud->u('tb_nilai_talenta_pegawai', $data, $where);
         $this->session->set_flashdata('alert_primary', 'Data nilai talenta pegawai berhasil disunting!');
@@ -629,8 +629,8 @@ class AdministratorInduk extends CI_Controller
         $input        = $this->input->post(NULL, TRUE);
 
         $data_penerima = array(
-            'nip'                       => $input['nipeg'],
-            'password'                  => password_hash($input['password'], PASSWORD_DEFAULT),
+            'nip'                       => trim($input['nipeg']),
+            'password'                  => password_hash(trim($input['password']), PASSWORD_DEFAULT),
             'role'                      => 'approval_committee',
         );
         $this->db->set('id_approval', 'UUID()', FALSE);
