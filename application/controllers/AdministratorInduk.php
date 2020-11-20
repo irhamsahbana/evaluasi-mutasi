@@ -916,14 +916,26 @@ class AdministratorInduk extends CI_Controller
     {
         $input      = $this->input->post(NULL, TRUE);
         $data_admin = array(
-            'nip'                            => $input['nip'],
-            'password'                       => password_hash($input['password'], PASSWORD_DEFAULT),
-            'role'                           => $input['status'],
-            'personnel_subarea'              => $input['personnel_subarea'],
+            'nip'                            => trim($input['nip']),
+            'password'                       => password_hash(trim($input['password']), PASSWORD_DEFAULT),
+            'role'                           => trim($input['status']),
+            'personnel_subarea'              => trim($input['personnel_subarea']),
         );
-        $this->db->set('id_administrator', 'UUID()', FALSE);
-        $this->db->insert('tb_administrator', $data_admin);
-        $this->session->set_flashdata('alert_success', 'Data Administrator Telah Ditambahkan!');
+
+        $nip_trim = trim($input['nip']);
+        $cek = $this->db->query("SELECT nip FROM tb_pegawai WHERE nip = '$nip_trim'");
+        $cek_admin = $this->db->query("SELECT nip FROM tb_administrator WHERE nip = '$nip_trim'");
+        if($cek->num_rows() == 0) { 
+            $this->session->set_flashdata("alert_danger", "Tambahkan dulu Data pegawai dengan NIP tersebut di database pegawai!");
+        } else {
+            if($cek_admin->num_rows() > 0) {
+                $this->session->set_flashdata("alert_danger", "Administrator dengan NIP tersebut telah ada!");
+            } else {
+                $this->db->set('id_administrator', 'UUID()', FALSE);
+                $this->db->insert('tb_administrator', $data_admin);
+                $this->session->set_flashdata('alert_success', 'Data Administrator Telah Ditambahkan!');
+            }
+        }
         redirect('AdministratorInduk/tampilanAdministrator');
     }
 
@@ -1426,6 +1438,60 @@ class AdministratorInduk extends CI_Controller
         die;
     }
 # ************ End Menu Lembar Evaluasi ******************
+
+# ************ Begin Menu Lembar Evaluasi dari Unit ******************
+    public function tampilanUsulanLembarEvaluasiUnit()
+    {
+        $where = array('status_usulan' => 'dipending');
+
+        $data = array(
+            'isi'                       => 'user/contents/administrator_induk/tabelUsulanLembarEvaluasi',
+            'title'                     => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
+            'lembar_evaluasi_diterima'  => $this->M_AdministratorInduk->usulanLembarEvaluasiDipending()
+        );
+
+        $this->load->view('user/_layouts/wrapper', $data);
+    }
+
+    public function tampilanUsulanLembarEvaluasiUnitDitolak()
+    {
+        $where = array('status_usulan' => 'dipending');
+
+        $data = array(
+            'isi'                       => 'user/contents/administrator_induk/tabelUsulanLembarEvaluasi',
+            'title'                     => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
+            'lembar_evaluasi_diterima'  => $this->M_AdministratorInduk->usulanLembarEvaluasiDitolak()
+        );
+
+        $this->load->view('user/_layouts/wrapper', $data);
+    }
+
+    public function terimaUsulan($id_usulan)
+    {
+        $where         = array('id_usulan' => $id_usulan);
+        $input         = $this->input->post(NULL, TRUE);
+        $data          = array(
+            'status_usulan'                => 'diterima'
+        );
+        $this->Crud->u('tb_usulan_evaluasi', $data, $where);
+        $this->session->set_flashdata('alert_success', 'Usulan Evaluasi Mutasi dari Unit Diterima!');
+        redirect('AdministratorInduk/tampilanUsulanLembarEvaluasi');
+    }
+
+    public function tolakUsulan($id_usulan)
+    {
+        $where         = array('id_usulan' => $id_usulan);
+        $input         = $this->input->post(NULL, TRUE);
+        $data          = array(
+            'status_usulan'     => 'ditolak',
+            'alasan_ditolak'    => $input['alasan_ditolak']
+
+        );
+        $this->Crud->u('tb_usulan_evaluasi', $data, $where);
+        $this->session->set_flashdata('alert_danger', 'Usulan Evaluasi Mutasi dari Unit Ditolak!');
+        redirect('AdministratorInduk/tampilanUsulanLembarEvaluasi');
+    }
+# ************ End Menu Lembar Evaluasi dari Unit ******************
     
 }
 

@@ -49,12 +49,12 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?= site_url('User/tampilanUsulanEvaluasiDariUnit') ?>" class="<?= ($modul == 'tampilanUsulanEvaluasiDariUnit') ? 'active' : '' ?>">
+                        <a href="<?= site_url('AdministratorInduk/tampilanUsulanLembarEvaluasiUnit') ?>" class="<?= ($modul == 'tampilanUsulanLembarEvaluasiUnit') ? 'active' : '' ?>">
                             <i class="icon-note menu-icon"></i><span class="nav-text">Usulan Evaluasi dari Unit</span>
                         </a>
                     </li>
                     <li>
-                        <a href="<?= site_url('User/tampilanUsulanEvaluasiYangDitolak') ?>" class="<?= ($modul == 'tampilanUsulanEvaluasiYangDitolak') ? 'active' : '' ?>">
+                        <a href="<?= site_url('AdministratorInduk/tampilanUsulanLembarEvaluasiUnitDitolak') ?>" class="<?= ($modul == 'tampilanUsulanLembarEvaluasiUnitDitolak') ? 'active' : '' ?>">
                             <i class="icon-user-unfollow menu-icon"></i><span class="nav-text">Usulan Evaluasi dari Unit yang Ditolak</span>
                         </a>
                     </li>
@@ -68,17 +68,19 @@
                             <i class="icon-settings menu-icon"></i><span class="nav-text">Pengaturan Adminstrator</span>
                         </a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="<?= site_url('AdministratorInduk/tampilanNilaiTalenta') ?>" class="<?= ($modul == 'tampilanNilaiTalenta') ? 'active' : '' ?>">
                             <i class="icon-star menu-icon"></i><span class="nav-text">Nilai Talenta</span>
                         </a>
-                    </li>
-                    <li>
+                    </li> -->
+                    <!-- <li>
                         <a href="<?= site_url('User/tampilanUsulanEvaluasi') ?>" class="<?= ($modul == 'tampilanUsulanEvaluasi') ? 'active' : '' ?>">
                             <i class="icon-paper-plane menu-icon"></i><span class="nav-text">Usulan Evaluasi</span>
                         </a>
-                    </li>
+                    </li> -->
                     <?php } ?>
+
+
                     <?php if($this->uri->segment(1) == 'AdministratorUnit') { ?>
                     <li>
                         <a href="<?= site_url('AdministratorUnit/tampilanUsulanLembarEvaluasi') ?>" class="<?= ($modul == 'tampilanUsulanLembarEvaluasi') ? 'active' : '' ?>">
@@ -86,6 +88,8 @@
                         </a>
                     </li>
                     <?php } ?>
+
+                    
                     <?php if($this->uri->segment(1) == 'ApprovalCommittee') { ?>
                     <li>
                         <a href="<?= site_url('ApprovalCommittee/tampilanUsulanEvaluasiMasuk') ?>" class="<?= ($modul == 'tampilanUsulanEvaluasiMasuk') ? 'active' : '' ?>">

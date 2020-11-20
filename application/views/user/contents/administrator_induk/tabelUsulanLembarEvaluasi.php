@@ -1,3 +1,4 @@
+<?php  $modul = $this->uri->segment(2);   ?>
         <!--**********************************
             Content body start
         ***********************************-->
@@ -58,7 +59,15 @@
                                                 <th>Administrator yang mengusulkan</th>
                                                 <th>Business Area</th>
                                                 <th>Personnel Subarea</th>
-                                                <th>Status</th>
+                                                <th>
+                                                    <?php if($modul == 'tampilanUsulanLembarEvaluasiUnitDitolak')
+                                                    {
+                                                        echo 'Alasan Ditolak';
+                                                    } else {
+                                                        echo 'Status';
+                                                    }
+                                                    ?>
+                                                </th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -79,11 +88,27 @@
                                                 </td>
                                                 <td><?= $f->nama_business_area ?></td>
                                                 <td><?= $f->nama_personnel_subarea ?></td>
-                                                <td><?php if($f->status_usulan == 'diterima'){echo 'Diterima oleh Administrator UIW';} ?></td>
+                                                <td>
+                                                    <?php
+                                                    if($f->status_usulan == 'diterima'){
+                                                        echo 'Diterima oleh Administrator UIW';
+                                                    } elseif ($f->status_usulan == 'dipending'){
+                                                        echo 'Menunggu persetujuan Administrator UIW';
+                                                    } else {
+                                                        echo $f->alasan_ditolak;
+                                                    }
+                                                    ?>        
+                                                </td>
                                                 <td>
                                                     <button type="button" class="btn mb-1 btn-secondary" onclick='window.open("<?= site_url('AdministratorInduk/tampilanRincianLembarEvaluasi/'.$f->id_usulan); ?>","_blank")'>Rincian<span class="btn-icon-right"><i class="fa fa-file"></i></span></button>
                                                     <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete<?= $f->id_usulan ?>">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
                                                     </button>
+                                                    <?php if($modul == 'tampilanUsulanLembarEvaluasiUnit') { ?>
+                                                        <button type="button" class="btn mb-1 btn-success" data-toggle="modal" data-target=".modal-accept<?= $f->id_usulan ?>">Terima<span class="btn-icon-right"><i class="fa fa-user-plus"></i></span>
+                                                        </button>
+                                                        <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-reject<?= $f->id_usulan ?>">Tolak<span class="btn-icon-right"><i class="fa fa-user-times"></i></span>
+                                                        </button>
+                                                    <?php } ?>
                                                 </td>
                                             </tr>
                                             <?php endforeach ?>
@@ -96,7 +121,15 @@
                                                 <th>Administrator yang mengusulkan</th>
                                                 <th>Business Area</th>
                                                 <th>Personnel Subarea</th>
-                                                <th>Status</th>
+                                                <th>
+                                                    <?php if($modul == 'tampilanUsulanLembarEvaluasiUnitDitolak')
+                                                    {
+                                                        echo 'Alasan Ditolak';
+                                                    } else {
+                                                        echo 'Status';
+                                                    }
+                                                    ?>
+                                                </th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </tfoot>
@@ -127,7 +160,7 @@ Begin : Modal for Delete Data
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Hapus data talenta</h5>
+                    <h5 class="modal-title">Hapus Usulan Evaluasi Mutasi</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                     </button>
                 </div>
@@ -145,4 +178,84 @@ Begin : Modal for Delete Data
 <?php endforeach ?>
 <!--**********************************
 End : Modal for Delete Data
+***********************************-->
+
+<!--**********************************
+Begin : Modal for Accept Data
+***********************************-->
+<?php foreach($lembar_evaluasi_diterima as $f): ?>
+    <?php 
+        $myDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $f->tgl_usulan);
+        $tanggal = $myDateTime->format('d/m/Y');
+        $jam = $myDateTime->format('H:i:s');
+        $waktu = $tanggal." Pukul ".$jam." WITA";
+     ?>
+        <div class="modal fade modal-accept<?= $f->id_usulan ?>" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Terima Usulan Evaluasi Mutasi</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="<?= site_url('AdministratorInduk/terimaUsulan/'.$f->id_usulan) ?>">
+                        Yakin ingin menerima data usulan evaluasi mutasi bertanggal <?= $waktu ?> dari <?= $f->nama_personnel_subarea ?>?
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Terima</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach ?>
+<!--**********************************
+End : Modal for Accept Data
+***********************************-->
+
+<!--**********************************
+Begin : Modal for Reject Data
+***********************************-->
+<?php foreach($lembar_evaluasi_diterima as $f): ?>
+    <?php 
+        $myDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $f->tgl_usulan);
+        $tanggal = $myDateTime->format('d/m/Y');
+        $jam = $myDateTime->format('H:i:s');
+        $waktu = $tanggal." Pukul ".$jam." WITA";
+     ?>
+
+    <div class="modal fade modal-reject<?= $f->id_usulan ?>" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Yakin ingin menolak data usulan evaluasi mutasi bertanggal <?= $waktu ?> dari <?= $f->nama_personnel_subarea ?>?</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-validation">
+                        <form class="form-valide" action="<?= site_url('AdministratorInduk/tolakUsulan/'.$f->id_usulan) ?>" method="POST" enctype="multipart/form-data">
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Alasan ditolak</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group mb-3">
+                                        <textarea name="alasan_ditolak" class="form-control" rows="4" required><?= $f->alasan_ditolak ?></textarea>
+                                        <div class ="input-group-append">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                       
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">Tolak</button>
+                </div></form>
+            </div>
+        </div>
+    </div>
+<?php endforeach ?>
+<!--**********************************
+    End : Modal for Reject Data
 ***********************************-->
