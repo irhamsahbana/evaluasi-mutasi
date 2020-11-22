@@ -28,7 +28,7 @@
                                 <h4 class="card-title">Sunting Data Sebutan Jabatan</h4>
 
                                 <div class="form-validation">
-                                    <form class="form-valide" action="<?= site_url('AdministratorInduk/doUpdateJabatan') ?>" method="POST" enctype="multipart/form-data">
+                                    <form class="form-valide" action="<?= site_url('AdministratorInduk/doUpdateJabatan'.'/'.$ps) ?>" method="POST" enctype="multipart/form-data">
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Business Area</label>
                                             <div class="col-sm-9">

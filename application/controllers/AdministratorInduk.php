@@ -633,9 +633,22 @@ class AdministratorInduk extends CI_Controller
             'password'                  => password_hash(trim($input['password']), PASSWORD_DEFAULT),
             'role'                      => 'approval_committee',
         );
-        $this->db->set('id_approval', 'UUID()', FALSE);
-        $this->db->insert('tb_approval_committee', $data_penerima);
-        $this->session->set_flashdata('alert_success', 'Data penerima berhasil ditambahkan!');
+
+        $nip_trim = trim($input['nipeg']);
+        $cek = $this->db->query("SELECT nip FROM tb_pegawai WHERE nip = '$nip_trim'");
+        $cek_approval = $this->db->query("SELECT nip FROM tb_approval_committee WHERE nip = '$nip_trim'");
+
+        if($cek->num_rows() == 0) { 
+            $this->session->set_flashdata("alert_danger", "Tambahkan dulu Data pegawai dengan NIP tersebut di database pegawai!");
+        } else {
+            if($cek_approval->num_rows() > 0) {
+                $this->session->set_flashdata("alert_danger", "Approval Committee dengan NIP tersebut telah ada!");
+            } else {
+                $this->db->set('id_approval', 'UUID()', FALSE);
+                $this->db->insert('tb_approval_committee', $data_penerima);
+                $this->session->set_flashdata('alert_success', 'Data penerima berhasil ditambahkan!');
+            }
+        }
         redirect('AdministratorInduk/tampilanApprovalCommittee');
     }
 
@@ -656,12 +669,12 @@ class AdministratorInduk extends CI_Controller
 
         if ($input['password'] != '') {
             $items = array(
-                'nip'        => $input['nipeg'],
-                'password'   => password_hash($input['password'], PASSWORD_DEFAULT),
+                'nip'        => trim($input['nipeg']),
+                'password'   => password_hash(trim($input['password']), PASSWORD_DEFAULT),
             );
         } else {
             $items = array(
-                'nip'        => $input['nipeg']
+                'nip'        => trim($input['nipeg'])
             );
         }
 
@@ -764,26 +777,41 @@ class AdministratorInduk extends CI_Controller
 # ************ End Menu Judul Talenta ******************
 
 # ************ Begin Menu Jabatan ******************
-    public function tampilanJabatan()
+    public function tampilanJabatanPerUnit()
+    {
+        $data = array(
+            'isi'           => 'user/contents/administrator_induk/tabelDaftarPersonnelSubareaJabatan',
+            'title'         => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
+            'data_subarea'  => $this->M_AdministratorInduk->getDataSubarea(),
+            'area'          => $this->Crud->ga('tb_business_area'),
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
+    }
+
+    public function tampilanJabatan($personnel_subarea)
     {
         $this->db->select('*');
         $this->db->from('tb_jabatan');
         $this->db->order_by('personnel_subarea', 'asc');
         $this->db->order_by('urutan_dalam_org', 'asc');
+        $this->db->where('personnel_subarea', $personnel_subarea);
         $query = $this->db->get();
         $data_jabatan = $query->result();
 
+        $where_ps = array('personnel_subarea' => $personnel_subarea);
 
         $data = array(
             'isi'           => 'user/contents/administrator_induk/tabelDaftarJabatan',
             'title'         => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
             'data_jabatan'  => $data_jabatan,
-            'area'          =>  $this->Crud->ga('tb_business_area'),
+            'area'          => $this->Crud->ga('tb_business_area'),
+            'ps'            => $personnel_subarea,
+            'nama_ps'       => $this->Crud->gw('tb_personnel_area', $where_ps)
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
 
-    public function doAddJabatan()
+    public function doAddJabatan($ps)
     {
         $input        = $this->input->post(NULL, TRUE);
         $data_jabatan = array(
@@ -794,10 +822,10 @@ class AdministratorInduk extends CI_Controller
         );
         $this->db->insert('tb_jabatan', $data_jabatan);
         $this->session->set_flashdata('alert_success', 'Data jabatan berhasil ditambahkan!');
-        redirect('AdministratorInduk/tampilanJabatan');
+        redirect('AdministratorInduk/tampilanJabatan/'.$ps);
     }
 
-    public function getEditJabatan($id_jabatan)
+    public function getEditJabatan($id_jabatan, $ps)
     {
         $where = array('id_sebutan_jabatan' => $id_jabatan);
         $data = array(
@@ -805,6 +833,7 @@ class AdministratorInduk extends CI_Controller
             'title'            => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
             'data_jabatan'     => $this->Crud->gw('tb_jabatan', $where),
             'area'             => $this->Crud->ga('tb_business_area'),
+            'ps'               => $ps
         );
         $get_data = $this->M_AdministratorInduk->getJabatanById($id_jabatan);
         if ($get_data->num_rows() > 0) {
@@ -821,7 +850,7 @@ class AdministratorInduk extends CI_Controller
         echo json_encode($data);
     }
 
-    public function doUpdateJabatan()
+    public function doUpdateJabatan($ps)
     {
         $id           = $this->input->post('id_sebutan_jabatan', TRUE);
         $where        = array('id_sebutan_jabatan' => $id,);
@@ -833,19 +862,19 @@ class AdministratorInduk extends CI_Controller
         );
         $this->Crud->u('tb_jabatan', $data_jabatan, $where);
         $this->session->set_flashdata('alert_primary', 'Data jabatan berhasil disunting!');
-        redirect('AdministratorInduk/tampilanJabatan');
+        redirect('AdministratorInduk/tampilanJabatan/'.$ps);
     }
 
-    public function doDeleteJabatan($id)
+    public function doDeleteJabatan($id, $ps)
     {
         $where = array('id_sebutan_jabatan' => $id);
 
         $this->Crud->d('tb_jabatan', $where);
         $this->session->set_flashdata('alert_danger', 'Data jabatan berhasil dihapus!');
-        redirect('AdministratorInduk/tampilanJabatan');
+        redirect('AdministratorInduk/tampilanJabatan/'.$ps);
     }
 
-    public function doImportJabatan()
+    public function doImportJabatan($ps)
     {
         $this->load->library(array('PHPExcel', 'PHPExcel/IOFactory'));
 
@@ -861,7 +890,7 @@ class AdministratorInduk extends CI_Controller
 
         if (!$this->upload->do_upload('file_jabatan')) {
             $this->session->set_flashdata('alert_danger', 'file daftar jabatan gagal diimpor!');
-            redirect('AdministratorInduk/tampilanJabatan');
+            redirect('AdministratorInduk/tampilanJabatan'.$ps);
         } else {
             $media = $this->upload->data();
             $inputFileName = './assets/user/administrator_induk/' . $media['file_name'];
@@ -895,7 +924,7 @@ class AdministratorInduk extends CI_Controller
             }
             unlink('./assets/user/administrator_induk/' . $fileName);
             $this->session->set_flashdata('alert_success', 'Daftar sebutan jabatan berhasil diimpor!');
-            redirect('AdministratorInduk/tampilanJabatan');
+            redirect('AdministratorInduk/tampilanJabatan/'.$ps);
         }
     }
 # ************ End Menu Jabatan ******************
@@ -972,14 +1001,14 @@ class AdministratorInduk extends CI_Controller
         if ($input['password'] != '') {
             $data_admin = array(
                 'nip'                => $input['nip'],
-                'password'           => password_hash($input['password'], PASSWORD_DEFAULT),
+                'password'           => password_hash(trim($input['password']), PASSWORD_DEFAULT),
                 'role'               => $input['status'],
                 'personnel_subarea'  => $input['personnel_subarea'],
             );
         } else {
             $data_admin = array(
                 'nip'                => $input['nip'],
-                'password'           => password_hash($input['password'], PASSWORD_DEFAULT),
+                'password'           => password_hash(trim($input['password']), PASSWORD_DEFAULT),
                 'role'               => $input['status'],
                 'personnel_subarea'  => $input['personnel_subarea'],
             );
@@ -1489,6 +1518,19 @@ class AdministratorInduk extends CI_Controller
         );
         $this->Crud->u('tb_usulan_evaluasi', $data, $where);
         $this->session->set_flashdata('alert_danger', 'Usulan Evaluasi Mutasi dari Unit Ditolak!');
+        redirect('AdministratorInduk/tampilanUsulanLembarEvaluasi');
+    }
+
+    public function reviewUsulan($id_usulan)
+    {
+        $where         = array('id_usulan' => $id_usulan);
+        $input         = $this->input->post(NULL, TRUE);
+        $data          = array(
+            'status_usulan'     => 'dipending',
+
+        );
+        $this->Crud->u('tb_usulan_evaluasi', $data, $where);
+        $this->session->set_flashdata('alert_warning', 'Usulan Evaluasi Mutasi dari Unit Ditinjau Kembali!');
         redirect('AdministratorInduk/tampilanUsulanLembarEvaluasi');
     }
 # ************ End Menu Lembar Evaluasi dari Unit ******************

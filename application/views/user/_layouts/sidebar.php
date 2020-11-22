@@ -34,7 +34,7 @@
                         </a>
                     </li>
                     <li class="mega-menu mega-menu-sm">
-                        <a href="<?= site_url('AdministratorInduk/tampilanJabatan') ?>" class="<?= ($modul == 'tampilanJabatan') ? 'active' : '' ?>">
+                        <a href="<?= site_url('AdministratorInduk/tampilanJabatanPerUnit') ?>" class="<?= ($modul == 'tampilanJabatan' || $modul == 'tampilanJabatanPerUnit' || $modul == 'getEditJabatan') ? 'active' : '' ?>">
                             <i class="icon-list menu-icon"></i><span class="nav-text">Daftar Jabatan</span>
                         </a>
                     </li>
@@ -59,7 +59,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?= site_url('AdministratorInduk/tampilanUsulanLembarEvaluasi') ?>" class="<?= ($modul == 'tampilanUsulanLembarEvaluasi') ? 'active' : '' ?>">
+                        <a href="<?= site_url('AdministratorInduk/tampilanUsulanLembarEvaluasi') ?>" class="<?= ($modul == 'tampilanUsulanLembarEvaluasi' || $modul == 'tampilanRincianLembarEvaluasi') ? 'active' : '' ?>">
                             <i class="icon-docs menu-icon"></i><span class="nav-text">Usulan Lembar Evaluasi</span>
                         </a>
                     </li>

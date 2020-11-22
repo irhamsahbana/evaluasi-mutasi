@@ -46,6 +46,14 @@
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
                                         </button><strong><?= $alert_danger ?></strong></div>
                                     <?php endif; ?>
+                                    <!-- Alert Warning -->
+                                    <?php 
+                                    $alert_warning = $this->session->flashdata('alert_warning');
+                                    if($this->session->flashdata('alert_warning') == TRUE) : ?>
+                                        <div class="alert alert-warning alert-dismissible fade show">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                        </button><strong><?= $alert_warning ?></strong></div>
+                                    <?php endif; ?>
 
                                         <button style="float: right;" type="button" class="btn mb-1 btn-success" onclick='window.open("<?= site_url('AdministratorInduk/tampilanAddUsulanLembarEvaluasi'); ?>","_blank")'>Kirim Usulan Baru<span class="btn-icon-right"><i class="fa fa-paper-plane"></i></span>
                                         </button>
@@ -100,15 +108,18 @@
                                                     ?>        
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn mb-1 btn-secondary" onclick='window.open("<?= site_url('AdministratorInduk/tampilanRincianLembarEvaluasi/'.$f->id_usulan); ?>","_blank")'>Rincian<span class="btn-icon-right"><i class="fa fa-file"></i></span></button>
-                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete<?= $f->id_usulan ?>">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
-                                                    </button>
                                                     <?php if($modul == 'tampilanUsulanLembarEvaluasiUnit') { ?>
                                                         <button type="button" class="btn mb-1 btn-success" data-toggle="modal" data-target=".modal-accept<?= $f->id_usulan ?>">Terima<span class="btn-icon-right"><i class="fa fa-user-plus"></i></span>
                                                         </button>
                                                         <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-reject<?= $f->id_usulan ?>">Tolak<span class="btn-icon-right"><i class="fa fa-user-times"></i></span>
                                                         </button>
                                                     <?php } ?>
+                                                    <button type="button" class="btn mb-1 btn-secondary" onclick='window.open("<?= site_url('AdministratorInduk/tampilanRincianLembarEvaluasi/'.$f->id_usulan); ?>","_blank")'>Rincian<span class="btn-icon-right"><i class="fa fa-file"></i></span></button>
+                                                    <?php if($modul == 'tampilanUsulanLembarEvaluasiUnitDitolak'): ?>
+                                                        <button type="button" class="btn mb-1 btn-warning" data-toggle="modal" data-target=".modal-review<?= $f->id_usulan ?>">Tinjau Kembali<span class="btn-icon-right"><i class="fa fa-undo"></i></span>
+                                                    <?php endif ?>
+                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete<?= $f->id_usulan ?>">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
+                                                    </button>
                                                 </td>
                                             </tr>
                                             <?php endforeach ?>
@@ -258,4 +269,38 @@ Begin : Modal for Reject Data
 <?php endforeach ?>
 <!--**********************************
     End : Modal for Reject Data
+***********************************-->
+
+<!--**********************************
+Begin : Modal for Accept Data
+***********************************-->
+<?php foreach($lembar_evaluasi_diterima as $f): ?>
+    <?php 
+        $myDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $f->tgl_usulan);
+        $tanggal = $myDateTime->format('d/m/Y');
+        $jam = $myDateTime->format('H:i:s');
+        $waktu = $tanggal." Pukul ".$jam." WITA";
+     ?>
+        <div class="modal fade modal-review<?= $f->id_usulan ?>" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tinjau Kembali Usulan Evaluasi Mutasi</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="<?= site_url('AdministratorInduk/reviewUsulan/'.$f->id_usulan) ?>">
+                        Yakin ingin meninjau kembali data usulan evaluasi mutasi bertanggal <?= $waktu ?> dari <?= $f->nama_personnel_subarea ?> (Lihat Kembali di menu <b>Usulan Evaluasi dari Unit</b>)?
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-warning">Tinjau Kembali</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach ?>
+<!--**********************************
+End : Modal for Accept Data
 ***********************************-->

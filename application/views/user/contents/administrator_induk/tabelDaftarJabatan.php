@@ -18,7 +18,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Daftar Jabatan</h4>
+                                <h4 class="card-title">Daftar Jabatan <?php foreach ($nama_ps as $f){ echo $f->nama_personnel_subarea;} ?></h4>
                                 <div class="table-responsive">
                                     <div id="dataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
                                         <!-- Alert Add -->
@@ -74,7 +74,7 @@
                                                     <td><?= $field->sebutan_jabatan ?></td>
                                                     <td><?= $field->id_sebutan_jabatan ?></td>
                                                     <td>
-                                                        <button type="button" class="btn mb-1 btn-info" onclick='window.open("<?= site_url('AdministratorInduk/getEditJabatan/' . $field->id_sebutan_jabatan); ?>","_blank")'>Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
+                                                        <button type="button" class="btn mb-1 btn-info" onclick='window.open("<?= site_url('AdministratorInduk/getEditJabatan/'.$field->id_sebutan_jabatan.'/'.$ps); ?>","_blank")'>Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
                                                         </button>
                                                         <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete<?= $field->id_sebutan_jabatan ?>">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
                                                         </button>
@@ -115,7 +115,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="form-validation">
-                        <form method="post" class="form-valide" action="<?= site_url('AdministratorInduk/doAddJabatan') ?>" enctype="multipart/form-data">
+                        <form method="post" class="form-valide" action="<?= site_url('AdministratorInduk/doAddJabatan'.'/'.$ps) ?>" enctype="multipart/form-data">
                             <div class="modal-header">
                                 <h5 class="modal-title">Tambah Jabatan</h5>
                                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
@@ -183,7 +183,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form method="POST" action="<?= site_url('AdministratorInduk/doDeleteJabatan/' . $id) ?>">
+                            <form method="POST" action="<?= site_url('AdministratorInduk/doDeleteJabatan/' . $id.'/'.$ps) ?>">
                                 Yakin ingin Menghapus data (<?= $field->sebutan_jabatan ?>)?
                         </div>
                         <div class="modal-footer">
@@ -205,7 +205,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="form-validation">
-                        <form class="form-valide" action="<?= site_url('AdministratorInduk/doImportJabatan') ?>" method="POST" enctype="multipart/form-data">
+                        <form class="form-valide" action="<?= site_url('AdministratorInduk/doImportJabatan'.'/'.$ps) ?>" method="POST" enctype="multipart/form-data">
                             <div class="modal-header">
                                 <h5 class="modal-title">Unggah File Excel Daftar Jabatan</h5>
                                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
