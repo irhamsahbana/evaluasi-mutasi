@@ -57,6 +57,9 @@
                                                 <th>Tahun</th>
                                                 <th>Semester</th>
                                                 <th>NIP</th>
+                                                <th>Nama</th>
+                                                <th>Business Area</th>
+                                                <th>Personnel Subarea</th>
                                                 <th>Nilai Talenta</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -72,6 +75,9 @@
                                                     <td><?= $talenta->tahun_talenta ?></td>
                                                     <td><?= $talenta->semester_talenta ?></td>
                                                     <td><?= $talenta->nip ?></td>
+                                                    <td><?= $talenta->nama_pegawai ?></td>
+                                                    <td><?= $talenta->nama_business_area ?></td>
+                                                    <td><?= $talenta->nama_personnel_subarea ?></td>
                                                     <td><?= $talenta->nilai_talenta ?></td>
                                                     <td>
                                                         <button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target=".modal-update<?= $target ?>">Sunting<span class="btn-icon-right"><i class="fa fa-edit"></i></span>
@@ -90,6 +96,9 @@
                                                 <th>Tahun</th>
                                                 <th>Semester</th>
                                                 <th>NIP</th>
+                                                <th>Nama</th>
+                                                <th>Business Area</th>
+                                                <th>Personnel Subarea</th>
                                                 <th>Nilai Talenta</th>
                                                 <th>Aksi</th>
                                             </tr>

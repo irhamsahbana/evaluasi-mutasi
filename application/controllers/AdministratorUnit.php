@@ -37,7 +37,20 @@ class AdministratorUnit extends CI_Controller
     }
 # ************ End Kebetuhan Script ******************
 
-    # ************ Begin Menu Lembar Evaluasi ******************
+# ************ Begin Menu Data Pegawai ******************
+    public function tampilanDataPegawai()
+    {
+        $data = array(
+            'isi' => 'user/contents/administrator_unit/tabelDataPegawai',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
+            'data_pegawai' => $this->M_AdministratorInduk->getDataPegawai(),
+            'area' =>  $this->Crud->ga('tb_business_area'),
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
+    }
+# ************ End Menu Data Pegawai ******************
+
+# ************ Begin Menu Lembar Evaluasi ******************
     public function tampilanUsulanLembarEvaluasi()
     {
         $personnel_subarea = $this->session->userdata('personnel_subarea');
@@ -198,7 +211,7 @@ class AdministratorUnit extends CI_Controller
         );
 
         $data = array(
-            'isi'                       => 'user/contents/administrator_induk/tabelRincianUsulanLembarEvaluasi',
+            'isi'                       => 'user/contents/administrator_unit/tabelRincianUsulanLembarEvaluasi',
             'title'                     => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
             'data_surat'                => $this->Crud->gw('tb_usulan_evaluasi', $where),
             'usulan_pegawai'            => $this->Crud->gw('tb_usulan_evaluasi_pegawai', $where),
@@ -274,8 +287,7 @@ class AdministratorUnit extends CI_Controller
         $this->session->set_flashdata('alert_primary', 'Data Pegawai Usulan berhasil dihapus!');
         redirect('AdministratorInduk/tampilanRincianLembarEvaluasi/'.$id_usulan);
     }
-
-    # ************ End Menu Lembar Evaluasi ******************
+# ************ End Menu Lembar Evaluasi ******************
 
 
 }

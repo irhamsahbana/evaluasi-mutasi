@@ -85,13 +85,16 @@
                                                         echo 'Diterima oleh Administrator UIW';
                                                     } elseif ($f->status_usulan == 'dipending'){
                                                         echo 'Menunggu persetujuan Administrator UIW';
+                                                    } else{
+                                                        echo 'Ditolak oleh Administrator UIW ('.$f->alasan_ditolak.')';
                                                     }
                                                     ?>        
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn mb-1 btn-secondary" onclick='window.open("<?= site_url('AdministratorInduk/tampilanRincianLembarEvaluasi/'.$f->id_usulan); ?>","_blank")'>Rincian<span class="btn-icon-right"><i class="fa fa-file"></i></span></button>
-                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete<?= $f->id_usulan ?>">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span>
-                                                    </button>
+                                                    <button type="button" class="btn mb-1 btn-secondary" onclick='window.open("<?= site_url('AdministratorUnit/tampilanRincianLembarEvaluasi/'.$f->id_usulan); ?>","_blank")'>Rincian<span class="btn-icon-right"><i class="fa fa-file"></i></span></button>
+                                                <?php if($f->status_usulan == 'dipending'): ?>
+                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-delete<?= $f->id_usulan ?>">Hapus<span class="btn-icon-right"><i class="fa fa-close"></i></span></button>
+                                                <?php endif ?>
                                                 </td>
                                             </tr>
                                             <?php endforeach ?>
@@ -140,7 +143,7 @@ Begin : Modal for Delete Data
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="<?= site_url('AdministratorInduk/doDeleteUsulanMutasi/'.$f->id_usulan) ?>">
+                    <form method="POST" action="<?= site_url('AdministratorUnit/doDeleteUsulanMutasi/'.$f->id_usulan) ?>">
                         Yakin ingin menghapus data usulan evaluasi mutasi bertanggal <?= $waktu ?> dari <?= $f->nama_personnel_subarea ?>?
                 </div>
                 <div class="modal-footer">

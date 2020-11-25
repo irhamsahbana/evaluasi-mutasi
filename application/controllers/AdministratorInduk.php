@@ -1,9 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class AdministratorInduk extends CI_Controller
 {
@@ -210,11 +207,11 @@ class AdministratorInduk extends CI_Controller
                     FALSE
                 );
 
-                $tgl_grade          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($rowData[0][11]));
-                $tgl_lahir          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($rowData[0][13]));
-                $tgl_capeg          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($rowData[0][14]));
-                $tgl_pegawai_tetap  = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($rowData[0][15]));
-                $tgl_masuk          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($rowData[0][18]));
+                $tgl_grade          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP(trim($rowData[0][11])));
+                $tgl_lahir          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP(trim($rowData[0][13])));
+                $tgl_capeg          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP(trim($rowData[0][14])));
+                $tgl_pegawai_tetap  = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP(trim($rowData[0][15])));
+                $tgl_masuk          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP(trim($rowData[0][18])));
 
                 $data = array(
                     "pers_no"               => strtoupper($rowData[0][0]),
@@ -348,6 +345,23 @@ class AdministratorInduk extends CI_Controller
         $this->load->view('user/_layouts/wrapper', $data);
     }
 
+    public function tampilanNilaiTalentaPegawai($tahun, $semester)
+    {
+        $where      = array(
+            'tahun_talenta'     => $tahun,
+            'semester_talenta'  => $semester,
+        );
+
+        $data = array(
+            'isi' => 'user/contents/administrator_induk/tabelNilaiTalentaPegawai',
+            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
+            'tb_talenta' => $this->M_AdministratorInduk->nilaiTalentaPegawai($where),
+            'judul_tahun' => $tahun,
+            'judul_semester' => $semester,
+        );
+        $this->load->view('user/_layouts/wrapper', $data);
+    }
+
     public function doAddDaftarTalenta()
     {
         $input      = $this->input->post(NULL, TRUE);
@@ -367,6 +381,7 @@ class AdministratorInduk extends CI_Controller
             'semester_talenta'  => $semester,
         );
         $this->Crud->d('tb_daftar_talenta_per_semester', $where);
+        $this->Crud->d('tb_nilai_talenta_pegawai', $where);
         $this->session->set_flashdata('alert_danger', 'Data semester berhasil dihapus!');
         redirect('AdministratorInduk/tampilanDaftarTalenta');
     }
@@ -386,23 +401,6 @@ class AdministratorInduk extends CI_Controller
         $this->Crud->u('tb_daftar_talenta_per_semester', $data, $where);
         $this->session->set_flashdata('alert_primary', 'Data semester berhasil disunting!');
         redirect('AdministratorInduk/tampilanDaftarTalenta');
-    }
-
-    public function tampilanNilaiTalentaPegawai($tahun, $semester)
-    {
-        $where      = array(
-            'tahun_talenta'     => $tahun,
-            'semester_talenta'  => $semester,
-        );
-
-        $data = array(
-            'isi' => 'user/contents/administrator_induk/tabelNilaiTalentaPegawai',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
-            'tb_talenta' => $this->Crud->gw('tb_nilai_talenta_pegawai', $where),
-            'judul_tahun' => $tahun,
-            'judul_semester' => $semester,
-        );
-        $this->load->view('user/_layouts/wrapper', $data);
     }
 
     public function doAddTalentaPegawai()
@@ -484,6 +482,13 @@ class AdministratorInduk extends CI_Controller
             $highestRow = $sheet->getHighestRow();
             $highestColumn = $sheet->getHighestColumn();
 
+            $pegawai_tidak_ada = 0;
+            $cell_kosong = 0;
+            $nilai_ada = 0;
+            $nip_tidak_ada = array();
+            $nip_sudah_ada = array();
+
+
             for ($row = 2; $row <= $highestRow; $row++) {
                 $rowData = $sheet->rangeToArray(
                     'A' . $row . ':' . $highestColumn . $row,
@@ -492,18 +497,55 @@ class AdministratorInduk extends CI_Controller
                     FALSE
                 );
 
-                $data = array(
-                    "nip"                   => $rowData[0][0],
-                    "tahun_talenta"         => $rowData[0][1],
-                    "semester_talenta"      => $rowData[0][2],
-                    "nilai_talenta"         => $rowData[0][3],
-                );
-                $this->db->insert("tb_nilai_talenta_pegawai", $data);
+                $nip                = trim($rowData[0][0]);
+                $tahun_talenta      = trim($rowData[0][1]);
+                $semester_talenta   = trim($rowData[0][2]);
+                $nilai_talenta      = trim($rowData[0][3]);
+                $cek_pegawai = $this->db->query("SELECT nip FROM tb_pegawai WHERE nip = '$nip'");
+                $cek_talenta = $this->db->query("SELECT nip FROM tb_nilai_talenta_pegawai WHERE nip = '$nip' AND tahun_talenta = '$tahun_talenta' AND semester_talenta = '$semester_talenta'");
+
+                if ((!empty($nip)) && (!empty($tahun_talenta)) && (!empty($semester_talenta)) && (!empty($nilai_talenta)) ){
+                    if($cek_pegawai->num_rows() == 0) { 
+                        $pegawai_tidak_ada++;
+                        array_push($nip_tidak_ada, $nip);
+                    } else {
+                        if($cek_talenta->num_rows() > 0){
+                            $nilai_ada++;
+                            array_push($nip_sudah_ada, $nip);
+                        } else {
+                            $data = array(
+                                "nip"                   => $nip,
+                                "tahun_talenta"         => $tahun_talenta,
+                                "semester_talenta"      => $semester_talenta,
+                                "nilai_talenta"         => $nilai_talenta,
+                            );
+                            $this->db->insert("tb_nilai_talenta_pegawai", $data);
+                        }
+                    }
+                } else {
+                    $cell_kosong++;
+                }
             }
             $fileName_ = str_replace(" ", "_", $fileName);
             unlink('./assets/user/administrator_induk/' . $fileName_);
             unlink('./assets/user/administrator_induk/' . $fileName);
-            $this->session->set_flashdata('alert_success', 'Nilai talenta pegawai berhasil diimpor!');
+
+            $daftar_nip_ta = '';
+            foreach ($nip_tidak_ada as $npa) {
+                $daftar_nip_ta .= $npa . '<br>';
+            }
+
+            $daftar_nip_sa = '';
+            foreach ($nip_sudah_ada as $nsa) {
+                $daftar_nip_sa .= $nsa . '<br>';
+            }
+
+            $this->session->set_flashdata('alert_success', 'Nilai talenta pegawai berhasil diimpor!'.' ('. 'Cell kosong = '.$cell_kosong.', pegawai tidak ada di database = '.$pegawai_tidak_ada.', nilai talenta telah ada = '.$nilai_ada.')'
+                .'<br>'
+                .'NIP yang tidak ada di data pegawai :<br>'
+                .$daftar_nip_ta
+                .'NIP sudah memiliki nilai talenta :<br>'
+                .$daftar_nip_sa);
 
             $baris = 2;
             $barisData = $sheet->rangeToArray('A' . $baris . ':' . $highestColumn . $baris, NULL, TRUE, FALSE);

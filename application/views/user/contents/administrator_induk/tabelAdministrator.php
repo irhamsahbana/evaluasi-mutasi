@@ -53,6 +53,7 @@
                                             <tr>
                                                 <th>No.</th>
                                                 <th>NIP</th>
+                                                <th>Nama</th>
                                                 <th>Status</th>
                                                 <th>Business Area</th>
                                                 <th>Personnel Subarea</th>
@@ -67,6 +68,7 @@
                                             <tr>
                                                 <td><?= $no++ ?></td>
                                                 <td><?= $admin->nip ?></td>
+                                                <td><?= $admin->nama_pegawai ?></td>
                                                 <td><?= $admin->role ?></td>
                                                 <td><?= $admin->nama_business_area ?></td>
                                                 <td><?= $admin->nama_personnel_subarea ?></td>
@@ -85,6 +87,7 @@
                                             <tr>
                                                 <th>No.</th>
                                                 <th>NIP</th>
+                                                <th>Nama</th>
                                                 <th>Status</th>
                                                 <th>Business Area</th>
                                                 <th>Personnel Subarea</th>

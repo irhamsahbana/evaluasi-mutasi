@@ -83,6 +83,11 @@
 
                     <?php if($this->uri->segment(1) == 'AdministratorUnit') { ?>
                     <li>
+                        <a href="<?= site_url('AdministratorUnit/tampilanDataPegawai') ?>" class="<?= ($modul == 'tampilanDataPegawai') ? 'active' : '' ?>">
+                            <i class="icon-people menu-icon"></i><span class="nav-text">Data Pegawai</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="<?= site_url('AdministratorUnit/tampilanUsulanLembarEvaluasi') ?>" class="<?= ($modul == 'tampilanUsulanLembarEvaluasi') ? 'active' : '' ?>">
                             <i class="icon-docs menu-icon"></i><span class="nav-text">Usulan Lembar Evaluasi</span>
                         </a>
