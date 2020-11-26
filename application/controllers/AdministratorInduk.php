@@ -1794,6 +1794,27 @@ class AdministratorInduk extends CI_Controller
         redirect('AdministratorInduk/tampilanUsulanLembarEvaluasi');
     }
 # ************ End Menu Lembar Evaluasi dari Unit ******************
+
+# ************ Begin Menu Pencarian Data Pegawai ******************
+    public function tampilanPencarian()
+    {
+        $data   = array(
+            'isi'                       => 'user/contents/administrator_induk/tabelPencarianDataPegawai',
+            'title'                     => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar'
+        );
+
+        $this->load->view('user/_layouts/wrapper', $data);
+    }
+
+    public function showAllNilaiTalenta()
+    {
+        $id_pegawai = $this->input->post('nip_talenta', TRUE);
+        $where      = array('nip' => $id_pegawai);
+        $talentaPeg = $this->Crud->gwo('tb_nilai_talenta_pegawai', $where, 'tahun_talenta', 'desc');
+        echo json_encode($talentaPeg);
+    }
+
+# ************ End Menu Pencarian Data Pegawai ********************
     
 }
 

@@ -14,6 +14,11 @@
                     </li>
                     <?php if($this->uri->segment(1) == 'AdministratorInduk') { ?>
                     <li>
+                        <a href="<?= site_url('AdministratorInduk/tampilanPencarian') ?>" class="<?= ($modul == 'tampilanPencarian') ? 'active' : '' ?>">
+                            <i class="icon-magnifier menu-icon"></i><span class="nav-text">Pencarian Data Pegawai</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="<?= site_url('AdministratorInduk/tampilanDataPegawai') ?>" class="<?= ($modul == 'tampilanDataPegawai') ? 'active' : '' ?>">
                             <i class="icon-people menu-icon"></i><span class="nav-text">Data Pegawai</span>
                         </a>

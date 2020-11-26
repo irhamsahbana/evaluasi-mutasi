@@ -294,6 +294,72 @@
 
         <?php } ?>
 
+        <?php if($myURI == 'tampilanPencarian') { ?>
+                $('#nip').keyup(function(){
+                    var nip = $('#nip').val();
+                    $.ajax({
+                        url : '<?= site_url('AdministratorInduk/autoFillUsulanPegawai'); ?>',
+                        data : {'nip' : nip},
+                        type : 'post',
+                        async : true,
+                        dataType : 'json',
+                        success : function(data){
+                            $.each(data, function(i, item){
+                                $('#pers_no').val(data[i].pers_no).attr('title', data[i].pers_no);
+                                $('#nama_pegawai').val(data[i].nama_pegawai).attr('title', data[i].nama_pegawai);
+                                $('#business_area').val(data[i].nama_business_area).attr('title', data[i].nama_business_area);
+                                $('#personnel_subarea').val(data[i].nama_personnel_subarea).attr('title', data[i].nama_personnel_subarea);
+                                $('#sebutan_jabatan').val(data[i].sebutan_jabatan).attr('title', data[i].sebutan_jabatan);
+                                $('#org_unit').val(data[i].org_unit).attr('title', data[i].org_unit);
+                                $('#organizational_unit').val(data[i].organizational_unit).attr('title', data[i].organizational_unit);
+                                $('#position').val(data[i].position).attr('title', data[i].position);
+                                $('#nama_panjang_posisi').val(data[i].nama_panjang_posisi).attr('title', data[i].nama_panjang_posisi);
+                                $('#jenjang_main_grp').val(data[i].jenjang_main_grp).attr('title', data[i].jenjang_main_grp);
+                                $('#jenjang_sub_grp').val(data[i].jenjang_sub_grp).attr('title', data[i].jenjang_sub_grp);
+                                $('#grade').val(data[i].grade).attr('title', data[i].grade);
+                                $('#tgl_grade').val(data[i].tgl_grade).attr('title', data[i].tgl_grade);
+                                $('#pendidikan_terakhir').val(data[i].pendidikan_terakhir).attr('title', data[i].pendidikan_terakhir);
+                                $('#tanggal_lahir').val(data[i].tgl_lahir).attr('title', data[i].tgl_lahir);
+                                $('#tanggal_capeg').val(data[i].tgl_capeg).attr('title', data[i].tgl_capeg);
+                                $('#tanggal_pegawai_tetap').val(data[i].tgl_pegawai_tetap).attr('title', data[i].tgl_pegawai_tetap);
+                                $('#gender').val(data[i].gender).attr('title', data[i].gender);
+                                $('#email').val(data[i].email).attr('title', data[i].email);
+                                $('#tanggal_masuk').val(data[i].tgl_masuk).attr('title', data[i].tgl_masuk);
+                                $('#religious').val(data[i].agama).attr('title', data[i].agama);
+                                $('#telp_no').val(data[i].no_telp).attr('title', data[i].no_telp);
+                            });
+                        }
+                    });
+                });
+
+                $('#nip').keyup(function(){
+                    var nip_talenta = $('#nip').val();
+                    $.ajax({
+                        url : '<?= site_url('AdministratorInduk/showAllNilaiTalenta'); ?>',
+                        data : {'nip_talenta' : nip_talenta},
+                        type : 'post',
+                        async : true,
+                        dataType : 'json',
+                        success : function(data){
+                            var html = '';
+                            var no = 1;
+                            var i;
+                            for(i=0; i<data.length; i++){
+                                html += '<tr>'+
+                                            '<td>'+no+'</td>'+
+                                            '<td>'+data[i].tahun_talenta+'</td>'+
+                                            '<td>'+data[i].semester_talenta+'</td>'+
+                                            '<td>'+data[i].nilai_talenta+'</td>'+
+                                        '</tr>';
+                                no++;
+                            }
+                            $('#show_nilai_talenta').html(html);
+                        }
+                    });
+                });      
+
+        <?php } ?>
+
         });
     </script>
 
