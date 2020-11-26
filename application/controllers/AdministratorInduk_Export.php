@@ -228,4 +228,102 @@ class AdministratorInduk_Export extends CI_Controller
         $writer->save('php://output');
         die;
     }
+
+    public function doExportDataPegawai()
+    {
+        $data['data_pegawai'] = $this->Crud->ga('tb_pegawai');
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $spreadsheet->getActiveSheet()->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
+        $spreadsheet->getActiveSheet()->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4);
+        $spreadsheet->getDefaultStyle()->getFont()->setName('Arial');
+        $spreadsheet->getDefaultStyle()->getFont()->setSize(10);
+
+        //Begin Styling
+            $sheet->getStyle('A1:U1')->getFont()->setBold(true);
+
+            $sheet->getColumnDimension('A')->setWidth(9.57);
+            $sheet->getColumnDimension('B')->setWidth(8.71);
+            $sheet->getColumnDimension('C')->setWidth(20.57);
+            $sheet->getColumnDimension('D')->setWidth(25.71);
+            $sheet->getColumnDimension('E')->setWidth(17.71);
+            $sheet->getColumnDimension('F')->setWidth(35.86);
+            $sheet->getColumnDimension('G')->setWidth(10.43);
+            $sheet->getColumnDimension('H')->setWidth(60);
+            $sheet->getColumnDimension('I')->setWidth(21.71);
+            $sheet->getColumnDimension('J')->setWidth(23.71);
+            $sheet->getColumnDimension('K')->setWidth(10.71);
+            $sheet->getColumnDimension('L')->setWidth(14.86);
+            $sheet->getColumnDimension('M')->setWidth(23.29);
+            $sheet->getColumnDimension('N')->setWidth(12.14);
+            $sheet->getColumnDimension('O')->setWidth(17);
+            $sheet->getColumnDimension('P')->setWidth(24);
+            $sheet->getColumnDimension('Q')->setWidth(12.71);
+            $sheet->getColumnDimension('R')->setWidth(29.29);
+            $sheet->getColumnDimension('S')->setWidth(15);
+            $sheet->getColumnDimension('T')->setWidth(28.57);
+            $sheet->getColumnDimension('U')->setWidth(15.86);
+        //End Styling
+
+        $sheet->setCellValue('A1', 'Pers.No.');
+        $sheet->setCellValue('B1', 'Nipeg');
+        $sheet->setCellValue('C1', 'Personnel Number');
+        $sheet->setCellValue('D1', 'ID Jabatan');
+        $sheet->setCellValue('E1', 'Org.unit');
+        $sheet->setCellValue('F1', 'Organizational Unit');
+        $sheet->setCellValue('G1', 'Position');
+        $sheet->setCellValue('H1', 'Nama Panjang Posisi');
+        $sheet->setCellValue('I1', 'Jenjang - Main Grp Text');
+        $sheet->setCellValue('J1', 'Jenjang - Sub Grp Text');
+        $sheet->setCellValue('K1', 'PS group');
+        $sheet->setCellValue('L1', 'Tanggal Grade Terakhir');
+        $sheet->setCellValue('M1', 'Pendidikan Terakhir');
+        $sheet->setCellValue('N1', 'Birth date');
+        $sheet->setCellValue('O1', 'Tanggal CAPEG');
+        $sheet->setCellValue('P1', 'Tanggal Pegawai Tetap');
+        $sheet->setCellValue('Q1', 'Gender Key');
+        $sheet->setCellValue('R1', 'E-mail');
+        $sheet->setCellValue('S1', 'Tanggal Masuk');
+        $sheet->setCellValue('T1', 'Religious Denomination Key');
+        $sheet->setCellValue('U1', 'Telephone no.');
+
+        $baris = 2;
+        foreach($data['data_pegawai'] as $f) {
+            $sheet->setCellValue('A'.$baris, $f->pers_no);
+            $sheet->setCellValue('B'.$baris, $f->nip);
+            $sheet->setCellValue('C'.$baris, $f->nama_pegawai);
+            $sheet->setCellValue('D'.$baris, $f->id_sebutan_jabatan);
+            $sheet->setCellValue('E'.$baris, $f->org_unit);
+            $sheet->setCellValue('F'.$baris, $f->organizational_unit);
+            $sheet->setCellValue('G'.$baris, $f->position);
+            $sheet->setCellValue('H'.$baris, $f->nama_panjang_posisi);
+            $sheet->setCellValue('I'.$baris, $f->jenjang_main_grp);
+            $sheet->setCellValue('J'.$baris, $f->jenjang_sub_grp);
+            $sheet->setCellValue('K'.$baris, $f->grade);
+            $sheet->setCellValue('L'.$baris, date('d/m/Y', strtotime($f->tgl_grade)));
+            $sheet->setCellValue('M'.$baris, $f->pendidikan_terakhir);
+            $sheet->setCellValue('N'.$baris, date('d/m/Y', strtotime($f->tgl_lahir)));
+            $sheet->setCellValue('O'.$baris, date('d/m/Y', strtotime($f->tgl_capeg)));
+            $sheet->setCellValue('P'.$baris, date('d/m/Y', strtotime($f->tgl_pegawai_tetap)));
+            $sheet->setCellValue('Q'.$baris, $f->gender);
+            $sheet->setCellValue('R'.$baris, $f->email);
+            $sheet->setCellValue('S'.$baris, date('d/m/Y', strtotime($f->tgl_masuk)));
+            $sheet->setCellValue('T'.$baris, $f->agama);
+            $sheet->setCellValue('U'.$baris, $f->no_telp);
+
+            $baris++;
+        }
+
+        $filename = 'Data_Pegawai_(Sistem_Evaluasi_Mutasi)_-_';
+        
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"'); 
+        header('Cache-Control: max-age=0');
+
+        ob_end_clean();
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $writer->save('php://output');
+        die;
+    }
 }
