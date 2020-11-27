@@ -49,7 +49,7 @@
                                     <?php endif; ?>
                                 <!-- Button Edit Data Surat dan Keterangan Pegawai -->
                                 <?php foreach($data_surat as $f): ?>
-                                    <form method="POST" action="<?= site_url('AdministratorInduk_Export/doExportToExcel/'.$f->id_usulan) ?>">
+                                    <form method="POST" action="<?= site_url('AdministratorInduk/doExportToExcel/'.$f->id_usulan) ?>">
                                         <button style="float: left;" type="submit" class="btn mb-1 mr-1 btn-success" >Ekspor ke Excel<span class="btn-icon-right"><i class="fa fa-file-text"></i></span></button>
                                     </form>
                                 <?php endforeach ?>

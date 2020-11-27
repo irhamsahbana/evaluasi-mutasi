@@ -11,27 +11,20 @@ class ApprovalCommittee extends CI_Controller
 
         if ($this->session->userdata('status') != "login") {
             redirect('Login');
-        }
-
-        if ($this->session->userdata('role') != 'approval_committee') {
-
-            if ($this->session->userdata('role') == "admin_unit"){
-                redirect('AdministratorUnit');
+        } else {
+            if ($this->session->userdata('role') != 'approval_committee') {
+                if ($this->session->userdata('role') == 'admin_induk'){
+                    redirect('AdministratorInduk');
+                } else {
+                    redirect('AdministratorUnit');
+                }
             }
-            if ($this->session->userdata('role') == "admin_induk") {
-                redirect('AdministratorInduk');
-            }
-
         }
     }
 
     public function index()
     {
-        $data = array(
-            'isi' => 'user/contents/testing',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
-        );
-        $this->load->view('user/_layouts/wrapper', $data);
+        redirect('ApprovalCommittee/tampilanUsulanEvaluasiMasuk');
     }
 
 # ************ Begin Menu Usulan Evaluasi Masuk  & Telah Ditanggapi ******************

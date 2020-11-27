@@ -61,6 +61,7 @@
                                         <?php  
                                             $no = 1;
                                             foreach ($data_subarea as $subarea) {
+                                                $id = $subarea->personnel_subarea;
                                         ?>
                                             <tr>
                                                 <td><?= $no++ ?></td>
@@ -70,6 +71,8 @@
                                                 <td>
                                                     <button type="button" class="btn mb-1 btn-secondary" onclick='window.open("<?= site_url('AdministratorInduk/tampilanJabatan/'.$subarea->personnel_subarea); ?>","_blank")'>Daftar Sebutan Jabatan<span class="btn-icon-right"><i class="fa fa-users"></i></span>
                                                     </button>
+                                                    <button type="button" class="btn mb-1 btn-danger" data-toggle="modal" data-target=".modal-empty<?= $id ?>">Kosongkan<span class="btn-icon-right"><i class="fa fa-trash"></i></span>
+                                                        </button>
                                                 </td>
                                             </tr>
                                         <?php } ?>
@@ -96,118 +99,24 @@
             Content body end
         ***********************************-->
 
-<!--**********************************
-    Begin : Modal for Add Data
-***********************************-->
-<div class="modal fade modal-create" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="form-validation">
-                <form class="form-valide" action="<?= site_url('AdministratorInduk/doAddSubarea') ?>" method="POST" enctype="multipart/form-data">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Tambah Data Unit</h5>
-                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Business Area</label>
-                            <div class="col-sm-9">
-                                <select class="form-control" name="business_area" required>
-                                    <option value="">Pilih Salah Satu</option>
-                                    <?php foreach($area as $row):?>
-                                    <option value="<?php echo $row->business_area;?>"><?php echo $row->nama_business_area;?></option>
-                                    <?php endforeach;?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Personnel Subarea</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="personnel_subarea" class="form-control" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Tambahkan Data</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<!--**********************************
-    End : Modal for Add Data
-***********************************-->
 
 <!--**********************************
-    Begin : Modal for Update Data
-***********************************-->
-<?php  
-    foreach ($data_subarea as $subarea) {
-        $id = $subarea->personnel_subarea;
-        $business_area_selected = $subarea->business_area;
-?>
-<div class="modal fade modal-update<?=$id?>" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="form-validation">
-                <form class="form-valide" action="<?= site_url('AdministratorInduk/doUpdateSubarea/'.$id) ?>" method="POST" enctype="multipart/form-data">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Sunting Daftar Unit</h5>
-                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Business Area</label>
-                            <div class="col-sm-9">
-                                <select class="form-control" name="business_area" required>
-                                    <option value="">Pilih Salah Satu</option>
-                                    <?php foreach($area as $row):?>
-                                    <option value="<?php echo $row->business_area;?>" <?php if($business_area_selected == $row->business_area){echo "selected";} ?>><?php echo $row->nama_business_area;?></option>
-                                    <?php endforeach;?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Personnel Subarea</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="personnel_subarea" class="form-control" placeholder="" required value="<?=$subarea->nama_personnel_subarea?>">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Sunting Data</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<?php } ?>
-<!--**********************************
-    End : Modal for Update Data
-***********************************-->
-
-
-<!--**********************************
-    Begin : Modal for Delete Data
+    Begin : Modal for Empty Data
 ***********************************-->
 <?php  
     foreach ($data_subarea as $subarea) {
         $id = $subarea->personnel_subarea;
 ?>
-<div class="modal fade modal-delete<?=$id?>" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade modal-empty<?=$id?>" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
-            <form method="POST" action="<?= site_url('AdministratorInduk/doDeleteSubarea/'.$id) ?>">
+            <form method="POST" action="<?= site_url('AdministratorInduk/doEmptyJabatan/'.$subarea->personnel_subarea) ?>">
             <div class="modal-header">
                 <h5 class="modal-title">Hapus data unit</h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
-            <div class="modal-body">Yakin ingin menghapus data (<?=$subarea->nama_personnel_subarea?>) ?</div>
+            <div class="modal-body">Yakin ingin mengosongkan data jabatan (<?=$subarea->nama_personnel_subarea?>) ?</div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-danger">Hapus</button>
             </div>
@@ -217,5 +126,5 @@
 </div>
 <?php } ?>
 <!--**********************************
-    End : Modal for Delete Data
+    End : Modal for Empty Data
 ***********************************-->

@@ -10,15 +10,19 @@ class AdministratorUnit extends CI_Controller
         date_default_timezone_set('Asia/Makassar');
         if ($this->session->userdata('status') != "login") {
             redirect('Login');
+        } else {
+            if ($this->session->userdata('role') != 'admin_unit') {
+                if ($this->session->userdata('role') == 'admin_induk'){
+                    redirect('AdministratorInduk');
+                } else {
+                    redirect('ApprovalCommittee');
+                }
+            }
         }
     }
     public function index()
     {
-        $data = array(
-            'isi' => 'user/contents/testing',
-            'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
-        );
-        $this->load->view('user/_layouts/wrapper', $data);
+        redirect('AdministratorUnit/tampilanUsulanLembarEvaluasi');
     }
 
 # ************ Begin Kebetuhan Script ******************
@@ -232,61 +236,9 @@ class AdministratorUnit extends CI_Controller
         $this->Crud->d('tb_usulan_evaluasi_approval', $where);
         $this->Crud->d('tb_approvement', $where);
         $this->session->set_flashdata('alert_danger', 'Data usulan evaluasi mutasi berhasil dihapus!');
-        redirect('AdministratorInduk/tampilanUsulanLembarEvaluasi');
+        redirect('AdministratorUnit/tampilanUsulanLembarEvaluasi');
     }
 
-    public function doUpdateDataSurat($id_usulan)
-    {
-        $where = array('id_usulan' => $id_usulan);
-        $input = $this->input->post(NULL, TRUE);
-
-        $data_surat = array(
-            'no_surat'      => $input['no_surat'],
-            'tgl_surat'     => $input['tgl_surat'],
-            'lokasi_surat'  => $input['lokasi_surat'],
-            'tim_approval'  => $input['tim_approval'],
-            'tahun_1'       => $input['thn_1'],
-            'tahun_2'       => $input['thn_2'],
-            'tahun_3'       => $input['thn_3'],
-            'semester_1'    => $input['smstr_1'],
-            'semester_2'    => $input['smstr_2'],
-            'semester_3'    => $input['smstr_3']
-        );
-
-        $this->Crud->u('tb_usulan_evaluasi', $data_surat, $where);
-        $this->session->set_flashdata('alert_primary', 'Data Surat Evaluasi Mutasi berhasil disunting!');
-        redirect('AdministratorInduk/tampilanRincianLembarEvaluasi/'.$id_usulan);
-    }
-
-    public function doUpdateKeterangan($id_usulan, $nip_usulan)
-    {
-        $where = array(
-            'id_usulan'     => $id_usulan,
-            'nip_usulan'    => $nip_usulan
-        );
-        $input = $this->input->post(NULL, TRUE);
-
-        $data_ket = array(
-            'keterangan' => $input['keterangan_pegawai']
-        );
-
-        $this->Crud->u('tb_usulan_evaluasi_pegawai', $data_ket, $where);
-        $this->session->set_flashdata('alert_primary', 'Data Keterangan Pegawai Usulan berhasil disunting!');
-        redirect('AdministratorInduk/tampilanRincianLembarEvaluasi/'.$id_usulan);
-    }
-
-    public function doDeletePegawaiUsulan($id_usulan, $nip_usulan)
-    {
-        $where = array(
-            'id_usulan'     => $id_usulan,
-            'nip_usulan'    => $nip_usulan
-        );
-
-        $this->Crud->d('tb_usulan_evaluasi_pegawai', $where);
-        $this->Crud->d('tb_approvement', $where);
-        $this->session->set_flashdata('alert_primary', 'Data Pegawai Usulan berhasil dihapus!');
-        redirect('AdministratorInduk/tampilanRincianLembarEvaluasi/'.$id_usulan);
-    }
 # ************ End Menu Lembar Evaluasi ******************
 
 

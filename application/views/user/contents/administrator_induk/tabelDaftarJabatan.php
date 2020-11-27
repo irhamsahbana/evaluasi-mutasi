@@ -205,7 +205,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="form-validation">
-                        <form class="form-valide" action="<?= site_url('AdministratorInduk/doImportJabatan'.'/'.$ps) ?>" method="POST" enctype="multipart/form-data">
+                        <form class="form-valide" action="<?= site_url('AdministratorInduk/doImportJabatanNew'.'/'.$ps) ?>" method="POST" enctype="multipart/form-data">
                             <div class="modal-header">
                                 <h5 class="modal-title">Unggah File Excel Daftar Jabatan</h5>
                                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>

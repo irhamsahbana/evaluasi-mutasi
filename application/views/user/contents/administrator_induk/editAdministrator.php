@@ -47,7 +47,7 @@
                                                 <select class="form-control" name="status" required>
                                                     <option>Pilih Salah Satu</option>
                                                     <option value="admin_induk">Administrator Unit Induk Wilayah</option>
-                                                    <option value="admin_unit">Administrator UP2D / UP2K / UP3</option>
+                                                    <option value="admin_unit">Administrator UP2D / UP2K / UP3 / ULP</option>
                                                 </select>
                                             </div>
                                         </div>

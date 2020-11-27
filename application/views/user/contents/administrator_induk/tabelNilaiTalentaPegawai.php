@@ -310,7 +310,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="form-validation">
-                        <form class="form-valide" action="<?= site_url('AdministratorInduk/doImportTalentaPegawai') ?>" method="POST" enctype="multipart/form-data">
+                        <form class="form-valide" action="<?= site_url('AdministratorInduk/doImportTalentaPegawaiNew') ?>" method="POST" enctype="multipart/form-data">
                             <div class="modal-header">
                                 <h5 class="modal-title">Unggah File Excel Nilai Talenta Pegawai</h5>
                                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>

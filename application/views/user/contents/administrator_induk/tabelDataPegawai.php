@@ -47,7 +47,7 @@
 
                                     <button style="float: right;" type="button" class="btn mb-1 btn-success" data-toggle="modal" data-target=".modal-create">Tambah<span class="btn-icon-right"><i class="fa fa-user-plus"></i></span>
                                     </button>
-                                    <form action="<?= site_url('AdministratorInduk_Export/doExportDataPegawai') ?>" method="POST" enctype="multipart/form-data">
+                                    <form action="<?= site_url('AdministratorInduk/doExportDataPegawai') ?>" method="POST" enctype="multipart/form-data">
                                         <button style="float: right;" type="submit" class="btn mb-1 mr-3 btn-rounded btn-success"><span class="btn-icon-left"><i class="fa fa-download color-info"></i> </span>Unduh Data Pegawai</button>
                                     </form>
                                     <button style="float: right;" type="button" class="btn mb-1 mr-3 btn-rounded btn-success" data-toggle="modal" data-target=".modal-import"><span class="btn-icon-left"><i class="fa fa-upload color-success"></i> </span>Unggah Data Pegawai</button>
@@ -386,7 +386,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="form-validation">
-                        <form class="form-valide" action="<?= site_url('AdministratorInduk/doImportPegawai') ?>" method="POST" enctype="multipart/form-data">
+                        <form class="form-valide" action="<?= site_url('AdministratorInduk/doImportPegawaiNew') ?>" method="POST" enctype="multipart/form-data">
                             <div class="modal-header">
                                 <h5 class="modal-title">Unggah File Excel Data Pegawai</h5>
                                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>

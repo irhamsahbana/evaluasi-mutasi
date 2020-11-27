@@ -14,26 +14,24 @@ class AdministratorInduk extends CI_Controller
 
         if ($this->session->userdata('status') != 'login') {
             redirect('Login');
-        }
-
-        if ($this->session->userdata('role') != 'admin_induk') {
-
-            if ($this->session->userdata('role') == 'admin_unit'){
-                redirect('AdministratorUnit');
-            }
-            if ($this->session->userdata('role') == 'approval_committee') {
-                redirect('ApprovalCommittee');
-            }
-
         } else {
-            $this->load->library(array('PHPExcel', 'PHPExcel/IOFactory', 'PHPExcel/Writer/Excel2007'));
+            if ($this->session->userdata('role') != 'admin_induk') {
+
+                if ($this->session->userdata('role') == 'admin_unit'){
+                    redirect('AdministratorUnit');
+                }else {
+                    redirect('ApprovalCommittee');
+                }
+            }
         }
+
+
     }
 
     public function index()
     {
         $data = array(
-            'isi'   => 'user/contents/testing',
+            'isi'   => 'user/contents/administrator_induk/dashboard',
             'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
         );
         $this->load->view('user/_layouts/wrapper', $data);
@@ -169,270 +167,118 @@ class AdministratorInduk extends CI_Controller
         redirect('AdministratorInduk/tampilanDataPegawai');
     }
 
-    public function doImportPegawai()
+    public function doImportPegawaiNew()
     {
-        $this->load->library(array('PHPExcel', 'PHPExcel/IOFactory'));
+        if($_FILES['file_data_pegawai']['name'] != '') {
+            $allowed_extension = array('xls', 'csv', 'xlsx');
+            $file_array = explode(".", $_FILES["file_data_pegawai"]["name"]);
+            $file_extension = end($file_array);
 
-        $fileName = $_FILES['file_data_pegawai']['name'];
+            if(in_array($file_extension, $allowed_extension)) {
+                $file_name = time() . '.' . $file_extension;
+                move_uploaded_file($_FILES['file_data_pegawai']['tmp_name'], $file_name);
+                $file_type = \PhpOffice\PhpSpreadsheet\IOFactory::identify($file_name);
+                $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($file_type);
 
-        $config['upload_path'] = './assets/user/administrator_induk';
-        $config['file_name'] = $fileName;
-        $config['allowed_types'] = 'xls|xlsx|csv|ods|ots';
-        $config['max_size'] = 10000;
+                $spreadsheet = $reader->load($file_name);
+                unlink($file_name);
+                $rowData = $spreadsheet->getActiveSheet()->toArray();
 
-        $this->load->library('upload', $config);
-        $this->upload->initialize($config);
+                $berhasil = 0;
+                $pegawai_sudah_ada = 0;
+                $cell_kosong = 0;
+                $nip_sudah_ada = array();
 
-        if (!$this->upload->do_upload('file_data_pegawai')) {
-            $this->session->set_flashdata('alert_danger', 'File data pegawai gagal diimpor!');
-            redirect('AdministratorInduk/tampilanDataPegawai');
-        } else {
-            $media = $this->upload->data();
-            $inputFileName = './assets/user/administrator_induk/' . $media['file_name'];
+                for($i = 1;$i < count($rowData);$i++){
+                    //Variabel pendek
+                        $tgl_grade          = date('Y-m-d', strtotime(trim($rowData[$i][11])));
+                        $tgl_lahir          = date('Y-m-d', strtotime(trim($rowData[$i][13])));
+                        $tgl_capeg          = date('Y-m-d', strtotime(trim($rowData[$i][14])));
+                        $tgl_pegawai_tetap  = date('Y-m-d', strtotime(trim($rowData[$i][15])));
+                        $tgl_masuk          = date('Y-m-d', strtotime(trim($rowData[$i][18])));
 
-            try {
-                $inputFileType = IOFactory::identify($inputFileName);
-                $objReader = IOFactory::createReader($inputFileType);
-                $objPHPExcel = $objReader->load($inputFileName);
-            } catch (Exception $e) {
-                die('Error loading file "' . pathinfo($inputFileName, PATHINFO_BASENAME) . '": ' . $e->getMessage());
-            }
+                        $pers_no               = trim(strtoupper($rowData[$i][0]));
+                        $nip                   = trim(strtoupper($rowData[$i][1]));
+                        $nama_pegawai          = trim(strtoupper($rowData[$i][2]));
+                        $id_sebutan_jabatan    = trim(strtoupper($rowData[$i][3]));
+                        $org_unit              = trim(strtoupper($rowData[$i][4]));
+                        $organizational_unit   = trim(strtoupper($rowData[$i][5]));
+                        $position              = trim(strtoupper($rowData[$i][6]));
+                        $nama_panjang_posisi   = trim(strtoupper($rowData[$i][7]));
+                        $jenjang_main_grp      = trim(strtoupper($rowData[$i][8]));
+                        $jenjang_sub_grp       = trim(strtoupper($rowData[$i][9]));
+                        $grade                 = trim(strtoupper($rowData[$i][10]));
+                        $tgl_grade             = trim($tgl_grade);
+                        $pendidikan_terakhir   = trim(strtoupper($rowData[$i][12]));
+                        $tgl_lahir             = trim($tgl_lahir);
+                        $tgl_capeg             = trim($tgl_capeg);
+                        $tgl_pegawai_tetap     = trim($tgl_pegawai_tetap);
+                        $gender                = trim(strtoupper($rowData[$i][16]));
+                        $email                 = trim(strtoupper($rowData[$i][17]));
+                        $tgl_masuk             = trim($tgl_masuk);
+                        $agama                 = trim(strtoupper($rowData[$i][19]));
+                        $no_telp               = trim(strtoupper($rowData[$i][20]));
+                    //variabel pendek
 
-            $berhasil = 0;
-            $pegawai_sudah_ada = 0;
-            $cell_kosong = 0;
-            $nip_sudah_ada = array();
+                    $cek_pegawai = $this->db->query("SELECT nip FROM tb_pegawai WHERE nip = '$nip'");
 
-            $sheet = $objPHPExcel->getSheet(0);
-            $highestRow = $sheet->getHighestRow();
-            $highestColumn = $sheet->getHighestColumn();
-
-            for ($row = 2; $row <= $highestRow; $row++) {
-                $rowData = $sheet->rangeToArray(
-                    'A' . $row . ':' . $highestColumn . $row,
-                    NULL,
-                    TRUE,
-                    FALSE
-                );
-
-                $tgl_grade          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP(trim($rowData[0][11])));
-                $tgl_lahir          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP(trim($rowData[0][13])));
-                $tgl_capeg          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP(trim($rowData[0][14])));
-                $tgl_pegawai_tetap  = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP(trim($rowData[0][15])));
-                $tgl_masuk          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP(trim($rowData[0][18])));
-                
-                //Variabel pendek
-                    $pers_no               = trim(strtoupper($rowData[0][0]));
-                    $nip                   = trim(strtoupper($rowData[0][1]));
-                    $nama_pegawai          = trim(strtoupper($rowData[0][2]));
-                    $id_sebutan_jabatan    = trim(strtoupper($rowData[0][3]));
-                    $org_unit              = trim(strtoupper($rowData[0][4]));
-                    $organizational_unit   = trim(strtoupper($rowData[0][5]));
-                    $position              = trim(strtoupper($rowData[0][6]));
-                    $nama_panjang_posisi   = trim(strtoupper($rowData[0][7]));
-                    $jenjang_main_grp      = trim(strtoupper($rowData[0][8]));
-                    $jenjang_sub_grp       = trim(strtoupper($rowData[0][9]));
-                    $grade                 = trim(strtoupper($rowData[0][10]));
-                    $tgl_grade             = trim($tgl_grade);
-                    $pendidikan_terakhir   = trim(strtoupper($rowData[0][12]));
-                    $tgl_lahir             = trim($tgl_lahir);
-                    $tgl_capeg             = trim($tgl_capeg);
-                    $tgl_pegawai_tetap     = trim($tgl_pegawai_tetap);
-                    $gender                = trim(strtoupper($rowData[0][16]));
-                    $email                 = trim(strtoupper($rowData[0][17]));
-                    $tgl_masuk             = trim($tgl_masuk);
-                    $agama                 = trim(strtoupper($rowData[0][19]));
-                    $no_telp               = trim(strtoupper($rowData[0][20]));
-                //variabel pendek
-
-                $cek_pegawai = $this->db->query("SELECT nip FROM tb_pegawai WHERE nip = '$nip'");
-
-                if( empty($pers_no) || empty($nip) || empty($nama_pegawai) || empty($id_sebutan_jabatan) || empty($org_unit) || empty($organizational_unit) || empty($position) || empty($nama_panjang_posisi) || empty($jenjang_main_grp) || empty($jenjang_sub_grp) || empty($grade) || empty($tgl_grade) || empty($pendidikan_terakhir) || empty($tgl_lahir) || empty($tgl_capeg) || empty($tgl_pegawai_tetap) || empty($gender) || empty($email) || empty($tgl_masuk) || empty($agama) || empty($no_telp) ){
-                    $cell_kosong++;
-                } else {
-                    if($cek_pegawai->num_rows() > 0) { 
-                        $pegawai_sudah_ada++;
-                        array_push($nip_sudah_ada, $nip);
+                    if( empty($pers_no) || empty($nip) || empty($nama_pegawai) || empty($id_sebutan_jabatan) || empty($org_unit) || empty($organizational_unit) || empty($position) || empty($nama_panjang_posisi) || empty($jenjang_main_grp) || empty($jenjang_sub_grp) || empty($grade) || empty($tgl_grade) || empty($pendidikan_terakhir) || empty($tgl_lahir) || empty($tgl_capeg) || empty($tgl_pegawai_tetap) || empty($gender) || empty($email) || empty($tgl_masuk) || empty($agama) || empty($no_telp) ){
+                        $cell_kosong++;
                     } else {
-                        $data = array(
-                            "pers_no"               => $pers_no,
-                            "nip"                   => $nip,
-                            "nama_pegawai"          => $nama_pegawai,
-                            "id_sebutan_jabatan"    => $id_sebutan_jabatan,
-                            "org_unit"              => $org_unit,
-                            "organizational_unit"   => $organizational_unit,
-                            "position"              => $position,
-                            "nama_panjang_posisi"   => $nama_panjang_posisi,
-                            "jenjang_main_grp"      => $jenjang_main_grp,
-                            "jenjang_sub_grp"       => $jenjang_sub_grp,
-                            "grade"                 => $grade,
-                            "tgl_grade"             => $tgl_grade,
-                            "pendidikan_terakhir"   => $pendidikan_terakhir,
-                            "tgl_lahir"             => $tgl_lahir,
-                            "tgl_capeg"             => $tgl_capeg,
-                            "tgl_pegawai_tetap"     => $tgl_pegawai_tetap,
-                            "gender"                => $gender,
-                            "email"                 => $email,
-                            "tgl_masuk"             => $tgl_masuk,
-                            "agama"                 => $agama,
-                            "no_telp"               => $no_telp,
-                        );
-                        $this->db->insert("tb_pegawai", $data);
-
-                        $berhasil++;
-                    }
-                }    
-            }
-            $fileName_ = str_replace(" ", "_", $fileName);
-            unlink('./assets/user/administrator_induk/' . $fileName);
-            unlink('./assets/user/administrator_induk/' . $fileName_);
-
-            $daftar_nip_sa = '';
-            foreach ($nip_sudah_ada as $nsa) {
-                $daftar_nip_sa .= $nsa . '<br>';
-            }
-
-            $this->session->set_flashdata('alert_success', 'Data pegawai berhasil diimpor!'.' ('. 'Cell kosong = '.$cell_kosong.', data pegawai berhasil diimpor = '.$berhasil.', pegawai telah ada di database = '.$pegawai_sudah_ada.')'
-                .'<br>'
-                .'NIP yang sudah ada di data pegawai :<br>'
-                .$daftar_nip_sa);
-
-            redirect('AdministratorInduk/tampilanDataPegawai');
-        }
-    }
-
-    public function doImportUpdatePegawai()
-    {
-        $this->load->library(array('PHPExcel', 'PHPExcel/IOFactory'));
-
-        $fileName = $_FILES['file_sunting_data_pegawai']['name'];
-
-        $config['upload_path'] = './assets/user/administrator_induk';
-        $config['file_name'] = $fileName;
-        $config['allowed_types'] = 'xls|xlsx|csv|ods|ots';
-        $config['max_size'] = 10000;
-
-        $this->load->library('upload', $config);
-        $this->upload->initialize($config);
-
-        if (!$this->upload->do_upload('file_sunting_data_pegawai')) {
-            $this->session->set_flashdata('alert_danger', 'File untuk sunting data pegawai gagal diimpor!');
-            redirect('AdministratorInduk/tampilanDataPegawai');
-        } else {
-            $media = $this->upload->data();
-            $inputFileName = './assets/user/administrator_induk/' . $media['file_name'];
-
-            try {
-                $inputFileType = IOFactory::identify($inputFileName);
-                $objReader = IOFactory::createReader($inputFileType);
-                $objPHPExcel = $objReader->load($inputFileName);
-            } catch (Exception $e) {
-                die('Error loading file "' . pathinfo($inputFileName, PATHINFO_BASENAME) . '": ' . $e->getMessage());
-            }
-
-            $berhasil = 0;
-            $pegawai_tidak_ada = 0;
-            $cell_kosong = 0;
-            $nip_tidak_ada = array();
-
-            $sheet = $objPHPExcel->getSheet(0);
-            $highestRow = $sheet->getHighestRow();
-            $highestColumn = $sheet->getHighestColumn();
-
-            for ($row = 2; $row <= $highestRow; $row++) {
-                $rowData = $sheet->rangeToArray(
-                    'A' . $row . ':' . $highestColumn . $row,
-                    NULL,
-                    TRUE,
-                    FALSE
-                );
-
-                $tgl_grade          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP(trim($rowData[0][11])));
-                $tgl_lahir          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP(trim($rowData[0][13])));
-                $tgl_capeg          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP(trim($rowData[0][14])));
-                $tgl_pegawai_tetap  = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP(trim($rowData[0][15])));
-                $tgl_masuk          = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP(trim($rowData[0][18])));
-                
-                //Variabel pendek
-                    $pers_no               = trim(strtoupper($rowData[0][0]));
-                    $nip                   = trim(strtoupper($rowData[0][1]));
-                    $nama_pegawai          = trim(strtoupper($rowData[0][2]));
-                    $id_sebutan_jabatan    = trim(strtoupper($rowData[0][3]));
-                    $org_unit              = trim(strtoupper($rowData[0][4]));
-                    $organizational_unit   = trim(strtoupper($rowData[0][5]));
-                    $position              = trim(strtoupper($rowData[0][6]));
-                    $nama_panjang_posisi   = trim(strtoupper($rowData[0][7]));
-                    $jenjang_main_grp      = trim(strtoupper($rowData[0][8]));
-                    $jenjang_sub_grp       = trim(strtoupper($rowData[0][9]));
-                    $grade                 = trim(strtoupper($rowData[0][10]));
-                    $tgl_grade             = trim($tgl_grade);
-                    $pendidikan_terakhir   = trim(strtoupper($rowData[0][12]));
-                    $tgl_lahir             = trim($tgl_lahir);
-                    $tgl_capeg             = trim($tgl_capeg);
-                    $tgl_pegawai_tetap     = trim($tgl_pegawai_tetap);
-                    $gender                = trim(strtoupper($rowData[0][16]));
-                    $email                 = trim(strtoupper($rowData[0][17]));
-                    $tgl_masuk             = trim($tgl_masuk);
-                    $agama                 = trim(strtoupper($rowData[0][19]));
-                    $no_telp               = trim(strtoupper($rowData[0][20]));
-                //variabel pendek
-
-                $cek_pegawai = $this->db->query("SELECT nip FROM tb_pegawai WHERE nip = '$nip'");
-
-                if( empty($pers_no) || empty($nip) || empty($nama_pegawai) || empty($id_sebutan_jabatan) || empty($org_unit) || empty($organizational_unit) || empty($position) || empty($nama_panjang_posisi) || empty($jenjang_main_grp) || empty($jenjang_sub_grp) || empty($grade) || empty($tgl_grade) || empty($pendidikan_terakhir) || empty($tgl_lahir) || empty($tgl_capeg) || empty($tgl_pegawai_tetap) || empty($gender) || empty($email) || empty($tgl_masuk) || empty($agama) || empty($no_telp) ){
-                    $cell_kosong++;
-                } else {
-                    if($cek_pegawai->num_rows() == 0) { 
-                        $pegawai_tidak_ada++;
-                        array_push($nip_tidak_ada, $nip);
-                    } else {
-                        $data = array(
-                            "pers_no"               => $pers_no,
-                            "nip"                   => $nip,
-                            "nama_pegawai"          => $nama_pegawai,
-                            "id_sebutan_jabatan"    => $id_sebutan_jabatan,
-                            "org_unit"              => $org_unit,
-                            "organizational_unit"   => $organizational_unit,
-                            "position"              => $position,
-                            "nama_panjang_posisi"   => $nama_panjang_posisi,
-                            "jenjang_main_grp"      => $jenjang_main_grp,
-                            "jenjang_sub_grp"       => $jenjang_sub_grp,
-                            "grade"                 => $grade,
-                            "tgl_grade"             => $tgl_grade,
-                            "pendidikan_terakhir"   => $pendidikan_terakhir,
-                            "tgl_lahir"             => $tgl_lahir,
-                            "tgl_capeg"             => $tgl_capeg,
-                            "tgl_pegawai_tetap"     => $tgl_pegawai_tetap,
-                            "gender"                => $gender,
-                            "email"                 => $email,
-                            "tgl_masuk"             => $tgl_masuk,
-                            "agama"                 => $agama,
-                            "no_telp"               => $no_telp,
-                        );
-                        $where = array('nip' => $nip);
-                        $this->Crud->u("tb_pegawai", $data, $where);
-
-                        $berhasil++;
+                        if($cek_pegawai->num_rows() > 0) { 
+                            $pegawai_sudah_ada++;
+                            array_push($nip_sudah_ada, $nip);
+                        } else {
+                            $data = array(
+                                "pers_no"               => $pers_no,
+                                "nip"                   => $nip,
+                                "nama_pegawai"          => $nama_pegawai,
+                                "id_sebutan_jabatan"    => $id_sebutan_jabatan,
+                                "org_unit"              => $org_unit,
+                                "organizational_unit"   => $organizational_unit,
+                                "position"              => $position,
+                                "nama_panjang_posisi"   => $nama_panjang_posisi,
+                                "jenjang_main_grp"      => $jenjang_main_grp,
+                                "jenjang_sub_grp"       => $jenjang_sub_grp,
+                                "grade"                 => $grade,
+                                "tgl_grade"             => $tgl_grade,
+                                "pendidikan_terakhir"   => $pendidikan_terakhir,
+                                "tgl_lahir"             => $tgl_lahir,
+                                "tgl_capeg"             => $tgl_capeg,
+                                "tgl_pegawai_tetap"     => $tgl_pegawai_tetap,
+                                "gender"                => $gender,
+                                "email"                 => $email,
+                                "tgl_masuk"             => $tgl_masuk,
+                                "agama"                 => $agama,
+                                "no_telp"               => $no_telp,
+                            );
+                            $this->db->insert("tb_pegawai", $data);
+                            $berhasil++;
+                        }
                     }
                 }
+
+                $daftar_nip_sa = '';
+                foreach ($nip_sudah_ada as $nsa) {
+                    $daftar_nip_sa .= $nsa . '<br>';
+                }
+
+                $this->session->set_flashdata('alert_success', 'Data pegawai berhasil diimpor!'.' ('. 'Cell kosong = '.$cell_kosong.', data pegawai berhasil diimpor = '.$berhasil.', pegawai telah ada di database = '.$pegawai_sudah_ada.')'
+                    .'<br>'
+                    .'NIP yang sudah ada di data pegawai :<br>'
+                    .$daftar_nip_sa);
+
+                redirect('AdministratorInduk/tampilanDataPegawai');
+            } else{
+                $this->session->set_flashdata('alert_danger', 'Hanya Boleh File berekstensi .xlsx .xls atau .csv!');
+                redirect('AdministratorInduk/tampilanDataPegawai');
             }
-            $fileName_ = str_replace(" ", "_", $fileName);
-            unlink('./assets/user/administrator_induk/' . $fileName);
-            unlink('./assets/user/administrator_induk/' . $fileName_);
-
-            $daftar_nip_ta = '';
-            foreach ($nip_tidak_ada as $nta) {
-                $daftar_nip_ta .= $nta . '<br>';
-            }
-
-            $this->session->set_flashdata('alert_success', 'Data pegawai berhasil disunting!'.' ('. 'Cell kosong = '.$cell_kosong.', data pegawai berhasil disunting = '.$berhasil.', pegawai tidak ada di database = '.$pegawai_tidak_ada.')'
-                .'<br>'
-                .'NIP yang tidak ada di data pegawai :<br>'
-                .$daftar_nip_ta);
-
+        } else {
+            $this->session->set_flashdata('alert_danger', 'Tidak dapat menemukan File!');
             redirect('AdministratorInduk/tampilanDataPegawai');
-        }
+        } 
     }
+
     public function doImportUpdatePegawaiNew()
     {
         if($_FILES['file_sunting_data_pegawai']['name'] != '') {
@@ -542,6 +388,104 @@ class AdministratorInduk extends CI_Controller
             $this->session->set_flashdata('alert_danger', 'Tidak dapat menemukan File!');
             redirect('AdministratorInduk/tampilanDataPegawai');
         }
+    }
+
+    public function doExportDataPegawai()
+    {
+        $data['data_pegawai'] = $this->Crud->ga('tb_pegawai');
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $spreadsheet->getActiveSheet()->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
+        $spreadsheet->getActiveSheet()->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4);
+        $spreadsheet->getDefaultStyle()->getFont()->setName('Arial');
+        $spreadsheet->getDefaultStyle()->getFont()->setSize(10);
+
+        //Begin Styling
+            $sheet->getStyle('A1:U1')->getFont()->setBold(true);
+
+            $sheet->getColumnDimension('A')->setWidth(9.57);
+            $sheet->getColumnDimension('B')->setWidth(8.71);
+            $sheet->getColumnDimension('C')->setWidth(20.57);
+            $sheet->getColumnDimension('D')->setWidth(25.71);
+            $sheet->getColumnDimension('E')->setWidth(17.71);
+            $sheet->getColumnDimension('F')->setWidth(35.86);
+            $sheet->getColumnDimension('G')->setWidth(10.43);
+            $sheet->getColumnDimension('H')->setWidth(60);
+            $sheet->getColumnDimension('I')->setWidth(21.71);
+            $sheet->getColumnDimension('J')->setWidth(23.71);
+            $sheet->getColumnDimension('K')->setWidth(10.71);
+            $sheet->getColumnDimension('L')->setWidth(14.86);
+            $sheet->getColumnDimension('M')->setWidth(23.29);
+            $sheet->getColumnDimension('N')->setWidth(12.14);
+            $sheet->getColumnDimension('O')->setWidth(17);
+            $sheet->getColumnDimension('P')->setWidth(24);
+            $sheet->getColumnDimension('Q')->setWidth(12.71);
+            $sheet->getColumnDimension('R')->setWidth(29.29);
+            $sheet->getColumnDimension('S')->setWidth(15);
+            $sheet->getColumnDimension('T')->setWidth(28.57);
+            $sheet->getColumnDimension('U')->setWidth(15.86);
+        //End Styling
+
+        $sheet->setCellValue('A1', 'Pers.No.');
+        $sheet->setCellValue('B1', 'Nipeg');
+        $sheet->setCellValue('C1', 'Personnel Number');
+        $sheet->setCellValue('D1', 'ID Jabatan');
+        $sheet->setCellValue('E1', 'Org.unit');
+        $sheet->setCellValue('F1', 'Organizational Unit');
+        $sheet->setCellValue('G1', 'Position');
+        $sheet->setCellValue('H1', 'Nama Panjang Posisi');
+        $sheet->setCellValue('I1', 'Jenjang - Main Grp Text');
+        $sheet->setCellValue('J1', 'Jenjang - Sub Grp Text');
+        $sheet->setCellValue('K1', 'PS group');
+        $sheet->setCellValue('L1', 'Tanggal Grade Terakhir');
+        $sheet->setCellValue('M1', 'Pendidikan Terakhir');
+        $sheet->setCellValue('N1', 'Birth date');
+        $sheet->setCellValue('O1', 'Tanggal CAPEG');
+        $sheet->setCellValue('P1', 'Tanggal Pegawai Tetap');
+        $sheet->setCellValue('Q1', 'Gender Key');
+        $sheet->setCellValue('R1', 'E-mail');
+        $sheet->setCellValue('S1', 'Tanggal Masuk');
+        $sheet->setCellValue('T1', 'Religious Denomination Key');
+        $sheet->setCellValue('U1', 'Telephone no.');
+
+        $baris = 2;
+        foreach($data['data_pegawai'] as $f) {
+            $sheet->setCellValue('A'.$baris, $f->pers_no);
+            $sheet->setCellValue('B'.$baris, $f->nip);
+            $sheet->setCellValue('C'.$baris, $f->nama_pegawai);
+            $sheet->setCellValue('D'.$baris, $f->id_sebutan_jabatan);
+            $sheet->setCellValue('E'.$baris, $f->org_unit);
+            $sheet->setCellValue('F'.$baris, $f->organizational_unit);
+            $sheet->setCellValue('G'.$baris, $f->position);
+            $sheet->setCellValue('H'.$baris, $f->nama_panjang_posisi);
+            $sheet->setCellValue('I'.$baris, $f->jenjang_main_grp);
+            $sheet->setCellValue('J'.$baris, $f->jenjang_sub_grp);
+            $sheet->setCellValue('K'.$baris, $f->grade);
+            $sheet->setCellValue('L'.$baris, date('d/m/Y', strtotime($f->tgl_grade)));
+            $sheet->setCellValue('M'.$baris, $f->pendidikan_terakhir);
+            $sheet->setCellValue('N'.$baris, date('d/m/Y', strtotime($f->tgl_lahir)));
+            $sheet->setCellValue('O'.$baris, date('d/m/Y', strtotime($f->tgl_capeg)));
+            $sheet->setCellValue('P'.$baris, date('d/m/Y', strtotime($f->tgl_pegawai_tetap)));
+            $sheet->setCellValue('Q'.$baris, $f->gender);
+            $sheet->setCellValue('R'.$baris, $f->email);
+            $sheet->setCellValue('S'.$baris, date('d/m/Y', strtotime($f->tgl_masuk)));
+            $sheet->setCellValue('T'.$baris, $f->agama);
+            $sheet->setCellValue('U'.$baris, $f->no_telp);
+
+            $baris++;
+        }
+
+        $filename = 'Data_Pegawai_(Sistem_Evaluasi_Mutasi)_-_';
+        
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"'); 
+        header('Cache-Control: max-age=0');
+
+        ob_end_clean();
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $writer->save('php://output');
+        die;
     }
 # ************ End Menu Data Pegawai ******************
 
@@ -666,111 +610,91 @@ class AdministratorInduk extends CI_Controller
         redirect('AdministratorInduk/tampilanNilaiTalentaPegawai/' . $tahun . '/' . $semester);
     }
 
-    public function doImportTalentaPegawai()
+    public function doImportTalentaPegawaiNew()
     {
-        $this->load->library(array('PHPExcel', 'PHPExcel/IOFactory'));
+        if($_FILES['file_nilai_talenta_pegawai']['name'] != '') {
+            $allowed_extension = array('xls', 'csv', 'xlsx');
+            $file_array = explode(".", $_FILES["file_nilai_talenta_pegawai"]["name"]);
+            $file_extension = end($file_array);
 
-        $fileName = $_FILES['file_nilai_talenta_pegawai']['name'];
+            if(in_array($file_extension, $allowed_extension)) {
+                $file_name = time() . '.' . $file_extension;
+                move_uploaded_file($_FILES['file_nilai_talenta_pegawai']['tmp_name'], $file_name);
+                $file_type = \PhpOffice\PhpSpreadsheet\IOFactory::identify($file_name);
+                $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($file_type);
 
-        $config['upload_path'] = './assets/user/administrator_induk';
-        $config['file_name'] = $fileName;
-        $config['allowed_types'] = 'xls|xlsx|csv|ods|ots';
-        $config['max_size'] = 10000;
+                $spreadsheet = $reader->load($file_name);
+                unlink($file_name);
+                $rowData = $spreadsheet->getActiveSheet()->toArray();
 
-        $this->load->library('upload', $config);
-        $this->upload->initialize($config);
+                $pegawai_tidak_ada = 0;
+                $cell_kosong = 0;
+                $nilai_ada = 0;
+                $berhasil = 0;
+                $nip_tidak_ada = array();
+                $nip_sudah_ada = array();
 
-        if (!$this->upload->do_upload('file_nilai_talenta_pegawai')) {
-            $this->session->set_flashdata('alert_danger', 'File nilai talenta pegawai gagal diimpor!');
-            redirect('AdministratorInduk/tampilanDaftarTalenta');
-        } else {
-            $media = $this->upload->data();
-            $inputFileName = './assets/user/administrator_induk/' . $media['file_name'];
+                for($i = 1;$i < count($rowData);$i++){
+                    $nip                = trim($rowData[$i][0]);
+                    $tahun_talenta      = trim($rowData[$i][1]);
+                    $semester_talenta   = trim($rowData[$i][2]);
+                    $nilai_talenta      = trim($rowData[$i][3]);
 
-            try {
-                $inputFileType = IOFactory::identify($inputFileName);
-                $objReader = IOFactory::createReader($inputFileType);
-                $objPHPExcel = $objReader->load($inputFileName);
-            } catch (Exception $e) {
-                die('Error loading file "' . pathinfo($inputFileName, PATHINFO_BASENAME) . '": ' . $e->getMessage());
-            }
+                    $cek_pegawai = $this->db->query("SELECT nip FROM tb_pegawai WHERE nip = '$nip'");
+                    $cek_talenta = $this->db->query("SELECT nip FROM tb_nilai_talenta_pegawai WHERE nip = '$nip' AND tahun_talenta = '$tahun_talenta' AND semester_talenta = '$semester_talenta'");
 
-            $pegawai_tidak_ada = 0;
-            $cell_kosong = 0;
-            $nilai_ada = 0;
-            $berhasil = 0;
-            $nip_tidak_ada = array();
-            $nip_sudah_ada = array();
-
-            $sheet = $objPHPExcel->getSheet(0);
-            $highestRow = $sheet->getHighestRow();
-            $highestColumn = $sheet->getHighestColumn();
-
-            for ($row = 2; $row <= $highestRow; $row++) {
-                $rowData = $sheet->rangeToArray(
-                    'A' . $row . ':' . $highestColumn . $row,
-                    NULL,
-                    TRUE,
-                    FALSE
-                );
-
-                $nip                = trim($rowData[0][0]);
-                $tahun_talenta      = trim($rowData[0][1]);
-                $semester_talenta   = trim($rowData[0][2]);
-                $nilai_talenta      = trim($rowData[0][3]);
-                $cek_pegawai = $this->db->query("SELECT nip FROM tb_pegawai WHERE nip = '$nip'");
-                $cek_talenta = $this->db->query("SELECT nip FROM tb_nilai_talenta_pegawai WHERE nip = '$nip' AND tahun_talenta = '$tahun_talenta' AND semester_talenta = '$semester_talenta'");
-
-                if ((!empty($nip)) && (!empty($tahun_talenta)) && (!empty($semester_talenta)) && (!empty($nilai_talenta)) ){
-                    if($cek_pegawai->num_rows() == 0) { 
-                        $pegawai_tidak_ada++;
-                        array_push($nip_tidak_ada, $nip);
-                    } else {
-                        if($cek_talenta->num_rows() > 0){
-                            $nilai_ada++;
-                            array_push($nip_sudah_ada, $nip);
+                    if ((!empty($nip)) && (!empty($tahun_talenta)) && (!empty($semester_talenta)) && (!empty($nilai_talenta)) ){
+                        if($cek_pegawai->num_rows() == 0) { 
+                            $pegawai_tidak_ada++;
+                            array_push($nip_tidak_ada, $nip);
                         } else {
-                            $data = array(
-                                "nip"                   => $nip,
-                                "tahun_talenta"         => $tahun_talenta,
-                                "semester_talenta"      => $semester_talenta,
-                                "nilai_talenta"         => $nilai_talenta,
-                            );
-                            $this->db->insert("tb_nilai_talenta_pegawai", $data);
-                            $berhasil++;
+                            if($cek_talenta->num_rows() > 0){
+                                $nilai_ada++;
+                                array_push($nip_sudah_ada, $nip);
+                            } else {
+                                $data = array(
+                                    "nip"                   => $nip,
+                                    "tahun_talenta"         => $tahun_talenta,
+                                    "semester_talenta"      => $semester_talenta,
+                                    "nilai_talenta"         => $nilai_talenta,
+                                );
+                                $this->db->insert("tb_nilai_talenta_pegawai", $data);
+                                $berhasil++;
+                            }
                         }
+                    } else {
+                        $cell_kosong++;
                     }
-                } else {
-                    $cell_kosong++;
                 }
+
+                $daftar_nip_ta = '';
+                foreach ($nip_tidak_ada as $npa) {
+                    $daftar_nip_ta .= $npa . '<br>';
+                }
+
+                $daftar_nip_sa = '';
+                foreach ($nip_sudah_ada as $nsa) {
+                    $daftar_nip_sa .= $nsa . '<br>';
+                }
+
+                $this->session->set_flashdata('alert_success', 'Nilai talenta pegawai berhasil diimpor!'.' ('. 'Cell kosong = '.$cell_kosong.', pegawai tidak ada di database = '.$pegawai_tidak_ada.', nilai talenta telah ada = '.$nilai_ada.', nilai talenta berhasil diimpor = '.$berhasil.')'
+                    .'<br>'
+                    .'NIP yang tidak ada di data pegawai :<br>'
+                    .$daftar_nip_ta
+                    .'NIP sudah memiliki nilai talenta :<br>'
+                    .$daftar_nip_sa);
+
+                $urisTahun = $rowData[1][1];
+                $urisSemester = $rowData[1][2];
+                redirect('AdministratorInduk/tampilanNilaiTalentaPegawai/' . $urisTahun . '/' . $urisSemester);
+            } else{
+                $this->session->set_flashdata('alert_danger', 'Hanya Boleh File berekstensi .xlsx .xls atau .csv!');
+                redirect('AdministratorInduk/tampilanDaftarTalenta');
             }
-            $fileName_ = str_replace(" ", "_", $fileName);
-            unlink('./assets/user/administrator_induk/' . $fileName_);
-            unlink('./assets/user/administrator_induk/' . $fileName);
-
-            $daftar_nip_ta = '';
-            foreach ($nip_tidak_ada as $npa) {
-                $daftar_nip_ta .= $npa . '<br>';
-            }
-
-            $daftar_nip_sa = '';
-            foreach ($nip_sudah_ada as $nsa) {
-                $daftar_nip_sa .= $nsa . '<br>';
-            }
-
-            $this->session->set_flashdata('alert_success', 'Nilai talenta pegawai berhasil diimpor!'.' ('. 'Cell kosong = '.$cell_kosong.', pegawai tidak ada di database = '.$pegawai_tidak_ada.', nilai talenta telah ada = '.$nilai_ada.', nilai talenta berhasil diimpor = '.$berhasil.')'
-                .'<br>'
-                .'NIP yang tidak ada di data pegawai :<br>'
-                .$daftar_nip_ta
-                .'NIP sudah memiliki nilai talenta :<br>'
-                .$daftar_nip_sa);
-
-            $baris = 2;
-            $barisData = $sheet->rangeToArray('A' . $baris . ':' . $highestColumn . $baris, NULL, TRUE, FALSE);
-            $urisTahun = $barisData[0][1];
-            $urisSemester = $barisData[0][2];
-            redirect('AdministratorInduk/tampilanNilaiTalentaPegawai/' . $urisTahun . '/' . $urisSemester);
-        }
+        } else {
+            $this->session->set_flashdata('alert_danger', 'Tidak dapat menemukan File!');
+            redirect('AdministratorInduk/tampilanDaftarTalenta');
+        } 
     }
 # ************ End Menu Nilai Talenta Pegawai ******************
 
@@ -1043,9 +967,16 @@ class AdministratorInduk extends CI_Controller
             'isi'           => 'user/contents/administrator_induk/tabelDaftarPersonnelSubareaJabatan',
             'title'         => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
             'data_subarea'  => $this->M_AdministratorInduk->getDataSubarea(),
-            'area'          => $this->Crud->ga('tb_business_area'),
         );
         $this->load->view('user/_layouts/wrapper', $data);
+    }
+
+    public function doEmptyJabatan($ps)
+    {
+        $where = array('personnel_subarea' => $ps);
+        $this->Crud->d('tb_jabatan', $where);
+        $this->session->set_flashdata('alert_danger', 'Data jabatan '.$ps.' berhasil dikosongkan!');
+        redirect('AdministratorInduk/tampilanJabatanPerUnit/');
     }
 
     public function tampilanJabatan($personnel_subarea)
@@ -1134,58 +1065,76 @@ class AdministratorInduk extends CI_Controller
         redirect('AdministratorInduk/tampilanJabatan/'.$ps);
     }
 
-    public function doImportJabatan($ps)
+    public function doImportJabatanNew($ps)
     {
-        $this->load->library(array('PHPExcel', 'PHPExcel/IOFactory'));
+        if($_FILES['file_jabatan']['name'] != '') {
+            $allowed_extension = array('xls', 'csv', 'xlsx');
+            $file_array = explode(".", $_FILES["file_jabatan"]["name"]);
+            $file_extension = end($file_array);
 
-        $fileName = $_FILES['file_jabatan']['name'];
+            if(in_array($file_extension, $allowed_extension)) {
+                $file_name = time() . '.' . $file_extension;
+                move_uploaded_file($_FILES['file_jabatan']['tmp_name'], $file_name);
+                $file_type = \PhpOffice\PhpSpreadsheet\IOFactory::identify($file_name);
+                $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($file_type);
 
-        $config['upload_path'] = './assets/user/administrator_induk';
-        $config['file_name'] = $fileName;
-        $config['allowed_types'] = 'xls|xlsx|csv|ods|ots';
-        $config['max_size'] = 10000;
+                $spreadsheet = $reader->load($file_name);
+                unlink($file_name);
+                $rowData = $spreadsheet->getActiveSheet()->toArray();
 
-        $this->load->library('upload', $config);
-        $this->upload->initialize($config);
+                $id_jabatan_ada = 0;
+                $cell_kosong = 0;
+                $berhasil = 0;
+                $id_jabatan_sudah_ada = array();
 
-        if (!$this->upload->do_upload('file_jabatan')) {
-            $this->session->set_flashdata('alert_danger', 'file daftar jabatan gagal diimpor!');
-            redirect('AdministratorInduk/tampilanJabatan'.$ps);
+                for($i = 1;$i < count($rowData);$i++){
+                    //variabel pendek
+                        $id_sebutan_jabatan    = trim($rowData[$i][2]) . '-' . trim($rowData[$i][0]);
+                        $urutan_dalam_org      = trim($rowData[$i][0]);
+                        $sebutan_jabatan       = trim($rowData[$i][1]);
+                        $Personnel_subarea     = trim($rowData[$i][2]);
+                    //variabal pendek
+
+                    $cek_jabatan = $this->db->query("SELECT id_sebutan_jabatan FROM tb_jabatan WHERE id_sebutan_jabatan = '$id_sebutan_jabatan'");
+
+                    if( empty($urutan_dalam_org) || empty($sebutan_jabatan) || empty($Personnel_subarea) ){
+                        $cell_kosong++;
+                    }else {
+                        if($cek_jabatan->num_rows() > 0){
+                            $id_sebutan_jabatan_ada++;
+                            array_push($id_jabatan_sudah_ada, $id_sebutan_jabatan);
+                        } else {
+                            $data = array(
+                                "id_sebutan_jabatan" => $id_sebutan_jabatan,
+                                "urutan_dalam_org" => $urutan_dalam_org,
+                                "sebutan_jabatan" => $sebutan_jabatan,
+                                "Personnel_subarea" => $Personnel_subarea,
+                            );
+                            $this->db->insert("tb_jabatan", $data);
+                            $berhasil++;
+                        }
+                    }
+                }
+
+                $daftar_id_sa = '';
+                foreach ($id_jabatan_sudah_ada as $isa) {
+                    $daftar_id_sa .= $isa . '<br>';
+                }
+
+                $this->session->set_flashdata('alert_success', 'Data sebutan jabatan berhasil diimpor!'.' ('. 'Cell kosong = '.$cell_kosong.', data sebutan jabatan berhasil diimpor = '.$berhasil.', id sebutan jabatan telah ada di database = '.$id_jabatan_ada.')'
+                    .'<br>'
+                    .'Id sebutan jabatan yang sudah ada di database :<br>'
+                    .$daftar_id_sa);
+
+                redirect('AdministratorInduk/tampilanJabatan/'.$ps);
+            } else{
+                $this->session->set_flashdata('alert_danger', 'Hanya Boleh File berekstensi .xlsx .xls atau .csv!');
+                redirect('AdministratorInduk/tampilanJabatan/'.$ps);
+            }
         } else {
-            $media = $this->upload->data();
-            $inputFileName = './assets/user/administrator_induk/' . $media['file_name'];
-
-            try {
-                $inputFileType = IOFactory::identify($inputFileName);
-                $objReader = IOFactory::createReader($inputFileType);
-                $objPHPExcel = $objReader->load($inputFileName);
-            } catch (Exception $e) {
-                die('Error loading file "' . pathinfo($inputFileName, PATHINFO_BASENAME) . '": ' . $e->getMessage());
-            }
-
-            $sheet = $objPHPExcel->getSheet(0);
-            $highestRow = $sheet->getHighestRow();
-            $highestColumn = $sheet->getHighestColumn();
-
-            for ($row = 2; $row <= $highestRow; $row++) {
-                $rowData = $sheet->rangeToArray(
-                    'A' . $row . ':' . $highestColumn . $row,
-                    NULL,
-                    TRUE,
-                    FALSE
-                );
-                $data = array(
-                    "id_sebutan_jabatan" => $rowData[0][2] . '-' . $rowData[0][0],
-                    "urutan_dalam_org" => $rowData[0][0],
-                    "sebutan_jabatan" => $rowData[0][1],
-                    "Personnel_subarea" => $rowData[0][2],
-                );
-                $this->db->insert("tb_jabatan", $data);
-            }
-            unlink('./assets/user/administrator_induk/' . $fileName);
-            $this->session->set_flashdata('alert_success', 'Daftar sebutan jabatan berhasil diimpor!');
+            $this->session->set_flashdata('alert_danger', 'Tidak dapat menemukan File!');
             redirect('AdministratorInduk/tampilanJabatan/'.$ps);
-        }
+        } 
     }
 # ************ End Menu Jabatan ******************
 
@@ -1260,14 +1209,14 @@ class AdministratorInduk extends CI_Controller
 
         if ($input['password'] != '') {
             $data_admin = array(
-                'nip'                => $input['nip'],
+                'nip'                => trim($input['nip']),
                 'password'           => password_hash(trim($input['password']), PASSWORD_DEFAULT),
                 'role'               => $input['status'],
                 'personnel_subarea'  => $input['personnel_subarea'],
             );
         } else {
             $data_admin = array(
-                'nip'                => $input['nip'],
+                'nip'                => trim($input['nip']),
                 'password'           => password_hash(trim($input['password']), PASSWORD_DEFAULT),
                 'role'               => $input['status'],
                 'personnel_subarea'  => $input['personnel_subarea'],
@@ -1282,9 +1231,25 @@ class AdministratorInduk extends CI_Controller
     public function doDeleteAdmin($id)
     {
         $where = array('id_administrator' => $id,);
+        $cek = $this->Crud->gw('tb_administrator', $where);
+        $count_induk = $this->Crud->cw('tb_administrator', array('role' => 'admin_induk'));
 
-        $this->Crud->d('tb_administrator', $where);
-        $this->session->set_flashdata('alert_danger', 'Data administrator berhasil dihapus!');
+        foreach($cek as $f){
+            $role = $f->role;
+        }
+
+        if($role == 'admin_induk'){
+            if($count_induk ==  1){
+                $this->session->set_flashdata('alert_danger', 'Tidak dapat menghapus! minimal ada 1 administrator induk di sistem!');
+            }else {
+                $this->Crud->d('tb_administrator', $where);
+                $this->session->set_flashdata('alert_danger', 'Data administrator berhasil dihapus!');
+            }
+        }else {
+            $this->Crud->d('tb_administrator', $where);
+            $this->session->set_flashdata('alert_danger', 'Data administrator berhasil dihapus!');
+        }
+
         redirect('AdministratorInduk/tampilanAdministrator');
     }
 # ************ End Menu Pengaturan Administrator ******************
@@ -1813,8 +1778,6 @@ class AdministratorInduk extends CI_Controller
         $talentaPeg = $this->Crud->gwo('tb_nilai_talenta_pegawai', $where, 'tahun_talenta', 'desc');
         echo json_encode($talentaPeg);
     }
-
 # ************ End Menu Pencarian Data Pegawai ********************
     
 }
-
