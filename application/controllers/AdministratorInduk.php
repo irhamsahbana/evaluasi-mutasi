@@ -24,8 +24,6 @@ class AdministratorInduk extends CI_Controller
                 }
             }
         }
-
-
     }
 
     public function index()
@@ -33,10 +31,16 @@ class AdministratorInduk extends CI_Controller
         $data = array(
             'isi'   => 'user/contents/administrator_induk/dashboard',
             'title' => 'Evaluasi Mutasi - PT. PLN (Persero) Unit Induk Wilayah Sulselrabar',
+            'jml_pegawai' => $this->Crud->ca('tb_pegawai'),
+            'jml_admin' => $this->Crud->ca('tb_administrator'),
+            'jml_approval' => $this->Crud->ca('tb_approval_committee'),
+            'jml_usulan_unit_pending' => $this->Crud->cw('tb_usulan_evaluasi', array('status_usulan' => 'dipending')),
+            'terakhir_tambah' => $this->Crud->gw('tb_dashboard', array('id_dashboard' => 'tambah_massal_data_pegawai')),
+            'terakhir_sunting' => $this->Crud->gw('tb_dashboard', array('id_dashboard' => 'sunting_massal_data_pegawai')),
+            // 'waktu_sekarang' => date(),
         );
         $this->load->view('user/_layouts/wrapper', $data);
     }
-
 
 # ************ Begin Menu Data Pegawai ******************
     public function tampilanDataPegawai()
@@ -267,8 +271,11 @@ class AdministratorInduk extends CI_Controller
                     .'<br>'
                     .'NIP yang sudah ada di data pegawai :<br>'
                     .$daftar_nip_sa);
-
+                // $this->Crud->u('tb_dashboard', array());
+                $this->Crud->u('tb_dashboard', array('terakhir' => date("Y-m-d H:i:s")) ,array('id_dashboard' =>'tambah_massal_data_pegawai'));
                 redirect('AdministratorInduk/tampilanDataPegawai');
+
+                
             } else{
                 $this->session->set_flashdata('alert_danger', 'Hanya Boleh File berekstensi .xlsx .xls atau .csv!');
                 redirect('AdministratorInduk/tampilanDataPegawai');
@@ -379,6 +386,7 @@ class AdministratorInduk extends CI_Controller
                     .'<br>'
                     .'NIP yang tidak ada di data pegawai :<br>'
                     .$daftar_nip_ta);
+                $this->Crud->u('tb_dashboard', array('terakhir' => date("Y-m-d H:i:s")), array('id_dashboard' => 'sunting_massal_data_pegawai'));
                 redirect('AdministratorInduk/tampilanDataPegawai');
             } else{
                 $this->session->set_flashdata('alert_danger', 'Hanya Boleh File berekstensi .xlsx .xls atau .csv!');
@@ -1085,6 +1093,7 @@ class AdministratorInduk extends CI_Controller
                 $id_jabatan_ada = 0;
                 $cell_kosong = 0;
                 $berhasil = 0;
+                $id_sebutan_jabatan_ada = 0;
                 $id_jabatan_sudah_ada = array();
 
                 for($i = 1;$i < count($rowData);$i++){
@@ -1362,6 +1371,7 @@ class AdministratorInduk extends CI_Controller
             'semester_2'           => $smstr_2,
             'semester_3'           => $smstr_3
         );
+        $this->db->trans_start();
         $this->db->insert('tb_usulan_evaluasi', $data_global_surat);
 
         for ($count = 0; $count < count($nip_usulan); $count++) {
@@ -1403,8 +1413,13 @@ class AdministratorInduk extends CI_Controller
                 $this->db->insert('tb_approvement', $data_approvement);
             }
         }
+        $this->db->trans_complete();
 
-        $this->session->set_flashdata('alert_success', 'Data usulan evaluasi mutasi berhasil ditambahkan!');
+        if ($this->db->trans_status() === FALSE) {
+                $this->session->set_flashdata('alert_danger', 'Data usulan evaluasi mutasi tidak berhasil ditambahkan!');
+        } else {
+            $this->session->set_flashdata('alert_success', 'Data usulan evaluasi mutasi berhasil ditambahkan!');
+        }
     }
 
     public function tampilanRincianLembarEvaluasi($id_usulan)
@@ -1779,5 +1794,13 @@ class AdministratorInduk extends CI_Controller
         echo json_encode($talentaPeg);
     }
 # ************ End Menu Pencarian Data Pegawai ********************
+
+# ************ Begin Menu Fungsi download ********************
+    public function doDownload()
+    {
+        $this->load->helper('download');
+        force_download('assets/user/administrator_induk/templates/template tambah dan unggah data pegawai massal.xlsx', NULL);
+    }
+# ************ End Menu Fungsi download ********************
     
 }

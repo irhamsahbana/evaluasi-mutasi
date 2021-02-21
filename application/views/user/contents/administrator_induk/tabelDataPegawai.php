@@ -26,7 +26,8 @@
                                     if ($this->session->flashdata('alert_success') == TRUE) : ?>
                                         <div class="alert alert-success alert-dismissible fade show">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
-                                            </button><strong><?= $alert_success ?></strong></div>
+                                            </button><strong><?= $alert_success ?></strong>
+                                        </div>
                                     <?php endif; ?>
                                     <!-- Alert Update -->
                                     <?php
@@ -34,7 +35,8 @@
                                     if ($this->session->flashdata('alert_primary') == TRUE) : ?>
                                         <div class="alert alert-primary alert-dismissible fade show">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
-                                            </button><strong><?= $alert_primary ?></strong></div>
+                                            </button><strong><?= $alert_primary ?></strong>
+                                        </div>
                                     <?php endif; ?>
                                     <!-- Alert Delete -->
                                     <?php
@@ -42,7 +44,8 @@
                                     if ($this->session->flashdata('alert_danger') == TRUE) : ?>
                                         <div class="alert alert-danger alert-dismissible fade show">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
-                                            </button><strong><?= $alert_danger ?></strong></div>
+                                            </button><strong><?= $alert_danger ?></strong>
+                                        </div>
                                     <?php endif; ?>
 
                                     <button style="float: right;" type="button" class="btn mb-1 btn-success" data-toggle="modal" data-target=".modal-create">Tambah<span class="btn-icon-right"><i class="fa fa-user-plus"></i></span>
@@ -395,7 +398,7 @@
                             <div class="modal-body">
                                 <div class="form-group row">
                                     <div class="col sm-12">
-                                        Silahkan download dan gunakan <strong><u><a href="#">Template Spreadsheet ini</a></u></strong> untuk mengunggah data pegawai!
+                                        Silahkan download dan gunakan <strong><u><a href="<?= base_url('AdministratorInduk/doDownload') ?>">Template Spreadsheet ini</a></u></strong> untuk mengunggah data pegawai!
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -433,7 +436,7 @@
                             <div class="modal-body">
                                 <div class="form-group row">
                                     <div class="col sm-12">
-                                        Silahkan download dan gunakan <strong><u><a href="#">Template Spreadsheet ini</a></u></strong> untuk mengunggah file sunting data pegawai!
+                                        Silahkan download dan gunakan <strong><u><a href="<?= base_url('AdministratorInduk/doDownload') ?>">Template Spreadsheet ini</a></u></strong> untuk mengunggah file sunting data pegawai!
                                     </div>
                                 </div>
                                 <div class="form-group row">
