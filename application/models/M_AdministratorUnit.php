@@ -46,6 +46,7 @@ class M_AdministratorUnit extends CI_Model
             $this->db->from('tb_nilai_talenta_pegawai');
             $this->db->where(array('nip' => $nip));
             $this->db->order_by('tahun_talenta', 'desc');
+            $this->db->order_by('semester_talenta', 'desc');
             $this->db->limit(3);
             $query = $this->db->get()->result();
             return $query;
