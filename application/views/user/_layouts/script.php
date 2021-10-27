@@ -443,9 +443,9 @@
                         async : true,
                         dataType : 'json',
                         success : function(talenta){
-                            $('#n_smstr_1_').val(talenta[2]['nilai_talenta']).attr('title', talenta[2]['tahun_talenta']+' Semester '+talenta[2]['semester_talenta']);
-                            $('#n_smstr_2_').val(talenta[1]['nilai_talenta']).attr('title', talenta[1]['tahun_talenta']+' Semester '+talenta[1]['semester_talenta']);
                             $('#n_smstr_3_').val(talenta[0]['nilai_talenta']).attr('title', talenta[0]['tahun_talenta']+' Semester '+talenta[0]['semester_talenta']);
+                            $('#n_smstr_2_').val(talenta[1]['nilai_talenta']).attr('title', talenta[1]['tahun_talenta']+' Semester '+talenta[1]['semester_talenta']);
+                            $('#n_smstr_1_').val(talenta[2]['nilai_talenta']).attr('title', talenta[2]['tahun_talenta']+' Semester '+talenta[2]['semester_talenta']);
                         }
                     });
                 });      
